@@ -135,6 +135,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&family=Lexend:wght@300;400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Inline: mark JS as available before body renders so .js-ready CSS hides non-active pages.
+     Crawlers/bots that skip JS will never see this class, so all sections remain visible to them. -->
+<script>document.documentElement.classList.add('js-ready');</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
@@ -368,8 +371,9 @@ nav {
 /* ─────────────────────────────
    PAGES
 ───────────────────────────── */
-.page { display:none; position:relative; z-index:1; min-height:100vh; padding-top:80px; }
-.page.active { display:block; }
+.page { position:relative; z-index:1; min-height:100vh; padding-top:80px; }
+.js-ready .page { display:none; }
+.js-ready .page.active { display:block; }
 
 .reveal-card {
   opacity: 0;
