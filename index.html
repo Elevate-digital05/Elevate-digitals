@@ -550,10 +550,16 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 .wa-btn svg { width:28px; height:28px; fill:#fff; }
 
 /* ── MOBILE MENU ── */
-.mobile-menu { display:none; position:fixed; inset:0; z-index:190; background:rgba(14,11,8,0.97); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:32px; }
+.mobile-menu { display:none; position:fixed; inset:0; z-index:190; background:rgba(14,11,8,0.97); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:28px; overflow-y:auto; padding:32px 0; }
 .mobile-menu.open { display:flex; }
 .mobile-menu a { font-family:'Syne',sans-serif; font-size:28px; font-weight:700; color:var(--text-secondary); text-decoration:none; cursor:pointer; transition:color 0.2s, transform 0.2s; }
 .mobile-menu a:hover { color:var(--accent); transform:scale(1.08); }
+.mobile-controls { margin-top:8px; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; flex-direction:column; gap:16px; width:100%; max-width:300px; padding-left:16px; padding-right:16px; }
+.mob-ctrl-label { font-size:11px; color:var(--text-secondary); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; display:block; }
+.mob-pills { display:flex; flex-wrap:wrap; gap:8px; }
+.mob-pill { padding:6px 14px; background:var(--glass-bg); border:1px solid var(--glass-bd); border-radius:50px; font-size:13px; color:var(--text-secondary); cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; }
+.mob-pill.active { background:rgba(0,224,255,0.15); border-color:rgba(0,224,255,0.5); color:var(--accent); }
+.mob-pill:hover { border-color:rgba(0,224,255,0.3); color:#fff; }
 
 /* ── CURRENCY & LANG SELECTORS ── */
 .currency-selector, .lang-selector { position: relative; }
@@ -739,12 +745,12 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     <div class="logo-text">ELEVATE<span>DIGITALS</span></div>
   </div>
   <ul class="nav-links">
-    <li><a href="#home" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
-    <li><a href="#services" onclick="showPage('services')" id="nav-services">Services</a></li>
-    <li><a href="#packages" onclick="showPage('packages')" id="nav-packages">Packages</a></li>
-    <li><a href="#pay" onclick="showPage('pay')" id="nav-pay">Pay</a></li>
-    <li><a href="#blog" onclick="showPage('blog')" id="nav-blog">Blog</a></li>
-    <li><a href="#contact" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    <li><a href="#home" onclick="showPage('home')" class="active" id="nav-home" data-i18n="nav_home">Home</a></li>
+    <li><a href="#services" onclick="showPage('services')" id="nav-services" data-i18n="nav_services">Services</a></li>
+    <li><a href="#packages" onclick="showPage('packages')" id="nav-packages" data-i18n="nav_packages">Packages</a></li>
+    <li><a href="#pay" onclick="showPage('pay')" id="nav-pay" data-i18n="nav_pay">Pay</a></li>
+    <li><a href="#blog" onclick="showPage('blog')" id="nav-blog" data-i18n="nav_blog">Blog</a></li>
+    <li><a href="#contact" onclick="showPage('contact')" id="nav-contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div class="nav-actions">
     <div class="currency-selector">
@@ -776,7 +782,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
         <div class="lang-option" data-lang="ar" data-label="🇸🇦 العربية" onclick="setLanguage(this)"><span class="lang-code">🇸🇦 العربية</span></div>
       </div>
     </div>
-    <button class="btn-nav" onclick="showPage('contact')">Get Started</button>
+    <button class="btn-nav" onclick="showPage('contact')" data-i18n="nav_getstarted">Get Started</button>
   </div>
   <div class="hamburger" onclick="toggleMenu()" role="button" tabindex="0" aria-label="Toggle mobile menu">
     <span></span><span></span><span></span>
@@ -785,12 +791,37 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 </header>
 
 <div class="mobile-menu" id="mobileMenu" role="menu">
-  <a href="#home" onclick="showPage('home');toggleMenu()">Home</a>
-  <a href="#services" onclick="showPage('services');toggleMenu()">Services</a>
-  <a href="#packages" onclick="showPage('packages');toggleMenu()">Packages</a>
-  <a href="#pay" onclick="showPage('pay');toggleMenu()">Pay</a>
-  <a href="#blog" onclick="showPage('blog');toggleMenu()">Blog</a>
-  <a href="#contact" onclick="showPage('contact');toggleMenu()">Contact</a>
+  <a href="#home" onclick="showPage('home');toggleMenu()" data-i18n="nav_home">Home</a>
+  <a href="#services" onclick="showPage('services');toggleMenu()" data-i18n="nav_services">Services</a>
+  <a href="#packages" onclick="showPage('packages');toggleMenu()" data-i18n="nav_packages">Packages</a>
+  <a href="#pay" onclick="showPage('pay');toggleMenu()" data-i18n="nav_pay">Pay</a>
+  <a href="#blog" onclick="showPage('blog');toggleMenu()" data-i18n="nav_blog">Blog</a>
+  <a href="#contact" onclick="showPage('contact');toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <div class="mobile-controls">
+    <div>
+      <span class="mob-ctrl-label">Currency</span>
+      <div class="mob-pills">
+        <span class="mob-pill active" data-code="ZAR" data-symbol="R" data-rate="1" onclick="setCurrencyAll(this)">ZAR</span>
+        <span class="mob-pill" data-code="USD" data-symbol="$" data-rate="0.055" onclick="setCurrencyAll(this)">USD</span>
+        <span class="mob-pill" data-code="EUR" data-symbol="€" data-rate="0.051" onclick="setCurrencyAll(this)">EUR</span>
+        <span class="mob-pill" data-code="GBP" data-symbol="£" data-rate="0.044" onclick="setCurrencyAll(this)">GBP</span>
+      </div>
+    </div>
+    <div>
+      <span class="mob-ctrl-label" data-i18n="ctrl_language">Language</span>
+      <div class="mob-pills">
+        <span class="mob-pill active" data-lang="en" data-label="🇬🇧 EN" onclick="setLangAll(this)">EN</span>
+        <span class="mob-pill" data-lang="af" data-label="🇿🇦 AF" onclick="setLangAll(this)">AF</span>
+        <span class="mob-pill" data-lang="zu" data-label="🇿🇦 ZU" onclick="setLangAll(this)">ZU</span>
+        <span class="mob-pill" data-lang="xh" data-label="🇿🇦 XH" onclick="setLangAll(this)">XH</span>
+        <span class="mob-pill" data-lang="fr" data-label="🇫🇷 FR" onclick="setLangAll(this)">FR</span>
+        <span class="mob-pill" data-lang="de" data-label="🇩🇪 DE" onclick="setLangAll(this)">DE</span>
+        <span class="mob-pill" data-lang="es" data-label="🇪🇸 ES" onclick="setLangAll(this)">ES</span>
+        <span class="mob-pill" data-lang="zh" data-label="🇨🇳 ZH" onclick="setLangAll(this)">ZH</span>
+        <span class="mob-pill" data-lang="ar" data-label="🇸🇦 AR" onclick="setLangAll(this)">AR</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <main id="main-content">
@@ -798,61 +829,61 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 <!-- ══════════ HOME ══════════ -->
 <section class="page active" id="page-home">
   <div class="hero">
-    <div class="badge"><span class="badge-dot"></span><span>Web Design Agency · South Africa</span></div>
-    <h1>Turn Your Website Into a <span class="hl">Lead-Generating Machine</span></h1>
-    <p>We design high-converting websites for ambitious South African businesses — built to attract more clients, establish trust, and accelerate growth. Packages from <strong data-price="6999">R6,999</strong>.</p>
+    <div class="badge"><span class="badge-dot"></span><span data-i18n="hero_badge">Web Design Agency · South Africa</span></div>
+    <h1 data-i18n-html="hero_h1">Turn Your Website Into a <span class="hl">Lead-Generating Machine</span></h1>
+    <p data-i18n-html="hero_sub">We design high-converting websites for ambitious South African businesses — built to attract more clients, establish trust, and accelerate growth. Packages from <strong data-price="6999">R6,999</strong>.</p>
     <div class="hero-ctas">
-      <button class="btn-primary" onclick="showPage('packages')">Get My Website</button>
-      <button class="btn-ghost" onclick="showPage('contact')">Book Free Call</button>
+      <button class="btn-primary" onclick="showPage('packages')" data-i18n="hero_cta1">Get My Website</button>
+      <button class="btn-ghost" onclick="showPage('contact')" data-i18n="hero_cta2">Book Free Call</button>
     </div>
     <div class="hero-visual">
       <div class="floating-chip">
         <span class="chip-icon">🚀</span>
-        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;">Live in 2 weeks</span>
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;" data-i18n="hero_chip">Live in 2 weeks</span>
       </div>
     </div>
   </div>
 
   <div class="stats-bar">
-    <div class="s-cell"><div class="s-big" data-price="6999">R6,999</div><div class="s-sm">Packages From</div></div>
-    <div class="s-cell"><div class="s-big">2 wks</div><div class="s-sm">Avg Turnaround</div></div>
-    <div class="s-cell"><div class="s-big">24h</div><div class="s-sm">Support Response</div></div>
-    <div class="s-cell"><div class="s-big">0</div><div class="s-sm">Hidden Fees</div></div>
+    <div class="s-cell"><div class="s-big" data-price="6999">R6,999</div><div class="s-sm" data-i18n="stats_from">Packages From</div></div>
+    <div class="s-cell"><div class="s-big">2 wks</div><div class="s-sm" data-i18n="stats_turnaround">Avg Turnaround</div></div>
+    <div class="s-cell"><div class="s-big">24h</div><div class="s-sm" data-i18n="stats_support">Support Response</div></div>
+    <div class="s-cell"><div class="s-big">0</div><div class="s-sm" data-i18n="stats_fees">Hidden Fees</div></div>
   </div>
 
   <div class="sec">
-    <div class="sec-lbl reveal-section">Why Elevate Digitals</div>
-    <h2 class="sec-h reveal-section">Everything You Need to <span class="hl">Succeed Online</span></h2>
-    <p class="sec-sub reveal-section">We combine sharp design with technical expertise to build websites that actually work for your business.</p>
+    <div class="sec-lbl reveal-section" data-i18n="why_label">Why Elevate Digitals</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="why_h2">Everything You Need to <span class="hl">Succeed Online</span></h2>
+    <p class="sec-sub reveal-section" data-i18n="why_sub">We combine sharp design with technical expertise to build websites that actually work for your business.</p>
     <div class="svc-grid">
-      <div class="svc-card reveal-card"><div class="svc-icon">🎨</div><div class="svc-name">Custom Design</div><div class="svc-desc">No templates. Every site is designed from scratch to reflect your brand uniquely.</div></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">⚡</div><div class="svc-name">Lightning Fast</div><div class="svc-desc">Optimised for speed so visitors stay and Google ranks you higher.</div></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">📱</div><div class="svc-name">Mobile First</div><div class="svc-desc">Perfect on every screen — phone, tablet, desktop — always.</div></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">🔍</div><div class="svc-name">SEO Ready</div><div class="svc-desc">Built with search engines in mind so customers can actually find you.</div></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">🛡️</div><div class="svc-name">Secure & Reliable</div><div class="svc-desc">SSL, regular backups, and security updates handled for you.</div></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">📍</div><div class="svc-name">WhatsApp & Maps</div><div class="svc-desc">WhatsApp chat and Google Maps so customers reach you instantly.</div></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🎨</div><div class="svc-name" data-i18n="feat1_name">Custom Design</div><div class="svc-desc" data-i18n="feat1_desc">No templates. Every site is designed from scratch to reflect your brand uniquely.</div></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">⚡</div><div class="svc-name" data-i18n="feat2_name">Lightning Fast</div><div class="svc-desc" data-i18n="feat2_desc">Optimised for speed so visitors stay and Google ranks you higher.</div></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">📱</div><div class="svc-name" data-i18n="feat3_name">Mobile First</div><div class="svc-desc" data-i18n="feat3_desc">Perfect on every screen — phone, tablet, desktop — always.</div></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🔍</div><div class="svc-name" data-i18n="feat4_name">SEO Ready</div><div class="svc-desc" data-i18n="feat4_desc">Built with search engines in mind so customers can actually find you.</div></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🛡️</div><div class="svc-name" data-i18n="feat5_name">Secure & Reliable</div><div class="svc-desc" data-i18n="feat5_desc">SSL, regular backups, and security updates handled for you.</div></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">📍</div><div class="svc-name" data-i18n="feat6_name">WhatsApp & Maps</div><div class="svc-desc" data-i18n="feat6_desc">WhatsApp chat and Google Maps so customers reach you instantly.</div></div>
     </div>
   </div>
 
   <div class="sec" style="padding-top:0;">
-    <div class="sec-lbl reveal-section">How It Works</div>
-    <h2 class="sec-h reveal-section">Simple <span class="hl">4-Step</span> Process</h2>
-    <p class="sec-sub reveal-section">From first conversation to live website — here's exactly what to expect.</p>
+    <div class="sec-lbl reveal-section" data-i18n="how_label">How It Works</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="how_h2">Simple <span class="hl">4-Step</span> Process</h2>
+    <p class="sec-sub reveal-section" data-i18n="how_sub">From first conversation to live website — here's exactly what to expect.</p>
     <div class="proc-steps">
-      <div class="step reveal-card"><div class="step-n">01</div><div class="step-nm">Discovery</div><div class="step-d">We learn about your business, goals, and target audience.</div></div>
-      <div class="step reveal-card"><div class="step-n">02</div><div class="step-nm">Design</div><div class="step-d">We create a stunning design tailored to your brand.</div></div>
-      <div class="step reveal-card"><div class="step-n">03</div><div class="step-nm">Build</div><div class="step-d">We develop and test your site to be fast, secure, and pixel-perfect.</div></div>
-      <div class="step reveal-card"><div class="step-n">04</div><div class="step-nm">Launch</div><div class="step-d">We go live and provide ongoing support to keep everything running.</div></div>
+      <div class="step reveal-card"><div class="step-n">01</div><div class="step-nm" data-i18n="step1_name">Discovery</div><div class="step-d" data-i18n="step1_desc">We learn about your business, goals, and target audience.</div></div>
+      <div class="step reveal-card"><div class="step-n">02</div><div class="step-nm" data-i18n="step2_name">Design</div><div class="step-d" data-i18n="step2_desc">We create a stunning design tailored to your brand.</div></div>
+      <div class="step reveal-card"><div class="step-n">03</div><div class="step-nm" data-i18n="step3_name">Build</div><div class="step-d" data-i18n="step3_desc">We develop and test your site to be fast, secure, and pixel-perfect.</div></div>
+      <div class="step reveal-card"><div class="step-n">04</div><div class="step-nm" data-i18n="step4_name">Launch</div><div class="step-d" data-i18n="step4_desc">We go live and provide ongoing support to keep everything running.</div></div>
     </div>
   </div>
 
   <div class="cta-banner">
     <div class="cta-inner reveal-section">
-      <h2>Ready to <span class="hl">Go Live?</span></h2>
-      <p>Get a free consultation and quote within 24 hours. No pressure, no jargon — just a friendly chat about your business.</p>
+      <h2 data-i18n-html="home_cta_h2">Ready to <span class="hl">Go Live?</span></h2>
+      <p data-i18n="home_cta_sub">Get a free consultation and quote within 24 hours. No pressure, no jargon — just a friendly chat about your business.</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn-primary" onclick="showPage('contact')">Get a Free Quote</button>
-        <button class="btn-ghost" onclick="showPage('packages')">See Pricing</button>
+        <button class="btn-primary" onclick="showPage('contact')" data-i18n="btn_quote">Get a Free Quote</button>
+        <button class="btn-ghost" onclick="showPage('packages')" data-i18n="btn_pricing">See Pricing</button>
       </div>
     </div>
   </div>
@@ -861,23 +892,23 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 <!-- ══════════ SERVICES ══════════ -->
 <section class="page" id="page-services">
   <div class="sec" style="padding-top:60px;">
-    <div class="sec-lbl reveal-section">What We Offer</div>
-    <h2 class="sec-h reveal-section">Modern Websites <span class="hl">That Work</span></h2>
-    <p class="sec-sub reveal-section">Built to get you found online — and kept running smoothly every month.</p>
+    <div class="sec-lbl reveal-section" data-i18n="svc_label">What We Offer</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="svc_h2">Modern Websites <span class="hl">That Work</span></h2>
+    <p class="sec-sub reveal-section" data-i18n="svc_sub">Built to get you found online — and kept running smoothly every month.</p>
     <div class="svc-grid">
-      <div class="svc-card reveal-card"><div class="svc-icon">🌐</div><div class="svc-name">Website Design & Build</div><div class="svc-desc">Modern, mobile-friendly websites for businesses that need a new online presence — or a complete refresh.</div><ul class="svc-list"><li>Custom modern design</li><li>Mobile responsive</li><li>Fast & SEO-friendly</li><li>New sites or redesigns</li><li>Contact forms & CTAs</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">🔧</div><div class="svc-name">Monthly Maintenance</div><div class="svc-desc">Keep your website secure, updated, and running perfectly. We handle the technical side.</div><ul class="svc-list"><li>Security updates</li><li>Performance monitoring</li><li>Content updates</li><li>Uptime guaranteed</li><li>Monthly reports</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">🔍</div><div class="svc-name">Search Engine Optimisation</div><div class="svc-desc">Get found on Google by the customers who matter. We optimise your site so it ranks higher.</div><ul class="svc-list"><li>Keyword research</li><li>On-page SEO</li><li>Google Business Profile</li><li>Technical SEO audit</li><li>Monthly ranking reports</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">🛒</div><div class="svc-name">E-Commerce Stores</div><div class="svc-desc">Sell online with a professional shop that looks great, loads fast, and makes buying easy.</div><ul class="svc-list"><li>Product catalogue</li><li>Secure checkout</li><li>Payment gateway integration</li><li>Inventory management</li><li>Order notifications</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">✍️</div><div class="svc-name">Content & Copywriting</div><div class="svc-desc">Professional website copy written to convert visitors into customers — clear, compelling, on-brand.</div><ul class="svc-list"><li>Homepage & about copy</li><li>Service page content</li><li>SEO-optimised writing</li><li>Blog posts</li><li>Proofreading & editing</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon">📅</div><div class="svc-name">Booking Systems</div><div class="svc-desc">Let clients book appointments directly from your website. Perfect for salons, consultants, clinics.</div><ul class="svc-list"><li>Online booking calendar</li><li>Email confirmations</li><li>Service & staff selection</li><li>Mobile friendly</li><li>Custom availability</li></ul></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🌐</div><div class="svc-name" data-i18n="svc1_name">Website Design & Build</div><div class="svc-desc" data-i18n="svc1_desc">Modern, mobile-friendly websites for businesses that need a new online presence — or a complete refresh.</div><ul class="svc-list"><li>Custom modern design</li><li>Mobile responsive</li><li>Fast & SEO-friendly</li><li>New sites or redesigns</li><li>Contact forms & CTAs</li></ul></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🔧</div><div class="svc-name" data-i18n="svc2_name">Monthly Maintenance</div><div class="svc-desc" data-i18n="svc2_desc">Keep your website secure, updated, and running perfectly. We handle the technical side.</div><ul class="svc-list"><li>Security updates</li><li>Performance monitoring</li><li>Content updates</li><li>Uptime guaranteed</li><li>Monthly reports</li></ul></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🔍</div><div class="svc-name" data-i18n="svc3_name">Search Engine Optimisation</div><div class="svc-desc" data-i18n="svc3_desc">Get found on Google by the customers who matter. We optimise your site so it ranks higher.</div><ul class="svc-list"><li>Keyword research</li><li>On-page SEO</li><li>Google Business Profile</li><li>Technical SEO audit</li><li>Monthly ranking reports</li></ul></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">🛒</div><div class="svc-name" data-i18n="svc4_name">E-Commerce Stores</div><div class="svc-desc" data-i18n="svc4_desc">Sell online with a professional shop that looks great, loads fast, and makes buying easy.</div><ul class="svc-list"><li>Product catalogue</li><li>Secure checkout</li><li>Payment gateway integration</li><li>Inventory management</li><li>Order notifications</li></ul></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">✍️</div><div class="svc-name" data-i18n="svc5_name">Content & Copywriting</div><div class="svc-desc" data-i18n="svc5_desc">Professional website copy written to convert visitors into customers — clear, compelling, on-brand.</div><ul class="svc-list"><li>Homepage & about copy</li><li>Service page content</li><li>SEO-optimised writing</li><li>Blog posts</li><li>Proofreading & editing</li></ul></div>
+      <div class="svc-card reveal-card"><div class="svc-icon">📅</div><div class="svc-name" data-i18n="svc6_name">Booking Systems</div><div class="svc-desc" data-i18n="svc6_desc">Let clients book appointments directly from your website. Perfect for salons, consultants, clinics.</div><ul class="svc-list"><li>Online booking calendar</li><li>Email confirmations</li><li>Service & staff selection</li><li>Mobile friendly</li><li>Custom availability</li></ul></div>
     </div>
   </div>
   <div class="cta-banner">
     <div class="cta-inner reveal-section">
-      <h2>Not Sure What You <span class="hl">Need?</span></h2>
-      <p>Let's chat — we'll figure it out together. Free consultation, no commitment.</p>
-      <button class="btn-primary" onclick="showPage('contact')">Get a Free Quote</button>
+      <h2 data-i18n-html="svc_cta_h2">Not Sure What You <span class="hl">Need?</span></h2>
+      <p data-i18n="svc_cta_sub">Let's chat — we'll figure it out together. Free consultation, no commitment.</p>
+      <button class="btn-primary" onclick="showPage('contact')" data-i18n="btn_quote">Get a Free Quote</button>
     </div>
   </div>
 </section>
@@ -885,41 +916,41 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 <!-- ══════════ PACKAGES ══════════ -->
 <section class="page" id="page-packages">
   <div class="sec" style="padding-top:60px;">
-    <div class="sec-lbl reveal-section">Transparent Pricing</div>
-    <h2 class="sec-h reveal-section">No Hidden Fees. <span class="hl">No Surprises.</span></h2>
-    <p class="sec-sub reveal-section">Just honest pricing for great work. All prices in <span id="currencyNote">ZAR</span>, once-off.</p>
+    <div class="sec-lbl reveal-section" data-i18n="pkg_label">Transparent Pricing</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="pkg_h2">No Hidden Fees. <span class="hl">No Surprises.</span></h2>
+    <p class="sec-sub reveal-section" data-i18n-html="pkg_sub">Just honest pricing for great work. All prices in <span id="currencyNote">ZAR</span>, once-off.</p>
     <div class="price-grid">
       <div class="p-card reveal-card">
-        <div class="p-name">Starter</div><div class="p-amount" data-price="6999">R6,999</div><div class="p-period">once-off · 1–3 pages</div>
-        <p class="p-best-for">Best for: New businesses needing a professional online presence fast</p>
+        <div class="p-name" data-i18n="pkg1_name">Starter</div><div class="p-amount" data-price="6999">R6,999</div><div class="p-period" data-i18n="pkg1_period">once-off · 1–3 pages</div>
+        <p class="p-best-for" data-i18n="pkg1_best">Best for: New businesses needing a professional online presence fast</p>
         <ul class="p-feats"><li>Capture more leads from your website</li><li>Mobile-responsive design</li><li>Basic SEO included</li><li>WhatsApp chat integration</li><li>Professional contact form</li><li>Launch in just 2 weeks</li></ul>
-        <button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Starter')},400)">Get Started</button>
+        <button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Starter')},400)" data-i18n="btn_getstarted">Get Started</button>
       </div>
       <div class="p-card pop reveal-card">
         <div class="pop-tag">Best Value</div>
-        <div class="p-name">Business</div><div class="p-amount" data-price="14999">R14,999</div><div class="p-period">once-off · 5–7 pages</div>
-        <p class="p-best-for">Best for: Growing businesses ready to dominate their market</p>
+        <div class="p-name" data-i18n="pkg2_name">Business</div><div class="p-amount" data-price="14999">R14,999</div><div class="p-period" data-i18n="pkg2_period">once-off · 5–7 pages</div>
+        <p class="p-best-for" data-i18n="pkg2_best">Best for: Growing businesses ready to dominate their market</p>
         <ul class="p-feats"><li>Everything in Starter, plus...</li><li>Full SEO optimisation</li><li>Google Maps integration</li><li>Google Analytics</li><li>Priority support</li><li>More service pages</li><li>Launch in just 2 weeks</li></ul>
-        <button class="btn-p pop-btn" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Business')},400)">Get Started</button>
+        <button class="btn-p pop-btn" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Business')},400)" data-i18n="btn_getstarted">Get Started</button>
       </div>
       <div class="p-card reveal-card">
-        <div class="p-name">Pro</div><div class="p-amount" data-price="29999">R29,999</div><div class="p-period">once-off · up to 10 pages</div>
-        <p class="p-best-for">Best for: Businesses ready to scale, automate & grow online sales</p>
+        <div class="p-name" data-i18n="pkg3_name">Pro</div><div class="p-amount" data-price="29999">R29,999</div><div class="p-period" data-i18n="pkg3_period">once-off · up to 10 pages</div>
+        <p class="p-best-for" data-i18n="pkg3_best">Best for: Businesses ready to scale, automate & grow online sales</p>
         <ul class="p-feats"><li>E-commerce or booking system</li><li>Full SEO with monthly reports</li><li>WhatsApp, Maps & Analytics</li><li>Blog setup</li><li>Dedicated account manager</li><li>Launch in just 2 weeks</li></ul>
-        <button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Pro')},400)">Get Started</button>
+        <button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Pro')},400)" data-i18n="btn_getstarted">Get Started</button>
       </div>
       <div class="p-card reveal-card" style="border-color:rgba(255,92,26,0.22);">
-        <div class="p-name">Premium</div><div class="p-amount" data-price="59999">R59,999<span style="font-size:18px;">+</span></div><div class="p-period">fully custom · no limits</div>
-        <p class="p-best-for">Best for: Enterprises needing a bespoke digital solution</p>
+        <div class="p-name" data-i18n="pkg4_name">Premium</div><div class="p-amount" data-price="59999">R59,999<span style="font-size:18px;">+</span></div><div class="p-period" data-i18n="pkg4_period">fully custom · no limits</div>
+        <p class="p-best-for" data-i18n="pkg4_best">Best for: Enterprises needing a bespoke digital solution</p>
         <ul class="p-feats"><li>Unlimited pages & custom functionality</li><li>Advanced integrations</li><li>Full SEO dominance strategy</li><li>Dedicated project manager</li><li>Priority 24/7 support</li><li>White-label options</li></ul>
-        <button class="btn-p" onclick="showPage('contact')">Let's Talk</button>
+        <button class="btn-p" onclick="showPage('contact')" data-i18n="btn_letstalk">Let's Talk</button>
       </div>
     </div>
-    <div class="deposit-note reveal-section"><div class="deposit-icon">💳</div><div class="deposit-text"><strong>50% deposit to start</strong> • Balance on completion</div></div>
+    <div class="deposit-note reveal-section"><div class="deposit-icon">💳</div><div class="deposit-text" data-i18n-html="deposit_text"><strong>50% deposit to start</strong> • Balance on completion</div></div>
     <div style="margin-top:60px;">
-      <div class="sec-lbl reveal-section">Add-Ons</div>
-      <h2 class="sec-h reveal-section">Monthly <span class="hl">Maintenance Plans</span></h2>
-      <p class="sec-sub reveal-section">Keep your site secure and up to date after launch.</p>
+      <div class="sec-lbl reveal-section" data-i18n="maint_label">Add-Ons</div>
+      <h2 class="sec-h reveal-section" data-i18n-html="maint_h2">Monthly <span class="hl">Maintenance Plans</span></h2>
+      <p class="sec-sub reveal-section" data-i18n="maint_sub">Keep your site secure and up to date after launch.</p>
       <div class="maint-grid">
         <div class="m-card reveal-card"><div class="m-name">Basic Care</div><div class="m-price" data-price="499">R499<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><ul class="p-feats"><li>Security updates</li><li>Uptime monitoring</li><li>Monthly backup</li></ul><button class="btn-p" onclick="showPage('contact')">Get Started</button></div>
         <div class="m-card rec reveal-card"><div class="pop-tag">Recommended</div><div class="m-name">Full Care</div><div class="m-price" data-price="999">R999<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><ul class="p-feats"><li>Everything in Basic</li><li>Content updates (2hr)</li><li>Performance reports</li><li>Priority support</li></ul><button class="btn-p pop-btn" onclick="showPage('contact')">Get Started</button></div>
@@ -1034,9 +1065,9 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 <!-- ══════════ BLOG ══════════ -->
 <section class="page" id="page-blog">
   <div class="sec" style="padding-top:60px;">
-    <div class="sec-lbl reveal-section">Insights & Tips</div>
-    <h2 class="sec-h reveal-section">The <span class="hl">Elevate Blog</span></h2>
-    <p class="sec-sub reveal-section">Practical advice to help South African businesses grow online — web design, SEO, and digital marketing tips you can actually use.</p>
+    <div class="sec-lbl reveal-section" data-i18n="blog_label">Insights & Tips</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="blog_h2">The <span class="hl">Elevate Blog</span></h2>
+    <p class="sec-sub reveal-section" data-i18n="blog_sub">Practical advice to help South African businesses grow online — web design, SEO, and digital marketing tips you can actually use.</p>
     <div class="blog-grid">
       <!-- CRAWLABLE: each blog card links to a real URL -->
       <article class="blog-card reveal-card" data-blog="pricing-guide" onclick="openBlog(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBlog(this)">
@@ -1082,9 +1113,9 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 <!-- ══════════ CONTACT ══════════ -->
 <section class="page" id="page-contact">
   <div class="sec" style="padding-top:60px;">
-    <div class="sec-lbl reveal-section">Get In Touch</div>
-    <h2 class="sec-h reveal-section">Let's Start Your <span class="hl">Project</span></h2>
-    <p class="sec-sub reveal-section">Fill in the form and we'll get back to you within 24 hours with a free consultation and quote. No pressure, no jargon.</p>
+    <div class="sec-lbl reveal-section" data-i18n="contact_label">Get In Touch</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="contact_h2">Let's Start Your <span class="hl">Project</span></h2>
+    <p class="sec-sub reveal-section" data-i18n="contact_sub">Fill in the form and we'll get back to you within 24 hours with a free consultation and quote. No pressure, no jargon.</p>
     <div class="contact-wrap">
       <div class="contact-info">
         <div class="info-item reveal-card"><div class="info-icon">📧</div><div><div class="info-lbl">Email</div><div class="info-val"><a href="mailto:elevatedigitalwebs@gmail.com">elevatedigitalwebs@gmail.com</a></div></div></div>
@@ -1095,13 +1126,13 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
       <div class="contact-form reveal-section">
         <form action="https://formspree.io/f/mqegrkbj" method="POST">
           <div class="form-row">
-            <div class="form-group"><label>First Name *</label><input type="text" name="first_name" placeholder="First Name" required></div>
-            <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Last Name"></div>
+            <div class="form-group"><label data-i18n="form_firstname">First Name *</label><input type="text" name="first_name" placeholder="First Name" data-i18n-ph="ph_firstname" required></div>
+            <div class="form-group"><label data-i18n="form_lastname">Last Name</label><input type="text" name="last_name" placeholder="Last Name" data-i18n-ph="ph_lastname"></div>
           </div>
-          <div class="form-group"><label>Email Address *</label><input type="email" name="email" placeholder="you@example.com" required></div>
-          <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="+27 ..."></div>
+          <div class="form-group"><label data-i18n="form_email">Email Address *</label><input type="email" name="email" placeholder="you@example.com" required></div>
+          <div class="form-group"><label data-i18n="form_phone">Phone Number</label><input type="tel" name="phone" placeholder="+27 ..."></div>
           <div class="form-group">
-            <label>I'm Interested In</label>
+            <label data-i18n="form_service">I'm Interested In</label>
             <select name="service">
               <option value="">Select a service…</option>
               <option>Starter Website (R6,999)</option>
@@ -1115,8 +1146,8 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
               <option>Not Sure Yet — Let's Chat</option>
             </select>
           </div>
-          <div class="form-group"><label>Tell Us About Your Project *</label><textarea name="message" placeholder="Tell us about your business, what you need, and any questions you have…" required></textarea></div>
-          <button type="submit" class="btn-submit">Send Message →</button>
+          <div class="form-group"><label data-i18n="form_message">Tell Us About Your Project *</label><textarea name="message" placeholder="Tell us about your business, what you need, and any questions you have…" data-i18n-ph="ph_message" required></textarea></div>
+          <button type="submit" class="btn-submit" data-i18n="form_submit">Send Message →</button>
         </form>
       </div>
     </div>
@@ -1127,32 +1158,32 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 
 <!-- FAQ -->
 <section style="position:relative;z-index:1;padding:60px 24px 40px;max-width:960px;margin:0 auto;" aria-labelledby="faq-heading">
-  <h2 class="faq-main-header" id="faq-heading">Frequently Asked Questions</h2>
-  <p class="faq-sub-header">Everything you need to know about our web design services, pricing, and process. Can't find the answer? Contact us.</p>
+  <h2 class="faq-main-header" id="faq-heading" data-i18n="faq_h2">Frequently Asked Questions</h2>
+  <p class="faq-sub-header" data-i18n="faq_sub">Everything you need to know about our web design services, pricing, and process. Can't find the answer? Contact us.</p>
   <div class="faq-accordion" role="list">
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
-      <div class="faq-q-accordion">How much does a website cost in South Africa?</div>
-      <div class="faq-a-accordion">Website costs in South Africa vary based on complexity. Basic small business websites start from R6,999, e-commerce sites from R29,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and balance on completion.</div>
+      <div class="faq-q-accordion" data-i18n="faq1_q">How much does a website cost in South Africa?</div>
+      <div class="faq-a-accordion" data-i18n="faq1_a">Website costs in South Africa vary based on complexity. Basic small business websites start from R6,999, e-commerce sites from R29,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and balance on completion.</div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
-      <div class="faq-q-accordion">How long does it take to build a website?</div>
-      <div class="faq-a-accordion">Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks.</div>
+      <div class="faq-q-accordion" data-i18n="faq2_q">How long does it take to build a website?</div>
+      <div class="faq-a-accordion" data-i18n="faq2_a">Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks.</div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
-      <div class="faq-q-accordion">Do your websites work on mobile devices?</div>
-      <div class="faq-a-accordion">Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach.</div>
+      <div class="faq-q-accordion" data-i18n="faq3_q">Do your websites work on mobile devices?</div>
+      <div class="faq-a-accordion" data-i18n="faq3_a">Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach.</div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
-      <div class="faq-q-accordion">What payment methods do you accept?</div>
-      <div class="faq-a-accordion">We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT (Electronic Funds Transfer) via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion.</div>
+      <div class="faq-q-accordion" data-i18n="faq4_q">What payment methods do you accept?</div>
+      <div class="faq-a-accordion" data-i18n="faq4_a">We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT (Electronic Funds Transfer) via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion.</div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
-      <div class="faq-q-accordion">Do you offer SEO services?</div>
-      <div class="faq-a-accordion">Yes! We specialize in SEO services for South African businesses. Our local SEO optimization helps you rank on Google.co.za for keywords like 'web design Cape Town', 'web design Johannesburg', and other South African search terms.</div>
+      <div class="faq-q-accordion" data-i18n="faq5_q">Do you offer SEO services?</div>
+      <div class="faq-a-accordion" data-i18n="faq5_a">Yes! We specialize in SEO services for South African businesses. Our local SEO optimization helps you rank on Google.co.za for keywords like 'web design Cape Town', 'web design Johannesburg', and other South African search terms.</div>
     </div>
   </div>
   <div style="text-align:center;margin-top:32px;">
-    <button class="btn-primary" onclick="showPage('contact')">Contact Us →</button>
+    <button class="btn-primary" onclick="showPage('contact')" data-i18n="footer_contact_btn">Contact Us →</button>
   </div>
 </section>
 
@@ -1163,11 +1194,11 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
       <div class="logo-icon"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fA" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient><linearGradient id="fB" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient></defs><path d="M6 8v24h12v-4H10.5v-6H16v-4h-5.5v-6H18V8z" fill="url(#fA)"/><path d="M20 8l5.5 16L31 8h3.5L27 32h-3L16.5 8z" fill="url(#fB)"/></svg></div>
       <div class="logo-text">ELEVATE<span>DIGITALS</span></div>
     </div>
-    <p class="foot-desc">Modern web design for South African businesses that want to stand out and grow online. Packages from <span data-price="6999">R6,999</span>.</p>
+    <p class="foot-desc" data-i18n-html="footer_desc">Modern web design for South African businesses that want to stand out and grow online. Packages from <span data-price="6999">R6,999</span>.</p>
     <p class="foot-contact"><a href="mailto:elevatedigitalwebs@gmail.com">elevatedigitalwebs@gmail.com</a><br>+27 65 085 8437</p>
   </div>
   <div>
-    <div class="foot-h">Company</div>
+    <div class="foot-h" data-i18n="footer_company">Company</div>
     <ul class="foot-links">
       <li><a href="#home" onclick="showPage('home')">Home</a></li>
       <li><a href="#services" onclick="showPage('services')">Services</a></li>
@@ -1177,7 +1208,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     </ul>
   </div>
   <div>
-    <div class="foot-h">Services</div>
+    <div class="foot-h" data-i18n="footer_services">Services</div>
     <ul class="foot-links">
       <li><a href="#services" onclick="showPage('services')">Website Design</a></li>
       <li><a href="#services" onclick="showPage('services')">Maintenance</a></li>
@@ -1329,17 +1360,18 @@ function toggleCurrency() {
 }
 document.addEventListener('click',e=>{if(!e.target.closest('.currency-selector')){document.getElementById('currencyBtn').classList.remove('open');document.getElementById('currencyDropdown').classList.remove('open');}});
 
-function setCurrency(el) {
+function setCurrencyAll(el) {
   currentCurrency={code:el.dataset.code,symbol:el.dataset.symbol,rate:parseFloat(el.dataset.rate)};
   document.getElementById('currSelected').textContent=currentCurrency.code;
   ['currencyNote','payCurrencyNote'].forEach(id=>{const n=document.getElementById(id);if(n)n.textContent=currentCurrency.code;});
-  document.querySelectorAll('.currency-option').forEach(o=>o.classList.remove('active'));
-  el.classList.add('active');
+  document.querySelectorAll('.currency-option').forEach(o=>o.classList.toggle('active',o.dataset.code===currentCurrency.code));
+  document.querySelectorAll('.mob-pill[data-code]').forEach(p=>p.classList.toggle('active',p.dataset.code===currentCurrency.code));
   document.getElementById('currencyBtn').classList.remove('open');
   document.getElementById('currencyDropdown').classList.remove('open');
   updateAllPrices();
   updatePaySummary();
 }
+function setCurrency(el){setCurrencyAll(el);}
 
 function formatPrice(zarPrice) {
   const v=zarPrice*currentCurrency.rate;
@@ -1459,18 +1491,637 @@ function openBlog(el) {
 function closeBlogModal(){document.getElementById('blogModal').classList.remove('open');document.body.style.overflow='';}
 
 /* ═══════════════════════
-   LANGUAGE SELECTOR (simplified)
+   LANGUAGE & TRANSLATION SYSTEM
 ═══════════════════════ */
+let currentLang = 'en';
+
 function toggleLang(){document.getElementById('langBtn').classList.toggle('open');document.getElementById('langDropdown').classList.toggle('open');}
 document.addEventListener('click',e=>{if(!e.target.closest('.lang-selector')){document.getElementById('langBtn').classList.remove('open');document.getElementById('langDropdown').classList.remove('open');}});
-function setLanguage(el){
-  document.querySelectorAll('.lang-option').forEach(o=>o.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('langSelected').textContent=el.dataset.label;
+
+function setLangAll(el) {
+  const lang = el.dataset.lang;
+  const label = el.dataset.label;
+  currentLang = lang;
+  document.getElementById('langSelected').textContent = label;
+  document.querySelectorAll('.lang-option').forEach(o=>o.classList.toggle('active', o.dataset.lang===lang));
+  document.querySelectorAll('.mob-pill[data-lang]').forEach(p=>p.classList.toggle('active', p.dataset.lang===lang));
   document.getElementById('langBtn').classList.remove('open');
   document.getElementById('langDropdown').classList.remove('open');
-  if(el.dataset.lang==='ar'){document.documentElement.dir='rtl';}else{document.documentElement.dir='ltr';}
+  document.documentElement.dir = lang==='ar' ? 'rtl' : 'ltr';
+  applyTranslation(lang);
+  updateAllPrices();
 }
+function setLanguage(el){setLangAll(el);}
+
+function applyTranslation(lang) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v=t[el.dataset.i18n]; if(v!==undefined) el.textContent=v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const v=t[el.dataset.i18nHtml]; if(v!==undefined) el.innerHTML=v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const v=t[el.dataset.i18nPh]; if(v!==undefined) el.placeholder=v;
+  });
+}
+
+const TRANSLATIONS = {
+  en: {
+    nav_home:'Home', nav_services:'Services', nav_packages:'Packages', nav_pay:'Pay', nav_blog:'Blog', nav_contact:'Contact', nav_getstarted:'Get Started', ctrl_language:'Language',
+    hero_badge:'Web Design Agency · South Africa',
+    hero_h1:'Turn Your Website Into a <span class="hl">Lead-Generating Machine</span>',
+    hero_sub:'We design high-converting websites for ambitious South African businesses — built to attract more clients, establish trust, and accelerate growth. Packages from <strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'Get My Website', hero_cta2:'Book Free Call', hero_chip:'Live in 2 weeks',
+    stats_from:'Packages From', stats_turnaround:'Avg Turnaround', stats_support:'Support Response', stats_fees:'Hidden Fees',
+    why_label:'Why Elevate Digitals',
+    why_h2:'Everything You Need to <span class="hl">Succeed Online</span>',
+    why_sub:'We combine sharp design with technical expertise to build websites that actually work for your business.',
+    feat1_name:'Custom Design', feat1_desc:'No templates. Every site is designed from scratch to reflect your brand uniquely.',
+    feat2_name:'Lightning Fast', feat2_desc:'Optimised for speed so visitors stay and Google ranks you higher.',
+    feat3_name:'Mobile First', feat3_desc:'Perfect on every screen — phone, tablet, desktop — always.',
+    feat4_name:'SEO Ready', feat4_desc:'Built with search engines in mind so customers can actually find you.',
+    feat5_name:'Secure & Reliable', feat5_desc:'SSL, regular backups, and security updates handled for you.',
+    feat6_name:'WhatsApp & Maps', feat6_desc:'WhatsApp chat and Google Maps so customers reach you instantly.',
+    how_label:'How It Works',
+    how_h2:'Simple <span class="hl">4-Step</span> Process',
+    how_sub:"From first conversation to live website — here's exactly what to expect.",
+    step1_name:'Discovery', step1_desc:'We learn about your business, goals, and target audience.',
+    step2_name:'Design', step2_desc:'We create a stunning design tailored to your brand.',
+    step3_name:'Build', step3_desc:'We develop and test your site to be fast, secure, and pixel-perfect.',
+    step4_name:'Launch', step4_desc:'We go live and provide ongoing support to keep everything running.',
+    home_cta_h2:'Ready to <span class="hl">Go Live?</span>',
+    home_cta_sub:'Get a free consultation and quote within 24 hours. No pressure, no jargon — just a friendly chat about your business.',
+    btn_quote:'Get a Free Quote', btn_pricing:'See Pricing',
+    svc_label:'What We Offer',
+    svc_h2:'Modern Websites <span class="hl">That Work</span>',
+    svc_sub:'Built to get you found online — and kept running smoothly every month.',
+    svc1_name:'Website Design & Build', svc1_desc:'Modern, mobile-friendly websites for businesses that need a new online presence — or a complete refresh.',
+    svc2_name:'Monthly Maintenance', svc2_desc:'Keep your website secure, updated, and running perfectly. We handle the technical side.',
+    svc3_name:'Search Engine Optimisation', svc3_desc:'Get found on Google by the customers who matter. We optimise your site so it ranks higher.',
+    svc4_name:'E-Commerce Stores', svc4_desc:'Sell online with a professional shop that looks great, loads fast, and makes buying easy.',
+    svc5_name:'Content & Copywriting', svc5_desc:'Professional website copy written to convert visitors into customers — clear, compelling, on-brand.',
+    svc6_name:'Booking Systems', svc6_desc:'Let clients book appointments directly from your website. Perfect for salons, consultants, clinics.',
+    svc_cta_h2:'Not Sure What You <span class="hl">Need?</span>',
+    svc_cta_sub:"Let's chat — we'll figure it out together. Free consultation, no commitment.",
+    pkg_label:'Transparent Pricing',
+    pkg_h2:'No Hidden Fees. <span class="hl">No Surprises.</span>',
+    pkg_sub:'Just honest pricing for great work. All prices in <span id="currencyNote">ZAR</span>, once-off.',
+    pkg1_name:'Starter', pkg1_period:'once-off · 1–3 pages', pkg1_best:'Best for: New businesses needing a professional online presence fast',
+    pkg2_name:'Business', pkg2_period:'once-off · 5–7 pages', pkg2_best:'Best for: Growing businesses ready to dominate their market',
+    pkg3_name:'Pro', pkg3_period:'once-off · up to 10 pages', pkg3_best:'Best for: Businesses ready to scale, automate & grow online sales',
+    pkg4_name:'Premium', pkg4_period:'fully custom · no limits', pkg4_best:'Best for: Enterprises needing a bespoke digital solution',
+    btn_getstarted:'Get Started', btn_letstalk:"Let's Talk",
+    deposit_text:'<strong>50% deposit to start</strong> • Balance on completion',
+    maint_label:'Add-Ons',
+    maint_h2:'Monthly <span class="hl">Maintenance Plans</span>',
+    maint_sub:'Keep your site secure and up to date after launch.',
+    contact_label:'Get In Touch',
+    contact_h2:"Let's Start Your <span class=\"hl\">Project</span>",
+    contact_sub:"Fill in the form and we'll get back to you within 24 hours with a free consultation and quote. No pressure, no jargon.",
+    form_firstname:'First Name *', form_lastname:'Last Name', form_email:'Email Address *', form_phone:'Phone Number', form_service:"I'm Interested In", form_message:'Tell Us About Your Project *', form_submit:'Send Message →',
+    ph_firstname:'First Name', ph_lastname:'Last Name', ph_message:'Tell us about your business, what you need, and any questions you have…',
+    blog_label:'Insights & Tips',
+    blog_h2:'The <span class="hl">Elevate Blog</span>',
+    blog_sub:'Practical advice to help South African businesses grow online — web design, SEO, and digital marketing tips you can actually use.',
+    faq_h2:'Frequently Asked Questions', faq_sub:"Everything you need to know about our web design services, pricing, and process. Can't find the answer? Contact us.",
+    faq1_q:'How much does a website cost in South Africa?', faq1_a:'Website costs in South Africa vary based on complexity. Basic small business websites start from R6,999, e-commerce sites from R29,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and balance on completion.',
+    faq2_q:'How long does it take to build a website?', faq2_a:'Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks.',
+    faq3_q:'Do your websites work on mobile devices?', faq3_a:"Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach.",
+    faq4_q:'What payment methods do you accept?', faq4_a:'We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT (Electronic Funds Transfer) via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion.',
+    faq5_q:'Do you offer SEO services?', faq5_a:"Yes! We specialize in SEO services for South African businesses. Our local SEO optimization helps you rank on Google.co.za for keywords like 'web design Cape Town', 'web design Johannesburg', and other South African search terms.",
+    footer_desc:'Modern web design for South African businesses that want to stand out and grow online. Packages from <span data-price="6999">R6,999</span>.',
+    footer_company:'Company', footer_services:'Services', footer_contact_btn:'Contact Us →',
+  },
+  af: {
+    nav_home:'Tuis', nav_services:'Dienste', nav_packages:'Pakkette', nav_pay:'Betaal', nav_blog:'Blog', nav_contact:'Kontak', nav_getstarted:'Begin Nou', ctrl_language:'Taal',
+    hero_badge:'Webontwerp Agentskap · Suid-Afrika',
+    hero_h1:"Verander Jou Webwerf in 'n <span class=\"hl\">Leidraad-Genererende Masjien</span>",
+    hero_sub:"Ons ontwerp hoë-omskakelings-webwerwe vir ambisieuse Suid-Afrikaanse besighede — gebou om meer kliënte te trek, vertroue te stig en groei te versnel. Pakkette vanaf <strong data-price=\"6999\">R6,999</strong>.",
+    hero_cta1:'Kry My Webwerf', hero_cta2:'Bespreek Gratis Oproep', hero_chip:'Aanlyn in 2 weke',
+    stats_from:'Pakkette Vanaf', stats_turnaround:'Gem. Omlooptyd', stats_support:'Ondersteuning Reaksie', stats_fees:'Verborge Fooie',
+    why_label:'Hoekom Elevate Digitals',
+    why_h2:'Alles Wat Jy Nodig Het om <span class="hl">Aanlyn te Slaag</span>',
+    why_sub:'Ons kombineer skerp ontwerp met tegniese kundigheid om webwerwe te bou wat werklik vir jou besigheid werk.',
+    feat1_name:'Pasgemaakte Ontwerp', feat1_desc:"Geen templates. Elke webwerf word van nuuts af ontwerp om jou handelsmerk uniek te weerspieël.",
+    feat2_name:'Blitsvinnig', feat2_desc:'Geoptimaliseer vir spoed sodat besoekers bly en Google jou hoër plaas.',
+    feat3_name:'Mobiel Eerste', feat3_desc:'Perfek op elke skerm — foon, tablet, rekenaar — altyd.',
+    feat4_name:'SEO-gereed', feat4_desc:'Gebou met soekenjins in gedagte sodat kliënte jou werklik kan vind.',
+    feat5_name:'Veilig & Betroubaar', feat5_desc:'SSL, gereelde rugsteune en sekuriteitsopdaterings vir jou hanteer.',
+    feat6_name:'WhatsApp & Kaarte', feat6_desc:'WhatsApp-klets en Google Maps sodat kliënte jou onmiddellik bereik.',
+    how_label:'Hoe Dit Werk',
+    how_h2:'Eenvoudige <span class="hl">4-Stap</span> Proses',
+    how_sub:'Van eerste gesprek tot lewende webwerf — dit is presies wat om te verwag.',
+    step1_name:'Ontdekking', step1_desc:'Ons leer meer oor jou besigheid, doelwitte en teikengehoor.',
+    step2_name:'Ontwerp', step2_desc:"Ons skep 'n pragtige ontwerp wat by jou handelsmerk pas.",
+    step3_name:'Bou', step3_desc:'Ons ontwikkel en toets jou webwerf vir spoed, sekuriteit en presisie.',
+    step4_name:'Loods', step4_desc:'Ons gaan aanlyn en bied voortdurende ondersteuning om alles aan die gang te hou.',
+    home_cta_h2:'Gereed om <span class="hl">Aanlyn te Gaan?</span>',
+    home_cta_sub:"Kry 'n gratis konsultasie en kwotasie binne 24 uur. Geen druk, geen jargon — net 'n vriendelike gesels oor jou besigheid.",
+    btn_quote:'Kry Gratis Kwotasie', btn_pricing:'Sien Pryse',
+    svc_label:'Wat Ons Aanbied',
+    svc_h2:'Moderne Webwerwe <span class="hl">Wat Werk</span>',
+    svc_sub:'Gebou om aanlyn gevind te word — en elke maand glad aan die gang gehou.',
+    svc1_name:'Webwerf Ontwerp & Bou', svc1_desc:'Moderne, mobielvriendelike webwerwe vir besighede wat nuwe aanlyn teenwoordigheid of herontwerp benodig.',
+    svc2_name:'Maandelikse Onderhoud', svc2_desc:'Hou jou webwerf veilig, op datum en perfek werksaam. Ons hanteer die tegniese kant.',
+    svc3_name:'Soekenjin Optimering', svc3_desc:'Word op Google gevind deur die kliënte wat saak maak. Ons optimeer jou werf om hoër te plaas.',
+    svc4_name:'Aanlyn Winkels', svc4_desc:'Verkoop aanlyn met professionele winkel wat goed lyk, vinnig laai en koop maklik maak.',
+    svc5_name:'Inhoud & Teksskrif', svc5_desc:'Professionele webwerfteks geskryf om besoekers in kliënte te omskep — duidelik, oortuigend, op handelsmerk.',
+    svc6_name:'Besprekingstelsels', svc6_desc:'Laat kliënte direk van jou webwerf afsprake bespreek. Ideaal vir salonne, konsultante, klinieke.',
+    svc_cta_h2:'Nie Seker Wat Jy <span class="hl">Nodig Het Nie?</span>',
+    svc_cta_sub:"Kom ons gesels — ons sal dit saam uitwerk. Gratis konsultasie, geen verbintenis.",
+    pkg_label:'Deursigtige Pryse',
+    pkg_h2:'Geen Verborge Fooie. <span class="hl">Geen Verrassings.</span>',
+    pkg_sub:'Net eerlike pryse vir uitstekende werk. Alle pryse in <span id="currencyNote">ZAR</span>, eenmalig.',
+    pkg1_name:'Begin', pkg1_period:'eenmalig · 1–3 bladsye', pkg1_best:'Beste vir: Nuwe besighede wat vinnig professionele aanlyn teenwoordigheid nodig het',
+    pkg2_name:'Besigheid', pkg2_period:'eenmalig · 5–7 bladsye', pkg2_best:'Beste vir: Groeiende besighede gereed om hul mark te oorheers',
+    pkg3_name:'Pro', pkg3_period:'eenmalig · tot 10 bladsye', pkg3_best:'Beste vir: Besighede gereed om te skaal, outomatiseer en aanlyn-verkope te groei',
+    pkg4_name:'Premium', pkg4_period:'volledig pasgemaak · geen limiete', pkg4_best:"Beste vir: Ondernemings wat 'n pasgemaakte digitale oplossing benodig",
+    btn_getstarted:'Begin Nou', btn_letstalk:'Kom Ons Praat',
+    deposit_text:'<strong>50% deposito om te begin</strong> • Saldo by voltooiing',
+    maint_label:'Byvoegings',
+    maint_h2:'Maandelikse <span class="hl">Onderhoudplanne</span>',
+    maint_sub:'Hou jou werf veilig en op datum na bekendstelling.',
+    contact_label:'Kontak Ons',
+    contact_h2:'Kom Ons Begin Jou <span class="hl">Projek</span>',
+    contact_sub:"Vul die vorm in en ons sal jou binne 24 uur terugbel met 'n gratis konsultasie en kwotasie. Geen druk, geen jargon.",
+    form_firstname:'Voornaam *', form_lastname:'Van', form_email:'E-posadres *', form_phone:'Telefoonnommer', form_service:'Ek Is Geïnteresseerd In', form_message:'Vertel Ons Oor Jou Projek *', form_submit:'Stuur Boodskap →',
+    ph_firstname:'Voornaam', ph_lastname:'Van', ph_message:'Vertel ons van jou besigheid, wat jy nodig het, en enige vrae wat jy het…',
+    blog_label:'Insigte & Wenke',
+    blog_h2:'Die <span class="hl">Elevate Blog</span>',
+    blog_sub:'Praktiese raad om Suid-Afrikaanse besighede te help om aanlyn te groei — webontwerp, SEO en digitale bemarkingswenke wat jy werklik kan gebruik.',
+    faq_h2:'Gereeld Gestelde Vrae', faq_sub:"Alles wat jy moet weet oor ons webontwerpienste, pryse en proses. Kan jy nie die antwoord vind nie? Kontak ons.",
+    faq1_q:'Hoeveel kos \'n webwerf in Suid-Afrika?', faq1_a:"Webwerf-kostes in Suid-Afrika wissel. Basiese kleinsakenwebwerwe begin vanaf R6,999, e-handelwebwerwe vanaf R29,999. Ons bied buigsame betalingsplanne met 'n 50% deposito om te begin.",
+    faq2_q:'Hoe lank neem dit om \'n webwerf te bou?', faq2_a:'Die meeste webwerwe begin binne 2 weke. Basiese webwerwe neem 1-2 weke, e-handelwebwerwe 3-5 weke en pasgemaakte projekte 6-10 weke.',
+    faq3_q:'Werk julle webwerwe op mobiele toestelle?', faq3_a:"Absoluut! Al ons webwerwe is volledig mobiel-responsief en geoptimeer vir Suid-Afrika se diverse toestelmark.",
+    faq4_q:'Watter betaalmetodes aanvaar julle?', faq4_a:"Ons aanvaar PayPal (Visa, Mastercard, Discover of American Express), WhatsApp-betalingsreëlings en EFT via FNB. Ons vereis 'n 50% deposito om te begin.",
+    faq5_q:'Bied julle SEO-dienste aan?', faq5_a:"Ja! Ons spesialiseer in SEO-dienste vir Suid-Afrikaanse besighede. Ons plaaslike SEO-optimering help jou om op Google.co.za te rangskik.",
+    footer_desc:'Moderne webontwerp vir Suid-Afrikaanse besighede wat wil uitstaan en aanlyn wil groei. Pakkette vanaf <span data-price="6999">R6,999</span>.',
+    footer_company:'Maatskappy', footer_services:'Dienste', footer_contact_btn:'Kontak Ons →',
+  },
+  zu: {
+    nav_home:'Ikhaya', nav_services:'Izinsiza', nav_packages:'Amapakheji', nav_pay:'Khokha', nav_blog:'IBhulogi', nav_contact:'Xhumana', nav_getstarted:'Qala Manje', ctrl_language:'Ulimi',
+    hero_badge:'Inhlangano Yokuklama Iwebhusayithi · INingizimu Afrika',
+    hero_h1:'Guqula Iwebhusayithi Yakho ibe <span class="hl">Injini Yokuheha Amakhasimende</span>',
+    hero_sub:'Sakha izikhumbuzo eziguqula amakheli amabhizinisi akhuthele eSouth Africa — akhiwe ukuheha amakhasimende, ukwakha ithemba nokusheshisa ukukhula. Amapakheji kusuka ku-<strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'Thola Iwebhusayithi Yami', hero_cta2:'Bhuka Ikholi Mahhala', hero_chip:'Phezulu ngeviki ezimbili',
+    stats_from:'Amapakheji Kusuka', stats_turnaround:'Isikhathi Esilinganisiwe', stats_support:'Impendulo Yokusekela', stats_fees:'Imali Efihliwe',
+    why_label:'Kungani Elevate Digitals',
+    why_h2:'Konke Okudingekayo <span class="hl">Ukuphumelela Ku-Inthanethi</span>',
+    why_sub:'Sihlanga uhlelo olukhazimlayo nezindlela zobuchwepheshe ukwakha izikhumbuzo ezisebenzayo ngempela.',
+    feat1_name:'Uhlelo Olukhethekile', feat1_desc:'Awekho amamodeli. Isiza ngasinye sikhiwa kabusha ukubonisa uphawu lwakho.',
+    feat2_name:'Ishesha Kakhulu', feat2_desc:'Ilungiselwe isivinini ukuze izivakashi zihlale futhi Google ikuphakelele phezulu.',
+    feat3_name:'Umakhalekhukhwini Kuqala', feat3_desc:'Iphelele kuwo wonke amaskherini — ifoni, ithebhulethi, ideskthopu — njalo.',
+    feat4_name:'Ilungele i-SEO', feat4_desc:'Yakhiwe ngokugxila kuma-search engine ukuze amakhasimende akuthole ngempela.',
+    feat5_name:'Iphephile Futhi Ithembekile', feat5_desc:'I-SSL, ukugcina ikhophi njalo, nezinhlelo zokuphepha kuphathwa wena.',
+    feat6_name:'I-WhatsApp & Izimephu', feat6_desc:'Ingxoxo ye-WhatsApp ne-Google Maps ukuze amakhasimende akufike ngokushesha.',
+    how_label:'Indlela Esebenza Ngayo',
+    how_h2:'Inqubo Elula <span class="hl">Yezinyathelo Ezine</span>',
+    how_sub:'Kusukela enkulumweni yokuqala kuya kuwebhusayithi ephilayo — nansi ngempela okulindelwe.',
+    step1_name:'Ukuthola', step1_desc:'Sifunda ngeshishini lakho, izinjongo nabalandeli bakho.',
+    step2_name:'Uhlelo', step2_desc:'Sakha uhlelo olumangalisayo olulungiswe uphawu lwakho.',
+    step3_name:'Ukwakha', step3_desc:'Sakhela futhi sihlole iwebhusayithi yakho ukuze ishesha, iphephile futhi iphelele.',
+    step4_name:'Ukuqalisa', step4_desc:'Siqalisa futhi sinikeze ukusekela okuqhubekayo ukuze konke kusebenze.',
+    home_cta_h2:'Ulungele <span class="hl">Ukuqalisa?</span>',
+    home_cta_sub:'Thola isinaleli sokuhlolwa mahhala nesilinganiso ngamasebe angu-24. Awukho umfutho, awukho ijargon.',
+    btn_quote:'Thola Isindleko Mahhala', btn_pricing:'Bona Amanani',
+    svc_label:'Esikuphakamisa',
+    svc_h2:'Izikhumbuzo Zanamuhla <span class="hl">Ezisebenzayo</span>',
+    svc_sub:'Zakhiwe ukuze utholwe ku-inthanethi — futhi ugcinwe usebenza kahle njalo ngenyanga.',
+    svc1_name:'Uklama & Ukwakha Iwebhusayithi', svc1_desc:'Izikhumbuzo zanamuhla, ezihlobisa umakhalekhukhwini zamabhizinisi adinga ukuba khona entsha ku-inthanethi.',
+    svc2_name:'Ukunakekela Kwenyanga', svc2_desc:'Gcina iwebhusayithi yakho iphephile, ibuyekeziwe futhi isebenza ngokuphelele.',
+    svc3_name:'Ukuphila KweSiteshi', svc3_desc:'Thola ukutholakala ku-Google ngamakhasimende abalulekile. Siqinisekisa ukuthi iwebhusayithi yakho iphakela phezulu.',
+    svc4_name:'Izitolo Ze-E-Commerce', svc4_desc:'Thengisa ku-inthanethi ngezitolo ezibukeka kahle, zihlala zisebenza futhi zenza ukuthenga kulula.',
+    svc5_name:'Okuqukethwe & Ukubhala', svc5_desc:'Umbhalo wewebhusayithi owunezinga woguqula izivakashi zambe amakhasimende.',
+    svc6_name:'Izinhlelo Zokubhuka', svc6_desc:'Vumela amakhasimende ukuthi abhuke izikhathi ngqo kusukela kuwebhusayithi yakho.',
+    svc_cta_h2:'Awunaziqiniso Ngokudingekayo <span class="hl">Kwakho?</span>',
+    svc_cta_sub:"Ake sixoxe — sizosizana. Isinaleli mahhala, awukho umsebenzi.",
+    pkg_label:'Amanani Angaqondi',
+    pkg_h2:'Awekho Imihlomulo Efihliwe. <span class="hl">Azikho Izimangaliso.</span>',
+    pkg_sub:'Amanani aqotho kuphela omsebenzi omuhle. Wonke amanani ku-<span id="currencyNote">ZAR</span>, kanye.',
+    pkg1_name:'Isiqalo', pkg1_period:'kanye · amakhasi 1–3', pkg1_best:'Kufanelele: Amabhizinisi amasha adinga ukuba khona ku-inthanethi ngokushesha',
+    pkg2_name:'Ibhizinisi', pkg2_period:'kanye · amakhasi 5–7', pkg2_best:'Kufanelele: Amabhizinisi akhulayo alungele ukubusa imakethe yawo',
+    pkg3_name:'Uchwepheshe', pkg3_period:'kanye · amakhasi angu-10 naphezulu', pkg3_best:'Kufanelele: Amabhizinisi alungele ukukhula, ukuzenzakalisa nokukhulisa imali',
+    pkg4_name:'Iphezulu', pkg4_period:'ikhethiwe ngokuphelele · akukho imingcele', pkg4_best:'Kufanelele: Amabhizinisi amakhulu adinga isixazululo esikhethekile sedijithali',
+    btn_getstarted:'Qala Manje', btn_letstalk:'Ake Sikhulume',
+    deposit_text:'<strong>50% idiphozithi ukuqala</strong> • Insalela iphela',
+    maint_label:'Izethulo',
+    maint_h2:'Izinhlelo Zonyaka <span class="hl">Zokusekelwa</span>',
+    maint_sub:'Gcina iwebhusayithi yakho iphephile neyibuyekeziwe ngemuva kokuqalisa.',
+    contact_label:'Xhumana Nathi',
+    contact_h2:'Ake Siqale <span class="hl">Iphrojekthi Yakho</span>',
+    contact_sub:"Gcwalisa ifomu futhi sizokuphendula ngamasebe angu-24 ngesinaleli mahhala nesindleko. Awukho umfutho, awukho ijargon.",
+    form_firstname:'Igama Lokuqala *', form_lastname:'Isibongo', form_email:'Ikheli le-Imeyili *', form_phone:'Inombolo Yocingo', form_service:'Ngithakaselwe', form_message:'Sitshele Ngephrojekthi Yakho *', form_submit:'Thumela Umlayezo →',
+    ph_firstname:'Igama Lokuqala', ph_lastname:'Isibongo', ph_message:'Sitshele ngeshishini lakho, okudingekayo, nemibuzo onayo…',
+    blog_label:'Ulwazi & Amacebo',
+    blog_h2:'I<span class="hl">Bhulogi ye-Elevate</span>',
+    blog_sub:'Iseluleko esikhethekile sobasiza amabhizinisi eSouth Africa ukukhula ku-inthanethi.',
+    faq_h2:'Imibuzo Evamile', faq_sub:"Konke okudingekayo ukwazi ngezinsizakalo zethu zokuklama iwebhusayithi. Awukwazi ukuthola impendulo? Xhumana nathi.",
+    faq1_q:'Ibiza malini iwebhusayithi eMzansi Afrika?', faq1_a:"Izindleko zewebhusayithi eMzansi Afrika ziyehluka ngokwebunkimbinkimbi. Izikhumbuzo zabasebenzisi abancane ziqala kusuka ku-R6,999. Sinikeza izinhlelo zokukhokha ezinokulungiswa ne-50% idiphozithi ukuqala.",
+    faq2_q:'Kuthatha isikhathi esingakanani ukwakha iwebhusayithi?', faq2_a:'Izikhumbuzo eziningi ziqalisa phakathi kweziviki ezimbili. Izikhumbuzo ezibasic zithatha iviki 1-2, e-commerce 3-5 amaviki.',
+    faq3_q:'Ngabe izikhumbuzo zenu zisebenza kumaselula?', faq3_a:"Nakanjani! Zonke izikhumbuzo zethu ziyaphendula ngokuphelele kumaselula futhi zilungiselwe imakethe yamasevisi ehlukene eSouth Africa.",
+    faq4_q:'Yiziphi izindlela zokukhokha ezimukelayo?', faq4_a:"Samukela i-PayPal (Visa, Mastercard), izinhlelo zokukhokha ze-WhatsApp, ne-EFT nge-FNB. Sidinga i-50% idiphozithi ukuqala.",
+    faq5_q:'Ngabe ninikeza izinsizakalo ze-SEO?', faq5_a:"Yebo! Sikhethekile kumasevisi e-SEO amabhizinisi eSouth Africa. I-SEO yethu yendawo ikusiza ukuphakela ku-Google.co.za.",
+    footer_desc:'Uklama wewebhusayithi wanamuhla wamabhizinisi eSouth Africa afuna ukukhanya nukukhula ku-inthanethi. Amapakheji kusuka ku-<span data-price="6999">R6,999</span>.',
+    footer_company:'Inkampani', footer_services:'Izinsiza', footer_contact_btn:'Xhumana Nathi →',
+  },
+  xh: {
+    nav_home:'Ikhaya', nav_services:'Iinkonzo', nav_packages:'Iipakheji', nav_pay:'Hlawula', nav_blog:'IBhlog', nav_contact:'Qhagamshelana', nav_getstarted:'Qala Ngoku', ctrl_language:'Ulwimi',
+    hero_badge:'Iziko lokuSeka Iwebhsayithi · Mzantsi Afrika',
+    hero_h1:'Guqula Iwebhsayithi Yakho ibe <span class="hl">Umtshini Wokunxulumanisa Amakhastamo</span>',
+    hero_sub:'Senza iiwebhsayithi eziguqula ukusebenza amashishini akhutheleyo eMzantsi Afrika — akhiwe ukuheha amakhastamo, ukwakha ukuzikhathaza nokukhulisa. Iipakheji ukusuka ku-<strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'Fumana IWebhsayithi Yam', hero_cta2:'Bhukhela Umnxeba Wamahala', hero_chip:'Phezulu kwiiveki ezi-2',
+    stats_from:'Iipakheji Ukusuka', stats_turnaround:'Ixesha Elilinganiselweyo', stats_support:'Impendulo Yenkxaso', stats_fees:'Iintlawulo Ezifihliweyo',
+    why_label:'Kutheni Elevate Digitals',
+    why_h2:'Yonke Into Oyidingayo <span class="hl">Ukuphumelela ku-Intanethi</span>',
+    why_sub:'Sidityanisa unxibelelwano olululo nezakhono zezobuchwepheshe ukwakha iiwebhsayithi ezisebenzayo ngokwenene.',
+    feat1_name:'Isakhelo Esisodwa', feat1_desc:'Akukho maqhalo. Isayithi nganye yenzelwa ukusuka ekuqaleni ukubonisa uphawu lwakho.',
+    feat2_name:'Shesha Kakhulu', feat2_desc:'Ilungiselwe ukubaleka ukuze abavakashi bahlale kwaye Google ikuphakamise phezulu.',
+    feat3_name:'Iselula Kuqala', feat3_desc:'Iphelele kuwo onke amaskrini — ifoni, ithebhulethi, idesktop — njalo.',
+    feat4_name:'Ilungele i-SEO', feat4_desc:'Yakhiwe ngokunakekela iienjini zokukhangela ukuze amakhastamo akufumane.',
+    feat5_name:'Ekhuselekileyo & Ethembekileyo', feat5_desc:'I-SSL, iibheki-ap ezihlaziyiweyo nezibuyekezo zokhuseleko ziphathwa wena.',
+    feat6_name:'I-WhatsApp & Iimephu', feat6_desc:'Ingxoxo ye-WhatsApp ne-Google Maps ukuze amakhastamo akufumane ngoko nangoko.',
+    how_label:'Indlela Esebenza Ngayo',
+    how_h2:'Inkqubo elula <span class="hl">yeenyathelo ezi-4</span>',
+    how_sub:'Ukusuka kwingxoxo yokuqala ukuya kwiwebhsayithi ephilayo — nanku ngokuchanekileyo okulindelwe.',
+    step1_name:'Ukufumanisa', step1_desc:'Sifunda ngeshishini lakho, iinjongo kunye nabaphulaphuli bakho.',
+    step2_name:'Isakhelo', step2_desc:'Senza isakhelo esibalaseleyo esilungiselwe uphawu lwakho.',
+    step3_name:'Ukwakha', step3_desc:'Siyakhela size sihlole isayithi yakho ukuze ishesha, ekhuselekile kwaye iphelele.',
+    step4_name:'Ukuqalisa', step4_desc:'Siqalisa size sinikeze inkxaso eqhubekayo ukuze konke kusebenze.',
+    home_cta_h2:'Ulungele <span class="hl">Ukuqalisa?</span>',
+    home_cta_sub:'Fumana ikhonsaltheshini yasimahla nesabelo ngamaxesha angu-24. Akukho mfutho, akukho jargon.',
+    btn_quote:'Fumana Isabelo Samahlala', btn_pricing:'Jonga Iindleko',
+    svc_label:'Esikunikezayo',
+    svc_h2:'Iiwebhsayithi zanamhlanje <span class="hl">Ezisebenzayo</span>',
+    svc_sub:'Zakhiwe ukuze ufunyanwe ku-intanethi — kwaye ugcinwe usebenza kakuhle njalo ngenyanga.',
+    svc1_name:'Ukunxulumanisa & Ukwakha Iwebhsayithi', svc1_desc:'Iiwebhsayithi zanamhlanje, ezihlobisa iifoni zamashishini adinga ukuba khona entsha ku-intanethi.',
+    svc2_name:'Ulondololo lwaNgenyanga', svc2_desc:'Gcina iwebhsayithi yakho ekhuselekileyo, ibuyekeziwe kwaye isebenza ngokuphelele.',
+    svc3_name:'Ukulungiswa kweEnjini Yokukhangela', svc3_desc:'Fumana ukufunyanwa ku-Google ngamakhastamo abalulekileyo. Sikhulisa ukuphakanyiswa kwesayithi yakho.',
+    svc4_name:'Iivenkile ze-E-Commerce', svc4_desc:'Thengisa ku-intanethi ngezitolo ezibukeka kakuhle, zibaleka kwaye zenza ukuthenga kulula.',
+    svc5_name:'Umxholo & Ukubhala', svc5_desc:'Umbhalo wewebhsayithi owunezinga oguqula abavakashi abe amakhastamo.',
+    svc6_name:'Iinkqubo zokuBhukhela', svc6_desc:'Vumela amakhastamo ukuba abhukhele iindibano ngqo kwiwebhsayithi yakho.',
+    svc_cta_h2:'Awunakuqiniseka Ngento <span class="hl">Oyidingayo?</span>',
+    svc_cta_sub:"Masithethe — siya kusizana. Ikhonsaltheshini yasimahla, akukho msebenzi.",
+    pkg_label:'Iindleko Ezicacileyo',
+    pkg_h2:'Akukho Iintlawulo Ezifihliweyo. <span class="hl">Akukho Iimangaliso.</span>',
+    pkg_sub:'Iindleko zokwenyaniso kuphela umsebenzi omhle. Onke amanani ku-<span id="currencyNote">ZAR</span>, kanye.',
+    pkg1_name:'Iqhalo', pkg1_period:'kanye · amaphepha 1–3', pkg1_best:'Kulungele: Amashishini amutsha adinga ukuba khona kwi-intanethi ngokukhawuleza',
+    pkg2_name:'IShishini', pkg2_period:'kanye · amaphepha 5–7', pkg2_best:'Kulungele: Amashishini akhulayo alungele ukubusa imakethe yawo',
+    pkg3_name:'Uchwepheshe', pkg3_period:'kanye · ukuya kumaphepha ali-10', pkg3_best:'Kulungele: Amashishini alungele ukwandisa, ukuzenzakalisa nokukhulisa iintengiso',
+    pkg4_name:'Iphezulu', pkg4_period:'yanzelwe ngokuphelele · akukho mida', pkg4_best:'Kulungele: Amashishini amakhulu adinga isixazululo esikhethekileyo sedijithali',
+    btn_getstarted:'Qala Ngoku', btn_letstalk:'Masithethe',
+    deposit_text:'<strong>50% idiphozithi ukuqala</strong> • Insalela xa iphela',
+    maint_label:'Izongeza',
+    maint_h2:'Iinqobo zoNyaka <span class="hl">zoLondololo</span>',
+    maint_sub:'Gcina isayithi yakho ekhuselekileyo kwaye ibuyekeziwe emva kokuqalisa.',
+    contact_label:'Qhagamshelana Nathi',
+    contact_h2:'MasiQale <span class="hl">Iprojethi Yakho</span>',
+    contact_sub:"Gcwalisa ifomu kwaye sizokuphendula ngamaxesha angu-24 ngekhonsaltheshini yasimahla nesabelo. Akukho mfutho, akukho jargon.",
+    form_firstname:'Igama Lokuqala *', form_lastname:'Ifani', form_email:'Idilesi ye-Imeyile *', form_phone:'Inombolo Yefoni', form_service:'Ndithanda', form_message:'Sitshintshe ngeProjethi Yakho *', form_submit:'Thumela Umyalezo →',
+    ph_firstname:'Igama Lokuqala', ph_lastname:'Ifani', ph_message:'Sitshintshe ngeshishini lakho, okudingekayo, neemibuzo onayo…',
+    blog_label:'Ulwazi & Amacebo',
+    blog_h2:'I<span class="hl">Bhlog ye-Elevate</span>',
+    blog_sub:'Icebiso elihle elinceda amashishini eMzantsi Afrika ukukhula kwi-intanethi.',
+    faq_h2:'Imibuzo Evamile', faq_sub:"Yonke into oyidingayo ukwazi ngeenkonzo zethu zokuklama iwebhsayithi. Awufumani mpendulo? Qhagamshelana nathi.",
+    faq1_q:'Koshta malini iwebhsayithi eMzantsi Afrika?', faq1_a:"Iindleko zewebhsayithi eMzantsi Afrika ziyahluka. Iiwebhsayithi zabasebenzisi abancane ziqala kusuka ku-R6,999. Sinikeza iinqobo zokuhlawula ezinokulungiswa ne-50% idiphozithi ukuqala.",
+    faq2_q:'Kuthatha ixesha elingakanani ukwakha iwebhsayithi?', faq2_a:'Iwebhsayithi eziningi ziqala kwiiveki ezi-2. Ezibasic zithatha iveki 1-2, e-commerce iiveki 3-5.',
+    faq3_q:'Ngaba iiwebhsayithi zenu zisebenza kwiisixhobo zeselula?', faq3_a:"Ngokuqinisekileyo! Zonke iiwebhsayithi zethu ziphendula ngokuphelele kwiisixhobo zeselula kwaye zilungiselwe imakethe yeesixhobo eMzantsi Afrika.",
+    faq4_q:'Zeziphi iindlela zokuhlawula ezamkelekileyo?', faq4_a:"Samkela i-PayPal (Visa, Mastercard), iitofolwano zokuhlawula ze-WhatsApp, ne-EFT nge-FNB. Sidinga i-50% idiphozithi ukuqala.",
+    faq5_q:'Ngaba ninika iinkonzo ze-SEO?', faq5_a:"Ewe! Sikhethekile kwiinkonzo ze-SEO zamashishini eMzantsi Afrika. I-SEO yethu yendawo ikunceda ukuphakanyiswa ku-Google.co.za.",
+    footer_desc:'Uklama wewebhsayithi wanamhlanje wamashishini eMzantsi Afrika afuna ukuphuma phambili nukukhula kwi-intanethi. Iipakheji ukusuka ku-<span data-price="6999">R6,999</span>.',
+    footer_company:'Inkampani', footer_services:'Iinkonzo', footer_contact_btn:'Qhagamshelana Nathi →',
+  },
+  fr: {
+    nav_home:'Accueil', nav_services:'Services', nav_packages:'Forfaits', nav_pay:'Payer', nav_blog:'Blog', nav_contact:'Contact', nav_getstarted:'Commencer', ctrl_language:'Langue',
+    hero_badge:'Agence Web · Afrique du Sud',
+    hero_h1:'Transformez Votre Site en <span class="hl">Machine à Générer des Leads</span>',
+    hero_sub:'Nous concevons des sites web à fort taux de conversion pour les entreprises ambitieuses d\'Afrique du Sud. Forfaits à partir de <strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'Obtenir Mon Site', hero_cta2:'Appel Gratuit', hero_chip:'En ligne en 2 semaines',
+    stats_from:'Forfaits À Partir De', stats_turnaround:'Délai Moyen', stats_support:'Réponse Support', stats_fees:'Frais Cachés',
+    why_label:'Pourquoi Elevate Digitals',
+    why_h2:'Tout Ce Qu\'il Faut Pour <span class="hl">Réussir En Ligne</span>',
+    why_sub:'Nous combinons un design percutant et une expertise technique pour créer des sites qui fonctionnent vraiment.',
+    feat1_name:'Design Sur Mesure', feat1_desc:'Pas de modèles. Chaque site est conçu de zéro pour refléter votre marque de façon unique.',
+    feat2_name:'Ultra Rapide', feat2_desc:'Optimisé pour la vitesse afin que les visiteurs restent et que Google vous classe plus haut.',
+    feat3_name:'Mobile d\'Abord', feat3_desc:'Parfait sur chaque écran — téléphone, tablette, bureau — toujours.',
+    feat4_name:'Prêt pour le SEO', feat4_desc:'Conçu pour les moteurs de recherche afin que les clients vous trouvent vraiment.',
+    feat5_name:'Sécurisé & Fiable', feat5_desc:'SSL, sauvegardes régulières et mises à jour de sécurité gérées pour vous.',
+    feat6_name:'WhatsApp & Cartes', feat6_desc:'Chat WhatsApp et Google Maps pour que les clients vous atteignent instantanément.',
+    how_label:'Comment Ça Marche',
+    how_h2:'Processus Simple <span class="hl">en 4 Étapes</span>',
+    how_sub:'De la première conversation au site en ligne — voici exactement ce à quoi vous attendre.',
+    step1_name:'Découverte', step1_desc:'Nous apprenons à connaître votre entreprise, vos objectifs et votre public cible.',
+    step2_name:'Design', step2_desc:'Nous créons un design époustouflant adapté à votre marque.',
+    step3_name:'Développement', step3_desc:'Nous développons et testons votre site pour qu\'il soit rapide, sécurisé et pixel-perfect.',
+    step4_name:'Lancement', step4_desc:'Nous mettons en ligne et fournissons un support continu pour que tout fonctionne.',
+    home_cta_h2:'Prêt à <span class="hl">Lancer?</span>',
+    home_cta_sub:'Obtenez une consultation et un devis gratuits en 24 heures. Sans pression, sans jargon.',
+    btn_quote:'Obtenir un Devis Gratuit', btn_pricing:'Voir les Tarifs',
+    svc_label:'Ce Que Nous Offrons',
+    svc_h2:'Sites Modernes <span class="hl">Qui Fonctionnent</span>',
+    svc_sub:'Conçus pour être trouvés en ligne — et maintenus en parfait état chaque mois.',
+    svc1_name:'Conception & Développement Web', svc1_desc:'Sites modernes et adaptés aux mobiles pour les entreprises qui ont besoin d\'une présence en ligne.',
+    svc2_name:'Maintenance Mensuelle', svc2_desc:'Gardez votre site sécurisé, à jour et fonctionnel. Nous gérons la partie technique.',
+    svc3_name:'Optimisation des Moteurs', svc3_desc:'Soyez trouvé sur Google par les clients qui comptent. Nous optimisons votre site pour qu\'il se classe plus haut.',
+    svc4_name:'Boutiques en Ligne', svc4_desc:'Vendez en ligne avec une boutique professionnelle qui a fière allure, charge vite et facilite les achats.',
+    svc5_name:'Contenu & Rédaction', svc5_desc:'Textes professionnels écrits pour convertir les visiteurs en clients — clairs, convaincants, fidèles à votre marque.',
+    svc6_name:'Systèmes de Réservation', svc6_desc:'Laissez les clients réserver directement depuis votre site. Parfait pour les salons, consultants, cliniques.',
+    svc_cta_h2:'Pas Sûr de Ce Dont <span class="hl">Vous Avez Besoin?</span>',
+    svc_cta_sub:"Parlons — nous trouverons ensemble. Consultation gratuite, sans engagement.",
+    pkg_label:'Tarification Transparente',
+    pkg_h2:'Aucuns Frais Cachés. <span class="hl">Aucune Surprise.</span>',
+    pkg_sub:'Des prix honnêtes pour un excellent travail. Tous les prix en <span id="currencyNote">ZAR</span>, uniques.',
+    pkg1_name:'Débutant', pkg1_period:'unique · 1–3 pages', pkg1_best:'Idéal pour: Les nouvelles entreprises ayant besoin d\'une présence professionnelle rapidement',
+    pkg2_name:'Entreprise', pkg2_period:'unique · 5–7 pages', pkg2_best:'Idéal pour: Les entreprises en croissance prêtes à dominer leur marché',
+    pkg3_name:'Pro', pkg3_period:'unique · jusqu\'à 10 pages', pkg3_best:'Idéal pour: Les entreprises prêtes à évoluer, automatiser et développer les ventes en ligne',
+    pkg4_name:'Premium', pkg4_period:'entièrement personnalisé · sans limites', pkg4_best:'Idéal pour: Les grandes entreprises ayant besoin d\'une solution digitale sur mesure',
+    btn_getstarted:'Commencer', btn_letstalk:'Parlons',
+    deposit_text:'<strong>50% d\'acompte pour démarrer</strong> • Solde à la fin',
+    maint_label:'Compléments',
+    maint_h2:'Plans de <span class="hl">Maintenance Mensuelle</span>',
+    maint_sub:'Gardez votre site sécurisé et à jour après le lancement.',
+    contact_label:'Contactez-Nous',
+    contact_h2:'Démarrons Votre <span class="hl">Projet</span>',
+    contact_sub:"Remplissez le formulaire et nous vous répondrons dans les 24 heures avec une consultation et un devis gratuits. Sans pression, sans jargon.",
+    form_firstname:'Prénom *', form_lastname:'Nom', form_email:'Adresse Email *', form_phone:'Numéro de Téléphone', form_service:'Je Suis Intéressé Par', form_message:'Parlez-Nous de Votre Projet *', form_submit:'Envoyer le Message →',
+    ph_firstname:'Prénom', ph_lastname:'Nom de famille', ph_message:'Parlez-nous de votre entreprise, de vos besoins et de vos questions…',
+    blog_label:'Insights & Conseils',
+    blog_h2:'Le <span class="hl">Blog Elevate</span>',
+    blog_sub:'Conseils pratiques pour aider les entreprises sud-africaines à se développer en ligne.',
+    faq_h2:'Questions Fréquemment Posées', faq_sub:"Tout ce que vous devez savoir sur nos services, tarifs et processus. Vous ne trouvez pas la réponse? Contactez-nous.",
+    faq1_q:'Combien coûte un site web en Afrique du Sud?', faq1_a:'Les coûts des sites varient selon la complexité. Les sites basiques commencent à R6,999, les e-commerce à R29,999. Nous proposons des plans de paiement flexibles avec 50% d\'acompte.',
+    faq2_q:'Combien de temps faut-il pour créer un site?', faq2_a:'La plupart des sites sont lancés en 2 semaines. Les sites basiques prennent 1-2 semaines, les e-commerce 3-5 semaines.',
+    faq3_q:'Vos sites fonctionnent-ils sur mobile?', faq3_a:'Absolument! Tous nos sites sont entièrement responsive et optimisés pour le marché sud-africain.',
+    faq4_q:'Quels modes de paiement acceptez-vous?', faq4_a:'Nous acceptons PayPal (Visa, Mastercard), les arrangements de paiement WhatsApp et le virement bancaire EFT. Nous demandons 50% d\'acompte pour commencer.',
+    faq5_q:'Proposez-vous des services SEO?', faq5_a:"Oui! Nous sommes spécialisés dans les services SEO pour les entreprises sud-africaines. Notre SEO local vous aide à vous classer sur Google.co.za.",
+    footer_desc:'Design web moderne pour les entreprises sud-africaines qui veulent se démarquer et grandir en ligne. Forfaits à partir de <span data-price="6999">R6,999</span>.',
+    footer_company:'Entreprise', footer_services:'Services', footer_contact_btn:'Contactez-Nous →',
+  },
+  de: {
+    nav_home:'Startseite', nav_services:'Leistungen', nav_packages:'Pakete', nav_pay:'Bezahlen', nav_blog:'Blog', nav_contact:'Kontakt', nav_getstarted:'Loslegen', ctrl_language:'Sprache',
+    hero_badge:'Webdesign Agentur · Südafrika',
+    hero_h1:'Verwandeln Sie Ihre Website in eine <span class="hl">Lead-Generating Machine</span>',
+    hero_sub:'Wir gestalten hochkonvertierende Websites für ambitionierte südafrikanische Unternehmen. Pakete ab <strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'Meine Website', hero_cta2:'Kostenloses Gespräch', hero_chip:'In 2 Wochen live',
+    stats_from:'Pakete Ab', stats_turnaround:'Ø Lieferzeit', stats_support:'Support-Antwort', stats_fees:'Versteckte Gebühren',
+    why_label:'Warum Elevate Digitals',
+    why_h2:'Alles für Ihren <span class="hl">Online-Erfolg</span>',
+    why_sub:'Wir vereinen scharfes Design mit technischer Expertise, um Websites zu bauen, die wirklich für Ihr Unternehmen funktionieren.',
+    feat1_name:'Individuelles Design', feat1_desc:'Keine Vorlagen. Jede Website wird von Grund auf entworfen, um Ihre Marke einzigartig widerzuspiegeln.',
+    feat2_name:'Blitzschnell', feat2_desc:'Für Geschwindigkeit optimiert, damit Besucher bleiben und Google Sie höher einordnet.',
+    feat3_name:'Mobile First', feat3_desc:'Perfekt auf jedem Bildschirm — Handy, Tablet, Desktop — immer.',
+    feat4_name:'SEO-fertig', feat4_desc:'Für Suchmaschinen entwickelt, damit Kunden Sie tatsächlich finden können.',
+    feat5_name:'Sicher & Zuverlässig', feat5_desc:'SSL, regelmäßige Backups und Sicherheitsupdates werden für Sie erledigt.',
+    feat6_name:'WhatsApp & Maps', feat6_desc:'WhatsApp-Chat und Google Maps, damit Kunden Sie sofort erreichen.',
+    how_label:'Wie Es Funktioniert',
+    how_h2:'Einfacher <span class="hl">4-Schritte</span>-Prozess',
+    how_sub:'Vom ersten Gespräch bis zur Live-Website — genau das, was Sie erwarten können.',
+    step1_name:'Entdeckung', step1_desc:'Wir erfahren mehr über Ihr Unternehmen, Ihre Ziele und Ihre Zielgruppe.',
+    step2_name:'Design', step2_desc:'Wir erstellen ein atemberaubendes Design, das auf Ihre Marke zugeschnitten ist.',
+    step3_name:'Entwicklung', step3_desc:'Wir entwickeln und testen Ihre Website auf Schnelligkeit, Sicherheit und Pixelgenauigkeit.',
+    step4_name:'Start', step4_desc:'Wir gehen live und bieten fortlaufenden Support, damit alles reibungslos läuft.',
+    home_cta_h2:'Bereit zum <span class="hl">Live-Gang?</span>',
+    home_cta_sub:'Erhalten Sie eine kostenlose Beratung und ein Angebot innerhalb von 24 Stunden. Kein Druck, kein Fachjargon.',
+    btn_quote:'Kostenloses Angebot', btn_pricing:'Preise Anzeigen',
+    svc_label:'Was Wir Anbieten',
+    svc_h2:'Moderne Websites <span class="hl">Die Funktionieren</span>',
+    svc_sub:'Entwickelt, um Sie online auffindbar zu machen — und jeden Monat reibungslos am Laufen zu halten.',
+    svc1_name:'Website Design & Entwicklung', svc1_desc:'Moderne, mobilfreundliche Websites für Unternehmen, die eine neue Online-Präsenz benötigen.',
+    svc2_name:'Monatliche Wartung', svc2_desc:'Halten Sie Ihre Website sicher, aktuell und einwandfrei funktionsfähig. Wir kümmern uns um die Technik.',
+    svc3_name:'Suchmaschinenoptimierung', svc3_desc:'Werden Sie auf Google von den Kunden gefunden, die zählen. Wir optimieren Ihre Website für höhere Rankings.',
+    svc4_name:'Online-Shops', svc4_desc:'Verkaufen Sie online mit einem professionellen Shop, der toll aussieht und schnell lädt.',
+    svc5_name:'Inhalt & Texterstellung', svc5_desc:'Professionelle Website-Texte, um Besucher in Kunden zu verwandeln — klar, überzeugend, markenkonform.',
+    svc6_name:'Buchungssysteme', svc6_desc:'Lassen Sie Kunden direkt über Ihre Website Termine buchen. Ideal für Salons, Berater, Kliniken.',
+    svc_cta_h2:'Nicht Sicher, Was Sie <span class="hl">Brauchen?</span>',
+    svc_cta_sub:'Lassen Sie uns reden — wir finden es gemeinsam heraus. Kostenlose Beratung, keine Verpflichtung.',
+    pkg_label:'Transparente Preise',
+    pkg_h2:'Keine Versteckten Gebühren. <span class="hl">Keine Überraschungen.</span>',
+    pkg_sub:'Nur faire Preise für gute Arbeit. Alle Preise in <span id="currencyNote">ZAR</span>, einmalig.',
+    pkg1_name:'Starter', pkg1_period:'einmalig · 1–3 Seiten', pkg1_best:'Ideal für: Neue Unternehmen, die schnell eine professionelle Online-Präsenz benötigen',
+    pkg2_name:'Business', pkg2_period:'einmalig · 5–7 Seiten', pkg2_best:'Ideal für: Wachsende Unternehmen, die bereit sind, ihren Markt zu dominieren',
+    pkg3_name:'Pro', pkg3_period:'einmalig · bis zu 10 Seiten', pkg3_best:'Ideal für: Unternehmen, die skalieren, automatisieren und Online-Umsätze steigern wollen',
+    pkg4_name:'Premium', pkg4_period:'vollständig maßgeschneidert · keine Grenzen', pkg4_best:'Ideal für: Unternehmen, die eine maßgeschneiderte Digitallösung benötigen',
+    btn_getstarted:'Loslegen', btn_letstalk:'Lass Uns Reden',
+    deposit_text:'<strong>50% Anzahlung zum Start</strong> • Restbetrag bei Abschluss',
+    maint_label:'Zusatzoptionen',
+    maint_h2:'Monatliche <span class="hl">Wartungspläne</span>',
+    maint_sub:'Halten Sie Ihre Website nach dem Launch sicher und aktuell.',
+    contact_label:'Kontaktieren Sie Uns',
+    contact_h2:'Starten Wir Ihr <span class="hl">Projekt</span>',
+    contact_sub:'Füllen Sie das Formular aus und wir melden uns innerhalb von 24 Stunden mit einer kostenlosen Beratung und einem Angebot. Kein Druck, kein Fachjargon.',
+    form_firstname:'Vorname *', form_lastname:'Nachname', form_email:'E-Mail-Adresse *', form_phone:'Telefonnummer', form_service:'Ich Bin Interessiert An', form_message:'Erzählen Sie Uns von Ihrem Projekt *', form_submit:'Nachricht Senden →',
+    ph_firstname:'Vorname', ph_lastname:'Nachname', ph_message:'Erzählen Sie uns von Ihrem Unternehmen, Ihren Anforderungen und Ihren Fragen…',
+    blog_label:'Einblicke & Tipps',
+    blog_h2:'Der <span class="hl">Elevate Blog</span>',
+    blog_sub:'Praktische Ratschläge, um südafrikanischen Unternehmen beim Online-Wachstum zu helfen.',
+    faq_h2:'Häufig Gestellte Fragen', faq_sub:'Alles, was Sie über unsere Webdesign-Dienstleistungen, Preise und Prozesse wissen müssen. Keine Antwort gefunden? Kontaktieren Sie uns.',
+    faq1_q:'Was kostet eine Website in Südafrika?', faq1_a:'Die Kosten variieren je nach Komplexität. Einfache Websites beginnen ab R6.999, E-Commerce-Sites ab R29.999. Wir bieten flexible Zahlungspläne mit 50% Anzahlung.',
+    faq2_q:'Wie lange dauert es, eine Website zu erstellen?', faq2_a:'Die meisten Websites gehen in 2 Wochen live. Einfache Sites dauern 1-2 Wochen, E-Commerce 3-5 Wochen.',
+    faq3_q:'Funktionieren Ihre Websites auf Mobilgeräten?', faq3_a:'Absolut! Alle unsere Websites sind vollständig mobilresponsiv und für den südafrikanischen Gerätemarkt optimiert.',
+    faq4_q:'Welche Zahlungsmethoden akzeptieren Sie?', faq4_a:'Wir akzeptieren PayPal (Visa, Mastercard), WhatsApp-Zahlungsvereinbarungen und Banküberweisung (EFT). Wir benötigen 50% Anzahlung zum Start.',
+    faq5_q:'Bieten Sie SEO-Dienstleistungen an?', faq5_a:'Ja! Wir sind auf SEO für südafrikanische Unternehmen spezialisiert. Unser lokales SEO hilft Ihnen, auf Google.co.za zu ranken.',
+    footer_desc:'Modernes Webdesign für südafrikanische Unternehmen, die sich abheben und online wachsen wollen. Pakete ab <span data-price="6999">R6,999</span>.',
+    footer_company:'Unternehmen', footer_services:'Leistungen', footer_contact_btn:'Kontaktieren Sie Uns →',
+  },
+  es: {
+    nav_home:'Inicio', nav_services:'Servicios', nav_packages:'Paquetes', nav_pay:'Pagar', nav_blog:'Blog', nav_contact:'Contacto', nav_getstarted:'Comenzar', ctrl_language:'Idioma',
+    hero_badge:'Agencia de Diseño Web · Sudáfrica',
+    hero_h1:'Convierte Tu Web en una <span class="hl">Máquina Generadora de Clientes</span>',
+    hero_sub:'Diseñamos webs de alta conversión para empresas ambiciosas en Sudáfrica — construidas para atraer más clientes, generar confianza y acelerar el crecimiento. Paquetes desde <strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'Obtener Mi Web', hero_cta2:'Llamada Gratis', hero_chip:'En vivo en 2 semanas',
+    stats_from:'Paquetes Desde', stats_turnaround:'Tiempo Promedio', stats_support:'Respuesta Soporte', stats_fees:'Tarifas Ocultas',
+    why_label:'Por Qué Elevate Digitals',
+    why_h2:'Todo Lo Que Necesitas Para <span class="hl">Triunfar Online</span>',
+    why_sub:'Combinamos diseño nítido con experiencia técnica para construir webs que realmente funcionan para tu negocio.',
+    feat1_name:'Diseño Personalizado', feat1_desc:'Sin plantillas. Cada sitio se diseña desde cero para reflejar tu marca de forma única.',
+    feat2_name:'Ultra Rápido', feat2_desc:'Optimizado para la velocidad para que los visitantes se queden y Google te posicione más alto.',
+    feat3_name:'Móvil Primero', feat3_desc:'Perfecto en cada pantalla — teléfono, tablet, escritorio — siempre.',
+    feat4_name:'Listo para SEO', feat4_desc:'Construido pensando en los buscadores para que los clientes realmente puedan encontrarte.',
+    feat5_name:'Seguro & Confiable', feat5_desc:'SSL, copias de seguridad regulares y actualizaciones de seguridad gestionadas para ti.',
+    feat6_name:'WhatsApp & Mapas', feat6_desc:'Chat de WhatsApp y Google Maps para que los clientes te lleguen al instante.',
+    how_label:'Cómo Funciona',
+    how_h2:'Proceso Simple <span class="hl">de 4 Pasos</span>',
+    how_sub:'Desde la primera conversación hasta el sitio web en vivo — aquí exactamente qué esperar.',
+    step1_name:'Descubrimiento', step1_desc:'Aprendemos sobre tu negocio, objetivos y público objetivo.',
+    step2_name:'Diseño', step2_desc:'Creamos un diseño impresionante adaptado a tu marca.',
+    step3_name:'Desarrollo', step3_desc:'Desarrollamos y probamos tu sitio para que sea rápido, seguro y perfecto al píxel.',
+    step4_name:'Lanzamiento', step4_desc:'Lanzamos y ofrecemos soporte continuo para que todo funcione.',
+    home_cta_h2:'¿Listo para <span class="hl">Lanzar?</span>',
+    home_cta_sub:'Obtén una consulta y presupuesto gratuitos en 24 horas. Sin presión, sin jerga.',
+    btn_quote:'Obtener Cotización Gratis', btn_pricing:'Ver Precios',
+    svc_label:'Lo Que Ofrecemos',
+    svc_h2:'Sitios Modernos <span class="hl">Que Funcionan</span>',
+    svc_sub:'Diseñados para ser encontrados online — y mantenidos funcionando sin problemas cada mes.',
+    svc1_name:'Diseño & Desarrollo Web', svc1_desc:'Sitios web modernos y amigables para móviles para empresas que necesitan una nueva presencia online.',
+    svc2_name:'Mantenimiento Mensual', svc2_desc:'Mantén tu web segura, actualizada y funcionando perfectamente. Nosotros gestionamos la parte técnica.',
+    svc3_name:'Optimización de Motores', svc3_desc:'Sé encontrado en Google por los clientes que importan. Optimizamos tu sitio para que se posicione más alto.',
+    svc4_name:'Tiendas Online', svc4_desc:'Vende online con una tienda profesional que se ve genial, carga rápido y hace que comprar sea fácil.',
+    svc5_name:'Contenido & Redacción', svc5_desc:'Textos profesionales escritos para convertir visitantes en clientes — claros, convincentes, fieles a tu marca.',
+    svc6_name:'Sistemas de Reservas', svc6_desc:'Permite que los clientes reserven citas directamente desde tu web. Perfecto para salones, consultores, clínicas.',
+    svc_cta_h2:'¿No Estás Seguro de Lo Que <span class="hl">Necesitas?</span>',
+    svc_cta_sub:'Hablemos — lo resolveremos juntos. Consulta gratuita, sin compromiso.',
+    pkg_label:'Precios Transparentes',
+    pkg_h2:'Sin Tarifas Ocultas. <span class="hl">Sin Sorpresas.</span>',
+    pkg_sub:'Solo precios honestos para un gran trabajo. Todos los precios en <span id="currencyNote">ZAR</span>, únicos.',
+    pkg1_name:'Inicio', pkg1_period:'único · 1–3 páginas', pkg1_best:'Ideal para: Nuevos negocios que necesitan presencia profesional rápidamente',
+    pkg2_name:'Negocio', pkg2_period:'único · 5–7 páginas', pkg2_best:'Ideal para: Negocios en crecimiento listos para dominar su mercado',
+    pkg3_name:'Pro', pkg3_period:'único · hasta 10 páginas', pkg3_best:'Ideal para: Empresas listas para escalar, automatizar y crecer en ventas online',
+    pkg4_name:'Premium', pkg4_period:'completamente personalizado · sin límites', pkg4_best:'Ideal para: Empresas que necesitan una solución digital a medida',
+    btn_getstarted:'Comenzar', btn_letstalk:'Hablemos',
+    deposit_text:'<strong>50% depósito para empezar</strong> • Saldo al finalizar',
+    maint_label:'Complementos',
+    maint_h2:'Planes de <span class="hl">Mantenimiento Mensual</span>',
+    maint_sub:'Mantén tu sitio seguro y actualizado después del lanzamiento.',
+    contact_label:'Contáctenos',
+    contact_h2:'Empecemos Tu <span class="hl">Proyecto</span>',
+    contact_sub:'Rellena el formulario y te responderemos en 24 horas con una consulta y presupuesto gratuitos. Sin presión, sin jerga.',
+    form_firstname:'Nombre *', form_lastname:'Apellido', form_email:'Dirección Email *', form_phone:'Número de Teléfono', form_service:'Estoy Interesado En', form_message:'Cuéntanos Sobre Tu Proyecto *', form_submit:'Enviar Mensaje →',
+    ph_firstname:'Nombre', ph_lastname:'Apellido', ph_message:'Cuéntanos sobre tu negocio, lo que necesitas y cualquier pregunta que tengas…',
+    blog_label:'Perspectivas & Consejos',
+    blog_h2:'El <span class="hl">Blog de Elevate</span>',
+    blog_sub:'Consejos prácticos para ayudar a empresas sudafricanas a crecer online.',
+    faq_h2:'Preguntas Frecuentes', faq_sub:'Todo lo que necesitas saber sobre nuestros servicios de diseño web, precios y proceso. ¿No encuentras la respuesta? Contáctanos.',
+    faq1_q:'¿Cuánto cuesta un sitio web en Sudáfrica?', faq1_a:'Los costos varían según la complejidad. Los sitios básicos comienzan en R6.999, los e-commerce en R29.999. Ofrecemos planes de pago flexibles con 50% de depósito.',
+    faq2_q:'¿Cuánto tiempo lleva crear un sitio web?', faq2_a:'La mayoría de los sitios se lanzan en 2 semanas. Los sitios básicos toman 1-2 semanas, los e-commerce 3-5 semanas.',
+    faq3_q:'¿Sus sitios funcionan en dispositivos móviles?', faq3_a:'¡Absolutamente! Todos nuestros sitios son totalmente responsive y optimizados para el mercado sudafricano.',
+    faq4_q:'¿Qué métodos de pago aceptan?', faq4_a:'Aceptamos PayPal (Visa, Mastercard), arreglos de pago por WhatsApp y transferencia bancaria EFT. Requerimos 50% de depósito para comenzar.',
+    faq5_q:'¿Ofrecen servicios de SEO?', faq5_a:'¡Sí! Nos especializamos en SEO para empresas sudafricanas. Nuestro SEO local te ayuda a posicionarte en Google.co.za.',
+    footer_desc:'Diseño web moderno para empresas sudafricanas que quieren destacar y crecer online. Paquetes desde <span data-price="6999">R6,999</span>.',
+    footer_company:'Empresa', footer_services:'Servicios', footer_contact_btn:'Contáctenos →',
+  },
+  zh: {
+    nav_home:'首页', nav_services:'服务', nav_packages:'套餐', nav_pay:'支付', nav_blog:'博客', nav_contact:'联系', nav_getstarted:'立即开始', ctrl_language:'语言',
+    hero_badge:'网页设计公司 · 南非',
+    hero_h1:'将您的网站变成<span class="hl">客户获取机器</span>',
+    hero_sub:'我们为南非雄心勃勃的企业设计高转化率网站 — 助您吸引更多客户、建立信任、加速增长。套餐起价 <strong data-price="6999">R6,999</strong>。',
+    hero_cta1:'获取我的网站', hero_cta2:'免费咨询通话', hero_chip:'2周内上线',
+    stats_from:'套餐起价', stats_turnaround:'平均交付时间', stats_support:'支持响应时间', stats_fees:'隐藏费用',
+    why_label:'为什么选择 Elevate Digitals',
+    why_h2:'您在线成功<span class="hl">所需的一切</span>',
+    why_sub:'我们将精锐设计与技术专长相结合，打造真正为您企业服务的网站。',
+    feat1_name:'定制设计', feat1_desc:'无模板。每个网站从头设计，独特呈现您的品牌。',
+    feat2_name:'极速快速', feat2_desc:'针对速度优化，让访客留下，Google给您更高排名。',
+    feat3_name:'移动优先', feat3_desc:'在每个屏幕上都完美 — 手机、平板、桌面 — 始终如此。',
+    feat4_name:'搜索引擎优化', feat4_desc:'以搜索引擎为核心构建，让客户真正能找到您。',
+    feat5_name:'安全可靠', feat5_desc:'SSL、定期备份和安全更新为您处理。',
+    feat6_name:'WhatsApp与地图', feat6_desc:'WhatsApp聊天和Google地图，让客户立即联系您。',
+    how_label:'如何运作',
+    how_h2:'简单的<span class="hl">4步</span>流程',
+    how_sub:'从第一次对话到网站上线 — 这正是您所期望的。',
+    step1_name:'发现', step1_desc:'我们了解您的业务、目标和目标受众。',
+    step2_name:'设计', step2_desc:'我们创建符合您品牌的精美设计。',
+    step3_name:'开发', step3_desc:'我们开发并测试您的网站，确保速度、安全和像素完美。',
+    step4_name:'发布', step4_desc:'我们上线并提供持续支持，确保一切正常运行。',
+    home_cta_h2:'准备好<span class="hl">上线了吗？</span>',
+    home_cta_sub:'24小时内获得免费咨询和报价。无压力，无专业术语。',
+    btn_quote:'获取免费报价', btn_pricing:'查看价格',
+    svc_label:'我们的服务',
+    svc_h2:'现代网站<span class="hl">真正有效</span>',
+    svc_sub:'为提升在线可见度而构建 — 每月保持顺畅运行。',
+    svc1_name:'网站设计与开发', svc1_desc:'为需要新在线形象的企业提供现代化、移动端友好的网站。',
+    svc2_name:'每月维护', svc2_desc:'保持您的网站安全、更新和完美运行。我们处理技术方面。',
+    svc3_name:'搜索引擎优化', svc3_desc:'被重要客户在Google上找到。我们优化您的网站以获得更高排名。',
+    svc4_name:'电商店铺', svc4_desc:'在线销售，打造外观精美、加载快速、购买方便的专业商店。',
+    svc5_name:'内容与文案', svc5_desc:'将访客转化为客户的专业网站文案 — 清晰、有说服力、符合品牌。',
+    svc6_name:'预约系统', svc6_desc:'让客户直接从您的网站预约。适合沙龙、顾问、诊所。',
+    svc_cta_h2:'不确定您<span class="hl">需要什么？</span>',
+    svc_cta_sub:'聊聊吧 — 我们一起找解决方案。免费咨询，无需承诺。',
+    pkg_label:'透明定价',
+    pkg_h2:'无隐藏费用。<span class="hl">无意外。</span>',
+    pkg_sub:'只有真实的优质服务价格。所有价格以<span id="currencyNote">ZAR</span>计，一次性收费。',
+    pkg1_name:'入门版', pkg1_period:'一次性 · 1-3页', pkg1_best:'适合：需要快速建立专业在线形象的新企业',
+    pkg2_name:'商业版', pkg2_period:'一次性 · 5-7页', pkg2_best:'适合：准备拓展市场的成长型企业',
+    pkg3_name:'专业版', pkg3_period:'一次性 · 最多10页', pkg3_best:'适合：准备扩展、自动化并增长在线销售的企业',
+    pkg4_name:'旗舰版', pkg4_period:'完全定制 · 无限制', pkg4_best:'适合：需要定制数字方案的企业',
+    btn_getstarted:'立即开始', btn_letstalk:'来聊聊',
+    deposit_text:'<strong>首付50%押金</strong> • 完成后付余款',
+    maint_label:'附加服务',
+    maint_h2:'每月<span class="hl">维护计划</span>',
+    maint_sub:'在上线后保持网站安全更新。',
+    contact_label:'联系我们',
+    contact_h2:'开始您的<span class="hl">项目</span>',
+    contact_sub:'填写表格，我们将在24小时内回复您，提供免费咨询和报价。无压力，无专业术语。',
+    form_firstname:'名字 *', form_lastname:'姓氏', form_email:'电子邮件地址 *', form_phone:'电话号码', form_service:'我感兴趣的', form_message:'告诉我们您的项目 *', form_submit:'发送消息 →',
+    ph_firstname:'名字', ph_lastname:'姓氏', ph_message:'告诉我们您的业务、需求和任何问题…',
+    blog_label:'洞察与提示',
+    blog_h2:'<span class="hl">Elevate</span>博客',
+    blog_sub:'帮助南非企业在线增长的实用建议 — 网站设计、SEO和数字营销技巧。',
+    faq_h2:'常见问题', faq_sub:'关于我们网页设计服务、价格和流程的所有信息。没有找到答案？联系我们。',
+    faq1_q:'南非网站建设要多少钱？', faq1_a:'南非网站费用因复杂程度而异。基本小企业网站从R6,999起，电商网站从R29,999起。我们提供灵活付款计划，首付50%押金。',
+    faq2_q:'网站建设需要多长时间？', faq2_a:'大多数网站在2周内上线。基本网站需要1-2周，电商网站3-5周。',
+    faq3_q:'你们的网站能在手机上使用吗？', faq3_a:'当然！我们所有的网站都完全适配手机，针对南非多样化的设备市场进行了优化。',
+    faq4_q:'你们接受哪些付款方式？', faq4_a:'我们接受PayPal（Visa、Mastercard）、WhatsApp付款安排和EFT电汇。需要50%押金开始项目。',
+    faq5_q:'你们提供SEO服务吗？', faq5_a:'是的！我们专注于为南非企业提供SEO服务，帮助您在Google.co.za上排名靠前。',
+    footer_desc:'为南非企业提供现代网页设计，助您脱颖而出并在线增长。套餐起价<span data-price="6999">R6,999</span>。',
+    footer_company:'公司', footer_services:'服务', footer_contact_btn:'联系我们 →',
+  },
+  ar: {
+    nav_home:'الرئيسية', nav_services:'الخدمات', nav_packages:'الباقات', nav_pay:'الدفع', nav_blog:'المدونة', nav_contact:'اتصل', nav_getstarted:'ابدأ الآن', ctrl_language:'اللغة',
+    hero_badge:'وكالة تصميم مواقع · جنوب أفريقيا',
+    hero_h1:'حوّل موقعك إلى <span class="hl">آلة توليد العملاء</span>',
+    hero_sub:'نصمم مواقع عالية التحويل للشركات الطموحة في جنوب أفريقيا — مبنية لجذب المزيد من العملاء وبناء الثقة وتسريع النمو. الباقات تبدأ من <strong data-price="6999">R6,999</strong>.',
+    hero_cta1:'احصل على موقعي', hero_cta2:'مكالمة مجانية', hero_chip:'متاح خلال أسبوعين',
+    stats_from:'الباقات تبدأ من', stats_turnaround:'متوسط وقت التسليم', stats_support:'استجابة الدعم', stats_fees:'رسوم مخفية',
+    why_label:'لماذا Elevate Digitals',
+    why_h2:'كل ما تحتاجه <span class="hl">للنجاح عبر الإنترنت</span>',
+    why_sub:'نجمع بين التصميم الحاد والخبرة التقنية لبناء مواقع تعمل فعلاً لصالح عملك.',
+    feat1_name:'تصميم مخصص', feat1_desc:'لا قوالب. كل موقع مصمم من الصفر ليعكس علامتك التجارية بشكل فريد.',
+    feat2_name:'سريع البرق', feat2_desc:'محسّن للسرعة حتى يبقى الزوار ويضعك Google في مرتبة أعلى.',
+    feat3_name:'الهاتف أولاً', feat3_desc:'مثالي على كل شاشة — هاتف، جهاز لوحي، حاسوب — دائماً.',
+    feat4_name:'جاهز لتحسين محركات البحث', feat4_desc:'مبني مع مراعاة محركات البحث حتى يتمكن العملاء من إيجادك فعلاً.',
+    feat5_name:'آمن وموثوق', feat5_desc:'يتم التعامل مع SSL والنسخ الاحتياطية المنتظمة وتحديثات الأمان نيابةً عنك.',
+    feat6_name:'واتساب والخرائط', feat6_desc:'دردشة واتساب وخرائط جوجل حتى يصلك العملاء فوراً.',
+    how_label:'كيف يعمل',
+    how_h2:'عملية بسيطة <span class="hl">من 4 خطوات</span>',
+    how_sub:'من المحادثة الأولى إلى الموقع المباشر — هذا بالضبط ما يمكن توقعه.',
+    step1_name:'الاستكشاف', step1_desc:'نتعرف على عملك وأهدافك وجمهورك المستهدف.',
+    step2_name:'التصميم', step2_desc:'نصمم تصميماً رائعاً مصمماً خصيصاً لعلامتك التجارية.',
+    step3_name:'البناء', step3_desc:'نطور موقعك ونختبره ليكون سريعاً وآمناً ومثالياً في كل بكسل.',
+    step4_name:'الإطلاق', step4_desc:'نطلق الموقع ونوفر دعماً مستمراً للحفاظ على سير كل شيء.',
+    home_cta_h2:'هل أنت مستعد <span class="hl">للإطلاق؟</span>',
+    home_cta_sub:'احصل على استشارة وعرض أسعار مجاني في غضون 24 ساعة. بدون ضغط، بدون مصطلحات تقنية.',
+    btn_quote:'احصل على عرض مجاني', btn_pricing:'عرض الأسعار',
+    svc_label:'ما نقدمه',
+    svc_h2:'مواقع حديثة <span class="hl">تعمل فعلاً</span>',
+    svc_sub:'مصممة لتتصدر نتائج البحث وتعمل بسلاسة كل شهر.',
+    svc1_name:'تصميم وبناء المواقع', svc1_desc:'مواقع حديثة ومتوافقة مع الجوال للشركات التي تحتاج حضوراً رقمياً جديداً.',
+    svc2_name:'الصيانة الشهرية', svc2_desc:'حافظ على أمان موقعك وتحديثه وعمله باكتمال. نحن نتعامل مع الجانب التقني.',
+    svc3_name:'تحسين محركات البحث', svc3_desc:'كن مرئياً على Google من قِبَل العملاء المهمين. نحسّن موقعك للحصول على ترتيب أعلى.',
+    svc4_name:'متاجر التجارة الإلكترونية', svc4_desc:'بيع عبر الإنترنت بمتجر احترافي يبدو رائعاً ويُحمَّل بسرعة ويجعل الشراء سهلاً.',
+    svc5_name:'المحتوى والكتابة', svc5_desc:'نصوص موقع احترافية مكتوبة لتحويل الزوار إلى عملاء — واضحة ومقنعة وتعكس علامتك.',
+    svc6_name:'أنظمة الحجز', svc6_desc:'دع العملاء يحجزون المواعيد مباشرة من موقعك. مثالي للصالونات والمستشارين والعيادات.',
+    svc_cta_h2:'غير متأكد مما <span class="hl">تحتاجه؟</span>',
+    svc_cta_sub:'تحدث معنا — سنجد الحل معاً. استشارة مجانية، بدون التزام.',
+    pkg_label:'أسعار شفافة',
+    pkg_h2:'بدون رسوم مخفية. <span class="hl">بدون مفاجآت.</span>',
+    pkg_sub:'أسعار صادقة فقط لعمل رائع. جميع الأسعار بـ<span id="currencyNote">ZAR</span>، مرة واحدة.',
+    pkg1_name:'المبتدئ', pkg1_period:'مرة واحدة · 1-3 صفحات', pkg1_best:'الأفضل لـ: الشركات الجديدة التي تحتاج حضوراً احترافياً سريعاً',
+    pkg2_name:'الأعمال', pkg2_period:'مرة واحدة · 5-7 صفحات', pkg2_best:'الأفضل لـ: الشركات النامية الجاهزة لتهيمن على سوقها',
+    pkg3_name:'المحترف', pkg3_period:'مرة واحدة · حتى 10 صفحات', pkg3_best:'الأفضل لـ: الشركات الجاهزة للتوسع والأتمتة وتنمية المبيعات',
+    pkg4_name:'المتميز', pkg4_period:'مخصص بالكامل · بلا حدود', pkg4_best:'الأفضل لـ: المؤسسات التي تحتاج حلاً رقمياً مخصصاً',
+    btn_getstarted:'ابدأ الآن', btn_letstalk:'لنتحدث',
+    deposit_text:'<strong>50% دفعة مقدمة للبدء</strong> • الرصيد عند الاكتمال',
+    maint_label:'الإضافات',
+    maint_h2:'خطط <span class="hl">الصيانة الشهرية</span>',
+    maint_sub:'حافظ على أمان موقعك وتحديثه بعد الإطلاق.',
+    contact_label:'تواصل معنا',
+    contact_h2:'لنبدأ <span class="hl">مشروعك</span>',
+    contact_sub:'أرسل النموذج وسنرد عليك خلال 24 ساعة باستشارة ومقترح سعر مجانيين. بدون ضغط، بدون مصطلحات معقدة.',
+    form_firstname:'الاسم الأول *', form_lastname:'الاسم الأخير', form_email:'عنوان البريد الإلكتروني *', form_phone:'رقم الهاتف', form_service:'أنا مهتم بـ', form_message:'أخبرنا عن مشروعك *', form_submit:'إرسال الرسالة →',
+    ph_firstname:'الاسم الأول', ph_lastname:'الاسم الأخير', ph_message:'أخبرنا عن عملك وما تحتاجه وأي أسئلة لديك…',
+    blog_label:'رؤى ونصائح',
+    blog_h2:'<span class="hl">مدونة Elevate</span>',
+    blog_sub:'نصائح عملية لمساعدة الشركات في جنوب أفريقيا على النمو عبر الإنترنت.',
+    faq_h2:'الأسئلة الشائعة', faq_sub:'كل ما تحتاج معرفته عن خدمات تصميم المواقع والأسعار والعملية. لم تجد الإجابة؟ اتصل بنا.',
+    faq1_q:'كم تكلف تصميم موقع في جنوب أفريقيا؟', faq1_a:'تتفاوت تكاليف المواقع حسب التعقيد. المواقع الأساسية تبدأ من R6,999 ومواقع التجارة الإلكترونية من R29,999. نقدم خطط دفع مرنة مع 50% دفعة مقدمة.',
+    faq2_q:'كم يستغرق بناء موقع؟', faq2_a:'معظم المواقع تُطلق خلال أسبوعين. المواقع الأساسية تستغرق 1-2 أسبوع، والتجارة الإلكترونية 3-5 أسابيع.',
+    faq3_q:'هل مواقعكم تعمل على الجوال؟', faq3_a:'بالتأكيد! جميع مواقعنا متوافقة تماماً مع الهواتف ومحسّنة لسوق الأجهزة المتنوع في جنوب أفريقيا.',
+    faq4_q:'ما هي طرق الدفع المقبولة؟', faq4_a:'نقبل PayPal (Visa، Mastercard) وترتيبات الدفع عبر واتساب وتحويل EFT. نطلب 50% دفعة مقدمة للبدء.',
+    faq5_q:'هل تقدمون خدمات SEO؟', faq5_a:'نعم! نتخصص في خدمات SEO للشركات في جنوب أفريقيا. تحسين محركات البحث المحلية يساعدك على الظهور في Google.co.za.',
+    footer_desc:'تصميم ويب حديث للشركات في جنوب أفريقيا التي تريد التميز والنمو عبر الإنترنت. الباقات تبدأ من <span data-price="6999">R6,999</span>.',
+    footer_company:'الشركة', footer_services:'الخدمات', footer_contact_btn:'اتصل بنا →',
+  },
+};
 
 /* ═══════════════════════
    EFT MODAL
