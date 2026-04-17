@@ -291,6 +291,7 @@ nav {
 @keyframes dotPulse { 0%,100%{box-shadow:0 0 8px var(--accent);transform:scale(1);} 50%{box-shadow:0 0 20px var(--accent),0 0 40px rgba(0,224,255,0.5);transform:scale(1.4);} }
 
 .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(44px,11vw,88px); font-weight:800; line-height:1.02; letter-spacing:-0.025em; margin-bottom:24px; max-width:740px; animation: fadeUp 0.7s 0.25s both; }
+html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,58px); line-height:1.08; }
 .hero h1 .hl { background: linear-gradient(90deg, var(--accent), var(--accent-dark), var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; background-size: 300% auto; animation: shimmer 5s linear infinite; }
 @keyframes shimmer { to { background-position: 300% center; } }
 
@@ -1508,6 +1509,7 @@ function setLangAll(el) {
   document.getElementById('langBtn').classList.remove('open');
   document.getElementById('langDropdown').classList.remove('open');
   document.documentElement.dir = lang==='ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
   applyTranslation(lang);
   updateAllPrices();
 }
