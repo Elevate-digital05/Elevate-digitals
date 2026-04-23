@@ -3021,10 +3021,29 @@ function processPaystackPayment() {
     },
     onSuccess: function(tx) {
       const successEl = document.getElementById('paySuccess');
-      successEl.textContent = 'Payment received! Reference: ' + tx.reference + '. We will be in touch shortly.';
       successEl.style.display = 'block';
-      const notify = `Paystack Deposit Paid\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
-      window.open('https://wa.me/27650858437?text=' + encodeURIComponent(notify), '_blank');
+      successEl.textContent = 'Verifying your payment…';
+      fetch('/api/verify-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reference: tx.reference })
+      })
+      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, body: j }; }); })
+      .then(function(result) {
+        if (result.ok && result.body && result.body.status) {
+          successEl.textContent = 'Payment verified! Reference: ' + result.body.reference + '. We will be in touch shortly.';
+          const notify = `Paystack Deposit Verified\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
+          window.open('https://wa.me/27650858437?text=' + encodeURIComponent(notify), '_blank');
+        } else {
+          const detail = (result.body && result.body.message) ? result.body.message : 'pending';
+          successEl.textContent = 'Payment received but verification is ' + detail + '. Please send reference ' + tx.reference + ' on WhatsApp so we can confirm manually.';
+          const notify = `Paystack Deposit — Needs Manual Check (${detail})\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nReference: ${tx.reference}`;
+          window.open('https://wa.me/27650858437?text=' + encodeURIComponent(notify), '_blank');
+        }
+      })
+      .catch(function() {
+        successEl.textContent = 'Payment received. Please send reference ' + tx.reference + ' on WhatsApp so we can confirm.';
+      });
     },
     onCancel: function() {
       // Buyer closed the modal — no-op, they can retry.
