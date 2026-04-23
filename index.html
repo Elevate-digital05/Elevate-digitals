@@ -1725,6 +1725,7 @@ a, button, .nav-links a, .btn-primary, .btn-ghost, .btn-nav, .svc-card, .blog-ca
   box-shadow:0 0 10px #fff,0 0 20px #A78BFA,0 0 30px rgba(139,92,246,0.5);
 }
 </style>
+<script src="https://js.paystack.co/v2/inline.js"></script>
 </head>
 <body>
 
@@ -2312,6 +2313,13 @@ a, button, .nav-links a, .btn-primary, .btn-ghost, .btn-nav, .svc-card, .blog-ca
                   </div>
                   <div class="pay-method-name">EFT</div>
                   <div class="pay-method-desc">Direct bank transfer via EFT</div>
+                </div>
+                <div class="pay-method-option" data-method="paystack" onclick="selectPayMethod(this)">
+                  <div class="pay-method-icon" style="background:#0BA4DB;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:14px;">💳</span>
+                  </div>
+                  <div class="pay-method-name">Card</div>
+                  <div class="pay-method-desc">Secure card payment via Paystack</div>
                 </div>
               </div>
             </div>
@@ -2959,7 +2967,69 @@ function updatePayButton() {
   } else if (selectedPaymentMethod === 'eft') {
     btn.textContent = 'Get EFT Details →';
     btn.onclick = showEftModal;
+  } else if (selectedPaymentMethod === 'paystack') {
+    btn.textContent = 'Pay Deposit with Card →';
+    btn.onclick = processPaystackPayment;
   }
+}
+
+const PAYSTACK_PUBLIC_KEY = 'pk_live_4a8801e83b9b31bca48cb0b9a167ec32f8e72624';
+
+function processPaystackPayment() {
+  const firstName = document.getElementById('buyerFirstName').value.trim();
+  const lastName  = document.getElementById('buyerLastName').value.trim();
+  const email     = document.getElementById('buyerEmail').value.trim();
+  const phone     = document.getElementById('buyerPhone').value.trim();
+  if (!firstName || !lastName || !email || !phone) {
+    alert('Please fill in your name, email and phone before paying.');
+    return;
+  }
+  if (typeof PaystackPop === 'undefined') {
+    alert('Card payment is unavailable right now. Please try again or choose WhatsApp/EFT.');
+    return;
+  }
+  const activeItem = document.querySelector('.pay-plan-item.active');
+  const planName   = activeItem ? activeItem.dataset.plan : 'Starter';
+  const depositZAR = parseInt(document.getElementById('paySumDeposit').dataset.price, 10);
+  if (!depositZAR || depositZAR < 1) {
+    alert('Please select a plan first.');
+    return;
+  }
+  const maintLabel = selectedMaintenance
+    ? selectedMaintenance.plan + ' (R' + selectedMaintenance.price + '/mo)'
+    : 'None';
+  const reference = 'ED-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+
+  const paystack = new PaystackPop();
+  paystack.newTransaction({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: depositZAR * 100,
+    currency: 'ZAR',
+    reference: reference,
+    firstname: firstName,
+    lastname: lastName,
+    phone: phone,
+    metadata: {
+      custom_fields: [
+        { display_name: 'Plan',        variable_name: 'plan',        value: planName },
+        { display_name: 'Maintenance', variable_name: 'maintenance', value: maintLabel },
+        { display_name: 'Business',    variable_name: 'business',    value: document.getElementById('buyerBusiness').value || 'N/A' },
+        { display_name: 'Website',     variable_name: 'website',     value: document.getElementById('buyerWebsite').value || 'N/A' },
+        { display_name: 'Payment Type', variable_name: 'payment_type', value: '50% deposit' }
+      ]
+    },
+    onSuccess: function(tx) {
+      const successEl = document.getElementById('paySuccess');
+      successEl.textContent = 'Payment received! Reference: ' + tx.reference + '. We will be in touch shortly.';
+      successEl.style.display = 'block';
+      const notify = `Paystack Deposit Paid\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
+      window.open('https://wa.me/27650858437?text=' + encodeURIComponent(notify), '_blank');
+    },
+    onCancel: function() {
+      // Buyer closed the modal — no-op, they can retry.
+    }
+  });
 }
 
 function processPayPalPayment() {
