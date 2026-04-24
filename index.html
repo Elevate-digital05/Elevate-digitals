@@ -74,7 +74,7 @@
         {"@type":"Question","name":"How long does it take to build a website?","acceptedAnswer":{"@type":"Answer","text":"Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks."}},
         {"@type":"Question","name":"Do your websites work on mobile devices?","acceptedAnswer":{"@type":"Answer","text":"Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach."}},
         {"@type":"Question","name":"What areas of South Africa do you serve?","acceptedAnswer":{"@type":"Answer","text":"We serve all of South Africa remotely, with special expertise in Cape Town, Johannesburg, Durban, and major metros."}},
-        {"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion."}}
+        {"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion."}}
       ]
     },
     {
@@ -2302,24 +2302,12 @@ a, button, .nav-links a, .btn-primary, .btn-ghost, .btn-nav, .svc-card, .blog-ca
             <div class="pay-form-group">
               <label>Payment Method</label>
               <div class="pay-method-selector">
-                <div class="pay-method-option active" data-method="whatsapp" onclick="selectPayMethod(this)">
-                  <div class="pay-method-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-                  <div class="pay-method-name">WhatsApp</div>
-                  <div class="pay-method-desc">Send payment details via WhatsApp</div>
-                </div>
-                <div class="pay-method-option" data-method="eft" onclick="selectPayMethod(this)">
-                  <div class="pay-method-icon" style="background:#3B0764;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;">
-                    <span style="font-size:14px;">🏦</span>
-                  </div>
-                  <div class="pay-method-name">EFT</div>
-                  <div class="pay-method-desc">Direct bank transfer via EFT</div>
-                </div>
-                <div class="pay-method-option" data-method="paystack" onclick="selectPayMethod(this)">
+                <div class="pay-method-option active" data-method="paystack" style="flex:1;cursor:default;">
                   <div class="pay-method-icon" style="background:#0BA4DB;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;">
                     <span style="font-size:14px;">💳</span>
                   </div>
-                  <div class="pay-method-name">Card</div>
-                  <div class="pay-method-desc">Secure card payment via Paystack</div>
+                  <div class="pay-method-name">Secure Card Payment</div>
+                  <div class="pay-method-desc">Powered by Paystack · Visa & Mastercard</div>
                 </div>
               </div>
             </div>
@@ -2364,18 +2352,17 @@ a, button, .nav-links a, .btn-primary, .btn-ghost, .btn-nav, .svc-card, .blog-ca
             <div class="pay-card-icons">
               <span class="pay-card-icon">VISA</span>
               <span class="pay-card-icon">MC</span>
-              <span class="pay-card-icon">EFT</span>
               <span class="pay-card-icon">PAYPAL</span>
             </div>
           </div>
         </div>
 
-        <button class="btn-pay-full" onclick="submitPayment()">
-          Step 3: Proceed to Payment →
+        <button class="btn-pay-full" onclick="processPaystackPayment()">
+          Pay Deposit with Card →
         </button>
 
         <div class="pay-success" id="paySuccess">
-          Thank you! Your payment request has been sent via WhatsApp.
+          Thank you! Your payment is being processed.
         </div>
 
         <div class="pay-contact-card reveal-section">
@@ -2502,7 +2489,7 @@ a, button, .nav-links a, .btn-primary, .btn-ghost, .btn-nav, .svc-card, .blog-ca
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" role="button" data-i18n="faq_q4">What payment methods do you accept?</div>
-      <div class="faq-a-accordion" role="region" data-i18n="faq_a4">We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT (Electronic Funds Transfer) via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion.</div>
+      <div class="faq-a-accordion" role="region" data-i18n="faq_a4">We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion.</div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" role="button" data-i18n="faq_q5">Do you offer SEO services?</div>
@@ -2942,37 +2929,6 @@ function updatePaySummary() {
   });
 }
 
-let selectedPaymentMethod = 'whatsapp';
-
-function selectPayMethod(el) {
-  document.querySelectorAll('.pay-method-option').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
-  selectedPaymentMethod = el.dataset.method;
-  updatePayButton();
-}
-
-// Initialize WhatsApp as default payment method on page load
-document.addEventListener('DOMContentLoaded', function() {
-  updatePayButton();
-});
-
-function updatePayButton() {
-  const btn = document.querySelector('.btn-pay-full');
-  if (selectedPaymentMethod === 'whatsapp') {
-    btn.textContent = 'Step 3: Proceed to Payment →';
-    btn.onclick = submitPayment;
-  } else if (selectedPaymentMethod === 'paypal') {
-    btn.textContent = 'Pay with PayPal →';
-    btn.onclick = processPayPalPayment;
-  } else if (selectedPaymentMethod === 'eft') {
-    btn.textContent = 'Get EFT Details →';
-    btn.onclick = showEftModal;
-  } else if (selectedPaymentMethod === 'paystack') {
-    btn.textContent = 'Pay Deposit with Card →';
-    btn.onclick = processPaystackPayment;
-  }
-}
-
 const PAYSTACK_PUBLIC_KEY = 'pk_live_4a8801e83b9b31bca48cb0b9a167ec32f8e72624';
 
 function processPaystackPayment() {
@@ -2985,7 +2941,7 @@ function processPaystackPayment() {
     return;
   }
   if (typeof PaystackPop === 'undefined') {
-    alert('Card payment is unavailable right now. Please try again or choose WhatsApp/EFT.');
+    alert('Card payment is unavailable right now. Please refresh the page and try again.');
     return;
   }
   const activeItem = document.querySelector('.pay-plan-item.active');
@@ -3051,43 +3007,6 @@ function processPaystackPayment() {
   });
 }
 
-function processPayPalPayment() {
-  const firstName = document.getElementById('buyerFirstName').value.trim();
-  const lastName  = document.getElementById('buyerLastName').value.trim();
-  const email     = document.getElementById('buyerEmail').value.trim();
-  if (!firstName || !lastName || !email) {
-    alert('Please fill in your name and email.');
-    return;
-  }
-  const activeItem  = document.querySelector('.pay-plan-item.active');
-  const planName    = activeItem ? activeItem.dataset.plan : 'Starter';
-  const deposit    = document.getElementById('paySumDeposit').textContent;
-  
-  const payPalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=elevatedigitalwebs@gmail.com&item_name=${encodeURIComponent('Website - ' + planName + ' Package')}&amount=${encodeURIComponent(deposit)}&currency_code=ZAR&no_shipping=1&no_note=1&custom=${encodeURIComponent(firstName + ' ' + lastName + ' - ' + email)}`;
-  window.open(payPalUrl, '_blank');
-}
-
-function submitPayment() {
-  const firstName = document.getElementById('buyerFirstName').value.trim();
-  const lastName  = document.getElementById('buyerLastName').value.trim();
-  const email     = document.getElementById('buyerEmail').value.trim();
-  const phone     = document.getElementById('buyerPhone').value.trim();
-  if (!firstName || !lastName || !email || !phone) {
-    alert('Please fill in all required fields.');
-    return;
-  }
-  const activeItem  = document.querySelector('.pay-plan-item.active');
-  const planName    = activeItem ? activeItem.dataset.plan : 'Not selected';
-  const totalEl     = document.getElementById('paySumTotal');
-  const depositEl   = document.getElementById('paySumDeposit');
-  const maint       = selectedMaintenance
-    ? selectedMaintenance.plan + ' (' + formatPrice(selectedMaintenance.price) + '/mo)'
-    : 'None';
-
-  const websiteUrl = document.getElementById('buyerWebsite').value.trim();
-  const msg = `Payment Enquiry\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${document.getElementById('buyerBusiness').value || 'N/A'}\nWebsite: ${websiteUrl || 'N/A'}\n\nPlan: ${planName}\nMaintenance: ${maint}\nTotal: ${totalEl ? totalEl.textContent : ''}\nDeposit: ${depositEl ? depositEl.textContent : ''}`;
-  window.open(`https://wa.me/27650858437?text=${encodeURIComponent(msg)}`, '_blank');
-}
 
 /* ════════════════════════════════════════
    BLOG MODAL
@@ -3708,7 +3627,7 @@ fr: {
 "What areas of South Africa do you serve?":"Quelles régions d'Afrique du Sud servez-vous?",
 "We serve all of South Africa remotely, with special expertise in Cape Town, Johannesburg, Durban, and major metros.":"Nous servons tout le pays.",
 "What payment methods do you accept?":"Quels moyens de paiement acceptez-vous?",
-"We accept EFT bank transfers, SnapScan, Yoco, and major credit cards. We require a 50% deposit to start with the balance due on completion.":"Nous acceptons virements, SnapScan, Yoco.",
+"We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion.":"Nous acceptons les paiements par carte en ligne sécurisés (Visa, Mastercard) via Paystack. Un acompte de 50% est requis pour commencer, avec le solde dû à la livraison.",
 "Flexible Payments":"Paiements Flexibles",
 "Pay just 50% to start your project, balance on completion. We also offer monthly payment plans for qualifying clients.":"Payez 50% pour commencer.",
 },
@@ -3811,7 +3730,7 @@ pt: {
 "What areas of South Africa do you serve?":"Quais áreas da África do Sul vocês servem?",
 "We serve all of South Africa remotely, with special expertise in Cape Town, Johannesburg, Durban, and major metros.":"Servimos todo o país.",
 "What payment methods do you accept?":"Quais métodos de pagamento vocês aceitam?",
-"We accept EFT bank transfers, SnapScan, Yoco, and major credit cards. We require a 50% deposit to start with the balance due on completion.":"Aceitamos transferência, SnapScan, Yoco.",
+"We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion.":"Aceitamos pagamentos seguros com cartão (Visa, Mastercard) via Paystack. Exigimos 50% de depósito para começar e o saldo na conclusão.",
 "Flexible Payments":"Pagamentos Flexíveis",
 "Pay just 50% to start your project, balance on completion. We also offer monthly payment plans for qualifying clients.":"Pague 50% para começar.",
 },
@@ -4375,7 +4294,7 @@ const translations = {
     faq_q1: 'Hoeveel kos \'n webwerf in Suid-Afrika?', faq_a1: 'Webwerf kostes in Suid-Afrika varieer based op kompleksiteit. Basiese klein besigheid webwerwe begin vanaf R6,999, e-handel werwe vanaf R29,999, en pasgemaakte oplossings varieer. Ons bied buigsame betalingsplanne met \'n 50% deposito om te begin en saldo by voltooiing.',
     faq_q2: 'Hoe lank neem dit om \'n webwerf te bou?', faq_a2: 'Meeste webwerwe launch binne 2 weke. Basiese webwerwe neem 1-2 weke, e-handel werwe 3-5 weke, en pasgemaakte enterprise projekte 6-10 weke.',
     faq_q3: 'Werk julle webwerwe op selfoon toestelle?', faq_a3: 'Absoluut! Al ons webwerwe is ten volle mobiel-responsief en geoptimiseer vir Suid-Africa se diverse toestel mark. Selfoon-eerste ontwerp is ons standaard benadering.',
-    faq_q4: 'Watter betaling metodes aanvaar julle?', faq_a4: 'Ons aanvaar EFT bank oordragte, SnapScan, Yoco, en majeur kredietkaarte. Ons benodig \'n 50% deposito om te begin met die saldo verskuldig by voltooiing.',
+    faq_q4: 'Watter betaling metodes aanvaar julle?', faq_a4: 'Ons aanvaar veilige aanlyn kaartbetalings (Visa, Mastercard) via Paystack. Ons benodig \'n 50% deposito om te begin met die saldo verskuldig by voltooiing.',
     faq_q5: 'Bied julle SEO dienste aan?', faq_a5: 'Ja! Ons spesialiseer in SEO dienste vir Suid-Afrikaanse besighede. Ons plaaslike SEO optimalisering help jou rank op Google.co.za vir sleutelwoorde soos \'web design Cape Town\', \'web design Johannesburg\', en ander Suid-Afrika soek terme.',
     faq_contact_btn: 'Kontak Ons →',
   },
@@ -4530,117 +4449,6 @@ document.addEventListener('click', e => {
   }
 });
 
-</script>
-
-<!-- EFT DETAILS MODAL -->
-<div id="eftModal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(2,3,8,0.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;">
-  <div style="background:linear-gradient(160deg,#080B1E 0%,#0F172A 100%);border:1px solid rgba(139,92,246,0.3);border-radius:28px;padding:40px 36px;max-width:480px;width:90%;position:relative;box-shadow:0 40px 80px rgba(0,0,0,0.6);">
-    <!-- Top glow line -->
-    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,0.8),rgba(96,165,250,0.6),transparent);border-radius:28px 28px 0 0;"></div>
-    <!-- Close button -->
-    <button onclick="closeEftModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:50%;width:32px;height:32px;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;">&times;</button>
-    <!-- Header -->
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
-      <div style="background:linear-gradient(135deg,#00843D,#006B30);border-radius:12px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(0,132,61,0.4);flex-shrink:0;">
-        <span style="color:#fff;font-family:Arial;font-size:14px;font-weight:800;">FNB</span>
-      </div>
-      <div>
-        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;">EFT Payment Details</div>
-        <div style="font-size:13px;color:var(--text-secondary);">First National Bank · South Africa</div>
-      </div>
-    </div>
-    <!-- Bank details -->
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;">Account Name</span>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Elevate Digitals</span>
-      </div>
-      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;">Bank</span>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">FNB (First National Bank)</span>
-      </div>
-      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;">Account Number</span>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;" id="eftAccNum">63012345678</span>
-      </div>
-      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;">Account Type</span>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Cheque / Current</span>
-      </div>
-      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;">Branch Code</span>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">250655</span>
-      </div>
-      <div style="background:rgba(96,165,250,0.07);border:1px solid rgba(96,165,250,0.2);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;">Reference</span>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--accent),#60A5FA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="eftRef">Your Name + Plan</span>
-      </div>
-    </div>
-    <!-- Amount due -->
-    <div style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(96,165,250,0.08));border:1px solid rgba(139,92,246,0.25);border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">50% Deposit Due</div>
-        <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--accent),#FF6B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="eftDepositAmount">R3,500</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">Selected Plan</div>
-        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;" id="eftPlanName">Starter</div>
-      </div>
-    </div>
-    <!-- Note -->
-    <div style="background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:12px;padding:14px;font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:20px;">
-      ✅ Once payment is made, please send your <strong style="color:#fff;">proof of payment</strong> to <a href="mailto:elevatedigitalwebs@gmail.com" style="color:var(--accent);">elevatedigitalwebs@gmail.com</a> or via <a href="https://wa.me/27650858437" target="_blank" style="color:#25D366;">WhatsApp</a> with your name and chosen package as reference.
-    </div>
-    <!-- WhatsApp confirm button -->
-    <button onclick="confirmEftWhatsApp()" style="width:100%;padding:15px;border-radius:50px;background:linear-gradient(135deg,#25D366,#128C7E);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.3s;box-shadow:0 0 24px rgba(37,211,102,0.3);">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Notify Us via WhatsApp
-    </button>
-  </div>
-</div>
-
-<script>
-function showEftModal() {
-  const firstName = document.getElementById('buyerFirstName').value.trim();
-  const lastName  = document.getElementById('buyerLastName').value.trim();
-  if (!firstName || !lastName) {
-    alert('Please fill in your first and last name before viewing EFT details.');
-    return;
-  }
-  // Update dynamic fields
-  const activeItem = document.querySelector('.pay-plan-item.active');
-  const planName   = activeItem ? activeItem.dataset.plan : 'Starter';
-  const depositEl  = document.getElementById('paySumDeposit');
-  document.getElementById('eftPlanName').textContent = planName;
-  document.getElementById('eftDepositAmount').textContent = depositEl ? depositEl.textContent : 'R3,500';
-  document.getElementById('eftRef').textContent = firstName + ' ' + lastName + ' - ' + planName;
-  // Show modal
-  const modal = document.getElementById('eftModal');
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeEftModal() {
-  document.getElementById('eftModal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function confirmEftWhatsApp() {
-  const firstName = document.getElementById('buyerFirstName').value.trim();
-  const lastName  = document.getElementById('buyerLastName').value.trim();
-  const email     = document.getElementById('buyerEmail').value.trim();
-  const activeItem = document.querySelector('.pay-plan-item.active');
-  const planName   = activeItem ? activeItem.dataset.plan : 'Starter';
-  const depositEl  = document.getElementById('paySumDeposit');
-  const deposit    = depositEl ? depositEl.textContent : '';
-  const msg = `EFT Payment Notification\n\nName: ${firstName} ${lastName}\nEmail: ${email || 'N/A'}\nPlan: ${planName}\nDeposit Amount: ${deposit}\n\nI have made an EFT payment to Elevate Digitals (FNB). Please confirm receipt.`;
-  window.open('https://wa.me/27650858437?text=' + encodeURIComponent(msg), '_blank');
-}
-
-// Close modal on backdrop click
-document.getElementById('eftModal').addEventListener('click', function(e) {
-  if (e.target === this) closeEftModal();
-});
 </script>
 
 <script>
