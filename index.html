@@ -2981,6 +2981,19 @@ function processPaystackPayment() {
       const successEl = document.getElementById('paySuccess');
       successEl.style.display = 'block';
       successEl.textContent = 'Verifying your payment…';
+      const renderResult = function(headline, notify, ctaLabel) {
+        successEl.textContent = '';
+        const msg = document.createElement('div');
+        msg.textContent = headline;
+        successEl.appendChild(msg);
+        const cta = document.createElement('a');
+        cta.href = 'https://wa.me/27650858437?text=' + encodeURIComponent(notify);
+        cta.target = '_blank';
+        cta.rel = 'noopener noreferrer';
+        cta.textContent = ctaLabel;
+        cta.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:12px 20px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border-radius:50px;text-decoration:none;font-weight:600;box-shadow:0 0 24px rgba(37,211,102,0.3);';
+        successEl.appendChild(cta);
+      };
       fetch('/api/verify-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2989,18 +3002,29 @@ function processPaystackPayment() {
       .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, body: j }; }); })
       .then(function(result) {
         if (result.ok && result.body && result.body.status) {
-          successEl.textContent = 'Payment verified! Reference: ' + result.body.reference + '. We will be in touch shortly.';
           const notify = `Paystack Deposit Verified\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
-          window.open('https://wa.me/27650858437?text=' + encodeURIComponent(notify), '_blank');
+          renderResult(
+            'Payment verified! Reference: ' + result.body.reference + '. We will be in touch shortly.',
+            notify,
+            'Send confirmation via WhatsApp →'
+          );
         } else {
           const detail = (result.body && result.body.message) ? result.body.message : 'pending';
-          successEl.textContent = 'Payment received but verification is ' + detail + '. Please send reference ' + tx.reference + ' on WhatsApp so we can confirm manually.';
           const notify = `Paystack Deposit — Needs Manual Check (${detail})\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nReference: ${tx.reference}`;
-          window.open('https://wa.me/27650858437?text=' + encodeURIComponent(notify), '_blank');
+          renderResult(
+            'Payment received but verification is ' + detail + '. Please tap below to confirm manually with your reference ' + tx.reference + '.',
+            notify,
+            'Notify us via WhatsApp →'
+          );
         }
       })
       .catch(function() {
-        successEl.textContent = 'Payment received. Please send reference ' + tx.reference + ' on WhatsApp so we can confirm.';
+        const notify = `Paystack Deposit — Confirmation\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nReference: ${tx.reference}`;
+        renderResult(
+          'Payment received. Please tap below to confirm with your reference ' + tx.reference + '.',
+          notify,
+          'Notify us via WhatsApp →'
+        );
       });
     },
     onCancel: function() {
