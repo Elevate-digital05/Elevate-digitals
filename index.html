@@ -2929,7 +2929,9 @@ function updatePaySummary() {
   });
 }
 
-const PAYSTACK_PUBLIC_KEY = 'pk_live_4a8801e83b9b31bca48cb0b9a167ec32f8e72624';
+const PAYSTACK_PUBLIC_KEY = /(^|\.)elevatedigitals\.co\.za$/i.test(location.hostname)
+  ? 'pk_live_4a8801e83b9b31bca48cb0b9a167ec32f8e72624'
+  : 'pk_test_73772bcccae3e25941e474b60299d7a080a2f384';
 
 function processPaystackPayment() {
   const firstName = document.getElementById('buyerFirstName').value.trim();
