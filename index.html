@@ -65,7 +65,7 @@
         {"@type":"Question","name":"How much does a website cost in South Africa?","acceptedAnswer":{"@type":"Answer","text":"Website costs in South Africa vary based on complexity. Basic small business websites start from R6,999, e-commerce sites from R29,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and balance on completion."}},
         {"@type":"Question","name":"How long does it take to build a website?","acceptedAnswer":{"@type":"Answer","text":"Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks."}},
         {"@type":"Question","name":"Do your websites work on mobile devices?","acceptedAnswer":{"@type":"Answer","text":"Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach."}},
-        {"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion."}}
+        {"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion."}}
       ]
     },
     {
@@ -681,6 +681,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(32px);} to{opacity:1;transform:translateY(0);} }
 </style>
+<script src="https://js.paystack.co/v2/inline.js"></script>
 </head>
 <body>
 
@@ -1023,15 +1024,10 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
             <div class="pay-form-group"><label>Business Name (Optional)</label><input type="text" id="buyerBusiness" placeholder="Your Business Name"></div>
             <div class="pay-form-group"><label>Payment Method</label>
               <div class="pay-method-selector">
-                <div class="pay-method-option active" data-method="whatsapp" onclick="selectPayMethod(this)">
-                  <div class="pay-method-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
-                  <div class="pay-method-name">WhatsApp</div>
-                  <div class="pay-method-desc">Send via WhatsApp</div>
-                </div>
-                <div class="pay-method-option" data-method="eft" onclick="selectPayMethod(this)">
-                  <div class="pay-method-icon"><span style="font-size:24px;">🏦</span></div>
-                  <div class="pay-method-name">EFT</div>
-                  <div class="pay-method-desc">Bank transfer via EFT</div>
+                <div class="pay-method-option active" data-method="paystack" style="flex:1;cursor:default;">
+                  <div class="pay-method-icon" style="background:#0BA4DB;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;"><span style="font-size:14px;">💳</span></div>
+                  <div class="pay-method-name">Secure Card Payment</div>
+                  <div class="pay-method-desc">Powered by Paystack · Visa & Mastercard</div>
                 </div>
               </div>
             </div>
@@ -1049,10 +1045,10 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
             <div class="pay-summary-row balance"><span>Balance Due</span><span id="paySumBalance" data-price="3500">R3,500</span></div>
           </div>
           <div class="pay-summary-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Secure payment · Monthly maintenance billed on purchase date</div>
-          <div class="pay-accepted-cards"><span>Accepted:</span><div class="pay-card-icons"><span class="pay-card-icon">VISA</span><span class="pay-card-icon">MC</span><span class="pay-card-icon">EFT</span><span class="pay-card-icon">PAYPAL</span></div></div>
+          <div class="pay-accepted-cards"><span>Accepted:</span><div class="pay-card-icons"><span class="pay-card-icon">VISA</span><span class="pay-card-icon">MC</span><span class="pay-card-icon">PAYPAL</span></div></div>
         </div>
-        <button class="btn-pay-full" onclick="submitPayment()">Step 3: Proceed to Payment →</button>
-        <div class="pay-success" id="paySuccess">Thank you! Your payment request has been sent via WhatsApp.</div>
+        <button class="btn-pay-full" onclick="processPaystackPayment()">Pay Deposit with Card →</button>
+        <div class="pay-success" id="paySuccess">Thank you! Your payment is being processed.</div>
         <div class="pay-contact-card reveal-section">
           <div class="pay-contact-h">Need Help?</div>
           <p>Contact us for custom payment arrangements or questions about your plan.</p>
@@ -1176,7 +1172,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq4_q">What payment methods do you accept?</div>
-      <div class="faq-a-accordion" data-i18n="faq4_a">We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT (Electronic Funds Transfer) via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion.</div>
+      <div class="faq-a-accordion" data-i18n="faq4_a">We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion.</div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq5_q">Do you offer SEO services?</div>
@@ -1427,23 +1423,105 @@ function updatePaySummary(){
   if(maintZAR>0){maintRow.style.display='flex';set('paySumMaint',maintZAR);}else{maintRow.style.display='none';}
 }
 
-let selectedPaymentMethod='whatsapp';
-function selectPayMethod(el){document.querySelectorAll('.pay-method-option').forEach(o=>o.classList.remove('active'));el.classList.add('active');selectedPaymentMethod=el.dataset.method;}
+const PAYSTACK_PUBLIC_KEY = /(^|\.)elevatedigitals\.co\.za$/i.test(location.hostname)
+  ? 'pk_live_4a8801e83b9b31bca48cb0b9a167ec32f8e72624'
+  : 'pk_test_73772bcccae3e25941e474b60299d7a080a2f384';
 
-function submitPayment(){
-  const firstName=document.getElementById('buyerFirstName').value.trim();
-  const lastName=document.getElementById('buyerLastName').value.trim();
-  const email=document.getElementById('buyerEmail').value.trim();
-  const phone=document.getElementById('buyerPhone').value.trim();
-  if(!firstName||!lastName||!email||!phone){alert('Please fill in all required fields.');return;}
-  const activeItem=document.querySelector('.pay-plan-item.active');
-  const planName=activeItem?activeItem.dataset.plan:'Not selected';
-  const totalEl=document.getElementById('paySumTotal');
-  const depositEl=document.getElementById('paySumDeposit');
-  const maint=selectedMaintenance?selectedMaintenance.plan+' ('+formatPrice(selectedMaintenance.price)+'/mo)':'None';
-  const msg=`Payment Enquiry\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${document.getElementById('buyerBusiness').value||'N/A'}\n\nPlan: ${planName}\nMaintenance: ${maint}\nTotal: ${totalEl?totalEl.textContent:''}\nDeposit: ${depositEl?depositEl.textContent:''}`;
-  if(selectedPaymentMethod==='eft'){showEftModal();}
-  else{window.open(`https://wa.me/27650858437?text=${encodeURIComponent(msg)}`,'_blank');}
+function processPaystackPayment() {
+  const firstName = document.getElementById('buyerFirstName').value.trim();
+  const lastName  = document.getElementById('buyerLastName').value.trim();
+  const email     = document.getElementById('buyerEmail').value.trim();
+  const phone     = document.getElementById('buyerPhone').value.trim();
+  if (!firstName || !lastName || !email || !phone) {
+    alert('Please fill in your name, email and phone before paying.');
+    return;
+  }
+  if (typeof PaystackPop === 'undefined') {
+    alert('Card payment is unavailable right now. Please refresh the page and try again.');
+    return;
+  }
+  const activeItem = document.querySelector('.pay-plan-item.active');
+  const planName   = activeItem ? activeItem.dataset.plan : 'Starter';
+  const depositZAR = parseInt(document.getElementById('paySumDeposit').dataset.price, 10);
+  if (!depositZAR || depositZAR < 1) {
+    alert('Please select a plan first.');
+    return;
+  }
+  const maintLabel = selectedMaintenance
+    ? selectedMaintenance.plan + ' (R' + selectedMaintenance.price + '/mo)'
+    : 'None';
+  const reference = 'ED-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+
+  const paystack = new PaystackPop();
+  paystack.newTransaction({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: depositZAR * 100,
+    currency: 'ZAR',
+    reference: reference,
+    firstname: firstName,
+    lastname: lastName,
+    phone: phone,
+    metadata: {
+      custom_fields: [
+        { display_name: 'Plan',         variable_name: 'plan',         value: planName },
+        { display_name: 'Maintenance',  variable_name: 'maintenance',  value: maintLabel },
+        { display_name: 'Business',     variable_name: 'business',     value: document.getElementById('buyerBusiness').value || 'N/A' },
+        { display_name: 'Payment Type', variable_name: 'payment_type', value: '50% deposit' }
+      ]
+    },
+    onSuccess: function(tx) {
+      const successEl = document.getElementById('paySuccess');
+      successEl.style.display = 'block';
+      successEl.textContent = 'Verifying your payment…';
+      const renderResult = function(headline, notify, ctaLabel) {
+        successEl.textContent = '';
+        const msg = document.createElement('div');
+        msg.textContent = headline;
+        successEl.appendChild(msg);
+        const cta = document.createElement('a');
+        cta.href = 'https://wa.me/27650858437?text=' + encodeURIComponent(notify);
+        cta.target = '_blank';
+        cta.rel = 'noopener noreferrer';
+        cta.textContent = ctaLabel;
+        cta.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:12px 20px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border-radius:50px;text-decoration:none;font-weight:600;box-shadow:0 0 24px rgba(37,211,102,0.3);';
+        successEl.appendChild(cta);
+      };
+      fetch('/api/verify-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reference: tx.reference })
+      })
+      .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, body: j }; }); })
+      .then(function(result) {
+        if (result.ok && result.body && result.body.status) {
+          const notify = `Paystack Deposit Verified\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
+          renderResult(
+            'Payment verified! Reference: ' + result.body.reference + '. We will be in touch shortly.',
+            notify,
+            'Send confirmation via WhatsApp →'
+          );
+        } else {
+          const detail = (result.body && result.body.message) ? result.body.message : 'pending';
+          const notify = `Paystack Deposit — Needs Manual Check (${detail})\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nReference: ${tx.reference}`;
+          renderResult(
+            'Payment received but verification is ' + detail + '. Please tap below to confirm manually with your reference ' + tx.reference + '.',
+            notify,
+            'Notify us via WhatsApp →'
+          );
+        }
+      })
+      .catch(function() {
+        const notify = `Paystack Deposit — Confirmation\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nReference: ${tx.reference}`;
+        renderResult(
+          'Payment received. Please tap below to confirm with your reference ' + tx.reference + '.',
+          notify,
+          'Notify us via WhatsApp →'
+        );
+      });
+    },
+    onCancel: function() {}
+  });
 }
 
 /* ═══════════════════════
@@ -1590,7 +1668,7 @@ const TRANSLATIONS = {
     faq1_q:'How much does a website cost in South Africa?', faq1_a:'Website costs in South Africa vary based on complexity. Basic small business websites start from R6,999, e-commerce sites from R29,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and balance on completion.',
     faq2_q:'How long does it take to build a website?', faq2_a:'Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks.',
     faq3_q:'Do your websites work on mobile devices?', faq3_a:"Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach.",
-    faq4_q:'What payment methods do you accept?', faq4_a:'We accept PayPal (Visa, Mastercard, Discover, or American Express), WhatsApp payment arrangements, and EFT (Electronic Funds Transfer) via FNB (First National Bank). We require a 50% deposit to start with the balance due on completion.',
+    faq4_q:'What payment methods do you accept?', faq4_a:'We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start with the balance due on completion.',
     faq5_q:'Do you offer SEO services?', faq5_a:"Yes! We specialize in SEO services for South African businesses. Our local SEO optimization helps you rank on Google.co.za for keywords like 'web design Cape Town', 'web design Johannesburg', and other South African search terms.",
     footer_desc:'Modern web design for South African businesses that want to stand out and grow online. Packages from <span data-price="6999">R6,999</span>.',
     footer_company:'Company', footer_services:'Services', footer_contact_btn:'Contact Us →',
@@ -1656,7 +1734,7 @@ const TRANSLATIONS = {
     faq1_q:'Hoeveel kos \'n webwerf in Suid-Afrika?', faq1_a:"Webwerf-kostes in Suid-Afrika wissel. Basiese kleinsakenwebwerwe begin vanaf R6,999, e-handelwebwerwe vanaf R29,999. Ons bied buigsame betalingsplanne met 'n 50% deposito om te begin.",
     faq2_q:'Hoe lank neem dit om \'n webwerf te bou?', faq2_a:'Die meeste webwerwe begin binne 2 weke. Basiese webwerwe neem 1-2 weke, e-handelwebwerwe 3-5 weke en pasgemaakte projekte 6-10 weke.',
     faq3_q:'Werk julle webwerwe op mobiele toestelle?', faq3_a:"Absoluut! Al ons webwerwe is volledig mobiel-responsief en geoptimeer vir Suid-Afrika se diverse toestelmark.",
-    faq4_q:'Watter betaalmetodes aanvaar julle?', faq4_a:"Ons aanvaar PayPal (Visa, Mastercard, Discover of American Express), WhatsApp-betalingsreëlings en EFT via FNB. Ons vereis 'n 50% deposito om te begin.",
+    faq4_q:'Watter betaalmetodes aanvaar julle?', faq4_a:"Ons aanvaar veilige aanlyn-kaartbetalings (Visa, Mastercard) via Paystack. Ons vereis 'n 50% deposito om te begin.",
     faq5_q:'Bied julle SEO-dienste aan?', faq5_a:"Ja! Ons spesialiseer in SEO-dienste vir Suid-Afrikaanse besighede. Ons plaaslike SEO-optimering help jou om op Google.co.za te rangskik.",
     footer_desc:'Moderne webontwerp vir Suid-Afrikaanse besighede wat wil uitstaan en aanlyn wil groei. Pakkette vanaf <span data-price="6999">R6,999</span>.',
     footer_company:'Maatskappy', footer_services:'Dienste', footer_contact_btn:'Kontak Ons →',
@@ -1722,7 +1800,7 @@ const TRANSLATIONS = {
     faq1_q:'Ibiza malini iwebhusayithi eMzansi Afrika?', faq1_a:"Izindleko zewebhusayithi eMzansi Afrika ziyehluka ngokwebunkimbinkimbi. Izikhumbuzo zabasebenzisi abancane ziqala kusuka ku-R6,999. Sinikeza izinhlelo zokukhokha ezinokulungiswa ne-50% idiphozithi ukuqala.",
     faq2_q:'Kuthatha isikhathi esingakanani ukwakha iwebhusayithi?', faq2_a:'Izikhumbuzo eziningi ziqalisa phakathi kweziviki ezimbili. Izikhumbuzo ezibasic zithatha iviki 1-2, e-commerce 3-5 amaviki.',
     faq3_q:'Ngabe izikhumbuzo zenu zisebenza kumaselula?', faq3_a:"Nakanjani! Zonke izikhumbuzo zethu ziyaphendula ngokuphelele kumaselula futhi zilungiselwe imakethe yamasevisi ehlukene eSouth Africa.",
-    faq4_q:'Yiziphi izindlela zokukhokha ezimukelayo?', faq4_a:"Samukela i-PayPal (Visa, Mastercard), izinhlelo zokukhokha ze-WhatsApp, ne-EFT nge-FNB. Sidinga i-50% idiphozithi ukuqala.",
+    faq4_q:'Yiziphi izindlela zokukhokha ezimukelayo?', faq4_a:"Samukela izinkokhelo zamakhadi eziphephile (Visa, Mastercard) nge-Paystack. Sidinga i-50% idiphozithi ukuqala.",
     faq5_q:'Ngabe ninikeza izinsizakalo ze-SEO?', faq5_a:"Yebo! Sikhethekile kumasevisi e-SEO amabhizinisi eSouth Africa. I-SEO yethu yendawo ikusiza ukuphakela ku-Google.co.za.",
     footer_desc:'Uklama wewebhusayithi wanamuhla wamabhizinisi eSouth Africa afuna ukukhanya nukukhula ku-inthanethi. Amapakheji kusuka ku-<span data-price="6999">R6,999</span>.',
     footer_company:'Inkampani', footer_services:'Izinsiza', footer_contact_btn:'Xhumana Nathi →',
@@ -1788,7 +1866,7 @@ const TRANSLATIONS = {
     faq1_q:'Koshta malini iwebhsayithi eMzantsi Afrika?', faq1_a:"Iindleko zewebhsayithi eMzantsi Afrika ziyahluka. Iiwebhsayithi zabasebenzisi abancane ziqala kusuka ku-R6,999. Sinikeza iinqobo zokuhlawula ezinokulungiswa ne-50% idiphozithi ukuqala.",
     faq2_q:'Kuthatha ixesha elingakanani ukwakha iwebhsayithi?', faq2_a:'Iwebhsayithi eziningi ziqala kwiiveki ezi-2. Ezibasic zithatha iveki 1-2, e-commerce iiveki 3-5.',
     faq3_q:'Ngaba iiwebhsayithi zenu zisebenza kwiisixhobo zeselula?', faq3_a:"Ngokuqinisekileyo! Zonke iiwebhsayithi zethu ziphendula ngokuphelele kwiisixhobo zeselula kwaye zilungiselwe imakethe yeesixhobo eMzantsi Afrika.",
-    faq4_q:'Zeziphi iindlela zokuhlawula ezamkelekileyo?', faq4_a:"Samkela i-PayPal (Visa, Mastercard), iitofolwano zokuhlawula ze-WhatsApp, ne-EFT nge-FNB. Sidinga i-50% idiphozithi ukuqala.",
+    faq4_q:'Zeziphi iindlela zokuhlawula ezamkelekileyo?', faq4_a:"Samkela iintlawulo zekhadi ezikhuselekileyo (Visa, Mastercard) nge-Paystack. Sidinga i-50% idiphozithi ukuqala.",
     faq5_q:'Ngaba ninika iinkonzo ze-SEO?', faq5_a:"Ewe! Sikhethekile kwiinkonzo ze-SEO zamashishini eMzantsi Afrika. I-SEO yethu yendawo ikunceda ukuphakanyiswa ku-Google.co.za.",
     footer_desc:'Uklama wewebhsayithi wanamhlanje wamashishini eMzantsi Afrika afuna ukuphuma phambili nukukhula kwi-intanethi. Iipakheji ukusuka ku-<span data-price="6999">R6,999</span>.',
     footer_company:'Inkampani', footer_services:'Iinkonzo', footer_contact_btn:'Qhagamshelana Nathi →',
@@ -1854,7 +1932,7 @@ const TRANSLATIONS = {
     faq1_q:'Combien coûte un site web en Afrique du Sud?', faq1_a:'Les coûts des sites varient selon la complexité. Les sites basiques commencent à R6,999, les e-commerce à R29,999. Nous proposons des plans de paiement flexibles avec 50% d\'acompte.',
     faq2_q:'Combien de temps faut-il pour créer un site?', faq2_a:'La plupart des sites sont lancés en 2 semaines. Les sites basiques prennent 1-2 semaines, les e-commerce 3-5 semaines.',
     faq3_q:'Vos sites fonctionnent-ils sur mobile?', faq3_a:'Absolument! Tous nos sites sont entièrement responsive et optimisés pour le marché sud-africain.',
-    faq4_q:'Quels modes de paiement acceptez-vous?', faq4_a:'Nous acceptons PayPal (Visa, Mastercard), les arrangements de paiement WhatsApp et le virement bancaire EFT. Nous demandons 50% d\'acompte pour commencer.',
+    faq4_q:'Quels modes de paiement acceptez-vous?', faq4_a:'Nous acceptons les paiements par carte en ligne sécurisés (Visa, Mastercard) via Paystack. Un acompte de 50% est requis pour commencer.',
     faq5_q:'Proposez-vous des services SEO?', faq5_a:"Oui! Nous sommes spécialisés dans les services SEO pour les entreprises sud-africaines. Notre SEO local vous aide à vous classer sur Google.co.za.",
     footer_desc:'Design web moderne pour les entreprises sud-africaines qui veulent se démarquer et grandir en ligne. Forfaits à partir de <span data-price="6999">R6,999</span>.',
     footer_company:'Entreprise', footer_services:'Services', footer_contact_btn:'Contactez-Nous →',
@@ -1920,7 +1998,7 @@ const TRANSLATIONS = {
     faq1_q:'Was kostet eine Website in Südafrika?', faq1_a:'Die Kosten variieren je nach Komplexität. Einfache Websites beginnen ab R6.999, E-Commerce-Sites ab R29.999. Wir bieten flexible Zahlungspläne mit 50% Anzahlung.',
     faq2_q:'Wie lange dauert es, eine Website zu erstellen?', faq2_a:'Die meisten Websites gehen in 2 Wochen live. Einfache Sites dauern 1-2 Wochen, E-Commerce 3-5 Wochen.',
     faq3_q:'Funktionieren Ihre Websites auf Mobilgeräten?', faq3_a:'Absolut! Alle unsere Websites sind vollständig mobilresponsiv und für den südafrikanischen Gerätemarkt optimiert.',
-    faq4_q:'Welche Zahlungsmethoden akzeptieren Sie?', faq4_a:'Wir akzeptieren PayPal (Visa, Mastercard), WhatsApp-Zahlungsvereinbarungen und Banküberweisung (EFT). Wir benötigen 50% Anzahlung zum Start.',
+    faq4_q:'Welche Zahlungsmethoden akzeptieren Sie?', faq4_a:'Wir akzeptieren sichere Online-Kartenzahlungen (Visa, Mastercard) über Paystack. Wir benötigen 50% Anzahlung zum Start.',
     faq5_q:'Bieten Sie SEO-Dienstleistungen an?', faq5_a:'Ja! Wir sind auf SEO für südafrikanische Unternehmen spezialisiert. Unser lokales SEO hilft Ihnen, auf Google.co.za zu ranken.',
     footer_desc:'Modernes Webdesign für südafrikanische Unternehmen, die sich abheben und online wachsen wollen. Pakete ab <span data-price="6999">R6,999</span>.',
     footer_company:'Unternehmen', footer_services:'Leistungen', footer_contact_btn:'Kontaktieren Sie Uns →',
@@ -1986,7 +2064,7 @@ const TRANSLATIONS = {
     faq1_q:'¿Cuánto cuesta un sitio web en Sudáfrica?', faq1_a:'Los costos varían según la complejidad. Los sitios básicos comienzan en R6.999, los e-commerce en R29.999. Ofrecemos planes de pago flexibles con 50% de depósito.',
     faq2_q:'¿Cuánto tiempo lleva crear un sitio web?', faq2_a:'La mayoría de los sitios se lanzan en 2 semanas. Los sitios básicos toman 1-2 semanas, los e-commerce 3-5 semanas.',
     faq3_q:'¿Sus sitios funcionan en dispositivos móviles?', faq3_a:'¡Absolutamente! Todos nuestros sitios son totalmente responsive y optimizados para el mercado sudafricano.',
-    faq4_q:'¿Qué métodos de pago aceptan?', faq4_a:'Aceptamos PayPal (Visa, Mastercard), arreglos de pago por WhatsApp y transferencia bancaria EFT. Requerimos 50% de depósito para comenzar.',
+    faq4_q:'¿Qué métodos de pago aceptan?', faq4_a:'Aceptamos pagos con tarjeta en línea seguros (Visa, Mastercard) a través de Paystack. Requerimos 50% de depósito para comenzar.',
     faq5_q:'¿Ofrecen servicios de SEO?', faq5_a:'¡Sí! Nos especializamos en SEO para empresas sudafricanas. Nuestro SEO local te ayuda a posicionarte en Google.co.za.',
     footer_desc:'Diseño web moderno para empresas sudafricanas que quieren destacar y crecer online. Paquetes desde <span data-price="6999">R6,999</span>.',
     footer_company:'Empresa', footer_services:'Servicios', footer_contact_btn:'Contáctenos →',
@@ -2052,7 +2130,7 @@ const TRANSLATIONS = {
     faq1_q:'南非网站建设要多少钱？', faq1_a:'南非网站费用因复杂程度而异。基本小企业网站从R6,999起，电商网站从R29,999起。我们提供灵活付款计划，首付50%押金。',
     faq2_q:'网站建设需要多长时间？', faq2_a:'大多数网站在2周内上线。基本网站需要1-2周，电商网站3-5周。',
     faq3_q:'你们的网站能在手机上使用吗？', faq3_a:'当然！我们所有的网站都完全适配手机，针对南非多样化的设备市场进行了优化。',
-    faq4_q:'你们接受哪些付款方式？', faq4_a:'我们接受PayPal（Visa、Mastercard）、WhatsApp付款安排和EFT电汇。需要50%押金开始项目。',
+    faq4_q:'你们接受哪些付款方式？', faq4_a:'我们接受通过 Paystack 的安全在线卡支付（Visa、Mastercard）。需要50%押金开始项目。',
     faq5_q:'你们提供SEO服务吗？', faq5_a:'是的！我们专注于为南非企业提供SEO服务，帮助您在Google.co.za上排名靠前。',
     footer_desc:'为南非企业提供现代网页设计，助您脱颖而出并在线增长。套餐起价<span data-price="6999">R6,999</span>。',
     footer_company:'公司', footer_services:'服务', footer_contact_btn:'联系我们 →',
@@ -2118,22 +2196,13 @@ const TRANSLATIONS = {
     faq1_q:'كم تكلف تصميم موقع في جنوب أفريقيا؟', faq1_a:'تتفاوت تكاليف المواقع حسب التعقيد. المواقع الأساسية تبدأ من R6,999 ومواقع التجارة الإلكترونية من R29,999. نقدم خطط دفع مرنة مع 50% دفعة مقدمة.',
     faq2_q:'كم يستغرق بناء موقع؟', faq2_a:'معظم المواقع تُطلق خلال أسبوعين. المواقع الأساسية تستغرق 1-2 أسبوع، والتجارة الإلكترونية 3-5 أسابيع.',
     faq3_q:'هل مواقعكم تعمل على الجوال؟', faq3_a:'بالتأكيد! جميع مواقعنا متوافقة تماماً مع الهواتف ومحسّنة لسوق الأجهزة المتنوع في جنوب أفريقيا.',
-    faq4_q:'ما هي طرق الدفع المقبولة؟', faq4_a:'نقبل PayPal (Visa، Mastercard) وترتيبات الدفع عبر واتساب وتحويل EFT. نطلب 50% دفعة مقدمة للبدء.',
+    faq4_q:'ما هي طرق الدفع المقبولة؟', faq4_a:'نقبل مدفوعات البطاقات الإلكترونية الآمنة (Visa، Mastercard) عبر Paystack. نطلب 50% دفعة مقدمة للبدء.',
     faq5_q:'هل تقدمون خدمات SEO؟', faq5_a:'نعم! نتخصص في خدمات SEO للشركات في جنوب أفريقيا. تحسين محركات البحث المحلية يساعدك على الظهور في Google.co.za.',
     footer_desc:'تصميم ويب حديث للشركات في جنوب أفريقيا التي تريد التميز والنمو عبر الإنترنت. الباقات تبدأ من <span data-price="6999">R6,999</span>.',
     footer_company:'الشركة', footer_services:'الخدمات', footer_contact_btn:'اتصل بنا →',
   },
 };
 
-/* ═══════════════════════
-   EFT MODAL
-═══════════════════════ */
-function showEftModal(){
-  const firstName=document.getElementById('buyerFirstName').value.trim();
-  const lastName=document.getElementById('buyerLastName').value.trim();
-  if(!firstName||!lastName){alert('Please fill in your name first.');return;}
-  alert('EFT Details:\n\nAccount Name: Elevate Digitals\nBank: FNB\nAccount: 63012345678\nBranch: 250655\nReference: '+firstName+' '+lastName+'\n\nPlease send proof of payment to elevatedigitalwebs@gmail.com');
-}
 </script>
 
 <script>
