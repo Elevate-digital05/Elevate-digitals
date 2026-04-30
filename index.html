@@ -385,6 +385,12 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,
 .p-feats li::before { content:'✓'; color:var(--accent); font-size:12px; font-weight:700; flex-shrink:0; }
 .p-feats li.no::before { content:'✕'; color:rgba(255,255,255,0.2); }
 .p-feats li.no { color:rgba(255,255,255,0.2); }
+.p-feat-new { display:inline-block; background:rgba(34,197,94,0.12); color:#4ade80; border:1px solid rgba(34,197,94,0.38); font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 7px; border-radius:50px; margin-left:6px; line-height:1; vertical-align:middle; }
+.p-retainer { margin-top:18px; padding:14px 14px 12px; border-radius:14px; background:rgba(255,255,255,0.025); border:1px dashed rgba(255,255,255,0.14); }
+.p-retainer-lbl { font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; font-weight:700; }
+.p-retainer-price { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
+.p-retainer-desc { font-size:11px; color:var(--text-secondary); line-height:1.5; }
+.p-card.pop { position:relative; }
 .btn-p { width:100%; padding:13px; border-radius:50px; border:1px solid var(--glass-bd); background:var(--glass-bg); color:#fff; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition:all 0.3s; backdrop-filter:blur(10px); }
 .btn-p:hover { background:rgba(0,224,255,0.15); border-color:var(--accent); transform:translateY(-2px); }
 .btn-p.pop-btn { background:linear-gradient(135deg,var(--accent),var(--primary)); border:none; box-shadow:0 0 20px rgba(0,224,255,0.3); }
@@ -922,29 +928,49 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     <p class="sec-sub reveal-section" data-i18n-html="pkg_sub">Just honest pricing for great work. All prices in <span id="currencyNote">ZAR</span>, once-off.</p>
     <div class="price-grid">
       <div class="p-card reveal-card">
-        <div class="p-name" data-i18n="pkg1_name">Starter</div><div class="p-amount" data-price="6999">R6,999</div><div class="p-period" data-i18n="pkg1_period">once-off · 1–3 pages</div>
+        <div class="p-name" data-i18n="pkg1_name">Starter</div><div class="p-amount" data-price="8500">R8,500</div><div class="p-period" data-i18n="pkg1_period">once-off · 3–5 pages</div>
         <p class="p-best-for" data-i18n="pkg1_best">Best for: New businesses needing a professional online presence fast</p>
-        <ul class="p-feats"><li>Capture more leads from your website</li><li>Mobile-responsive design</li><li>Basic SEO included</li><li>WhatsApp chat integration</li><li>Professional contact form</li><li>Launch in just 2 weeks</li></ul>
-        <button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Starter')},400)" data-i18n="btn_getstarted">Get Started</button>
+        <ul class="p-feats"><li>3–5 pages</li><li>Custom brand colours &amp; typography</li><li>Mobile-responsive design</li><li>WhatsApp chat integration</li><li>Professional contact form</li><li>Google Business Profile setup<span class="p-feat-new">New</span></li><li>Basic on-page SEO</li><li>1 round of revisions</li></ul>
+        <div class="p-retainer">
+          <div class="p-retainer-lbl">Retainer Add-On</div>
+          <div class="p-retainer-price">R799<span style="font-size:11px;color:var(--text-secondary);font-weight:500;"> /mo</span></div>
+          <div class="p-retainer-desc">Hosting, backups &amp; minor updates</div>
+        </div>
+        <button class="btn-p" style="margin-top:18px;" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Starter')},400)" data-i18n="btn_getstarted">Get Started</button>
       </div>
       <div class="p-card pop reveal-card">
-        <div class="pop-tag">Best Value</div>
-        <div class="p-name" data-i18n="pkg2_name">Business</div><div class="p-amount" data-price="14999">R14,999</div><div class="p-period" data-i18n="pkg2_period">once-off · 5–7 pages</div>
+        <div class="pop-tag">Recommended</div>
+        <div class="p-name" data-i18n="pkg2_name">Business</div><div class="p-amount" data-price="18500">R18,500</div><div class="p-period" data-i18n="pkg2_period">once-off · 6–8 pages</div>
         <p class="p-best-for" data-i18n="pkg2_best">Best for: Growing businesses ready to dominate their market</p>
-        <ul class="p-feats"><li>Everything in Starter, plus...</li><li>Full SEO optimisation</li><li>Google Maps integration</li><li>Google Analytics</li><li>Priority support</li><li>More service pages</li><li>Launch in just 2 weeks</li></ul>
-        <button class="btn-p pop-btn" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Business')},400)" data-i18n="btn_getstarted">Get Started</button>
+        <ul class="p-feats"><li>Everything in Starter</li><li>6–8 pages</li><li>Copywriting for 3 pages<span class="p-feat-new">New</span></li><li>Full on-page SEO</li><li>Google Maps + Analytics</li><li>Speed &amp; Core Web Vitals optimisation<span class="p-feat-new">New</span></li><li>Priority support</li><li>2 rounds of revisions</li></ul>
+        <div class="p-retainer">
+          <div class="p-retainer-lbl">Retainer Add-On</div>
+          <div class="p-retainer-price">R1,299<span style="font-size:11px;color:var(--text-secondary);font-weight:500;"> /mo</span></div>
+          <div class="p-retainer-desc">Hosting, updates &amp; monthly SEO report</div>
+        </div>
+        <button class="btn-p pop-btn" style="margin-top:18px;" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Business')},400)" data-i18n="btn_getstarted">Get Started</button>
       </div>
       <div class="p-card reveal-card">
-        <div class="p-name" data-i18n="pkg3_name">Pro</div><div class="p-amount" data-price="29999">R29,999</div><div class="p-period" data-i18n="pkg3_period">once-off · up to 10 pages</div>
-        <p class="p-best-for" data-i18n="pkg3_best">Best for: Businesses ready to scale, automate & grow online sales</p>
-        <ul class="p-feats"><li>E-commerce or booking system</li><li>Full SEO with monthly reports</li><li>WhatsApp, Maps & Analytics</li><li>Blog setup</li><li>Dedicated account manager</li><li>Launch in just 2 weeks</li></ul>
-        <button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Pro')},400)" data-i18n="btn_getstarted">Get Started</button>
+        <div class="p-name" data-i18n="pkg3_name">Pro</div><div class="p-amount" data-price="34999">R34,999</div><div class="p-period" data-i18n="pkg3_period">once-off · up to 12 pages</div>
+        <p class="p-best-for" data-i18n="pkg3_best">Best for: Businesses ready to scale, automate &amp; grow online sales</p>
+        <ul class="p-feats"><li>Everything in Business</li><li>Up to 12 pages</li><li>E-commerce or booking system</li><li>Payment gateway setup<span class="p-feat-new">New</span></li><li>Full copywriting<span class="p-feat-new">New</span></li><li>Blog setup + training</li><li>Dedicated account manager</li><li>3 rounds of revisions</li></ul>
+        <div class="p-retainer">
+          <div class="p-retainer-lbl">Retainer Add-On</div>
+          <div class="p-retainer-price">R1,999<span style="font-size:11px;color:var(--text-secondary);font-weight:500;"> /mo</span></div>
+          <div class="p-retainer-desc">Hosting, updates, SEO &amp; store support</div>
+        </div>
+        <button class="btn-p" style="margin-top:18px;" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Pro')},400)" data-i18n="btn_getstarted">Get Started</button>
       </div>
       <div class="p-card reveal-card" style="border-color:rgba(255,92,26,0.22);">
-        <div class="p-name" data-i18n="pkg4_name">Premium</div><div class="p-amount" data-price="59999">R59,999<span style="font-size:18px;">+</span></div><div class="p-period" data-i18n="pkg4_period">fully custom · no limits</div>
+        <div class="p-name" data-i18n="pkg4_name">Premium</div><div class="p-amount" data-price="75000">R75,000<span style="font-size:18px;">+</span></div><div class="p-period" data-i18n="pkg4_period">fully custom · no limits</div>
         <p class="p-best-for" data-i18n="pkg4_best">Best for: Enterprises needing a bespoke digital solution</p>
-        <ul class="p-feats"><li>Unlimited pages & custom functionality</li><li>Advanced integrations</li><li>Full SEO dominance strategy</li><li>Dedicated project manager</li><li>Priority 24/7 support</li><li>White-label options</li></ul>
-        <button class="btn-p" onclick="showPage('contact')" data-i18n="btn_letstalk">Let's Talk</button>
+        <ul class="p-feats"><li>Discovery &amp; strategy workshop<span class="p-feat-new">New</span></li><li>Unlimited pages &amp; custom functionality</li><li>Custom functionality / API integrations</li><li>Full SEO dominance strategy</li><li>Dedicated project manager</li><li>Priority 24/7 support</li><li>White-label options</li></ul>
+        <div class="p-retainer">
+          <div class="p-retainer-lbl">Retainer Add-On</div>
+          <div class="p-retainer-price">from R3,500<span style="font-size:11px;color:var(--text-secondary);font-weight:500;"> /mo</span></div>
+          <div class="p-retainer-desc">Fully managed, SLA-backed</div>
+        </div>
+        <button class="btn-p" style="margin-top:18px;" onclick="showPage('contact')" data-i18n="btn_letstalk">Let's Talk</button>
       </div>
     </div>
     <div class="deposit-note reveal-section"><div class="deposit-icon">💳</div><div class="deposit-text" data-i18n-html="deposit_text"><strong>50% deposit to start</strong> • Balance on completion</div></div>
@@ -977,21 +1003,21 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
       <div class="pay-plans-col">
         <div class="pay-section-h reveal-section">Website Packages</div>
         <div class="pay-plan-list">
-          <div class="pay-plan-item active" data-plan="Starter" data-price="6999" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Starter</div><div class="pay-plan-desc">1–3 pages · Mobile responsive · Contact form · Basic SEO · WhatsApp</div><div class="pay-plan-features"><span>✅ Custom Design</span><span>✅ Mobile Responsive</span><span>✅ Basic SEO</span><span>✅ WhatsApp Chat</span><span>✅ 2-Week Launch</span></div></div>
-            <div class="pay-plan-price" data-price="6999">R6,999</div>
+          <div class="pay-plan-item active" data-plan="Starter" data-price="8500" onclick="selectPayPlan(this)">
+            <div class="pay-plan-info"><div class="pay-plan-title">Starter</div><div class="pay-plan-desc">3–5 pages · Custom branding · Contact form · Basic SEO · WhatsApp</div><div class="pay-plan-features"><span>✅ Custom Brand Colours</span><span>✅ Mobile Responsive</span><span>✅ Basic On-Page SEO</span><span>✅ WhatsApp Chat</span><span>✅ Google Business Profile</span><span>✅ 1 Round of Revisions</span></div></div>
+            <div class="pay-plan-price" data-price="8500">R8,500</div>
           </div>
-          <div class="pay-plan-item" data-plan="Business" data-price="14999" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Business</div><div class="pay-plan-desc">5–7 pages · Full SEO · WhatsApp & Maps · Google Analytics</div><div class="pay-plan-features"><span>✅ Everything in Starter</span><span>✅ Full SEO Setup</span><span>✅ Google Maps</span><span>✅ Google Analytics</span><span>✅ Priority Support</span></div></div>
-            <div class="pay-plan-price" data-price="14999">R14,999</div>
+          <div class="pay-plan-item" data-plan="Business" data-price="18500" onclick="selectPayPlan(this)">
+            <div class="pay-plan-info"><div class="pay-plan-title">Business</div><div class="pay-plan-desc">6–8 pages · Full on-page SEO · Copywriting for 3 pages · Maps &amp; Analytics</div><div class="pay-plan-features"><span>✅ Everything in Starter</span><span>✅ Copywriting (3 pages)</span><span>✅ Full On-Page SEO</span><span>✅ Google Maps + Analytics</span><span>✅ Core Web Vitals Optimisation</span><span>✅ Priority Support</span><span>✅ 2 Rounds of Revisions</span></div></div>
+            <div class="pay-plan-price" data-price="18500">R18,500</div>
           </div>
-          <div class="pay-plan-item" data-plan="Pro" data-price="29999" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Pro</div><div class="pay-plan-desc">Up to 10 pages · E-commerce or Booking · Blog setup · Analytics</div><div class="pay-plan-features"><span>✅ E-commerce/Booking</span><span>✅ Blog Setup</span><span>✅ Advanced SEO</span><span>✅ Dedicated Manager</span></div></div>
-            <div class="pay-plan-price" data-price="29999">R29,999</div>
+          <div class="pay-plan-item" data-plan="Pro" data-price="34999" onclick="selectPayPlan(this)">
+            <div class="pay-plan-info"><div class="pay-plan-title">Pro</div><div class="pay-plan-desc">Up to 12 pages · E-commerce or booking · Payment gateway · Full copywriting</div><div class="pay-plan-features"><span>✅ Everything in Business</span><span>✅ E-commerce / Booking</span><span>✅ Payment Gateway Setup</span><span>✅ Full Copywriting</span><span>✅ Blog Setup + Training</span><span>✅ Dedicated Account Manager</span><span>✅ 3 Rounds of Revisions</span></div></div>
+            <div class="pay-plan-price" data-price="34999">R34,999</div>
           </div>
-          <div class="pay-plan-item" data-plan="Premium" data-price="59999" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Premium</div><div class="pay-plan-desc">Unlimited pages · Custom features · Priority support · Dedicated manager</div><div class="pay-plan-features"><span>✅ Unlimited Pages</span><span>✅ Custom Integrations</span><span>✅ 24/7 Support</span><span>✅ White-label Options</span></div></div>
-            <div class="pay-plan-price" data-price="59999">R59,999+</div>
+          <div class="pay-plan-item" data-plan="Premium" data-price="75000" onclick="selectPayPlan(this)">
+            <div class="pay-plan-info"><div class="pay-plan-title">Premium</div><div class="pay-plan-desc">Discovery workshop · Unlimited pages · Custom functionality &amp; API integrations · 24/7 priority support</div><div class="pay-plan-features"><span>✅ Discovery &amp; Strategy Workshop</span><span>✅ Unlimited Pages</span><span>✅ Custom API Integrations</span><span>✅ Full SEO Dominance</span><span>✅ Dedicated Project Manager</span><span>✅ 24/7 Priority Support</span><span>✅ White-label Options</span></div></div>
+            <div class="pay-plan-price" data-price="75000">R75,000+</div>
           </div>
         </div>
         <div class="pay-section-h reveal-section" style="margin-top:40px;">Add Monthly Maintenance</div>
@@ -1037,11 +1063,11 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
           <div class="pay-selected-plan" id="paySelectedPlan">Starter</div>
           <div class="pay-type-label" id="payTypeLabel">One-time Payment</div>
           <div class="pay-summary-rows">
-            <div class="pay-summary-row"><span>Website Package</span><span id="paySumPackage" data-price="6999">R6,999</span></div>
+            <div class="pay-summary-row"><span>Website Package</span><span id="paySumPackage" data-price="8500">R8,500</span></div>
             <div class="pay-summary-row" id="payMaintRow" style="display:none;"><span>+ Maintenance</span><span id="paySumMaint" data-price="0">R0</span></div>
-            <div class="pay-summary-row"><span>Total Price</span><span id="paySumTotal" data-price="6999">R6,999</span></div>
-            <div class="pay-summary-row"><span>Deposit (50%)</span><span id="paySumDeposit" data-price="3500">R3,500</span></div>
-            <div class="pay-summary-row balance"><span>Balance Due</span><span id="paySumBalance" data-price="3500">R3,500</span></div>
+            <div class="pay-summary-row"><span>Total Price</span><span id="paySumTotal" data-price="8500">R8,500</span></div>
+            <div class="pay-summary-row"><span>Deposit (50%)</span><span id="paySumDeposit" data-price="4250">R4,250</span></div>
+            <div class="pay-summary-row balance"><span>Balance Due</span><span id="paySumBalance" data-price="4250">R4,250</span></div>
           </div>
           <div class="pay-summary-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Secure payment · Monthly maintenance billed on purchase date</div>
           <div class="pay-accepted-cards"><span>Accepted:</span><div class="pay-card-icons"><span class="pay-card-icon">VISA</span><span class="pay-card-icon">MC</span><span class="pay-card-icon">PAYPAL</span></div></div>
