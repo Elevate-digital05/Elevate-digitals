@@ -404,7 +404,8 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,
 .m-card:hover { transform:translateY(-8px) scale(1.02); border-color:rgba(0,224,255,0.45); box-shadow:0 22px 55px rgba(0,224,255,0.15); }
 .m-card:hover::after { transform:scaleX(1); }
 .m-name { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; margin-bottom:4px; }
-.m-price { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; background:linear-gradient(135deg,var(--accent),#FF6B00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; }
+.m-price { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; background:linear-gradient(135deg,var(--accent),#FF6B00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+.m-tier-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; font-weight:600; }
 
 /* ── PROCESS ── */
 .proc-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
@@ -435,6 +436,9 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,
 .pay-addon-toggle { display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 18px 20px; cursor: pointer; transition: all 0.3s; }
 .pay-addon-toggle:hover { border-color: var(--glass-bd-hover); transform: translateY(-2px); }
 .pay-addon-toggle.selected { background: var(--glass-bg-hover); border-color: var(--accent); }
+.pay-addon-toggle.rec { border-color: rgba(0,224,255,0.45); box-shadow: 0 0 28px rgba(0,224,255,0.12); }
+.pay-addon-rec { display:none; font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; background:rgba(34,197,94,0.14); color:#4ade80; border:1px solid rgba(34,197,94,0.4); border-radius:50px; margin-left:8px; line-height:1; }
+.pay-addon-toggle.rec .pay-addon-rec { display:inline-block; }
 .pay-addon-info { flex: 1; }
 .pay-addon-title { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; margin-bottom:4px; display: flex; align-items: center; gap: 10px; }
 .pay-addon-tag { font-size: 12px; font-weight: 700; padding: 4px 10px; background: linear-gradient(135deg, var(--accent), #FF6B00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; border-radius: 20px; }
@@ -976,12 +980,13 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     <div class="deposit-note reveal-section"><div class="deposit-icon">💳</div><div class="deposit-text" data-i18n-html="deposit_text"><strong>50% deposit to start</strong> • Balance on completion</div></div>
     <div style="margin-top:60px;">
       <div class="sec-lbl reveal-section" data-i18n="maint_label">Add-Ons</div>
-      <h2 class="sec-h reveal-section" data-i18n-html="maint_h2">Monthly <span class="hl">Maintenance Plans</span></h2>
-      <p class="sec-sub reveal-section" data-i18n="maint_sub">Keep your site secure and up to date after launch.</p>
+      <h2 class="sec-h reveal-section" data-i18n-html="maint_h2">Monthly <span class="hl">Retainer Plans</span></h2>
+      <p class="sec-sub reveal-section" data-i18n="maint_sub">Each package has a matching monthly retainer to keep your site running, ranking and updated after launch.</p>
       <div class="maint-grid">
-        <div class="m-card reveal-card"><div class="m-name">Basic Care</div><div class="m-price" data-price="499">R499<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><ul class="p-feats"><li>Security updates</li><li>Uptime monitoring</li><li>Monthly backup</li></ul><button class="btn-p" onclick="showPage('contact')">Get Started</button></div>
-        <div class="m-card rec reveal-card"><div class="pop-tag">Recommended</div><div class="m-name">Full Care</div><div class="m-price" data-price="999">R999<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><ul class="p-feats"><li>Everything in Basic</li><li>Content updates (2hr)</li><li>Performance reports</li><li>Priority support</li></ul><button class="btn-p pop-btn" onclick="showPage('contact')">Get Started</button></div>
-        <div class="m-card reveal-card"><div class="m-name">Growth Care</div><div class="m-price" data-price="1999">R1,999<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><ul class="p-feats"><li>Everything in Full</li><li>Content updates (6hr)</li><li>SEO monitoring</li><li>Monthly strategy call</li></ul><button class="btn-p" onclick="showPage('contact')">Get Started</button></div>
+        <div class="m-card reveal-card"><div class="m-name">Starter Care</div><div class="m-price" data-price="799">R799<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><div class="m-tier-label">Pairs with Starter</div><ul class="p-feats"><li>Hosting included</li><li>Weekly backups</li><li>Minor content updates</li><li>Security &amp; SSL monitoring</li></ul><button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Starter');toggleMaintenanceByName('Starter Care');},400)">Add to Plan</button></div>
+        <div class="m-card rec reveal-card"><div class="pop-tag">Recommended</div><div class="m-name">Business Care</div><div class="m-price" data-price="1299">R1,299<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><div class="m-tier-label">Pairs with Business</div><ul class="p-feats"><li>Everything in Starter Care</li><li>Monthly SEO report</li><li>Content updates (2hr)</li><li>Priority support</li></ul><button class="btn-p pop-btn" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Business');toggleMaintenanceByName('Business Care');},400)">Add to Plan</button></div>
+        <div class="m-card reveal-card"><div class="m-name">Pro Care</div><div class="m-price" data-price="1999">R1,999<span style="font-size:14px;color:var(--text-secondary);"> /mo</span></div><div class="m-tier-label">Pairs with Pro</div><ul class="p-feats"><li>Everything in Business Care</li><li>Store / booking support</li><li>SEO monitoring &amp; reporting</li><li>Content updates (4hr)</li></ul><button class="btn-p" onclick="showPage('pay');setTimeout(function(){selectPayPlanByName('Pro');toggleMaintenanceByName('Pro Care');},400)">Add to Plan</button></div>
+        <div class="m-card reveal-card"><div class="m-name">Premium Care</div><div class="m-price" data-price="3500">R3,500<span style="font-size:14px;color:var(--text-secondary);">+ /mo</span></div><div class="m-tier-label">Pairs with Premium</div><ul class="p-feats"><li>Fully managed service</li><li>SLA-backed response times</li><li>Dedicated technical contact</li><li>Strategy &amp; review calls</li></ul><button class="btn-p" onclick="showPage('contact')">Contact Us</button></div>
       </div>
     </div>
     <div class="cta-banner">
@@ -1020,18 +1025,22 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
             <div class="pay-plan-price" data-price="75000">R75,000+</div>
           </div>
         </div>
-        <div class="pay-section-h reveal-section" style="margin-top:40px;">Add Monthly Maintenance</div>
+        <div class="pay-section-h reveal-section" style="margin-top:40px;">Add Monthly Retainer</div>
         <div class="pay-addon-list">
-          <div class="pay-addon-toggle" data-plan="Basic Care" data-price="499" onclick="toggleMaintenance(this)">
-            <div class="pay-addon-info"><div class="pay-addon-title">Basic Care <span class="pay-addon-tag">R499/mo</span></div><div class="pay-addon-desc">Security updates · Uptime monitoring · Monthly backup</div></div>
+          <div class="pay-addon-toggle rec" data-plan="Starter Care" data-pairs="Starter" data-price="799" onclick="toggleMaintenance(this)">
+            <div class="pay-addon-info"><div class="pay-addon-title">Starter Care <span class="pay-addon-tag">R799/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Hosting · Weekly backups · Minor content updates · Pairs with Starter</div></div>
             <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           </div>
-          <div class="pay-addon-toggle" data-plan="Full Care" data-price="999" onclick="toggleMaintenance(this)">
-            <div class="pay-addon-info"><div class="pay-addon-title">Full Care <span class="pay-addon-tag">R999/mo</span></div><div class="pay-addon-desc">Everything in Basic + 2hr content updates · Priority support</div></div>
+          <div class="pay-addon-toggle" data-plan="Business Care" data-pairs="Business" data-price="1299" onclick="toggleMaintenance(this)">
+            <div class="pay-addon-info"><div class="pay-addon-title">Business Care <span class="pay-addon-tag">R1,299/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Everything in Starter Care + Monthly SEO report · Content updates (2hr) · Pairs with Business</div></div>
             <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           </div>
-          <div class="pay-addon-toggle" data-plan="Growth Care" data-price="1999" onclick="toggleMaintenance(this)">
-            <div class="pay-addon-info"><div class="pay-addon-title">Growth Care <span class="pay-addon-tag">R1,999/mo</span></div><div class="pay-addon-desc">Everything in Full + SEO monitoring · Monthly strategy call</div></div>
+          <div class="pay-addon-toggle" data-plan="Pro Care" data-pairs="Pro" data-price="1999" onclick="toggleMaintenance(this)">
+            <div class="pay-addon-info"><div class="pay-addon-title">Pro Care <span class="pay-addon-tag">R1,999/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Everything in Business Care + Store / booking support · SEO monitoring · Pairs with Pro</div></div>
+            <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+          </div>
+          <div class="pay-addon-toggle" data-plan="Premium Care" data-pairs="Premium" data-price="3500" onclick="toggleMaintenance(this)">
+            <div class="pay-addon-info"><div class="pay-addon-title">Premium Care <span class="pay-addon-tag">from R3,500/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Fully managed · SLA-backed · Dedicated technical contact · Pairs with Premium (final price agreed in consultation)</div></div>
             <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           </div>
         </div>
@@ -1424,12 +1433,22 @@ function updateAllPrices() {
    PAYMENT CALCULATOR
 ═══════════════════════ */
 let selectedMaintenance=null;
-function selectPayPlan(el){document.querySelectorAll('.pay-plan-item').forEach(i=>i.classList.remove('active'));el.classList.add('active');updatePaySummary();}
+function selectPayPlan(el){
+  document.querySelectorAll('.pay-plan-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  const pkg=el.dataset.plan;
+  document.querySelectorAll('.pay-addon-toggle').forEach(t=>{t.classList.toggle('rec', t.dataset.pairs===pkg);});
+  updatePaySummary();
+}
 function selectPayPlanByName(name){document.querySelectorAll('.pay-plan-item').forEach(el=>{if(el.dataset.plan===name)selectPayPlan(el);});}
 function toggleMaintenance(el){
   if(el.classList.contains('selected')){el.classList.remove('selected');selectedMaintenance=null;}
   else{document.querySelectorAll('.pay-addon-toggle').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');selectedMaintenance={plan:el.dataset.plan,price:parseInt(el.dataset.price)};}
   updatePaySummary();
+}
+function toggleMaintenanceByName(name){
+  const el=document.querySelector('.pay-addon-toggle[data-plan="'+name+'"]');
+  if(el && !el.classList.contains('selected'))toggleMaintenance(el);
 }
 function updatePaySummary(){
   const activeItem=document.querySelector('.pay-plan-item.active');
