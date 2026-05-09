@@ -741,12 +741,12 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
 </header>
 
 <div class="mobile-menu" id="mobileMenu" role="menu">
-  <a href="#home" onclick="showPage('home');toggleMenu()" data-i18n="nav_home">Home</a>
-  <a href="#services" onclick="showPage('services');toggleMenu()" data-i18n="nav_services">Services</a>
-  <a href="#packages" onclick="showPage('packages');toggleMenu()" data-i18n="nav_packages">Packages</a>
-  <a href="#pay" onclick="showPage('pay');toggleMenu()" data-i18n="nav_pay">Pay</a>
-  <a href="#blog" onclick="showPage('blog');toggleMenu()" data-i18n="nav_blog">Blog</a>
-  <a href="#contact" onclick="showPage('contact');toggleMenu()" data-i18n="nav_contact">Contact</a>
+  <a href="#home" onclick="toggleMenu();showPage('home')" data-i18n="nav_home">Home</a>
+  <a href="#services" onclick="toggleMenu();showPage('services')" data-i18n="nav_services">Services</a>
+  <a href="#packages" onclick="toggleMenu();showPage('packages')" data-i18n="nav_packages">Packages</a>
+  <a href="#pay" onclick="toggleMenu();showPage('pay')" data-i18n="nav_pay">Pay</a>
+  <a href="#blog" onclick="toggleMenu();showPage('blog')" data-i18n="nav_blog">Blog</a>
+  <a href="#contact" onclick="toggleMenu();showPage('contact')" data-i18n="nav_contact">Contact</a>
   <div class="mobile-controls">
     <div>
       <span class="mob-ctrl-label">Currency</span>
@@ -1222,7 +1222,27 @@ function showPage(id) {
   }
 }
 
-function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+let _menuScrollY = 0;
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const opening = !menu.classList.contains('open');
+  menu.classList.toggle('open');
+  if (opening) {
+    _menuScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + _menuScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  } else {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, _menuScrollY);
+  }
+}
 function toggleFaq(el) { el.classList.toggle('open'); el.setAttribute('aria-expanded', el.classList.contains('open')); }
 
 /* ═══════════════════════
