@@ -295,6 +295,8 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,
 .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:18px; animation: fadeUp 0.7s 0.45s both; }
 .hero-secondary { display:inline-block; color:var(--text-secondary); font-size:14px; text-decoration:none; margin-bottom:64px; transition: color 0.2s; animation: fadeUp 0.7s 0.55s both; }
 .hero-secondary:hover { color:var(--accent-light); }
+.hero-assure { max-width:460px; font-size:14px; line-height:1.65; color:var(--text-secondary); margin-bottom:16px; animation: fadeUp 0.7s 0.5s both; }
+.hero-assure strong { color:var(--accent-light); font-weight:600; }
 
 .btn-primary { background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 40%, var(--indigo) 100%); color:#fff; border:none; padding:15px 32px; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; cursor:pointer; box-shadow: 0 4px 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.2); transition: all 0.3s; text-decoration:none; display:inline-block; position:relative; overflow:hidden; }
 .btn-primary::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s; }
@@ -344,6 +346,15 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,
 .deposit-icon { font-size: 28px; flex-shrink: 0; }
 .deposit-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 .deposit-text strong { color: var(--accent); }
+.assure-note { margin-top: 0; margin-bottom: 44px; }
+.assure-icon { flex-shrink: 0; color: var(--accent); }
+
+/* ── FOUNDER ── */
+.founder { display:flex; align-items:center; gap:22px; max-width:600px; margin:0 auto; padding:0 24px 64px; }
+.founder-photo { width:88px; height:88px; border-radius:50%; flex-shrink:0; object-fit:cover; background:var(--glass-bg); border:1px solid var(--glass-bd); }
+.founder-name { font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--text); margin-bottom:8px; }
+.founder-bio { font-size:14px; line-height:1.7; color:var(--text-secondary); }
+@media (max-width:560px) { .founder { flex-direction:column; text-align:center; gap:16px; padding-bottom:48px; } }
 
 /* ── SERVICES GRID ── */
 .svc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
@@ -778,6 +789,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     <div class="hero-ctas">
       <a href="#packages" class="btn-primary" onclick="event.preventDefault(); showPage('packages');" data-i18n="hero_cta1">Get My Website</a>
     </div>
+    <p class="hero-assure" data-i18n-html="assure_text"><strong>See your homepage design before you pay anything.</strong> I build the first concept free — if you don't want to go ahead after seeing it, you owe nothing.</p>
     <a href="#contact" class="hero-secondary" onclick="event.preventDefault(); showPage('contact');" data-i18n="hero_cta2">or book a free call →</a>
     <div class="hero-visual">
       <div class="floating-chip">
@@ -817,6 +829,15 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
       <div class="step reveal-card"><div class="step-n">02</div><div class="step-nm" data-i18n="step2_name">Design</div><div class="step-d" data-i18n="step2_desc">We create a stunning design tailored to your brand.</div></div>
       <div class="step reveal-card"><div class="step-n">03</div><div class="step-nm" data-i18n="step3_name">Build</div><div class="step-d" data-i18n="step3_desc">We develop and test your site to be fast, secure, and pixel-perfect.</div></div>
       <div class="step reveal-card"><div class="step-n">04</div><div class="step-nm" data-i18n="step4_name">Launch</div><div class="step-d" data-i18n="step4_desc">We go live and provide ongoing support to keep everything running.</div></div>
+    </div>
+  </div>
+
+  <!-- TODO: swap the placeholder div for <img class="founder-photo" src="/kabelo.jpg" alt="Kabelo, founder of Elevate Digitals" width="88" height="88"> — same class, same box, no layout shift -->
+  <div class="founder reveal-section">
+    <div class="founder-photo" aria-hidden="true"></div>
+    <div>
+      <div class="founder-name" data-i18n="founder_name">Kabelo — founder, Elevate Digitals</div>
+      <p class="founder-bio" data-i18n="founder_bio">I build the sites myself, which means you talk to the person doing the work rather than an account manager. Based in Cape Town.</p>
     </div>
   </div>
 
@@ -862,6 +883,10 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
     <div class="sec-lbl reveal-section" data-i18n="pkg_label">Transparent Pricing</div>
     <h2 class="sec-h reveal-section" data-i18n-html="pkg_h2">No Hidden Fees. <span class="hl">No Surprises.</span></h2>
     <p class="sec-sub reveal-section" data-i18n-html="pkg_sub">Just honest pricing for great work. All prices in <span id="currencyNote">ZAR</span>, once-off.</p>
+    <div class="deposit-note assure-note reveal-section">
+      <svg class="assure-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+      <div class="deposit-text" data-i18n-html="assure_text"><strong>See your homepage design before you pay anything.</strong> I build the first concept free — if you don't want to go ahead after seeing it, you owe nothing.</div>
+    </div>
     <div class="price-grid">
       <div class="p-card reveal-card">
         <div class="p-name" data-i18n="pkg1_name">Starter</div><div class="p-amount" data-price="8500">R8,500</div><div class="p-period" data-i18n="pkg1_period">once-off · 3–5 pages</div>
@@ -909,7 +934,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--glass-bd); pad
         <button class="btn-p" style="margin-top:18px;" onclick="showPage('contact')" data-i18n="btn_letstalk">Let's Talk</button>
       </div>
     </div>
-    <div class="deposit-note reveal-section"><div class="deposit-icon" aria-hidden="true">💳</div><div class="deposit-text" data-i18n-html="deposit_text"><strong>50% deposit to start</strong> • Balance on completion</div></div>
+    <div class="deposit-note reveal-section"><div class="deposit-icon" aria-hidden="true">💳</div><div class="deposit-text" data-i18n-html="deposit_text"><strong>50% deposit once you approve the concept</strong> • Balance on completion</div></div>
     <div style="margin-top:60px;">
       <div class="sec-lbl reveal-section" data-i18n="maint_label">Add-Ons</div>
       <h2 class="sec-h reveal-section" data-i18n-html="maint_h2">Monthly <span class="hl">Retainer Plans</span></h2>
@@ -1623,7 +1648,10 @@ const TRANSLATIONS = {
     pkg3_name:'Pro', pkg3_period:'once-off · up to 12 pages', pkg3_best:'Best for: Businesses ready to scale, automate & grow online sales',
     pkg4_name:'Premium', pkg4_period:'fully custom · no limits', pkg4_best:'Best for: Enterprises needing a bespoke digital solution',
     btn_getstarted:'Get Started', btn_letstalk:"Let's Talk",
-    deposit_text:'<strong>50% deposit to start</strong> • Balance on completion',
+    deposit_text:'<strong>50% deposit once you approve the concept</strong> • Balance on completion',
+    assure_text:'<strong>See your homepage design before you pay anything.</strong> I build the first concept free — if you don\'t want to go ahead after seeing it, you owe nothing.',
+    founder_name:'Kabelo — founder, Elevate Digitals',
+    founder_bio:'I build the sites myself, which means you talk to the person doing the work rather than an account manager. Based in Cape Town.',
     maint_label:'Add-Ons',
     maint_h2:'Monthly <span class="hl">Maintenance Plans</span>',
     maint_sub:'Keep your site secure and up to date after launch.',
@@ -1689,7 +1717,10 @@ const TRANSLATIONS = {
     pkg3_name:'Pro', pkg3_period:'eenmalig · tot 12 bladsye', pkg3_best:'Beste vir: Besighede gereed om te skaal, outomatiseer en aanlyn-verkope te groei',
     pkg4_name:'Premium', pkg4_period:'volledig pasgemaak · geen limiete', pkg4_best:"Beste vir: Ondernemings wat 'n pasgemaakte digitale oplossing benodig",
     btn_getstarted:'Begin Nou', btn_letstalk:'Kom Ons Praat',
-    deposit_text:'<strong>50% deposito om te begin</strong> • Saldo by voltooiing',
+    deposit_text:'<strong>50% deposito sodra jy die konsep goedkeur</strong> • Saldo by voltooiing',
+    assure_text:'<strong>Sien jou tuisblad-ontwerp voordat jy enigiets betaal.</strong> Ek bou die eerste konsep gratis — as jy nie wil voortgaan nadat jy dit gesien het nie, betaal jy niks.',
+    founder_name:'Kabelo — stigter, Elevate Digitals',
+    founder_bio:'Ek bou die webwerwe self, wat beteken jy praat met die persoon wat die werk doen, nie met \'n rekeningbestuurder nie. Gebaseer in Kaapstad.',
     maint_label:'Byvoegings',
     maint_h2:'Maandelikse <span class="hl">Onderhoudplanne</span>',
     maint_sub:'Hou jou werf veilig en op datum na bekendstelling.',
@@ -1755,7 +1786,10 @@ const TRANSLATIONS = {
     pkg3_name:'Uchwepheshe', pkg3_period:'kanye · amakhasi angu-12', pkg3_best:'Kufanelele: Amabhizinisi alungele ukukhula, ukuzenzakalisa nokukhulisa imali',
     pkg4_name:'Iphezulu', pkg4_period:'ikhethiwe ngokuphelele · akukho imingcele', pkg4_best:'Kufanelele: Amabhizinisi amakhulu adinga isixazululo esikhethekile sedijithali',
     btn_getstarted:'Qala Manje', btn_letstalk:'Ake Sikhulume',
-    deposit_text:'<strong>50% idiphozithi ukuqala</strong> • Insalela iphela',
+    deposit_text:'<strong>50% idiphozithi uma usuvumile umklamo</strong> • Insalela iphela',
+    assure_text:'<strong>Bona umklamo wekhasi lakho lasekhaya ngaphambi kokukhokha.</strong> Ngakha umklamo wokuqala mahhala — uma ungafuni ukuqhubeka ngemva kokuwubona, awukhokhi lutho.',
+    founder_name:'Kabelo — umsunguli, Elevate Digitals',
+    founder_bio:'Ngakha amawebhusayithi ngokwami, okusho ukuthi ukhuluma nomuntu owenza umsebenzi, hhayi imenenja ye-akhawunti. NgiseKapa.',
     maint_label:'Izethulo',
     maint_h2:'Izinhlelo Zonyaka <span class="hl">Zokusekelwa</span>',
     maint_sub:'Gcina iwebhusayithi yakho iphephile neyibuyekeziwe ngemuva kokuqalisa.',
@@ -1821,7 +1855,10 @@ const TRANSLATIONS = {
     pkg3_name:'Uchwepheshe', pkg3_period:'kanye · ukuya kumaphepha ali-12', pkg3_best:'Kulungele: Amashishini alungele ukwandisa, ukuzenzakalisa nokukhulisa iintengiso',
     pkg4_name:'Iphezulu', pkg4_period:'yanzelwe ngokuphelele · akukho mida', pkg4_best:'Kulungele: Amashishini amakhulu adinga isixazululo esikhethekileyo sedijithali',
     btn_getstarted:'Qala Ngoku', btn_letstalk:'Masithethe',
-    deposit_text:'<strong>50% idiphozithi ukuqala</strong> • Insalela xa iphela',
+    deposit_text:'<strong>50% idiphozithi xa uvumile uyilo</strong> • Insalela xa iphela',
+    assure_text:'<strong>Bona uyilo lwephepha lakho lokuqala ngaphambi kokuba uhlawule.</strong> Ndakha uyilo lokuqala simahla — ukuba awufuni ukuqhubeka emva kokulubona, akukho nto uyihlawulayo.',
+    founder_name:'Kabelo — umseki, Elevate Digitals',
+    founder_bio:'Ndakha amawebhsayithi ngokwam, oko kuthetha ukuba uthetha nomntu owenza umsebenzi, hayi umphathi we-akhawunti. NdiseKapa.',
     maint_label:'Izongeza',
     maint_h2:'Iinqobo zoNyaka <span class="hl">zoLondololo</span>',
     maint_sub:'Gcina isayithi yakho ekhuselekileyo kwaye ibuyekeziwe emva kokuqalisa.',
