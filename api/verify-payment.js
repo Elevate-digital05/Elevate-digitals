@@ -1,16 +1,18 @@
 // Verifies a Paystack transaction server-side using the secret key.
 // Requires PAYSTACK_SECRET_KEY (sk_live_... or sk_test_...) in Vercel env vars.
 
-const VALID_DEPOSIT_AMOUNTS_ZAR = new Set([
-  // base packages (50% deposit)
-  3500, 7500, 15000, 30000,
-  // + Basic Care (R499/mo)
-  3749, 7749, 15249, 30249,
-  // + Full Care (R999/mo)
-  3999, 7999, 15499, 30499,
-  // + Growth Care (R1,999/mo)
-  4499, 8499, 15999, 30999
-]);
+// These must match the data-price attributes on .pay-plan-item and
+// .pay-addon-toggle in index.html. check-prices.mjs fails the build if they
+// drift — an earlier version of this file still listed the 2025 prices, so
+// every real deposit came back "Amount mismatch" after the packages were
+// repriced.
+export const PACKAGES_ZAR = [8500, 18500, 34999, 75000];
+export const RETAINERS_ZAR = [0, 799, 1299, 1999, 3500];
+
+// The page charges 50% of package + retainer, rounded the same way.
+export const VALID_DEPOSIT_AMOUNTS_ZAR = new Set(
+  PACKAGES_ZAR.flatMap(pkg => RETAINERS_ZAR.map(m => Math.round((pkg + m) / 2)))
+);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

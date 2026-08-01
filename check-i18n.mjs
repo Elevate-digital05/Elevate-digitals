@@ -1,12 +1,11 @@
 // Every data-i18n* key in the markup must exist in each ENABLED dictionary,
 // or that language silently falls back to English mid-page.
-// zu/xh are disabled in the UI (machine-translated, wrong in places), so gaps
-// there are reported but don't fail — they're the backlog for whoever fixes them.
+// All four languages are live, so all four must be complete.
 // Run: node check-i18n.mjs
 import { readFileSync } from 'node:fs';
 
-const ENABLED = ['en', 'af'];
-const DISABLED = ['zu', 'xh'];
+const ENABLED = ['en', 'af', 'zu', 'xh'];
+const DISABLED = [];
 
 const html = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
 

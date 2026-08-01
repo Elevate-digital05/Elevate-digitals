@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice | Elevate Digitals</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Archivo',sans-serif;background:var(--concrete);color:var(--ink);font-size:14px;line-height:1.6;}
+
+.bar{background:var(--ink);color:var(--concrete);padding:14px 24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.bar p{font-size:13px;color:var(--concrete-dark);margin-right:auto;}
+.bar button{font-family:inherit;font-size:13px;font-weight:600;padding:9px 18px;border:none;border-radius:50px;background:var(--hivis);color:var(--ink);cursor:pointer;}
+.bar button.ghost{background:transparent;color:var(--concrete);border:1px solid var(--concrete-dark);}
+
+.sheet{max-width:800px;margin:32px auto;background:var(--surface);border:1px solid var(--concrete-dark);padding:56px;}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;margin-bottom:44px;}
+header img{height:44px;width:auto;}
+h1{font-size:30px;font-weight:600;letter-spacing:-0.02em;line-height:1;}
+.num{font-size:13px;color:var(--grey);margin-top:6px;}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:36px;}
+.lbl{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);margin-bottom:7px;}
+.from{font-size:13px;line-height:1.8;}
+
+table{width:100%;border-collapse:collapse;margin-bottom:8px;}
+th{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);text-align:left;padding:0 8px 10px;border-bottom:1px solid var(--ink);}
+th.r,td.r{text-align:right;}
+td{padding:12px 8px;border-bottom:1px solid var(--concrete-dark);vertical-align:top;}
+tfoot td{border:none;padding:8px;}
+tfoot tr:first-child td{padding-top:18px;}
+tfoot .total td{border-top:1px solid var(--ink);font-size:18px;font-weight:600;padding-top:14px;}
+
+[contenteditable]{outline:none;}
+[contenteditable]:focus{background:var(--hivis);}
+[contenteditable]:empty::before{content:attr(data-ph);color:var(--concrete-dark);}
+
+.terms{margin-top:40px;padding-top:24px;border-top:1px solid var(--concrete-dark);font-size:13px;color:var(--grey);}
+.terms strong{color:var(--ink);}
+.pay{margin-top:20px;padding:18px 20px;background:var(--concrete);font-size:13px;line-height:1.9;}
+.todo{background:var(--hivis);padding:1px 5px;font-weight:600;color:var(--ink);}
+.rm{border:none;background:none;color:var(--grey);cursor:pointer;font-size:16px;line-height:1;padding:0 4px;}
+
+@media print{
+  .bar{display:none;}
+  body{background:var(--surface);}
+  .sheet{margin:0;border:none;padding:0;max-width:none;}
+  .rm{display:none;}
+  @page{margin:18mm;}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <p>Click any field to edit. Nothing is saved — print to PDF when you're done.</p>
+  <button class="ghost" onclick="addRow()">+ Add line</button>
+  <button onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<div class="sheet">
+  <header>
+    <div>
+      <img src="/brand/logo-horizontal-ink.svg" alt="Elevate Digitals">
+    </div>
+    <div style="text-align:right;">
+      <h1>Invoice</h1>
+      <div class="num">No. <span contenteditable data-ph="ED-0001">ED-0001</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div>
+      <div class="lbl">From</div>
+      <div class="from">
+        <strong>Elevate Digitals</strong><br>
+        Cape Town, South Africa<br>
+        elevatedigitalwebs@gmail.com<br>
+        +27 65 085 8437
+      </div>
+    </div>
+    <div>
+      <div class="lbl">Bill to</div>
+      <div class="from">
+        <div contenteditable data-ph="Client business name"></div>
+        <div contenteditable data-ph="Contact name"></div>
+        <div contenteditable data-ph="Email"></div>
+        <div contenteditable data-ph="Address"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="lbl">Issued</div>
+      <div contenteditable data-ph="1 August 2026"></div>
+    </div>
+    <div>
+      <div class="lbl">Due</div>
+      <div contenteditable data-ph="On receipt"></div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th style="width:60%">Description</th><th class="r">Qty</th><th class="r">Unit (ZAR)</th><th class="r">Amount</th><th></th></tr>
+    </thead>
+    <tbody id="rows">
+      <tr>
+        <td contenteditable data-ph="Business package — 6–8 page website"></td>
+        <td class="r qty" contenteditable>1</td>
+        <td class="r unit" contenteditable data-ph="18500"></td>
+        <td class="r amt">R0</td>
+        <td><button class="rm" onclick="this.closest('tr').remove();recalc()" aria-label="Remove line">×</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3" class="r">Subtotal</td><td class="r" id="sub">R0</td><td></td></tr>
+      <tr><td colspan="3" class="r">Less deposit already paid</td><td class="r">R<span contenteditable data-ph="0" id="paid">0</span></td><td></td></tr>
+      <tr class="total"><td colspan="3" class="r">Amount due</td><td class="r" id="due">R0</td><td></td></tr>
+    </tfoot>
+  </table>
+
+  <div class="terms">
+    <p><strong>Payment terms.</strong> 50% deposit on approval of the concept. The balance is due before the site is launched to your domain. Work is carried out on a staging URL until the balance clears.</p>
+    <div class="pay">
+      <strong>How to pay</strong><br>
+      Card — pay by link, sent separately, or ask and we'll resend it.<br>
+      EFT — <span class="todo">TODO: bank, account name, account number, branch code</span><br>
+      Reference — the invoice number above.
+    </div>
+    <p style="margin-top:18px;">Elevate Digitals is not a registered VAT vendor. No VAT is charged on this invoice.</p>
+  </div>
+</div>
+
+<script>
+function money(n) { return 'R' + n.toLocaleString('en-ZA'); }
+function num(el) { return parseFloat((el.textContent || '').replace(/[^0-9.]/g, '')) || 0; }
+
+function recalc() {
+  let sub = 0;
+  document.querySelectorAll('#rows tr').forEach(function (tr) {
+    const amt = num(tr.querySelector('.qty')) * num(tr.querySelector('.unit'));
+    tr.querySelector('.amt').textContent = money(amt);
+    sub += amt;
+  });
+  document.getElementById('sub').textContent = money(sub);
+  document.getElementById('due').textContent = money(Math.max(0, sub - num(document.getElementById('paid'))));
+}
+
+function addRow() {
+  const tr = document.querySelector('#rows tr').cloneNode(true);
+  tr.querySelectorAll('[contenteditable]').forEach(function (c) { c.textContent = ''; });
+  tr.querySelector('.qty').textContent = '1';
+  tr.querySelector('.amt').textContent = 'R0';
+  document.getElementById('rows').appendChild(tr);
+  recalc();
+}
+
+document.addEventListener('input', recalc);
+recalc();
+</script>
+</body>
+</html>
