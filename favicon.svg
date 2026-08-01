@@ -1,21 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0F172A"/>
-      <stop offset="100%" stop-color="#05071A"/>
-    </linearGradient>
-    <linearGradient id="letterE" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#a78bfa"/>
-    </linearGradient>
-    <linearGradient id="letterV" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c4b5fd"/>
-      <stop offset="100%" stop-color="#60a5fa"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+  <rect width="32" height="32" rx="7" fill="#1A1A18"/>
   <!-- E -->
-  <path d="M4 6v20h9.5v-3H7.5v-5.5H12v-3H7.5V9H13.5V6z" fill="url(#letterE)"/>
+  <path d="M4 6v20h9.5v-3H7.5v-5.5H12v-3H7.5V9H13.5V6z" fill="#EDEDEA"/>
   <!-- V -->
-  <path d="M15.5 6l4 12.5L23.5 6h3L20.5 26h-2.5L12 6z" fill="url(#letterV)"/>
+  <path d="M15.5 6l4 12.5L23.5 6h3L20.5 26h-2.5L12 6z" fill="#EDEDEA"/>
 </svg>

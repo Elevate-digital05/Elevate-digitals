@@ -1,0 +1,17 @@
+/* Elevate Digitals — concrete and hi-vis.
+   Single source of truth for colour. Every page links this file; nothing
+   below it should carry a literal colour value.
+
+   Hard rule: hi-vis only ever carries ink text on top of it. Never light
+   text on hi-vis, never hi-vis as a page or section background. One or two
+   hi-vis elements per screen. */
+
+:root {
+  --concrete:      #EDEDEA;  /* page background */
+  --concrete-dark: #D8D8D3;  /* borders, dividers, card edges */
+  --surface:       #FFFFFF;  /* raised cards on concrete */
+  --ink:           #1A1A18;  /* headings and body */
+  --grey:          #56585C;  /* secondary text */
+  --hivis:         #C8F31D;  /* accent — buttons, links, active states */
+  --hivis-dark:    #A8CE12;  /* accent hover/active only */
+}
