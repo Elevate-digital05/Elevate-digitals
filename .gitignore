@@ -1,0 +1,5 @@
+# Secrets live here locally and never in the repo. Vercel holds the real ones.
+.env
+.env.local
+.DS_Store
+node_modules/

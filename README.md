@@ -34,11 +34,13 @@ PAYSTACK_PLAN_PRO_CARE        PLN_...
 PAYSTACK_PLAN_PREMIUM_CARE    PLN_...
 ```
 
-The four plan codes come from a one-time script. Run it once against live:
+The four plan codes come from a one-time script. Put the secret key in
+`.env.local` (gitignored) so it stays out of your shell history:
 
 ```
-PAYSTACK_SECRET_KEY=sk_live_... node setup-paystack-plans.mjs
-PAYSTACK_SECRET_KEY=sk_live_... node setup-paystack-plans.mjs --list   # what already exists
+echo 'PAYSTACK_SECRET_KEY=sk_live_...' > .env.local
+node setup-paystack-plans.mjs --list   # what already exists
+node setup-paystack-plans.mjs          # create the four plans
 ```
 
 It creates four monthly ZAR plans and prints the env lines. Running it twice

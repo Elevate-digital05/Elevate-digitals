@@ -1,18 +1,22 @@
 // One-time setup: creates the four monthly retainer plans on your Paystack
 // account and prints the env vars to paste into Vercel.
 //
-// Run it once, against live:
-//   PAYSTACK_SECRET_KEY=sk_live_... node setup-paystack-plans.mjs
+// Put your secret key in .env.local (gitignored) so it never lands in your
+// shell history or a screen share:
+//   echo 'PAYSTACK_SECRET_KEY=sk_live_...' > .env.local
+//   node setup-paystack-plans.mjs --list   # what already exists
+//   node setup-paystack-plans.mjs          # create the four plans
 //
 // Running it twice creates duplicate plans — Paystack does not dedupe by name.
-// Pass --list first to see what already exists.
 import { RETAINER_PLANS } from './lib/pricing.js';
 import { createPlan } from './lib/paystack.js';
+
+try { process.loadEnvFile('.env.local'); } catch { /* fall back to the environment */ }
 
 const key = process.env.PAYSTACK_SECRET_KEY;
 if (!key) {
   console.error('PAYSTACK_SECRET_KEY is not set.\n' +
-    'Run: PAYSTACK_SECRET_KEY=sk_live_... node setup-paystack-plans.mjs');
+    "Put it in .env.local:  echo 'PAYSTACK_SECRET_KEY=sk_live_...' > .env.local");
   process.exit(1);
 }
 console.log(`Using ${key.startsWith('sk_live') ? 'LIVE' : 'TEST'} key\n`);
@@ -22,6 +26,10 @@ if (process.argv.includes('--list')) {
     headers: { Authorization: `Bearer ${key}` }
   });
   const body = await res.json();
+  if (!res.ok || !body.status) {
+    console.error(`Paystack rejected the request: ${body.message || res.status}`);
+    process.exit(1);
+  }
   const plans = (body.data || []);
   if (!plans.length) console.log('No plans on this account yet.');
   for (const p of plans) {
