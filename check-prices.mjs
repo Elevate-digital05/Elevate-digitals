@@ -4,13 +4,14 @@
 // 2025 prices and the current ones. This fails loudly instead.
 // Run: node check-prices.mjs
 import { readFileSync } from 'node:fs';
-import { PACKAGES_ZAR, RETAINERS_ZAR, VALID_DEPOSIT_AMOUNTS_ZAR, RETAINER_PLANS } from './lib/pricing.js';
+import { PACKAGES_ZAR, RETAINERS_ZAR, VALID_DEPOSIT_AMOUNTS_ZAR, RETAINER_PLANS, NON_SUBSCRIBABLE_RETAINERS_ZAR } from './lib/pricing.js';
 
 const html = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
 
 const pull = (re) => [...html.matchAll(re)].map(m => parseInt(m[1], 10));
 const packages = [...new Set(pull(/class="pay-plan-item[^"]*"[^>]*data-price="(\d+)"/g))];
 const retainers = [...new Set(pull(/class="pay-addon-toggle[^"]*"[^>]*data-price="(\d+)"/g))];
+const subscribable = RETAINERS_ZAR.filter(r => !NON_SUBSCRIBABLE_RETAINERS_ZAR.includes(r));
 
 let bad = 0;
 const compare = (name, found, expected) => {
@@ -22,8 +23,14 @@ const compare = (name, found, expected) => {
 };
 
 compare('packages', packages, PACKAGES_ZAR);
-compare('retainers', retainers, RETAINERS_ZAR);
-compare('retainer plans', RETAINERS_ZAR, Object.values(RETAINER_PLANS).map(p => p.zar));
+// only the fixed-price retainers are toggles on the pay page
+compare('subscribable retainers', retainers, subscribable);
+compare('retainer plans', subscribable, Object.values(RETAINER_PLANS).map(p => p.zar));
+for (const zar of NON_SUBSCRIBABLE_RETAINERS_ZAR) {
+  if (Object.values(RETAINER_PLANS).some(p => p.zar === zar)) {
+    console.error(`FAIL: R${zar} is negotiated but has a fixed subscription plan`); bad++;
+  } else console.log(`ok R${zar} retainer is not auto-billed`);
+}
 
 // The deposit is 50% of the package alone. A retainer must never change it —
 // that was the bug that billed half a month once and never recurred.

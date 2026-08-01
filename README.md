@@ -31,8 +31,11 @@ PAYSTACK_SECRET_KEY           sk_live_...
 PAYSTACK_PLAN_STARTER_CARE    PLN_...
 PAYSTACK_PLAN_BUSINESS_CARE   PLN_...
 PAYSTACK_PLAN_PRO_CARE        PLN_...
-PAYSTACK_PLAN_PREMIUM_CARE    PLN_...
 ```
+
+Premium Care has no plan on purpose: it is priced "from R3,500" and settled in
+consultation, so a fixed monthly plan would bill the wrong amount. The pay page
+shows it as a note, not a toggle. Set those subscriptions up by hand.
 
 The four plan codes come from a one-time script. Put the secret key in
 `.env.local` (gitignored) so it stays out of your shell history:
@@ -43,7 +46,7 @@ node setup-paystack-plans.mjs --list   # what already exists
 node setup-paystack-plans.mjs          # create the four plans
 ```
 
-It creates four monthly ZAR plans and prints the env lines. Running it twice
+It creates three monthly ZAR plans and prints the env lines. Running it twice
 creates duplicates — Paystack does not dedupe by name, so check `--list` first.
 
 Until those four variables are set, `start-retainer` returns "Retainer plans are

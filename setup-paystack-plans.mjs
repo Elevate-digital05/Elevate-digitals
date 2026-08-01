@@ -1,11 +1,11 @@
-// One-time setup: creates the four monthly retainer plans on your Paystack
+// One-time setup: creates the fixed-price monthly retainer plans on your Paystack
 // account and prints the env vars to paste into Vercel.
 //
 // Put your secret key in .env.local (gitignored) so it never lands in your
 // shell history or a screen share:
 //   echo 'PAYSTACK_SECRET_KEY=sk_live_...' > .env.local
 //   node setup-paystack-plans.mjs --list   # what already exists
-//   node setup-paystack-plans.mjs          # create the four plans
+//   node setup-paystack-plans.mjs          # create the plans
 //
 // Running it twice creates duplicate plans — Paystack does not dedupe by name.
 import { RETAINER_PLANS } from './lib/pricing.js';

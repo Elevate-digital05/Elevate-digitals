@@ -573,6 +573,8 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(32px,4.4vw,
 .pay-plan-features span::before { content:''; display:inline-block; width:10px; height:10px; margin-right:5px; vertical-align:-1px; background:var(--ink); -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C8F31D'/%3E%3Cg transform='scale(0.65) translate(6,6)' fill='%231A1A18'%3E%3Cpath d='M6 8v24h12v-4H10.5v-6H16v-4h-5.5v-6H18V8z'/%3E%3Cpath d='M20 8l5.5 16L31 8h3.5L27 32h-3L16.5 8z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C8F31D'/%3E%3Cg transform='scale(0.65) translate(6,6)' fill='%231A1A18'%3E%3Cpath d='M6 8v24h12v-4H10.5v-6H16v-4h-5.5v-6H18V8z'/%3E%3Cpath d='M20 8l5.5 16L31 8h3.5L27 32h-3L16.5 8z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat; }
 .pay-plan-price { font-family:'Archivo',sans-serif; font-size:24px; font-weight:600; color:var(--ink); white-space: nowrap; margin-left: 20px; }
 .pay-addon-list { display: flex; flex-direction: column; gap: 10px; }
+.pay-addon-note { display: flex; background: var(--concrete); border: 1px dashed var(--concrete-dark); border-radius: 20px; padding: 18px 20px; margin-top: 10px; }
+.pay-addon-note .pay-addon-title { color: var(--grey); }
 .pay-addon-toggle { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--concrete-dark); border-radius: 20px; padding: 18px 20px; cursor: pointer; transition: all 0.3s; }
 .pay-addon-toggle:hover { border-color: var(--concrete-dark); transform: translateY(-2px); }
 .pay-addon-toggle.selected { background: var(--surface); border-color: var(--ink); }
@@ -1037,7 +1039,7 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R799<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
-          <div class="p-retainer-desc">Hosting, backups &amp; minor updates</div>
+          <div class="p-retainer-desc">Hosting, backups &amp; 1hr content updates</div>
         </div>
         <button class="btn-p" style="margin-top:18px;" onclick="waEnquire('Starter package')" data-i18n="btn_getstarted">Get Started</button>
       </div>
@@ -1045,7 +1047,7 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <div class="pop-tag">Recommended</div>
         <div class="p-name" data-i18n="pkg2_name">Business</div><div class="p-amount" data-price="18500">R18,500</div><div class="p-period" data-i18n="pkg2_period">once-off · 6–8 pages</div>
         <p class="p-best-for" data-i18n="pkg2_best">Best for: Growing businesses ready to dominate their market</p>
-        <ul class="p-feats"><li>Everything in Starter</li><li>6–8 pages</li><li>Copywriting for 3 pages<span class="p-feat-new">New</span></li><li>Full on-page SEO</li><li>Google Maps + Analytics</li><li>Speed &amp; Core Web Vitals optimisation<span class="p-feat-new">New</span></li><li>Priority support</li><li>2 rounds of revisions</li></ul>
+        <ul class="p-feats"><li>Everything in Starter</li><li>6–8 pages</li><li>Copywriting for 3 pages<span class="p-feat-new">New</span></li><li>Full on-page SEO</li><li>Google Maps + Analytics</li><li>Speed &amp; Core Web Vitals optimisation<span class="p-feat-new">New</span></li><li>Priority support — same-day reply on weekdays</li><li>2 rounds of revisions</li></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R1,299<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1082,10 +1084,10 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
       <h2 class="sec-h reveal-section" data-i18n-html="maint_h2">Monthly <span class="hl">Retainer Plans</span></h2>
       <p class="sec-sub reveal-section" data-i18n="maint_sub">Each package has a matching monthly retainer to keep your site running, ranking and updated after launch.</p>
       <div class="maint-grid">
-        <div class="m-card reveal-card"><div class="m-name">Starter Care</div><div class="m-price" data-price="799">R799<span style="font-size:14px;color:var(--grey);"> /mo</span></div><div class="m-tier-label">Pairs with Starter</div><ul class="p-feats"><li>Hosting included</li><li>Weekly backups</li><li>Minor content updates</li><li>Security &amp; SSL monitoring</li></ul><button class="btn-p" onclick="waEnquire('Starter Care retainer')">Add to Plan</button></div>
-        <div class="m-card rec reveal-card"><div class="pop-tag">Recommended</div><div class="m-name">Business Care</div><div class="m-price" data-price="1299">R1,299<span style="font-size:14px;color:var(--grey);"> /mo</span></div><div class="m-tier-label">Pairs with Business</div><ul class="p-feats"><li>Everything in Starter Care</li><li>Monthly SEO report</li><li>Content updates (2hr)</li><li>Priority support</li></ul><button class="btn-p pop-btn" onclick="waEnquire('Business Care retainer')">Add to Plan</button></div>
+        <div class="m-card reveal-card"><div class="m-name">Starter Care</div><div class="m-price" data-price="799">R799<span style="font-size:14px;color:var(--grey);"> /mo</span></div><div class="m-tier-label">Pairs with Starter</div><ul class="p-feats"><li>Hosting included</li><li>Weekly backups</li><li>Content updates (1hr)</li><li>Security &amp; SSL monitoring</li></ul><button class="btn-p" onclick="waEnquire('Starter Care retainer')">Add to Plan</button></div>
+        <div class="m-card rec reveal-card"><div class="pop-tag">Recommended</div><div class="m-name">Business Care</div><div class="m-price" data-price="1299">R1,299<span style="font-size:14px;color:var(--grey);"> /mo</span></div><div class="m-tier-label">Pairs with Business</div><ul class="p-feats"><li>Everything in Starter Care</li><li>Monthly SEO report</li><li>Content updates (2hr)</li><li>Priority support — same-day reply on weekdays</li></ul><button class="btn-p pop-btn" onclick="waEnquire('Business Care retainer')">Add to Plan</button></div>
         <div class="m-card reveal-card"><div class="m-name">Pro Care</div><div class="m-price" data-price="1999">R1,999<span style="font-size:14px;color:var(--grey);"> /mo</span></div><div class="m-tier-label">Pairs with Pro</div><ul class="p-feats"><li>Everything in Business Care</li><li>Store / booking support</li><li>SEO monitoring &amp; reporting</li><li>Content updates (4hr)</li></ul><button class="btn-p" onclick="waEnquire('Pro Care retainer')">Add to Plan</button></div>
-        <div class="m-card reveal-card"><div class="m-name">Premium Care</div><div class="m-price" data-price="3500">R3,500<span style="font-size:14px;color:var(--grey);">+ /mo</span></div><div class="m-tier-label">Pairs with Premium</div><ul class="p-feats"><li>Fully managed service</li><li>Agreed response times in writing</li><li>Direct technical contact</li><li>Strategy &amp; review calls</li></ul><button class="btn-p" onclick="showPage('contact')">Contact Us</button></div>
+        <div class="m-card reveal-card"><div class="m-name">Premium Care</div><div class="m-price" data-price="3500">R3,500<span style="font-size:14px;color:var(--grey);">+ /mo</span></div><div class="m-tier-label">Pairs with Premium</div><ul class="p-feats"><li>Everything in Pro Care</li><li>Fully managed service</li><li>Agreed response times in writing</li><li>Direct technical contact</li><li>Strategy &amp; review calls</li></ul><button class="btn-p" onclick="showPage('contact')">Contact Us</button></div>
       </div>
     </div>
     <div class="cta-banner">
@@ -1127,20 +1129,19 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <div class="pay-section-h reveal-section" style="margin-top:40px;">Add Monthly Retainer</div>
         <div class="pay-addon-list">
           <div class="pay-addon-toggle rec" data-plan="Starter Care" data-pairs="Starter" data-price="799" onclick="toggleMaintenance(this)">
-            <div class="pay-addon-info"><div class="pay-addon-title">Starter Care <span class="pay-addon-tag">R799/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Hosting · Weekly backups · Minor content updates · Pairs with Starter</div></div>
+            <div class="pay-addon-info"><div class="pay-addon-title">Starter Care <span class="pay-addon-tag">R799/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Hosting · Weekly backups · Content updates (1hr) · Pairs with Starter</div></div>
             <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           </div>
           <div class="pay-addon-toggle" data-plan="Business Care" data-pairs="Business" data-price="1299" onclick="toggleMaintenance(this)">
-            <div class="pay-addon-info"><div class="pay-addon-title">Business Care <span class="pay-addon-tag">R1,299/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Everything in Starter Care + Monthly SEO report · Content updates (2hr) · Pairs with Business</div></div>
+            <div class="pay-addon-info"><div class="pay-addon-title">Business Care <span class="pay-addon-tag">R1,299/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Everything in Starter Care + Monthly SEO report · Content updates (2hr) · Same-day replies · Pairs with Business</div></div>
             <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           </div>
           <div class="pay-addon-toggle" data-plan="Pro Care" data-pairs="Pro" data-price="1999" onclick="toggleMaintenance(this)">
             <div class="pay-addon-info"><div class="pay-addon-title">Pro Care <span class="pay-addon-tag">R1,999/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Everything in Business Care + Store / booking support · SEO monitoring · Pairs with Pro</div></div>
             <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           </div>
-          <div class="pay-addon-toggle" data-plan="Premium Care" data-pairs="Premium" data-price="3500" onclick="toggleMaintenance(this)">
-            <div class="pay-addon-info"><div class="pay-addon-title">Premium Care <span class="pay-addon-tag">from R3,500/mo</span><span class="pay-addon-rec">Recommended for you</span></div><div class="pay-addon-desc">Fully managed · Agreed response times · Direct technical contact · Pairs with Premium (final price agreed in consultation)</div></div>
-            <div class="pay-addon-check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <div class="pay-addon-note" data-plan="Premium Care">
+            <div class="pay-addon-info"><div class="pay-addon-title">Premium Care <span class="pay-addon-tag">from R3,500/mo</span></div><div class="pay-addon-desc">Fully managed · Agreed response times · Direct technical contact · Pairs with Premium. The price is agreed in consultation, so we set this one up by hand after launch rather than billing it automatically.</div></div>
           </div>
         </div>
       </div>
