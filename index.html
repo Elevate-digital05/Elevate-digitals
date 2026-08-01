@@ -15,15 +15,15 @@
 <meta name="ICBM" content="-33.9249, 18.4241">
 <meta name="theme-color" content="#EDEDEA">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="alternate icon" type="image/png" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate icon" type="image/png" href="/brand/favicon-180.png">
+<link rel="apple-touch-icon" href="/brand/favicon-180.png">
 <link rel="canonical" href="https://elevatedigitals.co.za/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_ZA">
 <meta property="og:url" content="https://elevatedigitals.co.za/">
 <meta property="og:title" content="Elevate Digitals | Web Design South Africa">
 <meta property="og:description" content="Websites for South African trades and service businesses. Fast, mobile-first, built to bring in enquiries. Packages from R8,500 — see your first concept free.">
-<meta property="og:image" content="https://elevatedigitals.co.za/og-image.jpg">
+<meta property="og:image" content="https://elevatedigitals.co.za/og-image-1200x630.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Elevate Digitals - Web Design South Africa">
@@ -32,7 +32,7 @@
 <meta name="twitter:site" content="@ElevateDigitals">
 <meta name="twitter:title" content="Elevate Digitals | Web Design South Africa">
 <meta name="twitter:description" content="Websites for South African trades and service businesses. Fast, mobile-first, built to bring in enquiries. From R8,500.">
-<meta name="twitter:image" content="https://elevatedigitals.co.za/og-image.jpg">
+<meta name="twitter:image" content="https://elevatedigitals.co.za/og-image-1200x630.png">
 <link rel="alternate" hreflang="en" href="https://elevatedigitals.co.za/">
 <link rel="alternate" hreflang="x-default" href="https://elevatedigitals.co.za/">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://elevatedigitals.co.za/sitemap.xml">
@@ -49,7 +49,7 @@
       "telephone": "+27-65-085-8437",
       "email": "elevatedigitalwebs@gmail.com",
       "priceRange": "$$",
-      "image": "https://elevatedigitals.co.za/og-image.jpg",
+      "image": "https://elevatedigitals.co.za/og-image-1200x630.png",
       "logo": "https://elevatedigitals.co.za/logo.svg",
       "address": {
         "@type": "PostalAddress",
@@ -299,7 +299,6 @@
 }
 </script>
 <title>Elevate Digitals | Web Design South Africa</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C8F31D'/%3E%3Cg transform='scale(0.65) translate(6,6)' fill='%231A1A18'%3E%3Cpath d='M6 8v24h12v-4H10.5v-6H16v-4h-5.5v-6H18V8z'/%3E%3Cpath d='M20 8l5.5 16L31 8h3.5L27 32h-3L16.5 8z'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap">
@@ -382,25 +381,10 @@ nav {
 .nav-actions { display: flex; align-items: center; gap: 12px; }
 @keyframes slideDown { from{transform:translateY(-110%);opacity:0;} to{transform:translateY(0);opacity:1;} }
 
-.logo { display:flex; align-items:center; gap:14px; text-decoration:none; cursor:pointer; }
-.logo-icon {
-  background: var(--ink);
-  color: var(--concrete);
-  width:40px; height:40px;
-  color:var(--ink);
-  border-radius: 10px;
-  display:flex; align-items:center; justify-content:center;
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-  position: relative; overflow: hidden;
-}
-@keyframes logoShine { 0%, 100% { transform: translateX(-100%) rotate(45deg); } 50% { transform: translateX(100%) rotate(45deg); } }
-.logo-icon svg { width: 30px; height: 30px; }
-.logo:hover .logo-icon {
-  background: var(--ink);
-  color: var(--concrete); transform: translateY(-2px); }
-.logo-text { font-family:'Archivo',sans-serif; font-size:16px; font-weight:600; letter-spacing:0.04em; line-height:1.2; color:var(--ink); }
-.logo-text span { display:block; font-size:9px; font-weight:500; letter-spacing:0.18em; color:var(--ink); margin-top:2px; }
-
+.logo { display:flex; align-items:center; text-decoration:none; cursor:pointer; }
+.logo-lockup { height:34px; width:auto; display:block; transition:opacity 0.2s; }
+.logo:hover .logo-lockup { opacity:0.75; }
+footer .logo-lockup { height:38px; }
 .nav-links { display:flex; gap:28px; list-style:none; }
 .nav-links a { color:var(--grey); text-decoration:none; font-size:14px; transition:color 0.2s; cursor:pointer; position:relative; padding-bottom:2px; }
 .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: var(--hivis); transform:scaleX(0); transform-origin:left; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
@@ -699,20 +683,20 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(28px,5.5vw,
 .cta-inner p { font-size:15px; color:var(--grey); margin-bottom:32px; line-height:1.75; }
 
 /* ── FOOTER ── */
-footer { position:relative; z-index:1; border-top:1px solid var(--concrete-dark); padding:40px 32px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; max-width:960px; margin:0 auto; }
-.foot-desc { font-size:13px; color:var(--grey); line-height:1.7; max-width:220px; margin-bottom:16px; }
-.foot-contact { font-size:13px; color:var(--grey); line-height:1.9; }
-.foot-contact a { color:var(--ink); text-decoration:none; }
+footer { position:relative; z-index:1; background:var(--ink); color:var(--concrete); border-top:1px solid var(--ink); padding:40px max(32px, calc((100% - 960px) / 2)); display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; }
+.foot-desc { font-size:13px; color:var(--concrete-dark); line-height:1.7; max-width:220px; margin-bottom:16px; }
+.foot-contact { font-size:13px; color:var(--concrete-dark); line-height:1.9; }
+.foot-contact a { color:var(--hivis); text-decoration:none; }
 .foot-contact a:hover { text-decoration:underline; }
-.foot-h { font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); margin-bottom:14px; }
+.foot-h { font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--concrete); margin-bottom:14px; }
 .foot-links { list-style:none; }
 .foot-links li { margin-bottom:8px; }
-.foot-links a { font-size:13px; color:var(--grey); text-decoration:none; cursor:pointer; transition:color 0.2s, padding-left 0.2s; display:block; }
-.foot-links a:hover { color:var(--ink); padding-left:6px; }
-.foot-bottom { position:relative; z-index:1; border-top:1px solid var(--concrete-dark); padding:20px 32px; max-width:960px; margin:0 auto; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:12px; text-align:center; }
-.foot-bottom p { font-size:12px; color:var(--grey); }
-.foot-bottom p a { color:var(--grey); text-decoration:underline; transition:color 0.2s; }
-.foot-bottom p a:hover { color:var(--ink); }
+.foot-links a { font-size:13px; color:var(--concrete-dark); text-decoration:none; cursor:pointer; transition:color 0.2s, padding-left 0.2s; display:block; }
+.foot-links a:hover { color:var(--hivis); padding-left:6px; }
+.foot-bottom { position:relative; z-index:1; background:var(--ink); border-top:1px solid var(--grey); padding:20px 32px; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:12px; text-align:center; }
+.foot-bottom p { font-size:12px; color:var(--concrete-dark); }
+.foot-bottom p a { color:var(--hivis); text-decoration:underline; transition:color 0.2s; }
+.foot-bottom p a:hover { color:var(--concrete); }
 
 /* ── WHATSAPP ── */
 .wa-btn { position:fixed; bottom:calc(28px + env(safe-area-inset-bottom)); right:calc(28px + env(safe-area-inset-right)); z-index:300; width:56px; height:56px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 0.3s; text-decoration:none; animation: fadeUp 1s 1s both; }
@@ -829,11 +813,11 @@ footer { position:relative; z-index:1; border-top:1px solid var(--concrete-dark)
 @keyframes fadeUp { from{opacity:0;transform:translateY(32px);} to{opacity:1;transform:translateY(0);} }
 
 /* links: ink text, hi-vis underline */
-.info-val a, .foot-links a, article a, .sec-sub a, .pay-sub a {
+.info-val a, article a, .sec-sub a, .pay-sub a {
   color: var(--ink); text-decoration: underline; text-decoration-color: var(--hivis);
   text-decoration-thickness: 2px; text-underline-offset: 3px;
 }
-.info-val a:hover, .foot-links a:hover, article a:hover, .sec-sub a:hover, .pay-sub a:hover {
+.info-val a:hover, article a:hover, .sec-sub a:hover, .pay-sub a:hover {
   text-decoration-thickness: 4px;
 }
 </style>
@@ -868,8 +852,7 @@ footer { position:relative; z-index:1; border-top:1px solid var(--concrete-dark)
 <header>
 <nav role="navigation" aria-label="Main navigation">
   <a href="/" class="logo" onclick="event.preventDefault(); showPage('home');" aria-label="Elevate Digitals - Go to homepage">
-    <div class="logo-icon" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M6 8v24h12v-4H10.5v-6H16v-4h-5.5v-6H18V8z"/><path d="M20 8l5.5 16L31 8h3.5L27 32h-3L16.5 8z"/></svg></div>
-    <div class="logo-text" aria-hidden="true">ELEVATE<span>DIGITALS</span></div>
+    <img class="logo-lockup" src="/brand/logo-horizontal-ink.svg" alt="" width="274" height="62">
   </a>
   <ul class="nav-links">
     <li><a href="#home" onclick="showPage('home')" class="active" id="nav-home" data-i18n="nav_home">Home</a></li>
@@ -1353,12 +1336,9 @@ footer { position:relative; z-index:1; border-top:1px solid var(--concrete-dark)
 <!-- FOOTER -->
 <footer>
   <div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-      <div class="logo-icon"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M6 8v24h12v-4H10.5v-6H16v-4h-5.5v-6H18V8z"/><path d="M20 8l5.5 16L31 8h3.5L27 32h-3L16.5 8z"/></svg></div>
-      <div class="logo-text">ELEVATE<span>DIGITALS</span></div>
-    </div>
+    <img class="logo-lockup" src="/brand/logo-horizontal-concrete.svg" alt="Elevate Digitals" width="274" height="62" style="margin-bottom:12px;">
     <p class="foot-desc" data-i18n-html="footer_desc">Modern web design for South African businesses that want to stand out and grow online. Packages from <span data-price="8500">R8,500</span>.</p>
-    <p class="foot-contact"><a href="mailto:elevatedigitalwebs@gmail.com">elevatedigitalwebs@gmail.com</a><br>+27 65 085 8437<br>Cape Town, South Africa<br><span style="color:var(--grey);">Mon–Fri 7am–7pm · Sat 12pm–5pm SAST</span></p>
+    <p class="foot-contact"><a href="mailto:elevatedigitalwebs@gmail.com">elevatedigitalwebs@gmail.com</a><br>+27 65 085 8437<br>Cape Town, South Africa<br><span style="color:var(--concrete-dark);">Mon–Fri 7am–7pm · Sat 12pm–5pm SAST</span></p>
   </div>
   <div>
     <div class="foot-h" data-i18n="footer_company">Company</div>
