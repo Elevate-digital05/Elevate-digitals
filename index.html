@@ -599,6 +599,9 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(32px,4.4vw,
 .pay-summary-note { display: flex; align-items: center; gap: 8px; margin-top: 20px; padding: 12px; background: var(--concrete-dark); border-radius: 10px; font-size: 12px; color: var(--grey); }
 .btn-pay-full { width: 100%; padding: 16px; margin-top: 20px; border-radius: 50px; background: var(--hivis); border: none; color: var(--ink); font-family: 'Archivo', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
 .btn-pay-full:hover { opacity: 0.9; transform: translateY(-2px); }
+.retainer-consent { display:flex; gap:10px; align-items:flex-start; margin-top:16px; padding:14px 16px; background:var(--concrete); border-radius:14px; font-size:12px; line-height:1.6; color:var(--grey); cursor:pointer; }
+.retainer-consent input { margin-top:2px; flex-shrink:0; width:16px; height:16px; accent-color:var(--ink); }
+.retainer-consent strong { color:var(--ink); }
 .pay-accepted-cards { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 11px; color: var(--grey); }
 .pay-card-icons { display: flex; gap: 6px; }
 .pay-card-icon { padding: 4px 8px; background: var(--surface); border: 1px solid var(--concrete-dark); border-radius: 4px; font-size: 10px; font-weight: 600; }
@@ -1169,12 +1172,16 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
           <div class="pay-type-label" id="payTypeLabel">One-time Payment</div>
           <div class="pay-summary-rows">
             <div class="pay-summary-row"><span>Website Package</span><span id="paySumPackage" data-price="8500">R8,500</span></div>
-            <div class="pay-summary-row" id="payMaintRow" style="display:none;"><span>+ Maintenance</span><span id="paySumMaint" data-price="0">R0</span></div>
             <div class="pay-summary-row"><span>Total Price</span><span id="paySumTotal" data-price="8500">R8,500</span></div>
             <div class="pay-summary-row"><span>Deposit (50%)</span><span id="paySumDeposit" data-price="4250">R4,250</span></div>
-            <div class="pay-summary-row balance"><span>Balance Due</span><span id="paySumBalance" data-price="4250">R4,250</span></div>
+            <div class="pay-summary-row balance"><span>Pay today (deposit)</span><span id="paySumBalance" data-price="4250">R4,250</span></div>
+            <div class="pay-summary-row" id="payMaintRow" style="display:none;"><span>Then monthly, from launch</span><span id="paySumMaint" data-price="0">R0</span></div>
           </div>
-          <div class="pay-summary-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Secure payment · Monthly maintenance billed on purchase date</div>
+          <label class="retainer-consent" id="retainerConsent" style="display:none;">
+            <input type="checkbox" id="retainerAgree">
+            <span>I authorise Elevate Digitals to charge this card <strong id="retainerAmount">R0</strong> a month for <strong id="retainerName">the retainer</strong>, with the first debit 30 days from today. Cancel any time with 30 days' notice.</span>
+          </label>
+          <div class="pay-summary-note"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Secure payment · The balance is due before launch</div>
           <div class="pay-accepted-cards"><span>Accepted:</span><div class="pay-card-icons"><span class="pay-card-icon">VISA</span><span class="pay-card-icon">MC</span></div></div>
         </div>
         <button class="btn-pay-full" onclick="processPaystackPayment()">Pay Deposit with Card →</button>
@@ -1540,15 +1547,26 @@ function updatePaySummary(){
   const planName=activeItem.dataset.plan;
   const packageZAR=parseInt(activeItem.dataset.price);
   const maintZAR=selectedMaintenance?selectedMaintenance.price:0;
-  const totalZAR=packageZAR+maintZAR;
-  const depositZAR=Math.round(totalZAR*0.5);
-  const balanceZAR=totalZAR-depositZAR;
+  // The retainer is a monthly subscription, not part of the once-off total.
+  const depositZAR=Math.round(packageZAR*0.5);
+  const balanceZAR=packageZAR-depositZAR;
   document.getElementById('paySelectedPlan').textContent=planName;
-  document.getElementById('payTypeLabel').textContent=maintZAR>0?'Package + Maintenance':'One-time Payment';
+  document.getElementById('payTypeLabel').textContent=maintZAR>0?'Deposit + monthly retainer':'One-time Payment';
   const set=(id,zar)=>{const el=document.getElementById(id);if(!el)return;el.dataset.price=zar;el.textContent=formatPrice(zar);};
-  set('paySumPackage',packageZAR);set('paySumTotal',totalZAR);set('paySumDeposit',depositZAR);set('paySumBalance',balanceZAR);
+  set('paySumPackage',packageZAR);set('paySumTotal',packageZAR);set('paySumDeposit',depositZAR);set('paySumBalance',balanceZAR);
   const maintRow=document.getElementById('payMaintRow');
-  if(maintZAR>0){maintRow.style.display='flex';set('paySumMaint',maintZAR);}else{maintRow.style.display='none';}
+  const consent=document.getElementById('retainerConsent');
+  if(maintZAR>0){
+    maintRow.style.display='flex';
+    set('paySumMaint',maintZAR);
+    document.getElementById('retainerName').textContent=selectedMaintenance.plan;
+    document.getElementById('retainerAmount').textContent=formatPrice(maintZAR);
+    consent.style.display='flex';
+  } else {
+    maintRow.style.display='none';
+    consent.style.display='none';
+    document.getElementById('retainerAgree').checked=false;
+  }
 }
 
 const PAYSTACK_PUBLIC_KEY = /(^|\.)elevatedigitals\.co\.za$/i.test(location.hostname)
@@ -1583,6 +1601,10 @@ async function processPaystackPayment() {
     alert('Card payment is unavailable right now. Please check your connection and try again.');
     return;
   }
+  if (selectedMaintenance && !document.getElementById('retainerAgree').checked) {
+    alert('Please tick the box authorising the monthly retainer, or deselect it to pay the deposit only.');
+    return;
+  }
   const activeItem = document.querySelector('.pay-plan-item.active');
   const planName   = activeItem ? activeItem.dataset.plan : 'Starter';
   const depositZAR = parseInt(document.getElementById('paySumDeposit').dataset.price, 10);
@@ -1591,7 +1613,7 @@ async function processPaystackPayment() {
     return;
   }
   const maintLabel = selectedMaintenance
-    ? selectedMaintenance.plan + ' (R' + selectedMaintenance.price + '/mo)'
+    ? selectedMaintenance.plan + ' (R' + selectedMaintenance.price + '/mo subscription)'
     : 'None';
   const reference = 'ED-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
 
@@ -1608,7 +1630,7 @@ async function processPaystackPayment() {
     metadata: {
       custom_fields: [
         { display_name: 'Plan',         variable_name: 'plan',         value: planName },
-        { display_name: 'Maintenance',  variable_name: 'maintenance',  value: maintLabel },
+        { display_name: 'Retainer',     variable_name: 'retainer',     value: maintLabel },
         { display_name: 'Business',     variable_name: 'business',     value: document.getElementById('buyerBusiness').value || 'N/A' },
         { display_name: 'Payment Type', variable_name: 'payment_type', value: '50% deposit' }
       ]
@@ -1638,12 +1660,34 @@ async function processPaystackPayment() {
       .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, body: j }; }); })
       .then(function(result) {
         if (result.ok && result.body && result.body.status) {
-          const notify = `Paystack Deposit Verified\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
-          renderResult(
-            'Payment verified! Reference: ' + result.body.reference + '. We will be in touch shortly.',
-            notify,
-            'Send confirmation via WhatsApp →'
-          );
+          const done = function (retainerLine) {
+            const notify = `Paystack Deposit Verified\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nRetainer: ${retainerLine}\nDeposit: R${depositZAR}\nReference: ${tx.reference}`;
+            renderResult(
+              'Payment verified! Reference: ' + result.body.reference + '. We will be in touch shortly.',
+              notify,
+              'Send confirmation via WhatsApp →'
+            );
+          };
+          if (!selectedMaintenance) { done('None'); return; }
+          // The deposit leaves a reusable card authorisation behind, so the
+          // subscription needs no second card entry.
+          fetch('/api/start-retainer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ reference: tx.reference, plan: selectedMaintenance.plan })
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (sub) {
+            if (sub && sub.status) {
+              const from = (sub.first_debit || '').slice(0, 10);
+              done(`${sub.plan} R${sub.amount_zar}/mo · ${sub.subscription_code} · first debit ${from}`);
+            } else {
+              done(`${selectedMaintenance.plan} NOT STARTED — ${(sub && sub.message) || 'unknown error'} — set this up by hand`);
+            }
+          })
+          .catch(function () {
+            done(`${selectedMaintenance.plan} NOT STARTED — could not reach the server — set this up by hand`);
+          });
         } else {
           const detail = (result.body && result.body.message) ? result.body.message : 'pending';
           const notify = `Paystack Deposit — Needs Manual Check (${detail})\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nPlan: ${planName}\nMaintenance: ${maintLabel}\nReference: ${tx.reference}`;
