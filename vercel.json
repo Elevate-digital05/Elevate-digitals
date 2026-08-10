@@ -1,11 +1,6 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/blog/website-cost-south-africa-2026", "destination": "/website-cost-south-africa-2026.html" },
-    { "source": "/blog/whatsapp-marketing-website", "destination": "/whatsapp-marketing-website.html" },
-    { "source": "/blog/mobile-first-web-design-south-africa", "destination": "/mobile-first-web-design-south-africa.html" }
-  ],
   "redirects": [
     { "source": "/website-cost-south-africa-2026", "destination": "/blog/website-cost-south-africa-2026", "permanent": true },
     { "source": "/website-cost-south-africa-2026.html", "destination": "/blog/website-cost-south-africa-2026", "permanent": true },
