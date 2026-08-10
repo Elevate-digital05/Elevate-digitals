@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://elevatedigitals.co.za/sitemap.xml
+Sitemap: https://www.elevatedigitals.co.za/sitemap.xml
