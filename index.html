@@ -284,7 +284,7 @@
           "name": "Pro Website",
           "price": "34999",
           "priceCurrency": "ZAR",
-          "description": "Up to 12 pages with e-commerce or booking system, payment gateway, full copywriting, blog setup and dedicated account manager"
+          "description": "Up to 12 pages with e-commerce or booking system, payment gateway, full copywriting, blog setup and direct access to the person building it"
         },
         {
           "@type": "Offer",
@@ -391,6 +391,35 @@ footer .logo-lockup { height:38px; }
 .nav-links a:hover::after, .nav-links a.active::after { transform:scaleX(1); }
 .nav-links a:hover, .nav-links a.active { color:var(--ink); }
 
+/* ── SERVICES DROPDOWN ──
+   Hover and :focus-within, no JS: tabbing into the Services link opens it, so
+   it is reachable by keyboard. The padding-top on .nav-sub bridges the gap
+   under the trigger, otherwise the menu closes as the pointer crosses it. */
+.nav-has-sub { position:relative; }
+.nav-sub {
+  position:absolute; top:100%; left:-14px; z-index:120; min-width:210px;
+  list-style:none; margin:0; padding:10px 0 0;
+  opacity:0; visibility:hidden; transform:translateY(-6px);
+  transition:opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+.nav-has-sub:hover .nav-sub, .nav-has-sub:focus-within .nav-sub { opacity:1; visibility:visible; transform:translateY(0); }
+.nav-sub::before {
+  content:''; position:absolute; inset:10px 0 0; border-radius:14px;
+  background:var(--surface); border:1px solid var(--concrete-dark);
+}
+.nav-sub li { position:relative; }
+.nav-sub a { display:block; padding:9px 16px; font-size:13.5px; color:var(--grey); }
+.nav-sub a::after { display:none; }
+.nav-sub a:hover { color:var(--ink); background:var(--concrete); }
+.nav-sub li:first-child a { border-radius:13px 13px 0 0; }
+.nav-sub-all { border-top:1px solid var(--concrete-dark); margin-top:4px; padding-top:4px; }
+.nav-sub-all a { font-weight:600; color:var(--ink); border-radius:0 0 13px 13px; }
+@media (prefers-reduced-motion:reduce) { .nav-sub { transition:none; } }
+
+/* mobile menu: the same links, indented under Services */
+.mob-sub-group { display:flex; flex-direction:column; gap:6px; margin:-4px 0 4px 14px; }
+.mobile-menu a.mob-sub { font-size:14px; font-weight:500; color:var(--grey); padding:10px 14px; border-radius:10px; }
+
 .btn-nav { background:transparent; color:var(--ink); border:1px solid var(--ink); padding:10px 22px; border-radius:50px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:500; cursor:pointer; transition: transform 0.2s; }
 .btn-nav:hover { background:var(--ink); color:var(--concrete); transform: translateY(-2px); }
 
@@ -485,12 +514,35 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(32px,4.4vw,
 .founder-bio { font-size:14px; line-height:1.7; color:var(--grey); }
 @media (max-width:560px) { .founder { flex-direction:column; text-align:center; gap:16px; padding-bottom:48px; } }
 
+/* ── TRUST STRIP ── */
+.trust-strip { position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:12px 28px; max-width:760px; margin:0 auto 72px; padding:0 24px; }
+.trust-lbl { width:100%; text-align:center; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--grey); }
+.trust-item { display:inline-flex; align-items:center; gap:7px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; color:var(--grey); transition:color 0.3s; }
+.trust-item:hover { color:var(--ink); }
+.trust-item svg { flex-shrink:0; }
+@media (max-width:560px) { .trust-strip { gap:12px 20px; margin-bottom:48px; } .trust-item { font-size:12px; } }
+
+/* ── PATHS ── the self-select router: pick where you are, land on the right page */
+.paths-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+.path-card { display:flex; flex-direction:column; text-align:left; font:inherit; color:inherit; cursor:pointer; background:var(--surface); border:1px solid var(--concrete-dark); border-radius:20px; padding:28px; position:relative; overflow:hidden; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.path-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--hivis); transform:scaleX(0); transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.path-card:hover { transform:translateY(-10px) scale(1.02); border-color:transparent; }
+.path-card:hover::after, .path-card:focus-visible::after { transform:scaleX(1); }
+.path-q { font-size:13px; color:var(--grey); margin-bottom:10px; }
+.path-v { font-family:'Archivo',sans-serif; font-size:32px; font-weight:600; line-height:1; color:var(--ink); margin-bottom:14px; }
+.path-d { font-size:13px; color:var(--grey); line-height:1.65; flex:1; }
+.path-go { font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; color:var(--ink); margin-top:18px; }
+.path-card:hover .path-go { text-decoration:underline; text-underline-offset:3px; }
+
 /* ── SERVICES GRID ── */
 .svc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
-.svc-card { background:var(--surface); border:1px solid var(--concrete-dark); border-radius:20px; padding:28px; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); position:relative; overflow:hidden; cursor:default; }
+.svc-card { display:block; color:inherit; text-decoration:none; background:var(--surface); border:1px solid var(--concrete-dark); border-radius:20px; padding:28px; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); position:relative; overflow:hidden; cursor:default; }
 .svc-card::before { content:''; position:absolute; inset:0; color:var(--ink); opacity:0; transition:opacity 0.35s; }
 .svc-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background: var(--hivis); transform:scaleX(0); transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
 .svc-card:hover { transform:translateY(-10px) scale(1.02); border-color:transparent; }
+a.svc-card { cursor:pointer; }
+.svc-more { display:inline-block; margin-top:16px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:600; color:var(--ink); transition:letter-spacing 0.3s; }
+a.svc-card:hover .svc-more { letter-spacing:0.05em; }
 .svc-card:hover::before { opacity:1; }
 .svc-card:hover::after { transform:scaleX(1); }
 .svc-card:hover .svc-icon { transform:scale(1.18) rotate(-6deg); }
@@ -643,18 +695,16 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(32px,4.4vw,
 
 /* ── BLOG ── */
 .blog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
-.blog-card { background:var(--surface); border:1px solid var(--concrete-dark); border-radius:20px; padding:28px; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); cursor:pointer; position:relative; overflow:hidden; }
+.blog-card { display:block; color:inherit; text-decoration:none; background:var(--surface); border:1px solid var(--concrete-dark); border-radius:20px; padding:28px; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); cursor:pointer; position:relative; overflow:hidden; }
 .blog-card::before { content:''; position:absolute; inset:0; color:var(--ink); opacity:0; transition:opacity 0.35s; }
 .blog-card:hover { transform:translateY(-10px) scale(1.02); border-color:var(--concrete-dark); }
 .blog-card:hover::before { opacity:1; }
 .blog-card:hover .blog-read { letter-spacing:0.05em; color:var(--ink); }
 .blog-tag { display:inline-block; background:var(--concrete-dark); border:1px solid var(--concrete-dark); color:var(--ink); font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:50px; margin-bottom:14px; }
-.blog-tag.coming { background:var(--surface); border-color:var(--concrete-dark); color:var(--grey); }
 .blog-date { font-size:12px; color:var(--grey); margin-bottom:10px; }
 .blog-title { font-family:'Archivo',sans-serif; font-size:17px; font-weight:600; line-height:1.3; margin-bottom:10px; }
 .blog-excerpt { font-size:13px; color:var(--grey); line-height:1.65; margin-bottom:16px; }
 .blog-read { font-size:13px; color:var(--ink); font-weight:500; transition:letter-spacing 0.3s, color 0.3s; text-decoration:none; display:inline-block; }
-.blog-soon { font-size:13px; color:var(--grey); font-style:italic; }
 
 /* ── CONTACT ── */
 .contact-wrap { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
@@ -750,25 +800,6 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
 .curr-symbol { font-size: 14px; color: var(--ink); }
 .lang-dropdown { min-width: 180px; }
 
-/* ── BLOG MODAL ── */
-.blog-modal { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-.blog-modal.open { opacity: 1; pointer-events: all; }
-.blog-modal-bg { position: absolute; inset: 0; background: var(--concrete-dark); }
-.blog-modal-content { position: relative; z-index: 2; max-width: 680px; width: 90%; max-height: 85vh; background: var(--surface); border: 1px solid var(--concrete-dark); border-radius: 24px; padding: 40px; overflow-y: auto; transform: scale(0.9) translateY(20px); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
-.blog-modal.open .blog-modal-content { transform: scale(1) translateY(0); }
-.blog-modal-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: var(--surface); border: 1px solid var(--concrete-dark); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--grey); transition: all 0.3s; }
-.blog-modal-close:hover { background: var(--concrete-dark); border-color: var(--ink); color: var(--ink); }
-.blog-modal-tag { display: inline-block; background: var(--concrete-dark); border: 1px solid var(--concrete-dark); color: var(--ink); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 16px; }
-.blog-modal-title { font-family: 'Archivo', sans-serif; font-size: 28px; font-weight: 600; line-height: 1.2; margin-bottom: 12px; }
-.blog-modal-date { font-size: 13px; color: var(--grey); margin-bottom: 24px; }
-.blog-modal-body { font-size: 15px; line-height: 1.8; color:var(--grey); }
-.blog-modal-body p { margin-bottom: 16px; }
-.blog-modal-body h3 { font-family: 'Archivo', sans-serif; font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: var(--ink); }
-.blog-modal-body ul { margin: 16px 0; padding-left: 20px; }
-.blog-modal-body li { margin-bottom: 8px; color:var(--grey); }
-.blog-modal-cta { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--concrete-dark); }
-.blog-modal-cta p { font-size: 14px; color: var(--grey); margin-bottom: 16px; }
-
 /* ── SCROLL PROGRESS ── */
 .scroll-progress { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); width: 4px; height: 120px; z-index: 150; background:var(--surface); border-radius: 4px; overflow: hidden; opacity: 0; transition: opacity 0.3s; }
 .scroll-progress.visible { opacity: 1; }
@@ -834,22 +865,6 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 </div>
 
-<!-- BLOG MODAL -->
-<div class="blog-modal" id="blogModal">
-  <div class="blog-modal-bg" onclick="closeBlogModal()"></div>
-  <div class="blog-modal-content">
-    <button class="blog-modal-close" onclick="closeBlogModal()">×</button>
-    <div class="blog-modal-tag" id="blogModalTag">Pricing</div>
-    <h2 class="blog-modal-title" id="blogModalTitle">Blog Title</h2>
-    <div class="blog-modal-date" id="blogModalDate">August 2026</div>
-    <div class="blog-modal-body" id="blogModalBody"></div>
-    <div class="blog-modal-cta">
-      <p>Ready to get started with your own website?</p>
-      <button class="btn-primary" onclick="closeBlogModal(); showPage('packages')">View Our Packages →</button>
-    </div>
-  </div>
-</div>
-
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div id="scroll-bg" aria-hidden="true">
@@ -862,7 +877,22 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
   </a>
   <ul class="nav-links">
     <li><a href="#home" onclick="showPage('home')" class="active" id="nav-home" data-i18n="nav_home">Home</a></li>
-    <li><a href="#services" onclick="showPage('services')" id="nav-services" data-i18n="nav_services">Services</a></li>
+    <li class="nav-has-sub">
+      <a href="#services" onclick="showPage('services')" id="nav-services" data-i18n="nav_services" aria-haspopup="true">Services</a>
+      <ul class="nav-sub">
+<!--BUILD:nav-services-->
+      <li><a href="/services/web-design">Web Design</a></li>
+      <li><a href="/services/seo">SEO</a></li>
+      <li><a href="/services/ecommerce">E-Commerce</a></li>
+      <li><a href="/services/maintenance">Maintenance</a></li>
+      <li><a href="/services/booking-systems">Booking Systems</a></li>
+      <li><a href="/services/copywriting">Copywriting</a></li>
+      <li><a href="/services/video-editing">Video Editing</a></li>
+      <li><a href="/services/brand-identity">Brand Identity</a></li>
+<!--/BUILD:nav-services-->
+        <li class="nav-sub-all"><a href="#services" onclick="showPage('services')">All services →</a></li>
+      </ul>
+    </li>
     <li><a href="#packages" onclick="showPage('packages')" id="nav-packages" data-i18n="nav_packages">Packages</a></li>
     <li><a href="#blog" onclick="showPage('blog')" id="nav-blog" data-i18n="nav_blog">Blog</a></li>
     <li><a href="#contact" onclick="showPage('contact')" id="nav-contact" data-i18n="nav_contact">Contact</a></li>
@@ -901,6 +931,18 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
 <div class="mobile-menu" id="mobileMenu" role="menu">
   <a href="#home" onclick="navTo('home')" data-i18n="nav_home">Home</a>
   <a href="#services" onclick="navTo('services')" data-i18n="nav_services">Services</a>
+  <div class="mob-sub-group">
+<!--BUILD:mob-services-->
+    <a class="mob-sub" href="/services/web-design">Web Design</a>
+    <a class="mob-sub" href="/services/seo">SEO</a>
+    <a class="mob-sub" href="/services/ecommerce">E-Commerce</a>
+    <a class="mob-sub" href="/services/maintenance">Maintenance</a>
+    <a class="mob-sub" href="/services/booking-systems">Booking Systems</a>
+    <a class="mob-sub" href="/services/copywriting">Copywriting</a>
+    <a class="mob-sub" href="/services/video-editing">Video Editing</a>
+    <a class="mob-sub" href="/services/brand-identity">Brand Identity</a>
+<!--/BUILD:mob-services-->
+  </div>
   <a href="#packages" onclick="navTo('packages')" data-i18n="nav_packages">Packages</a>
   <a href="#blog" onclick="navTo('blog')" data-i18n="nav_blog">Blog</a>
   <a href="#contact" onclick="navTo('contact')" data-i18n="nav_contact">Contact</a>
@@ -950,6 +992,40 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
     <div class="s-cell"><div class="s-big" data-price="8500">R8,500</div><div class="s-sm" data-i18n="stats_from">Packages From</div></div>
     <div class="s-cell"><div class="s-big">2 wks</div><div class="s-sm" data-i18n="stats_turnaround">Avg Turnaround</div></div>
     <div class="s-cell"><div class="s-big">24h</div><div class="s-sm" data-i18n="stats_support">Support Response</div></div>
+  </div>
+
+  <div class="trust-strip reveal-section">
+    <div class="trust-lbl" data-i18n="trust_lbl">Built to work with</div>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>WhatsApp Business</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Google Business Profile</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>Paystack</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>SSL &amp; Backups</span>
+  </div>
+
+  <div class="sec" style="padding-bottom:0;">
+    <div class="sec-lbl reveal-section" data-i18n="paths_label">Start Here</div>
+    <h2 class="sec-h reveal-section" data-i18n="paths_h2">Build it. Keep it running. Grow it.</h2>
+    <p class="sec-sub reveal-section" data-i18n="paths_sub">Every business is at a different stage. Pick the one that sounds like you and I'll take you straight to it.</p>
+    <div class="paths-grid">
+      <button type="button" class="path-card reveal-card" onclick="showPage('packages')" aria-label="I need a website: see packages">
+        <span class="path-q" data-i18n="path1_q">"I need a website"</span>
+        <span class="path-v" data-i18n="path1_v">Build.</span>
+        <span class="path-d" data-i18n-html="path1_d">A new site designed and built from scratch, or a full redesign of the one you have. From <strong data-price="8500">R8,500</strong>, live in about two weeks.</span>
+        <span class="path-go" data-i18n="path1_go">See packages →</span>
+      </button>
+      <button type="button" class="path-card reveal-card" onclick="showPage('packages','retainers')" aria-label="I already have a site: see care plans">
+        <span class="path-q" data-i18n="path2_q">"I already have a site"</span>
+        <span class="path-v" data-i18n="path2_v">Maintain.</span>
+        <span class="path-d" data-i18n-html="path2_d">Hosting, backups, security and the small content changes, handled every month so it never quietly breaks. From <strong data-price="799">R799</strong> a month.</span>
+        <span class="path-go" data-i18n="path2_go">See care plans →</span>
+      </button>
+      <button type="button" class="path-card reveal-card" onclick="showPage('services')" aria-label="I need more leads: see what's involved">
+        <span class="path-q" data-i18n="path3_q">"I need more leads"</span>
+        <span class="path-v" data-i18n="path3_v">Grow.</span>
+        <span class="path-d" data-i18n="path3_d">SEO, your Google Business Profile and copy that turns the people already finding you into booked jobs.</span>
+        <span class="path-go" data-i18n="path3_go">See what's involved →</span>
+      </button>
+    </div>
   </div>
 
   <div class="sec">
@@ -1005,12 +1081,17 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
     <h2 class="sec-h reveal-section" data-i18n-html="svc_h2">Modern Websites <span class="hl">That Work</span></h2>
     <p class="sec-sub reveal-section" data-i18n="svc_sub">Built to get you found online, and kept running smoothly every month.</p>
     <div class="svc-grid">
-      <div class="svc-card reveal-card"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><div class="svc-name" data-i18n="svc1_name">Website Design & Build</div><div class="svc-desc" data-i18n="svc1_desc">Modern, mobile-friendly websites for businesses that need a new online presence, or a complete refresh.</div><ul class="svc-list"><li>Custom modern design</li><li>Mobile responsive</li><li>Fast & SEO-friendly</li><li>New sites or redesigns</li><li>Contact forms & CTAs</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="svc-name" data-i18n="svc2_name">Monthly Maintenance</div><div class="svc-desc" data-i18n="svc2_desc">Keep your website secure, updated, and running perfectly. We handle the technical side.</div><ul class="svc-list"><li>Security updates</li><li>Performance monitoring</li><li>Content updates</li><li>Uptime guaranteed</li><li>Monthly reports</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><div class="svc-name" data-i18n="svc3_name">Search Engine Optimisation</div><div class="svc-desc" data-i18n="svc3_desc">Get found on Google by the customers who matter. We optimise your site so it ranks higher.</div><ul class="svc-list"><li>Keyword research</li><li>On-page SEO</li><li>Google Business Profile</li><li>Technical SEO audit</li><li>Monthly ranking reports</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div><div class="svc-name" data-i18n="svc4_name">E-Commerce Stores</div><div class="svc-desc" data-i18n="svc4_desc">Sell online with a professional shop that looks great, loads fast, and makes buying easy.</div><ul class="svc-list"><li>Product catalogue</li><li>Secure checkout</li><li>Payment gateway integration</li><li>Inventory management</li><li>Order notifications</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8"/><path d="m15 5 4 4"/><path d="M18.4 2.6a2.17 2.17 0 0 1 3 3L6 21l-4 1 1-4Z"/></svg></div><div class="svc-name" data-i18n="svc5_name">Content & Copywriting</div><div class="svc-desc" data-i18n="svc5_desc">Professional website copy written to convert visitors into customers. Clear, compelling, on-brand.</div><ul class="svc-list"><li>Homepage & about copy</li><li>Service page content</li><li>SEO-optimised writing</li><li>Blog posts</li><li>Proofreading & editing</li></ul></div>
-      <div class="svc-card reveal-card"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></div><div class="svc-name" data-i18n="svc6_name">Booking Systems</div><div class="svc-desc" data-i18n="svc6_desc">Let clients book appointments directly from your website. Perfect for salons, consultants, clinics.</div><ul class="svc-list"><li>Online booking calendar</li><li>Email confirmations</li><li>Service & staff selection</li><li>Mobile friendly</li><li>Custom availability</li></ul></div>
+<!--BUILD:svc-grid-->
+      <a class="svc-card reveal-card" href="/services/web-design"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><div class="svc-name" data-i18n="svc1_name">Website Design &amp; Build</div><div class="svc-desc" data-i18n="svc1_desc">Modern, mobile-friendly websites for businesses that need a new online presence, or a complete refresh.</div><ul class="svc-list"><li>Custom modern design</li><li>Mobile responsive</li><li>Fast &amp; SEO-friendly</li><li>New sites or redesigns</li><li>Contact forms &amp; CTAs</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/seo"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><div class="svc-name" data-i18n="svc3_name">Search Engine Optimisation</div><div class="svc-desc" data-i18n="svc3_desc">Get found on Google by the customers who matter. We optimise your site so it ranks higher.</div><ul class="svc-list"><li>Keyword research</li><li>On-page SEO</li><li>Google Business Profile</li><li>Technical SEO audit</li><li>Monthly ranking reports</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/ecommerce"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div><div class="svc-name" data-i18n="svc4_name">E-Commerce Stores</div><div class="svc-desc" data-i18n="svc4_desc">Sell online with a professional shop that looks great, loads fast, and makes buying easy.</div><ul class="svc-list"><li>Product catalogue</li><li>Secure checkout</li><li>Payment gateway integration</li><li>Inventory management</li><li>Order notifications</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/maintenance"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="svc-name" data-i18n="svc2_name">Monthly Maintenance</div><div class="svc-desc" data-i18n="svc2_desc">Keep your website secure, updated, and running perfectly. We handle the technical side.</div><ul class="svc-list"><li>Hosting included</li><li>Weekly backups</li><li>Security &amp; SSL monitoring</li><li>Content updates</li><li>Monthly reports</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/booking-systems"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></div><div class="svc-name" data-i18n="svc6_name">Booking Systems</div><div class="svc-desc" data-i18n="svc6_desc">Let clients book appointments directly from your website. Perfect for salons, consultants, clinics.</div><ul class="svc-list"><li>Online booking calendar</li><li>Email confirmations</li><li>Service &amp; staff selection</li><li>Custom availability</li><li>Mobile friendly</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/copywriting"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8"/><path d="m15 5 4 4"/><path d="M18.4 2.6a2.17 2.17 0 0 1 3 3L6 21l-4 1 1-4Z"/></svg></div><div class="svc-name" data-i18n="svc5_name">Content &amp; Copywriting</div><div class="svc-desc" data-i18n="svc5_desc">Professional website copy written to convert visitors into customers. Clear, compelling, on-brand.</div><ul class="svc-list"><li>Homepage &amp; about copy</li><li>Service page content</li><li>SEO-optimised writing</li><li>Blog posts</li><li>Proofreading &amp; editing</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/video-editing"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div><div class="svc-name" data-i18n="svc7_name">Video Editing</div><div class="svc-desc" data-i18n="svc7_desc">Turn the footage already on your phone into short, sharp video for your website and social feeds.</div><ul class="svc-list"><li>Social cuts &amp; reels</li><li>Subtitles &amp; captions</li><li>Colour &amp; sound</li><li>Branded intros</li><li>Website-ready exports</li></ul><span class="svc-more">Read more →</span></a>
+      <a class="svc-card reveal-card" href="/services/brand-identity"><div class="svc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg></div><div class="svc-name" data-i18n="svc8_name">Brand Identity</div><div class="svc-desc" data-i18n="svc8_desc">A logo, colours and type that hold together, so your van, your card and your website all look like one business.</div><ul class="svc-list"><li>Logo design</li><li>Colour palette</li><li>Typography</li><li>Usage guidelines</li><li>Vector files you own</li></ul><span class="svc-more">Read more →</span></a>
+<!--/BUILD:svc-grid-->
+    </div>
     </div>
   </div>
   <div class="cta-banner">
@@ -1033,10 +1114,10 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
       <div class="deposit-text" data-i18n-html="assure_text"><strong>See your homepage design before you pay anything.</strong> After a quick call, I'll build your homepage concept free. If you don't want to go ahead after seeing it, you owe nothing.</div>
     </div>
     <div class="price-grid">
-      <div class="p-card reveal-card">
+      <div class="p-card reveal-card" data-plan="Starter">
         <div class="p-name" data-i18n="pkg1_name">Starter</div><div class="p-amount" data-price="8500">R8,500</div><div class="p-period" data-i18n="pkg1_period">once-off · 3–5 pages</div>
         <p class="p-best-for" data-i18n="pkg1_best">Best for: New businesses needing a professional online presence fast</p>
-        <ul class="p-feats"><li>3–5 pages</li><li>Custom brand colours &amp; typography</li><li>Mobile-responsive design</li><li>WhatsApp chat integration</li><li>Professional contact form</li><li>Google Business Profile setup<span class="p-feat-new">New</span></li><li>Basic on-page SEO</li><li>1 round of revisions</li></ul>
+        <ul class="p-feats"></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R799<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1044,11 +1125,11 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         </div>
         <button class="btn-p" style="margin-top:18px;" onclick="waEnquire('Starter package')" data-i18n="btn_getstarted">Get Started</button>
       </div>
-      <div class="p-card pop reveal-card">
+      <div class="p-card pop reveal-card" data-plan="Business">
         <div class="pop-tag">Recommended</div>
         <div class="p-name" data-i18n="pkg2_name">Business</div><div class="p-amount" data-price="18500">R18,500</div><div class="p-period" data-i18n="pkg2_period">once-off · 6–8 pages</div>
         <p class="p-best-for" data-i18n="pkg2_best">Best for: Growing businesses ready to dominate their market</p>
-        <ul class="p-feats"><li>Everything in Starter</li><li>6–8 pages</li><li>Copywriting for 3 pages<span class="p-feat-new">New</span></li><li>Full on-page SEO</li><li>Google Maps + Analytics</li><li>Speed &amp; Core Web Vitals optimisation<span class="p-feat-new">New</span></li><li>Priority support: same-day reply on weekdays</li><li>2 rounds of revisions</li></ul>
+        <ul class="p-feats"></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R1,299<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1056,10 +1137,10 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         </div>
         <button class="btn-p pop-btn" style="margin-top:18px;" onclick="waEnquire('Business package')" data-i18n="btn_getstarted">Get Started</button>
       </div>
-      <div class="p-card reveal-card">
+      <div class="p-card reveal-card" data-plan="Pro">
         <div class="p-name" data-i18n="pkg3_name">Pro</div><div class="p-amount" data-price="34999">R34,999</div><div class="p-period" data-i18n="pkg3_period">once-off · up to 12 pages</div>
         <p class="p-best-for" data-i18n="pkg3_best">Best for: Businesses ready to scale, automate &amp; grow online sales</p>
-        <ul class="p-feats"><li>Everything in Business</li><li>Up to 12 pages</li><li>E-commerce or booking system</li><li>Payment gateway setup<span class="p-feat-new">New</span></li><li>Full copywriting<span class="p-feat-new">New</span></li><li>Blog setup + training</li><li>Direct access to the person building it</li><li>3 rounds of revisions</li></ul>
+        <ul class="p-feats"></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R1,999<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1067,10 +1148,10 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         </div>
         <button class="btn-p" style="margin-top:18px;" onclick="waEnquire('Pro package')" data-i18n="btn_getstarted">Get Started</button>
       </div>
-      <div class="p-card reveal-card" style="border-color:var(--concrete-dark);">
+      <div class="p-card reveal-card" style="border-color:var(--concrete-dark);" data-plan="Premium">
         <div class="p-name" data-i18n="pkg4_name">Premium</div><div class="p-amount" data-price="75000">R75,000<span style="font-size:18px;">+</span></div><div class="p-period" data-i18n="pkg4_period">fully custom · no limits</div>
         <p class="p-best-for" data-i18n="pkg4_best">Best for: Enterprises needing a bespoke digital solution</p>
-        <ul class="p-feats"><li>Discovery &amp; strategy workshop<span class="p-feat-new">New</span></li><li>Unlimited pages &amp; custom functionality</li><li>Custom functionality / API integrations</li><li>Full SEO dominance strategy</li><li>Direct line to the founder throughout</li><li>Priority support, replies within 24h on weekdays</li></ul>
+        <ul class="p-feats"></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">from R3,500<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1080,7 +1161,7 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
       </div>
     </div>
     <div class="deposit-note reveal-section"><div class="deposit-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></div><div class="deposit-text" data-i18n-html="deposit_text"><strong>50% deposit once you approve the concept</strong> • Balance due before launch</div></div>
-    <div style="margin-top:60px;">
+    <div id="retainers" style="margin-top:60px;scroll-margin-top:88px;">
       <div class="sec-lbl reveal-section" data-i18n="maint_label">Add-Ons</div>
       <h2 class="sec-h reveal-section" data-i18n-html="maint_h2">Monthly <span class="hl">Retainer Plans</span></h2>
       <p class="sec-sub reveal-section" data-i18n="maint_sub">Each package has a matching monthly retainer to keep your site running, ranking and updated after launch.</p>
@@ -1111,19 +1192,19 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <div class="pay-section-h reveal-section">Website Packages</div>
         <div class="pay-plan-list">
           <div class="pay-plan-item active" data-plan="Starter" data-price="8500" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Starter</div><div class="pay-plan-desc">3–5 pages · Custom branding · Contact form · Basic SEO · WhatsApp</div><div class="pay-plan-features"><span>Custom Brand Colours</span><span>Mobile Responsive</span><span>Basic On-Page SEO</span><span>WhatsApp Chat</span><span>Google Business Profile</span><span>1 Round of Revisions</span></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Starter</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
             <div class="pay-plan-price" data-price="8500">R8,500</div>
           </div>
           <div class="pay-plan-item" data-plan="Business" data-price="18500" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Business</div><div class="pay-plan-desc">6–8 pages · Full on-page SEO · Copywriting for 3 pages · Maps &amp; Analytics</div><div class="pay-plan-features"><span>Everything in Starter</span><span>Copywriting (3 pages)</span><span>Full On-Page SEO</span><span>Google Maps + Analytics</span><span>Core Web Vitals Optimisation</span><span>Priority Support</span><span>2 Rounds of Revisions</span></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Business</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
             <div class="pay-plan-price" data-price="18500">R18,500</div>
           </div>
           <div class="pay-plan-item" data-plan="Pro" data-price="34999" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Pro</div><div class="pay-plan-desc">Up to 12 pages · E-commerce or booking · Payment gateway · Full copywriting</div><div class="pay-plan-features"><span>Everything in Business</span><span>E-commerce / Booking</span><span>Payment Gateway Setup</span><span>Full Copywriting</span><span>Blog Setup + Training</span><span>Dedicated Account Manager</span><span>3 Rounds of Revisions</span></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Pro</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
             <div class="pay-plan-price" data-price="34999">R34,999</div>
           </div>
           <div class="pay-plan-item" data-plan="Premium" data-price="75000" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Premium</div><div class="pay-plan-desc">Discovery workshop · Unlimited pages · Custom functionality &amp; API integrations · Priority support</div><div class="pay-plan-features"><span>Discovery &amp; Strategy Workshop</span><span>Unlimited Pages</span><span>Custom API Integrations</span><span>Full SEO Dominance</span><span>Direct Line to the Founder</span><span>Priority Support (24h Weekdays)</span></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Premium</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
             <div class="pay-plan-price" data-price="75000">R75,000+</div>
           </div>
         </div>
@@ -1205,43 +1286,28 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
     <h2 class="sec-h reveal-section" data-i18n-html="blog_h2">The <span class="hl">Elevate Blog</span></h2>
     <p class="sec-sub reveal-section" data-i18n="blog_sub">Practical advice to help South African businesses grow online: web design, SEO, and digital marketing tips you can actually use.</p>
     <div class="blog-grid">
-      <!-- CRAWLABLE: each blog card links to a real URL -->
-      <article class="blog-card reveal-card" data-blog="pricing-guide" onclick="openBlog(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBlog(this)">
+      <!-- CRAWLABLE: each card is a real <a> to the real post. These used to be
+           role=button cards opening a modal that carried its own copy of every
+           post, so the same words were on the page twice and the crawler saw
+           neither as a link. -->
+      <a class="blog-card reveal-card" href="/blog/website-cost-south-africa-2026">
         <span class="blog-tag">Pricing</span><div class="blog-date">August 2026</div>
         <div class="blog-title">How Much Does a Website Cost in South Africa? (2026 Guide)</div>
         <div class="blog-excerpt">Prices vary wildly, from R2,000 to R200,000. We break down what you actually get at each price point so you can make the right call for your budget.</div>
         <span class="blog-read">Read more →</span>
-      </article>
-      <article class="blog-card reveal-card" data-blog="whatsapp-marketing" onclick="openBlog(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBlog(this)">
+      </a>
+      <a class="blog-card reveal-card" href="/blog/whatsapp-marketing-website">
         <span class="blog-tag">Marketing</span><div class="blog-date">August 2026</div>
         <div class="blog-title">How to Use WhatsApp to Get More Customers From Your Website</div>
         <div class="blog-excerpt">A WhatsApp button on your site can be the single highest-converting element you add. Here's how to set it up right.</div>
         <span class="blog-read">Read more →</span>
-      </article>
-      <article class="blog-card reveal-card" data-blog="mobile-first" onclick="openBlog(this)" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openBlog(this)">
+      </a>
+      <a class="blog-card reveal-card" href="/blog/mobile-first-web-design-south-africa">
         <span class="blog-tag">Mobile</span><div class="blog-date">August 2026</div>
         <div class="blog-title">Why Mobile-First Web Design Matters More in South Africa Than Anywhere Else</div>
         <div class="blog-excerpt">Over 80% of South African internet users browse on mobile. If your site isn't built for phones first, you're losing most of your potential customers.</div>
         <span class="blog-read">Read more →</span>
-      </article>
-      <article class="blog-card reveal-card" style="opacity:0.55;">
-        <span class="blog-tag coming">Coming Soon</span>
-        <div class="blog-title">Does Your Business Really Need a Website in 2026?</div>
-        <div class="blog-excerpt">Many South African small businesses still rely only on WhatsApp or Facebook. Here's why that's costing you customers.</div>
-        <div class="blog-soon">Coming soon</div>
-      </article>
-      <article class="blog-card reveal-card" style="opacity:0.55;">
-        <span class="blog-tag coming">Coming Soon</span>
-        <div class="blog-title">Why Your Website Isn't Showing on Google (And How to Fix It)</div>
-        <div class="blog-excerpt">Getting a website built is only half the battle. If Google can't find you, neither can your customers.</div>
-        <div class="blog-soon">Coming soon</div>
-      </article>
-      <article class="blog-card reveal-card" style="opacity:0.55;">
-        <span class="blog-tag coming">Coming Soon</span>
-        <div class="blog-title">5 Things Every Good Business Website Must Have</div>
-        <div class="blog-excerpt">These are the five non-negotiables that separate a website that converts from one that doesn't.</div>
-        <div class="blog-soon">Coming soon</div>
-      </article>
+      </a>
     </div>
   </div>
 </section>
@@ -1373,11 +1439,16 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
   <div>
     <div class="foot-h" data-i18n="footer_services">Services</div>
     <ul class="foot-links">
-      <li><a href="#services" onclick="showPage('services')">Website Design</a></li>
-      <li><a href="#services" onclick="showPage('services')">Maintenance</a></li>
-      <li><a href="#services" onclick="showPage('services')">SEO</a></li>
-      <li><a href="#services" onclick="showPage('services')">E-Commerce</a></li>
-      <li><a href="#services" onclick="showPage('services')">Booking Systems</a></li>
+<!--BUILD:foot-services-->
+      <li><a href="/services/web-design">Web Design</a></li>
+      <li><a href="/services/seo">SEO</a></li>
+      <li><a href="/services/ecommerce">E-Commerce</a></li>
+      <li><a href="/services/maintenance">Maintenance</a></li>
+      <li><a href="/services/booking-systems">Booking Systems</a></li>
+      <li><a href="/services/copywriting">Copywriting</a></li>
+      <li><a href="/services/video-editing">Video Editing</a></li>
+      <li><a href="/services/brand-identity">Brand Identity</a></li>
+<!--/BUILD:foot-services-->
     </ul>
   </div>
   <div>
@@ -1402,7 +1473,7 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
 /* ═══════════════════════
    PAGE SWITCHING
 ═══════════════════════ */
-function showPage(id) {
+function showPage(id, anchor) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   const target = document.getElementById('page-' + id);
@@ -1410,12 +1481,34 @@ function showPage(id) {
   const navEl = document.getElementById('nav-' + id);
   if (navEl) navEl.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'auto' });
+  // Measuring in the same tick as the page swap reads a stale layout and
+  // overshoots to the bottom of the document, so wait a frame. 'auto' is
+  // explicit because scroll-behavior is smooth globally, and a smooth scroll
+  // here would animate away from the jump to top above.
+  if (anchor) requestAnimationFrame(() => {
+    const a = document.getElementById(anchor);
+    if (a) a.scrollIntoView({ behavior: 'auto', block: 'start' });
+  });
   initObserver();
   if (id === 'pay') {
     updatePaySummary();
     loadPaystack().catch(function(){ /* will retry on click */ });
   }
 }
+
+// Every link back from a standalone page (/services/*, /blog/*, the legal
+// pages) arrives as /#services or /#blog. Nothing read the hash on load, so all
+// of them silently landed on the homepage hero instead of the page they named —
+// the blog posts' own "Back to Blog" link included. hashchange makes the
+// browser's back button work across those in-page switches too.
+const PAGE_IDS = ['home', 'services', 'packages', 'pay', 'blog', 'contact'];
+function pageFromHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  return PAGE_IDS.includes(id) ? id : null;
+}
+function routeFromHash() { const id = pageFromHash(); if (id) showPage(id); }
+routeFromHash();
+window.addEventListener('hashchange', routeFromHash);
 
 let _menuScrollY = 0;
 function toggleMenu() {
@@ -1542,6 +1635,89 @@ function updateAllPrices() {
   });
   updatePaySummary();
 }
+
+/* ═══════════════════════
+   PACKAGE FEATURES
+═══════════════════════ */
+// Single source of truth. The package cards and the payment calculator each
+// kept their own hand-written copy of these lists and drifted: the calculator
+// was still promising Pro clients a "Dedicated Account Manager" for what is a
+// one-person studio. Both surfaces render from here, so they cannot disagree
+// again. check-packages.mjs fails if either surface stops rendering.
+//
+// A feature is a string, or [label, 'new'] to carry the "New" badge.
+// `summary` is the one-line description the calculator shows above the chips;
+// it is not duplicated anywhere else.
+const PACKAGES = {
+  Starter: {
+    summary: '3–5 pages · Custom branding · Contact form · Basic SEO · WhatsApp',
+    features: [
+      '3–5 pages',
+      'Custom brand colours & typography',
+      'Mobile-responsive design',
+      'WhatsApp chat integration',
+      'Professional contact form',
+      ['Google Business Profile setup', 'new'],
+      'Basic on-page SEO',
+      '1 round of revisions',
+    ],
+  },
+  Business: {
+    summary: '6–8 pages · Full on-page SEO · Copywriting for 3 pages · Maps & Analytics',
+    features: [
+      'Everything in Starter',
+      '6–8 pages',
+      ['Copywriting for 3 pages', 'new'],
+      'Full on-page SEO',
+      'Google Maps + Analytics',
+      ['Speed & Core Web Vitals optimisation', 'new'],
+      'Priority support: same-day reply on weekdays',
+      '2 rounds of revisions',
+    ],
+  },
+  Pro: {
+    summary: 'Up to 12 pages · E-commerce or booking · Payment gateway · Full copywriting',
+    features: [
+      'Everything in Business',
+      'Up to 12 pages',
+      'E-commerce or booking system',
+      ['Payment gateway setup', 'new'],
+      ['Full copywriting', 'new'],
+      'Blog setup + training',
+      'Direct access to the person building it',
+      '3 rounds of revisions',
+    ],
+  },
+  Premium: {
+    summary: 'Discovery workshop · Unlimited pages · Custom functionality & API integrations · Priority support',
+    features: [
+      ['Discovery & strategy workshop', 'new'],
+      'Unlimited pages',
+      'Custom functionality / API integrations',
+      'Full SEO dominance strategy',
+      'Direct line to the founder throughout',
+      'Priority support, replies within 24h on weekdays',
+    ],
+  },
+};
+
+function renderPackageFeatures() {
+  for (const [name, pkg] of Object.entries(PACKAGES)) {
+    const label = f => Array.isArray(f) ? f[0] : f;
+    const badge = f => Array.isArray(f) ? '<span class="p-feat-new">New</span>' : '';
+
+    const card = document.querySelector(`.p-card[data-plan="${name}"] .p-feats`);
+    if (card) card.innerHTML = pkg.features.map(f => `<li>${label(f)}${badge(f)}</li>`).join('');
+
+    const pay = document.querySelector(`.pay-plan-item[data-plan="${name}"]`);
+    if (pay) {
+      pay.querySelector('.pay-plan-desc').textContent = pkg.summary;
+      pay.querySelector('.pay-plan-features').innerHTML =
+        pkg.features.map(f => `<span>${label(f)}</span>`).join('');
+    }
+  }
+}
+renderPackageFeatures();
 
 /* ═══════════════════════
    PAYMENT CALCULATOR
@@ -1740,51 +1916,6 @@ async function processPaystackPayment() {
 }
 
 /* ═══════════════════════
-   BLOG MODAL
-═══════════════════════ */
-const blogContent = {
-  'pricing-guide': {
-    tag:'Pricing', title:'How Much Does a Website Cost in South Africa? (2026 Guide)', date:'August 2026',
-    body:`<p>Prices vary wildly, from R2,000 for a DIY template to R200,000+ for enterprise solutions. Most small to medium South African businesses need something in the R8,500–R35,000 range.</p>
-    <h3>Price Ranges Explained</h3>
-    <ul><li><strong>R2,000–R5,000:</strong> DIY builders. You do all the work, limited results</li><li><strong>R8,500–R18,500:</strong> Custom professional website, the sweet spot for most businesses</li><li><strong>R18,500–R35,000:</strong> Advanced features, e-commerce, comprehensive SEO</li><li><strong>R35,000+:</strong> Enterprise custom development</li></ul>
-    <h3>What Affects the Price?</h3>
-    <ul><li>Design complexity and number of pages</li><li>E-commerce or booking systems</li><li>SEO requirements and content creation</li><li>Ongoing maintenance plans</li></ul>
-    <p>At Elevate Digitals, packages start at <strong>R8,500</strong> for a professionally designed, mobile-responsive, SEO-ready website, built specifically for South African businesses.</p>`
-  },
-  'whatsapp-marketing': {
-    tag:'Marketing', title:'How to Use WhatsApp to Get More Customers From Your Website', date:'August 2026',
-    body:`<p>WhatsApp is used by over 90% of South African smartphone users. Adding it to your website is one of the simplest, highest-impact things you can do to increase enquiries.</p>
-    <h3>Why WhatsApp Works</h3>
-    <ul><li>Familiar and trusted: people check it dozens of times daily</li><li>Lower barrier: a WhatsApp message feels less formal than a form</li><li>Real-time conversation builds trust faster</li><li>Works perfectly on mobile, where 80%+ of SA users browse</li></ul>
-    <h3>Where to Add WhatsApp</h3>
-    <ul><li><strong>Floating sticky button:</strong> bottom right corner, visible on every page</li><li><strong>Hero section:</strong> next to your main call-to-action</li><li><strong>Pricing pages:</strong> "Questions? Chat with us" closes more deals</li><li><strong>Contact page:</strong> alongside your contact form</li></ul>
-    <p>Every website we build at Elevate Digitals includes a properly configured WhatsApp chat button, included in every package.</p>`
-  },
-  'mobile-first': {
-    tag:'Mobile', title:'Why Mobile-First Web Design Matters More in South Africa Than Anywhere Else', date:'August 2026',
-    body:`<p>Over 80% of South African internet users browse primarily on their mobile phones. Many are smartphone-only users: their phone is their computer.</p>
-    <h3>The Numbers</h3>
-    <ul><li>80%+ of SA internet users browse on mobile</li><li>53% of mobile visitors leave sites that take 3+ seconds to load</li><li>Google uses mobile-first indexing, so your mobile site determines your rankings</li><li>Mobile-optimised sites get 2x the conversion rate on phones</li></ul>
-    <h3>What Mobile-First Actually Means</h3>
-    <ul><li>Design for the smallest screen first, then scale up</li><li>Touch-friendly buttons and links (minimum 44px)</li><li>Fast loading: compressed images, minimal scripts</li><li>Readable without zooming</li><li>Simple, accessible navigation</li></ul>
-    <p>Every website we build is designed mobile-first and tested on real South African devices.</p>`
-  }
-};
-
-function openBlog(el) {
-  const blog=blogContent[el.dataset.blog];
-  if(!blog)return;
-  document.getElementById('blogModalTag').textContent=blog.tag;
-  document.getElementById('blogModalTitle').textContent=blog.title;
-  document.getElementById('blogModalDate').textContent=blog.date;
-  document.getElementById('blogModalBody').innerHTML=blog.body;
-  document.getElementById('blogModal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeBlogModal(){document.getElementById('blogModal').classList.remove('open');document.body.style.overflow='';}
-
-/* ═══════════════════════
    LANGUAGE & TRANSLATION SYSTEM
 ═══════════════════════ */
 let currentLang = 'en';
@@ -1823,6 +1954,15 @@ function applyTranslation(lang) {
 
 const TRANSLATIONS = {
   en: {
+    trust_lbl:'Built to work with',
+    paths_label:'Start Here', paths_h2:'Build it. Keep it running. Grow it.',
+    paths_sub:"Every business is at a different stage. Pick the one that sounds like you and I'll take you straight to it.",
+    path1_q:'"I need a website"', path1_v:'Build.', path1_go:'See packages →',
+    path1_d:'A new site designed and built from scratch, or a full redesign of the one you have. From <strong data-price="8500">R8,500</strong>, live in about two weeks.',
+    path2_q:'"I already have a site"', path2_v:'Maintain.', path2_go:'See care plans →',
+    path2_d:'Hosting, backups, security and the small content changes, handled every month so it never quietly breaks. From <strong data-price="799">R799</strong> a month.',
+    path3_q:'"I need more leads"', path3_v:'Grow.', path3_go:"See what's involved →",
+    path3_d:'SEO, your Google Business Profile and copy that turns the people already finding you into booked jobs.',
     hero_cta_wa:'Chat on WhatsApp',
     contact_wa_btn:'Chat on WhatsApp',
     contact_wa_note:'Fastest way to reach me. Most questions are answered the same day.',
@@ -1872,6 +2012,8 @@ const TRANSLATIONS = {
     svc4_name:'E-Commerce Stores', svc4_desc:'Sell online with a professional shop that looks great, loads fast, and makes buying easy.',
     svc5_name:'Content & Copywriting', svc5_desc:'Professional website copy written to convert visitors into customers. Clear, compelling, on-brand.',
     svc6_name:'Booking Systems', svc6_desc:'Let clients book appointments directly from your website. Perfect for salons, consultants, clinics.',
+    svc7_name:'Video Editing', svc7_desc:'Turn the footage already on your phone into short, sharp video for your website and social feeds.',
+    svc8_name:'Brand Identity', svc8_desc:'A logo, colours and type that hold together, so your van, your card and your website all look like one business.',
     svc_cta_h2:'Not Sure What You <span class="hl">Need?</span>',
     svc_cta_sub:"Let's chat and figure it out together. Free consultation, no commitment.",
     pkg_label:'Transparent Pricing',
@@ -1905,6 +2047,15 @@ const TRANSLATIONS = {
     footer_company:'Company', footer_services:'Services', footer_contact_btn:'Contact Us →',
   },
   af: {
+    trust_lbl:'Werk saam met',
+    paths_label:'Begin Hier', paths_h2:'Bou dit. Hou dit aan die gang. Laat dit groei.',
+    paths_sub:'Elke besigheid is op ’n ander stadium. Kies die een wat soos jy klink, dan vat ek jou reguit daarheen.',
+    path1_q:'"Ek het ’n webwerf nodig"', path1_v:'Bou.', path1_go:'Sien pakkette →',
+    path1_d:'’n Splinternuwe webwerf, van nuuts af ontwerp en gebou, of ’n volledige herontwerp van die een wat jy het. Vanaf <strong data-price="8500">R8,500</strong>, regstreeks binne omtrent twee weke.',
+    path2_q:'"Ek het reeds ’n webwerf"', path2_v:'Onderhou.', path2_go:'Sien sorgplanne →',
+    path2_d:'Hosting, rugsteun, sekuriteit en die klein inhoudsveranderinge, elke maand hanteer sodat dit nooit stilweg breek nie. Vanaf <strong data-price="799">R799</strong> per maand.',
+    path3_q:'"Ek het meer leidrade nodig"', path3_v:'Groei.', path3_go:'Sien wat dit behels →',
+    path3_d:'SEO, jou Google Business Profile en teks wat die mense wat jou reeds vind, in bespreekte werk omskep.',
     hero_cta_wa:'Gesels op WhatsApp',
     contact_wa_btn:'Gesels op WhatsApp',
     contact_wa_note:'Vinnigste manier om my te bereik. Die meeste vrae word dieselfde dag beantwoord.',
@@ -1954,6 +2105,8 @@ const TRANSLATIONS = {
     svc4_name:'Aanlyn Winkels', svc4_desc:'Verkoop aanlyn met professionele winkel wat goed lyk, vinnig laai en koop maklik maak.',
     svc5_name:'Inhoud & Teksskrif', svc5_desc:'Professionele webwerfteks geskryf om besoekers in kliënte te omskep. Duidelik, oortuigend, op handelsmerk.',
     svc6_name:'Besprekingstelsels', svc6_desc:'Laat kliënte direk van jou webwerf afsprake bespreek. Ideaal vir salonne, konsultante, klinieke.',
+    svc7_name:'Video Redigering', svc7_desc:'Verander die opnames wat reeds op jou foon is in kort, skerp video vir jou webwerf en sosiale media.',
+    svc8_name:'Handelsmerk Identiteit', svc8_desc:'’n Logo, kleure en lettertipes wat bymekaar pas, sodat jou bakkie, jou kaartjie en jou webwerf soos een besigheid lyk.',
     svc_cta_h2:'Nie Seker Wat Jy <span class="hl">Nodig Het Nie?</span>',
     svc_cta_sub:"Kom ons gesels en werk dit saam uit. Gratis konsultasie, geen verbintenis.",
     pkg_label:'Deursigtige Pryse',
@@ -1991,6 +2144,15 @@ const TRANSLATIONS = {
     hero_badge:'Inkampani Yokwakha Amawebhusayithi · INingizimu Afrika',
     hero_h1:'Guqula Iwebhusayithi Yakho Ibe <span class="hl">Umshini Oletha Amakhasimende</span>',
     hero_sub:'Sakhela amabhizinisi asemsebenzini nawezinsizakalo aseNingizimu Afrika amawebhusayithi, kusukela kubakhandi bamapayipi nochwepheshe bakagesi kuya kumasaloni nabeluleki. Akhelwe ukuguqula isikrini sefoni sibe umsebenzi obhukiwe. Amaphakheji kusukela ku-<strong data-price="8500">R8,500</strong>.',
+    trust_lbl:'Isebenzisana ne',
+    paths_label:'Qala Lapha', paths_h2:'Yakha. Igcine isebenza. Ikhulise.',
+    paths_sub:'Ibhizinisi ngalinye lisesigabeni esihlukile. Khetha lokho okuzwakala kufana nawe, ngizokuyisa ngqo lapho.',
+    path1_q:'"Ngidinga iwebhusayithi"', path1_v:'Yakha.', path1_go:'Buka amaphakheji →',
+    path1_d:'Iwebhusayithi entsha eyakhiwe kusukela ekuqaleni, noma ukwakhiwa kabusha kwaleyo osunayo. Kusukela ku-<strong data-price="8500">R8,500</strong>, isebenze cishe emasontweni amabili.',
+    path2_q:'"Sengivele nginayo iwebhusayithi"', path2_v:'Igcine.', path2_go:'Buka amaphakheji okunakekela →',
+    path2_d:'Ukubamba iwebhusayithi, ama-backup, ukuphepha nezinguquko ezincane zokuqukethwe, kunakekelwa nyanga zonke ukuze ingaphuki ngokuthula. Kusukela ku-<strong data-price="799">R799</strong> ngenyanga.',
+    path3_q:'"Ngidinga amakhasimende amaningi"', path3_v:'Ikhulise.', path3_go:'Buka okuhilelekile →',
+    path3_d:'I-SEO, iphrofayela yakho ye-Google Business kanye nombhalo oguqula abantu asebekuthola babe imisebenzi ebhukiwe.',
     hero_cta_wa:'Xoxa nge-WhatsApp',
     hero_cta1:'Buka Amaphakheji', hero_cta2:'Bhuka ikholi mahhala →', hero_chip:'Iyaphila emavikini amabili',
     stats_from:'Amaphakheji Kusukela', stats_turnaround:'Isikhathi Esijwayelekile', stats_support:'Impendulo Yosizo',
@@ -2022,6 +2184,8 @@ const TRANSLATIONS = {
     svc4_name:'Izitolo Ze-inthanethi', svc4_desc:'Thengisa ku-inthanethi ngesitolo esibukeka kahle, esisheshayo nesenza ukuthenga kube lula.',
     svc5_name:'Okuqukethwe Nokubhala', svc5_desc:'Umbhalo wewebhusayithi obhalwe ngochwepheshe oguqula izivakashi zibe amakhasimende. Ocacile, ohehayo, ohambisana nophawu lwakho.',
     svc6_name:'Izinhlelo Zokubhuka', svc6_desc:'Vumela amakhasimende abhuke ama-aphoyintimenti ngqo kuwebhusayithi yakho. Kulungele izitayela, abeluleki nemitholampilo.',
+    svc7_name:'Ukuhlela Amavidiyo', svc7_desc:'Guqula amavidiyo asevele ekhona efonini yakho abe amavidiyo amafushane, acacile, ewebhusayithi yakho nakumakhasi okuxhumana.',
+    svc8_name:'Uphawu Lwebhizinisi', svc8_desc:'Ilogo, imibala nezinhlobo zamagama ezihambisanayo, ukuze imoto yakho, ikhadi lakho newebhusayithi yakho kubukeke njengebhizinisi elilodwa.',
     svc_cta_h2:'Awuqiniseki Ukuthi <span class="hl">Udingani?</span>',
     svc_cta_sub:"Ake sixoxe futhi sithole indlela sisonke. Ingxoxo yamahhala, awubophezelekile.",
     pkg_label:'Amanani Asobala',
@@ -2072,6 +2236,15 @@ const TRANSLATIONS = {
     hero_badge:'Inkampani Yokwakha Iiwebhusayithi · UMzantsi Afrika',
     hero_h1:'Guqula Iwebhusayithi Yakho Ibe <span class="hl">Ngumatshini Ozisa Abathengi</span>',
     hero_sub:'Sakhela amashishini ezandla neenkonzo aseMzantsi Afrika iiwebhusayithi, ukusuka koosomapayipi noochwephesha bombane ukuya kwiisaluni nabacebisi. Zakhelwe ukuguqula iskrini sefowuni sibe ngumsebenzi obhukishiweyo. Iipakeji ukusuka ku-<strong data-price="8500">R8,500</strong>.',
+    trust_lbl:'Isebenzisana ne',
+    paths_label:'Qala Apha', paths_h2:'Yakha. Yigcine isebenza. Yikhulise.',
+    paths_sub:'Ishishini ngalinye likwinqanaba elahlukileyo. Khetha elo livakala ngathi nguwe, ndikuse ngqo apho.',
+    path1_q:'"Ndidinga iwebhusayithi"', path1_v:'Yakha.', path1_go:'Jonga iipakethi →',
+    path1_d:'Iwebhusayithi entsha eyilwe yaza yakhiwa ukusuka ekuqaleni, okanye uyilo olutsha lwaleyo unayo. Ukusuka ku-<strong data-price="8500">R8,500</strong>, iphume malunga neeveki ezimbini.',
+    path2_q:'"Sele ndinayo iwebhusayithi"', path2_v:'Yigcine.', path2_go:'Jonga izicwangciso zokhathalelo →',
+    path2_d:'Ubugcini bewebhusayithi, ii-backup, ukhuseleko kunye notshintsho oluncinci lomxholo, kujongwa nyanga nganye ukuze ingaze yaphuke ngokuthe cwaka. Ukusuka ku-<strong data-price="799">R799</strong> ngenyanga.',
+    path3_q:'"Ndidinga abathengi abaninzi"', path3_v:'Yikhulise.', path3_go:'Jonga okubandakanyekayo →',
+    path3_d:'I-SEO, iprofayile yakho yeGoogle Business kunye nombhalo oguqula abantu abakufumanayo babe ngumsebenzi obhukishiweyo.',
     hero_cta_wa:'Ncokola nge-WhatsApp',
     hero_cta1:'Jonga Iipakeji', hero_cta2:'Bhukisha umnxeba simahla →', hero_chip:'Iyaphila kwiiveki ezimbini',
     stats_from:'Iipakeji Ukusuka', stats_turnaround:'Ixesha Eliqhelekileyo', stats_support:'Impendulo Yoncedo',
@@ -2103,6 +2276,8 @@ const TRANSLATIONS = {
     svc4_name:'Iivenkile Ze-intanethi', svc4_desc:'Thengisa kwi-intanethi ngevenkile ebukekayo, ekhawulezayo neyenza ukuthenga kube lula.',
     svc5_name:'Umxholo Nokubhala', svc5_desc:'Umbhalo wewebhusayithi obhalwe ngobuchule oguqula iindwendwe zibe ngabathengi. Ocacileyo, otsalayo, ohambelana nophawu lwakho.',
     svc6_name:'Iinkqubo Zokubhukisha', svc6_desc:'Vumela abathengi babhukishe amaxesha ngqo kwiwebhusayithi yakho. Ilungele iisaluni, abacebisi neekliniki.',
+    svc7_name:'Ukuhlela Iividiyo', svc7_desc:'Guqula iividiyo esele zikhona kwifowuni yakho zibe ziividiyo ezimfutshane, ezicacileyo zewebhusayithi yakho namaqonga onxibelelwano.',
+    svc8_name:'Uphawu Lweshishini', svc8_desc:'Ilogo, imibala neefonti ezihambelanayo, ukuze imoto yakho, ikhadi lakho newebhusayithi yakho kubonakale njengeshishini elinye.',
     svc_cta_h2:'Awuqinisekanga Ukuba <span class="hl">Ufuna Ntoni?</span>',
     svc_cta_sub:"Masincokole size siyifumane kunye. Incoko simahla, akukho sibophelelo.",
     pkg_label:'Amaxabiso Acacileyo',
