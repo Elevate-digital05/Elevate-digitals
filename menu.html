@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Menu | Elevate Digitals</title>
+<meta name="description" content="Elevate Digitals service menu: web design, SEO, e-commerce, maintenance, booking systems, copywriting, video editing and brand identity, with pricing in ZAR.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/brand/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme.css">
+<style>
+/* Menu-only. Not in site.css: the eight service pages have no use for any of
+   it, and print rules that nothing else shares are easier to reason about when
+   they live next to the only document they format. */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Archivo',system-ui,sans-serif; background:var(--concrete); color:var(--ink); line-height:1.5; -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
+.sheet { max-width:820px; margin:0 auto; padding:32px 24px 64px; }
+
+/* ── cover ── */
+.m-cover { padding-bottom:28px; border-bottom:2px solid var(--ink); }
+.logo { width:230px; height:auto; display:block; }
+.m-title { font-size:38px; font-weight:600; letter-spacing:-0.02em; line-height:1.05; margin-top:24px; }
+.m-sub { font-size:15px; color:var(--grey); margin-top:10px; max-width:56ch; }
+.m-assure { font-size:13.5px; color:var(--ink); margin-top:18px; padding:14px 16px; background:var(--surface); border:1px solid var(--concrete-dark); border-radius:12px; max-width:62ch; }
+.m-assure strong { font-weight:600; }
+.m-note { font-size:12px; color:var(--grey); margin-top:14px; }
+.m-index { list-style:none; columns:2; gap:24px; margin-top:22px; font-size:13.5px; }
+.m-index li { padding:4px 0; break-inside:avoid; }
+.m-index a { text-decoration:none; color:var(--grey); }
+.m-index a:hover { color:var(--ink); }
+
+/* ── a service ── */
+.m-svc { padding-top:34px; }
+.m-svc-head { border-bottom:1px solid var(--concrete-dark); padding-bottom:14px; }
+.m-svc-kicker { font-size:10.5px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--grey); }
+.m-svc h2 { font-size:26px; font-weight:600; line-height:1.15; letter-spacing:-0.015em; margin-top:7px; max-width:24ch; }
+.m-svc-lede { font-size:13.5px; color:var(--grey); margin-top:9px; max-width:70ch; }
+.m-svc h3 { font-size:10.5px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--grey); margin-bottom:10px; }
+
+.m-incl { margin-top:20px; }
+.m-incl ul { list-style:none; columns:2; gap:26px; }
+.m-incl li { position:relative; padding:3px 0 3px 15px; font-size:13px; break-inside:avoid; }
+.m-incl li::before { content:'✓'; position:absolute; left:0; font-size:11px; font-weight:700; }
+
+.m-pricing { margin-top:22px; }
+.m-pricing-lead { font-size:12.5px; color:var(--grey); margin:-4px 0 14px; max-width:74ch; }
+.m-tier { padding:11px 0; border-top:1px solid var(--concrete-dark); break-inside:avoid; }
+.m-tier:last-of-type { border-bottom:1px solid var(--concrete-dark); }
+.m-tier-top { display:flex; align-items:baseline; justify-content:space-between; gap:16px; }
+.m-tier-name { font-size:14px; font-weight:600; letter-spacing:0.02em; }
+.m-rec { display:inline-block; margin-left:9px; font-size:8.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; background:var(--hivis); color:var(--ink); padding:2px 7px; border-radius:50px; vertical-align:1px; }
+.m-tier-price { font-size:19px; font-weight:600; letter-spacing:-0.01em; white-space:nowrap; }
+.m-per { font-size:11px; font-weight:500; color:var(--grey); }
+.m-tier-period { font-size:11.5px; color:var(--grey); margin-top:1px; }
+.m-tier-desc { font-size:12.5px; margin-top:5px; }
+.m-tier-feats { font-size:11.5px; color:var(--grey); margin-top:4px; line-height:1.55; }
+
+/* Unset price — deliberately loud so a draft cannot be sent as if it were final. */
+.tbc { display:inline-block; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; border:1.5px dashed var(--ink); border-radius:6px; padding:2px 7px; }
+
+.m-contact { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:20px; padding-top:12px; border-top:1px solid var(--concrete-dark); font-size:11.5px; color:var(--grey); break-inside:avoid; }
+.m-contact strong { color:var(--ink); font-weight:600; }
+.m-contact a { text-decoration:none; }
+
+.m-end { margin-top:40px; padding:24px; background:var(--surface); border:1px solid var(--concrete-dark); border-radius:16px; }
+.m-end h2 { font-size:22px; font-weight:600; }
+.m-end p { font-size:13.5px; color:var(--grey); margin-top:8px; max-width:56ch; }
+.m-end .m-contact { border-top:none; margin-top:14px; padding-top:0; font-size:13px; }
+
+/* ── screen-only controls ── */
+.bar { position:sticky; top:0; z-index:10; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; background:var(--concrete); border-bottom:1px solid var(--concrete-dark); padding:12px 24px; }
+.bar p { font-size:12.5px; color:var(--grey); }
+.bar-btn { font-family:inherit; font-size:14px; font-weight:600; background:var(--hivis); color:var(--ink); border:none; border-radius:50px; padding:11px 22px; cursor:pointer; }
+.bar-btn:hover { background:var(--hivis-dark); }
+
+@media (max-width:560px) {
+  .m-incl ul, .m-index { columns:1; }
+  .m-title { font-size:30px; }
+  .m-tier-top { flex-direction:column; gap:2px; }
+}
+
+/* ══════════ PRINT ══════════
+   A4 portrait, one service per page. Everything that only makes sense on a
+   screen is removed rather than hidden, so it cannot claim layout. */
+@page { size: A4 portrait; margin: 14mm 15mm; }
+
+@media print {
+  .bar, .m-index { display:none !important; }
+
+  html, body { background:#fff; }
+  body { font-size:9.4pt; line-height:1.45; }
+  .sheet { max-width:none; margin:0; padding:0; }
+
+  /* Keep the hi-vis Recommended tag and the card fills — a PDF is the point
+     here, and browsers drop background colour from print unless told. */
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  /* Fill the cover sheet rather than stacking everything at the top and
+     leaving two thirds of the page blank. min-height is the A4 content box
+     (297mm less the 14mm margins); percentages are unreliable inside @page. */
+  .m-cover { break-after:page; padding-bottom:0; border-bottom:none; display:flex; flex-direction:column; min-height:266mm; }
+  .m-cover-mid { margin:auto 0; }
+  .m-cover .m-contact { margin-top:0; }
+  .logo { width:52mm; }
+  .m-title { font-size:34pt; }
+  .m-sub { font-size:11.5pt; margin-top:5mm; max-width:64ch; }
+  .m-assure { font-size:9.5pt; margin-top:8mm; max-width:70ch; }
+
+  /* One service per page. The last must not force a trailing blank sheet. */
+  .m-svc { break-before:page; break-inside:auto; padding-top:0; }
+  .m-svc h2 { font-size:19pt; max-width:30ch; }
+  .m-svc-lede { font-size:9.4pt; }
+  .m-svc h3 { font-size:7.5pt; }
+  .m-incl li, .m-tier-desc { font-size:9pt; }
+  .m-tier-feats, .m-tier-period, .m-contact { font-size:8.4pt; }
+  .m-tier-price { font-size:15pt; }
+  .m-tier-name { font-size:11pt; }
+
+  /* A heading must never be the last thing on a page. */
+  .m-svc-head, .m-incl, .m-pricing h3 + .m-pricing-lead { break-after:avoid; }
+  h2, h3 { break-after:avoid; }
+
+  /* No forced break: it is short, and on its own sheet it leaves a page that is
+     one-sixth full at the end of a document that gets emailed. It sits under
+     the last service when there is room and takes a page of its own only when
+     there genuinely is not. */
+  .m-end { break-before:auto; break-inside:avoid; border:none; background:none; padding:0; margin-top:7mm; }
+  a { text-decoration:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <p>Service menu &middot; all prices in South African Rand</p>
+  <button class="bar-btn" onclick="window.print()">Save as PDF</button>
+</div>
+
+<div class="sheet">
+
+  <header class="m-cover">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274.0 62.0" role="img"><title>Elevate Digitals</title><g transform="translate(-11.446153846153846,-17.16923076923077) scale(0.9538461538461539)" fill="#1A1A18"><rect x="12" y="72"/><rect x="12" y="48"/><rect x="42" y="34"/><rect x="72" y="18"/></g><g fill="#1A1A18"><path transform="translate(94.49,27.00) scale(0.37062)" d="M7.6000000000000005 0.0V-68.60000000000001H61.1V-57.5H20.6V-40.6H56.7V-29.5H20.6V-11.100000000000001H61.7V0.0Z M77.8 0.0V-68.60000000000001H90.80000000000001V-11.3H125.2V0.0Z M137.79999999999998 0.0V-68.60000000000001H191.29999999999998V-57.5H150.79999999999998V-40.6H186.89999999999998V-29.5H150.79999999999998V-11.100000000000001H191.89999999999998V0.0Z M226.39999999999998 0.0 201.39999999999998 -68.60000000000001H215.49999999999997L231.79999999999998 -21.400000000000002Q232.2 -20.400000000000002 232.59999999999997 -19.1Q232.99999999999997 -17.8 233.39999999999998 -16.65Q233.79999999999998 -15.5 234.09999999999997 -14.600000000000001H234.59999999999997Q234.89999999999998 -15.4 235.24999999999997 -16.5Q235.59999999999997 -17.6 235.99999999999997 -18.85Q236.39999999999998 -20.1 236.79999999999998 -21.3L252.99999999999997 -68.60000000000001H266.5L241.49999999999997 0.0Z M271.0 0.0 297.7 -68.60000000000001H314.1L340.9 0.0H326.8L321.3 -14.600000000000001H289.9L284.4 0.0ZM294.0 -25.6H317.1L310.2 -44.2Q309.8 -45.2 309.25 -46.75Q308.7 -48.300000000000004 308.1 -50.150000000000006Q307.5 -52.0 306.9 -53.900000000000006Q306.3 -55.800000000000004 305.8 -57.300000000000004H305.3Q304.7 -55.300000000000004 303.85 -52.7Q303.0 -50.1 302.2 -47.8Q301.4 -45.5 300.9 -44.2Z M368.79999999999995 0.0V-57.400000000000006H346.9V-68.60000000000001H403.79999999999995V-57.400000000000006H381.79999999999995V0.0Z M416.9 0.0V-68.60000000000001H470.4V-57.5H429.9V-40.6H465.99999999999994V-29.5H429.9V-11.100000000000001H470.99999999999994V0.0Z"/><path transform="translate(94.49,62.00) scale(0.37062)" d="M8.1 0.0V-68.60000000000001H34.6Q45.2 -68.60000000000001 52.7 -64.95Q60.2 -61.300000000000004 64.25 -53.75Q68.3 -46.2 68.3 -34.300000000000004Q68.3 -22.5 64.25 -14.9Q60.2 -7.300000000000001 52.7 -3.6500000000000004Q45.2 0.0 34.6 0.0ZM19.3 -9.600000000000001H34.5Q39.800000000000004 -9.600000000000001 43.95 -11.0Q48.1 -12.4 50.95 -15.3Q53.800000000000004 -18.2 55.25 -22.65Q56.7 -27.1 56.7 -33.2V-35.300000000000004Q56.7 -41.5 55.25 -45.95Q53.800000000000004 -50.400000000000006 50.95 -53.300000000000004Q48.1 -56.2 43.95 -57.6Q39.800000000000004 -59.0 34.5 -59.0H19.3Z M84.2 0.0V-68.60000000000001H95.4V0.0Z M145.70000000000002 1.2000000000000002Q129.4 1.2000000000000002 120.65 -7.4Q111.90000000000002 -16.0 111.90000000000002 -34.300000000000004Q111.90000000000002 -46.300000000000004 116.00000000000003 -54.150000000000006Q120.10000000000002 -62.0 127.90000000000002 -65.9Q135.70000000000002 -69.8 146.90000000000003 -69.8Q153.60000000000002 -69.8 159.35000000000002 -68.3Q165.10000000000002 -66.8 169.45000000000002 -63.75Q173.8 -60.7 176.15 -56.1Q178.5 -51.5 178.5 -45.2H167.10000000000002Q167.10000000000002 -49.1 165.55 -51.95Q164.0 -54.800000000000004 161.25 -56.7Q158.5 -58.6 154.85000000000002 -59.45Q151.20000000000002 -60.300000000000004 147.10000000000002 -60.300000000000004Q141.4 -60.300000000000004 136.95 -58.800000000000004Q132.5 -57.300000000000004 129.5 -54.2Q126.50000000000001 -51.1 125.00000000000001 -46.400000000000006Q123.50000000000001 -41.7 123.50000000000001 -35.300000000000004V-33.2Q123.50000000000001 -24.400000000000002 126.05000000000001 -18.900000000000002Q128.60000000000002 -13.4 133.65000000000003 -10.850000000000001Q138.70000000000002 -8.3 146.0 -8.3Q152.90000000000003 -8.3 157.60000000000002 -10.3Q162.3 -12.3 164.8 -16.25Q167.3 -20.200000000000003 167.3 -26.1V-27.1H144.20000000000002V-36.4H178.5V0.0H170.40000000000003L169.3 -8.200000000000001Q166.5 -4.9 162.9 -2.85Q159.3 -0.8 155.05 0.20000000000000007Q150.8 1.2000000000000002 145.70000000000002 1.2000000000000002Z M197.1 0.0V-68.60000000000001H208.3V0.0Z M244.3 0.0V-59.0H221.6V-68.60000000000001H278.4V-59.0H255.5V0.0Z M284.20000000000005 0.0 311.1 -68.60000000000001H325.40000000000003L352.40000000000003 0.0H340.40000000000003L334.3 -15.9H301.8L295.70000000000005 0.0ZM305.40000000000003 -25.400000000000002H330.6L322.90000000000003 -45.5Q322.6 -46.400000000000006 322.0 -48.0Q321.40000000000003 -49.6 320.75 -51.5Q320.1 -53.400000000000006 319.45000000000005 -55.35000000000001Q318.8 -57.300000000000004 318.3 -58.900000000000006H317.70000000000005Q317.1 -57.0 316.20000000000005 -54.400000000000006Q315.3 -51.800000000000004 314.45000000000005 -49.400000000000006Q313.6 -47.0 313.0 -45.5Z M364.20000000000005 0.0V-68.60000000000001H375.40000000000003V-9.700000000000001H409.6V0.0Z M447.8 1.2000000000000002Q442.2 1.2000000000000002 437.0 0.050000000000000044Q431.8 -1.1 427.8 -3.6500000000000004Q423.8 -6.2 421.5 -10.15Q419.2 -14.100000000000001 419.2 -19.6Q419.2 -20.200000000000003 419.25 -20.75Q419.3 -21.3 419.3 -21.700000000000003H430.5Q430.5 -21.400000000000002 430.45000000000005 -20.800000000000004Q430.40000000000003 -20.200000000000003 430.40000000000003 -19.8Q430.40000000000003 -16.1 432.6 -13.5Q434.8 -10.9 438.75 -9.600000000000001Q442.7 -8.3 447.8 -8.3Q450.6 -8.3 453.20000000000005 -8.65Q455.8 -9.0 457.95000000000005 -9.75Q460.1 -10.5 461.70000000000005 -11.65Q463.3 -12.8 464.20000000000005 -14.4Q465.1 -16.0 465.1 -18.1Q465.1 -21.3 463.25 -23.4Q461.40000000000003 -25.5 458.25 -26.9Q455.1 -28.3 451.15 -29.4Q447.2 -30.5 443.0 -31.6Q438.8 -32.7 434.85 -34.2Q430.90000000000003 -35.7 427.75 -37.85Q424.6 -40.0 422.75 -43.25Q420.90000000000003 -46.5 420.90000000000003 -51.2Q420.90000000000003 -55.7 422.8 -59.2Q424.7 -62.7 428.3 -65.05000000000001Q431.90000000000003 -67.4 436.90000000000003 -68.6Q441.90000000000003 -69.8 448.2 -69.8Q453.6 -69.8 458.40000000000003 -68.65Q463.20000000000005 -67.5 466.80000000000007 -65.1Q470.40000000000003 -62.7 472.45000000000005 -59.0Q474.5 -55.300000000000004 474.5 -50.2V-49.0H463.40000000000003V-50.300000000000004Q463.40000000000003 -53.5 461.5 -55.7Q459.6 -57.900000000000006 456.20000000000005 -59.10000000000001Q452.8 -60.300000000000004 448.3 -60.300000000000004Q443.0 -60.300000000000004 439.4 -59.25Q435.8 -58.2 433.95000000000005 -56.35Q432.1 -54.5 432.1 -51.900000000000006Q432.1 -49.0 434.0 -47.150000000000006Q435.90000000000003 -45.300000000000004 439.05 -44.0Q442.2 -42.7 446.15 -41.650000000000006Q450.1 -40.6 454.25 -39.45Q458.40000000000003 -38.300000000000004 462.35 -36.800000000000004Q466.3 -35.300000000000004 469.45000000000005 -33.1Q472.6 -30.900000000000002 474.5 -27.650000000000002Q476.40000000000003 -24.400000000000002 476.40000000000003 -19.700000000000003Q476.40000000000003 -12.3 472.70000000000005 -7.65Q469.0 -3.0 462.55 -0.8999999999999999Q456.1 1.2000000000000002 447.8 1.2000000000000002Z"/></g></svg>
+    <div class="m-cover-mid">
+      <h1 class="m-title">Service Menu</h1>
+      <p class="m-sub">Websites, and the work that keeps them earning, for South African trades and service businesses. Built and looked after by one person in Cape Town.</p>
+      <div class="m-assure"><strong>See your homepage design before you pay anything.</strong> After a quick call, I'll build your homepage concept free. If you don't want to go ahead after seeing it, you owe nothing.</div>
+      <p class="m-note">All prices in South African Rand. Mon–Fri 7am–7pm · Sat 12pm–5pm SAST.</p>
+      <ul class="m-index">
+        <li><a href="#web-design">Web Design</a></li>
+        <li><a href="#seo">SEO</a></li>
+        <li><a href="#ecommerce">E-Commerce</a></li>
+        <li><a href="#maintenance">Maintenance</a></li>
+        <li><a href="#booking-systems">Booking Systems</a></li>
+        <li><a href="#copywriting">Copywriting</a></li>
+        <li><a href="#video-editing">Video Editing</a></li>
+        <li><a href="#brand-identity">Brand Identity</a></li>
+      </ul>
+    </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+  </header>
+
+    <section class="m-svc" id="web-design">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">Web Design</div>
+        <h2>Turn a phone screen into a booked job</h2>
+        <p class="m-svc-lede">Most of your customers will meet you on a phone before they meet you in person. I build the site that decides whether they call you or the next name on the list.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Designed from scratch</li><li>Built mobile first</li><li>Fast on a bad connection</li><li>WhatsApp chat button</li><li>Contact form that works</li><li>Google Business Profile</li><li>On-page SEO groundwork</li><li>Training and handover</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">Once-off, in ZAR. A 50% deposit starts the work once you have approved the concept, and the balance is due before launch.</p>
+        
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Starter</span>
+              <span class="m-tier-price">R8,500</span>
+            </div>
+            <div class="m-tier-period">once-off · 3–5 pages</div>
+            <div class="m-tier-desc">A professional presence, up fast.</div>
+            <div class="m-tier-feats">3–5 pages &middot; Mobile-responsive design &middot; WhatsApp chat integration &middot; Contact form &middot; Google Business Profile setup &middot; Basic on-page SEO &middot; 1 round of revisions</div>
+          </div>
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Business<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R18,500</span>
+            </div>
+            <div class="m-tier-period">once-off · 6–8 pages</div>
+            <div class="m-tier-desc">For a site that has to bring in work.</div>
+            <div class="m-tier-feats">Everything in Starter &middot; 6–8 pages &middot; Copywriting for 3 pages &middot; Full on-page SEO &middot; Google Maps + Analytics &middot; Speed &amp; Core Web Vitals work &middot; 2 rounds of revisions</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Pro</span>
+              <span class="m-tier-price">R34,999</span>
+            </div>
+            <div class="m-tier-period">once-off · up to 12 pages</div>
+            <div class="m-tier-desc">Once the site has to sell or book, not just inform.</div>
+            <div class="m-tier-feats">Everything in Business &middot; Up to 12 pages &middot; E-commerce or booking system &middot; Payment gateway setup &middot; Full copywriting &middot; Blog setup + training &middot; 3 rounds of revisions</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Premium</span>
+              <span class="m-tier-price">R75,000+</span>
+            </div>
+            <div class="m-tier-period">fully custom · no limits</div>
+            <div class="m-tier-desc">Bespoke builds and integrations.</div>
+            <div class="m-tier-feats">Discovery &amp; strategy workshop &middot; Unlimited pages &middot; Custom functionality / API integrations &middot; Full SEO strategy &middot; Direct line to the founder throughout</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="seo">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">SEO</div>
+        <h2>Get found by the people already searching for what you do</h2>
+        <p class="m-svc-lede">Someone in your area types "plumber near me" a few times a day. SEO is the work that decides whether your name is on that screen or your competitor's is.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Keyword research</li><li>On-page SEO</li><li>Google Business Profile</li><li>Technical audit</li><li>Speed and Core Web Vitals</li><li>Monthly ranking report</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">Standalone SEO, priced for a site the size I build. A much larger site scales the audit, and I tell you before starting rather than after.</p>
+        
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">SEO audit</span>
+              <span class="m-tier-price">R3,500</span>
+            </div>
+            <div class="m-tier-period">once-off</div>
+            <div class="m-tier-desc">A full technical and on-page audit of your existing site, with a prioritised list of what to fix.</div>
+            <div class="m-tier-feats">Technical crawl and error report &middot; On-page review, page by page &middot; Keyword and competitor snapshot &middot; Google Business Profile review &middot; Prioritised action list you can hand to anyone</div>
+          </div>
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Setup &amp; fix<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R7,500</span>
+            </div>
+            <div class="m-tier-period">once-off</div>
+            <div class="m-tier-desc">The audit, then the work to actually fix what it found.</div>
+            <div class="m-tier-feats">Everything in the audit &middot; On-page SEO implemented &middot; Technical fixes applied &middot; Google Business Profile set up or cleaned up &middot; Sitemap and structured data</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Ongoing SEO</span>
+              <span class="m-tier-price">R2,500</span>
+            </div>
+            <div class="m-tier-period">per month, on top of a retainer</div>
+            <div class="m-tier-desc">Continuous work and reporting, on top of a maintenance retainer.</div>
+            <div class="m-tier-feats">Monthly ranking report &middot; Ongoing on-page improvements &middot; Content recommendations &middot; Google Business Profile upkeep &middot; Competitor movement</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="ecommerce">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">E-Commerce</div>
+        <h2>Sell online without the checkout falling over</h2>
+        <p class="m-svc-lede">Taking orders through DMs and manual EFTs works until it does not. A proper shop takes the payment, records the order and tells you about it, while you are doing something else.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Product catalogue</li><li>Secure card checkout</li><li>Paystack integration</li><li>Inventory management</li><li>Order notifications</li><li>Shipping and collection</li><li>Built for phone checkout</li><li>Training and handover</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">A shop is part of the Pro package. Larger catalogues or custom integrations move to Premium, which is quoted after a discovery session.</p>
+        
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Pro<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R34,999</span>
+            </div>
+            <div class="m-tier-period">once-off · up to 12 pages</div>
+            <div class="m-tier-desc">A complete shop on a complete website.</div>
+            <div class="m-tier-feats">Everything in the Business package &middot; Full product catalogue &middot; Secure checkout &middot; Paystack payment gateway setup &middot; Inventory and order notifications &middot; Full copywriting &middot; 3 rounds of revisions</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Premium</span>
+              <span class="m-tier-price">R75,000+</span>
+            </div>
+            <div class="m-tier-period">fully custom</div>
+            <div class="m-tier-desc">Large catalogues, custom logic or an integration with the system you already run.</div>
+            <div class="m-tier-feats">Discovery &amp; strategy workshop &middot; Unlimited products and pages &middot; Custom functionality / API integrations &middot; Accounting or stock system integration &middot; Direct line to the founder throughout</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="maintenance">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">Maintenance</div>
+        <h2>Your site stays up and current, without you thinking about it</h2>
+        <p class="m-svc-lede">Websites do not fail loudly. A certificate expires, a form stops sending, prices go stale, and you find out weeks later from a customer. A retainer is the arrangement where that stops being your problem.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Hosting included</li><li>Weekly backups</li><li>Security &amp; SSL monitoring</li><li>Content updates</li><li>Uptime monitoring</li><li>Monthly report</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">Monthly, in ZAR. Each plan pairs with a website package, but you do not have to have bought the site from me. Cancel any time with 30 days' notice.</p>
+        
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Starter Care</span>
+              <span class="m-tier-price">R799<span class="m-per">/mo</span></span>
+            </div>
+            <div class="m-tier-period">pairs with Starter</div>
+            <div class="m-tier-desc">Keeps the site you paid for from quietly breaking.</div>
+            <div class="m-tier-feats">Hosting included &middot; Weekly backups &middot; Security &amp; SSL monitoring &middot; Content updates (1hr/mo)</div>
+          </div>
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Business Care<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R1,299<span class="m-per">/mo</span></span>
+            </div>
+            <div class="m-tier-period">pairs with Business</div>
+            <div class="m-tier-desc">For a site that has to bring in work, not just sit there.</div>
+            <div class="m-tier-feats">Everything in Starter Care &middot; Content updates (2hr/mo) &middot; Monthly SEO report &middot; Same-day reply on weekdays</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Pro Care</span>
+              <span class="m-tier-price">R1,999<span class="m-per">/mo</span></span>
+            </div>
+            <div class="m-tier-period">pairs with Pro</div>
+            <div class="m-tier-desc">For sites with a shop or a booking system.</div>
+            <div class="m-tier-feats">Everything in Business Care &middot; Store / booking support &middot; SEO monitoring &amp; reporting &middot; Content updates (4hr/mo)</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Premium Care</span>
+              <span class="m-tier-price">R3,500+<span class="m-per">/mo</span></span>
+            </div>
+            <div class="m-tier-period">pairs with Premium</div>
+            <div class="m-tier-desc">For businesses where the website is the front door.</div>
+            <div class="m-tier-feats">Everything in Pro Care &middot; Fully managed service &middot; Agreed response times in writing &middot; Direct technical contact &middot; Strategy &amp; review calls</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="booking-systems">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">Booking Systems</div>
+        <h2>Let clients book themselves in while you are on the job</h2>
+        <p class="m-svc-lede">Every booking taken by phone is a job interrupted, and every missed call is a booking that went to somebody else. A calendar on your site takes them while your hands are full.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Online booking calendar</li><li>Service and staff selection</li><li>Automatic confirmations</li><li>Reminders</li><li>Custom availability</li><li>Optional booking deposit</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">A booking system is part of the Pro package. More complicated setups, or an integration with software you already run, move to Premium.</p>
+        
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Pro<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R34,999</span>
+            </div>
+            <div class="m-tier-period">once-off · up to 12 pages</div>
+            <div class="m-tier-desc">A booking system on a complete website.</div>
+            <div class="m-tier-feats">Everything in the Business package &middot; Online booking calendar &middot; Service and staff selection &middot; Automatic confirmations and reminders &middot; Custom availability rules &middot; Full copywriting &middot; 3 rounds of revisions</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Premium</span>
+              <span class="m-tier-price">R75,000+</span>
+            </div>
+            <div class="m-tier-period">fully custom</div>
+            <div class="m-tier-desc">Multiple locations, complex rules, or integration with your existing system.</div>
+            <div class="m-tier-feats">Discovery &amp; strategy workshop &middot; Multi-location or multi-team scheduling &middot; Custom functionality / API integrations &middot; Integration with software you already use &middot; Direct line to the founder throughout</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="copywriting">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">Copywriting</div>
+        <h2>Words that answer the question your customer is actually asking</h2>
+        <p class="m-svc-lede">Most small business websites talk about the business. The ones that get enquiries talk about the problem the visitor arrived with, and then make it obvious what to do next.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Homepage and about copy</li><li>Service page content</li><li>Written for search</li><li>Blog posts</li><li>Proofreading and editing</li><li>Tone of voice</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">Standalone copywriting. A three-page site and a twelve-page site are different jobs, so the full-site price below covers up to eight pages and scales past that.</p>
+        
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Page pack</span>
+              <span class="m-tier-price">R1,250</span>
+            </div>
+            <div class="m-tier-period">per page</div>
+            <div class="m-tier-desc">Individual pages written to order, for a site that is otherwise fine.</div>
+            <div class="m-tier-feats">Briefing call &middot; Keyword and audience research &middot; Written to your tone of voice &middot; Meta title and description &middot; Two rounds of changes</div>
+          </div>
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Full site copy<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R7,500</span>
+            </div>
+            <div class="m-tier-period">once-off · up to 8 pages</div>
+            <div class="m-tier-desc">Every page on the site, written as one consistent piece of work.</div>
+            <div class="m-tier-feats">Tone of voice defined up front &middot; Homepage, about and all service pages &middot; Written for search &middot; Calls to action throughout &middot; Meta titles and descriptions</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Ongoing content</span>
+              <span class="m-tier-price">R2,800</span>
+            </div>
+            <div class="m-tier-period">per month</div>
+            <div class="m-tier-desc">Regular articles that answer what customers ask before they buy.</div>
+            <div class="m-tier-feats">Two posts a month &middot; Topics chosen from real search demand &middot; Written for search &middot; Published and formatted for you &middot; Internal links back to your service pages</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="video-editing">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">Video Editing</div>
+        <h2>Turn the footage on your phone into something worth posting</h2>
+        <p class="m-svc-lede">You already film the work. A tidy sixty-second cut of a job going well does more for a trade business than any stock photo, and it costs you nothing extra to shoot.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Edit and assembly</li><li>Vertical and landscape</li><li>Subtitles and captions</li><li>Colour and sound</li><li>Branded intro and end card</li><li>Licensed music</li><li>Thumbnails</li><li>Compressed for the web</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">Editing only, from footage you supply. A finished cut is up to about 90 seconds; longer pieces are quoted once I have seen the material.</p>
+        
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Single cut</span>
+              <span class="m-tier-price">R1,200</span>
+            </div>
+            <div class="m-tier-period">per video</div>
+            <div class="m-tier-desc">One edited video from footage you supply.</div>
+            <div class="m-tier-feats">One edit from your raw clips &middot; Vertical and landscape export &middot; Burned-in subtitles &middot; Colour and audio levelling &middot; Licensed music &middot; One round of changes</div>
+          </div>
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Batch<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R4,500</span>
+            </div>
+            <div class="m-tier-period">five videos</div>
+            <div class="m-tier-desc">A set of clips cut from one shoot or one month of footage.</div>
+            <div class="m-tier-feats">Five finished videos &middot; Consistent look across the set &middot; Vertical and landscape exports &middot; Subtitles on every cut &middot; Branded intro and end card &middot; Thumbnails</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Monthly</span>
+              <span class="m-tier-price">R3,200</span>
+            </div>
+            <div class="m-tier-period">four videos a month</div>
+            <div class="m-tier-desc">A standing arrangement: you send footage, edited clips come back.</div>
+            <div class="m-tier-feats">Four finished videos a month &middot; Ongoing consistent branding &middot; Subtitles and thumbnails included &middot; Exports for every platform you post to &middot; Priority in the queue</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+    <section class="m-svc" id="brand-identity">
+      <header class="m-svc-head">
+        <div class="m-svc-kicker">Brand Identity</div>
+        <h2>Look like the same business everywhere someone finds you</h2>
+        <p class="m-svc-lede">A logo stretched on the van, different colours on the website, and a card someone made in Word. None of it is wrong on its own. Together it reads as a business that is not quite established yet.</p>
+      </header>
+
+      <div class="m-incl">
+        <h3>What's included</h3>
+        <ul><li>Logo design</li><li>Colour palette</li><li>Typography</li><li>Usage guidelines</li><li>Social profile assets</li><li>Print-ready files</li><li>Vector files you own</li></ul>
+      </div>
+
+      <div class="m-pricing">
+        <h3>Pricing</h3>
+        <p class="m-pricing-lead">Once-off, in ZAR. If you already have a mark worth keeping, a refresh is quoted lower than a rebuild, and I will tell you which one you actually need.</p>
+        
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Logo only</span>
+              <span class="m-tier-price">R3,500</span>
+            </div>
+            <div class="m-tier-period">once-off</div>
+            <div class="m-tier-desc">A mark and its variations, for a business that needs the one thing.</div>
+            <div class="m-tier-feats">Primary logo plus variations &middot; Icon version for profiles and favicon &middot; Black, white and reversed versions &middot; Vector source files &middot; Three concepts, two rounds of changes</div>
+          </div>
+          <div class="m-tier rec">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Identity<span class="m-rec">Recommended</span></span>
+              <span class="m-tier-price">R6,500</span>
+            </div>
+            <div class="m-tier-period">once-off</div>
+            <div class="m-tier-desc">The logo, plus the colours and type that go with it.</div>
+            <div class="m-tier-feats">Everything in Logo only &middot; Colour palette for screen, print and paint &middot; Typography pairing &middot; Usage guidelines document &middot; Social profile assets</div>
+          </div>
+          <div class="m-tier">
+            <div class="m-tier-top">
+              <span class="m-tier-name">Identity + collateral</span>
+              <span class="m-tier-price">R9,500</span>
+            </div>
+            <div class="m-tier-period">once-off</div>
+            <div class="m-tier-desc">The identity, applied to the things you actually hand people.</div>
+            <div class="m-tier-feats">Everything in Identity &middot; Business card artwork &middot; Letterhead and quote template &middot; Vehicle or signage artwork &middot; Print-ready files for your supplier</div>
+          </div>
+      </div>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    </section>
+
+  <section class="m-end">
+    <h2>Tell me what you need</h2>
+    <p>Send a message with what your business does and what you are trying to fix. I'll come back with a straight answer on whether I can help and what it would cost.</p>
+
+      <div class="m-contact">
+        <span><strong>WhatsApp</strong> <a href="https://wa.me/27650858437">+27 65 085 8437</a></span>
+        <span><strong>Email</strong> <a href="mailto:info@elevatedigitals.co.za">info@elevatedigitals.co.za</a></span>
+        <span><strong>Web</strong> <a href="https://www.elevatedigitals.co.za">elevatedigitals.co.za</a></span>
+      </div>
+    <p class="m-note">Mon–Fri 7am–7pm · Sat 12pm–5pm SAST</p>
+  </section>
+
+</div>
+</body>
+</html>
