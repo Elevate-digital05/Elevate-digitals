@@ -317,14 +317,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
-@media (prefers-reduced-motion: reduce) {
-  *,*::before,*::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* reduced-motion handling lives in the block near the end of this stylesheet */
 
 .skip-link {
   position: absolute;
@@ -854,16 +847,17 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(32px);} to{opacity:1;transform:translateY(0);} }
 
-/* The whole page moves by default. Anyone who has asked their OS to stop that
-   gets a static page rather than a reduced one: reveals resolve to visible
-   instead of animating in, and nothing loops. */
+/* Reduced motion means no MOVEMENT, not a dead page. Windows sets this flag
+   whenever "Animation effects" is off — which is off on a huge share of PCs —
+   so entrances still fade (opacity only, in place), while everything that
+   slides, floats or pulses stops. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
-  *, *::before, *::after {
-    animation-duration:0.01ms !important; animation-iteration-count:1 !important;
-    transition-duration:0.01ms !important; scroll-behavior:auto !important;
-  }
-  .reveal-card, .reveal-section { opacity:1 !important; transform:none !important; }
+  *, *::before, *::after { transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  @keyframes fadeUp { from{opacity:0;} to{opacity:1;} }
+  @keyframes slideDown { from{opacity:0;} to{opacity:1;} }
+  .badge-dot, .floating-chip { animation:none !important; }
+  .reveal-card, .reveal-section { transform:none !important; transition:opacity 0.55s ease !important; }
 }
 
 /* links: ink text, hi-vis underline */
