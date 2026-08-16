@@ -3,3 +3,6 @@
 .env.local
 .DS_Store
 node_modules/
+
+# Per-machine Claude Code settings. launch.json is shared; this is not.
+.claude/settings.local.json
