@@ -1177,7 +1177,9 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
       <div class="p-card reveal-card" data-plan="Starter">
         <div class="p-name" data-i18n="pkg1_name">Starter</div><div class="p-amount" data-price="8500">R8,500</div><div class="p-period" data-i18n="pkg1_period">once-off · 3–5 pages</div>
         <p class="p-best-for" data-i18n="pkg1_best">Best for: New businesses needing a professional online presence fast</p>
-        <ul class="p-feats"></ul>
+        <ul class="p-feats"><!--BUILD:feats-Starter-->
+<li>3–5 pages</li><li>Custom brand colours &amp; typography</li><li>Mobile-responsive design</li><li>WhatsApp chat integration</li><li>Professional contact form</li><li>Google Business Profile setup<span class="p-feat-new">New</span></li><li>Basic on-page SEO</li><li>1 round of revisions</li>
+<!--/BUILD:feats-Starter--></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R799<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1189,7 +1191,9 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <div class="pop-tag">Recommended</div>
         <div class="p-name" data-i18n="pkg2_name">Business</div><div class="p-amount" data-price="18500">R18,500</div><div class="p-period" data-i18n="pkg2_period">once-off · 6–8 pages</div>
         <p class="p-best-for" data-i18n="pkg2_best">Best for: Growing businesses ready to dominate their market</p>
-        <ul class="p-feats"></ul>
+        <ul class="p-feats"><!--BUILD:feats-Business-->
+<li>Everything in Starter</li><li>6–8 pages</li><li>Copywriting for 3 pages<span class="p-feat-new">New</span></li><li>Full on-page SEO</li><li>Google Maps + Analytics</li><li>Speed &amp; Core Web Vitals optimisation<span class="p-feat-new">New</span></li><li>Priority support: same-day reply on weekdays</li><li>2 rounds of revisions</li>
+<!--/BUILD:feats-Business--></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R1,299<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1200,7 +1204,9 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
       <div class="p-card reveal-card" data-plan="Pro">
         <div class="p-name" data-i18n="pkg3_name">Pro</div><div class="p-amount" data-price="34999">R34,999</div><div class="p-period" data-i18n="pkg3_period">once-off · up to 12 pages</div>
         <p class="p-best-for" data-i18n="pkg3_best">Best for: Businesses ready to scale, automate &amp; grow online sales</p>
-        <ul class="p-feats"></ul>
+        <ul class="p-feats"><!--BUILD:feats-Pro-->
+<li>Everything in Business</li><li>Up to 12 pages</li><li>E-commerce or booking system</li><li>Payment gateway setup<span class="p-feat-new">New</span></li><li>Full copywriting<span class="p-feat-new">New</span></li><li>Blog setup + training</li><li>Direct access to the people doing the work</li><li>3 rounds of revisions</li>
+<!--/BUILD:feats-Pro--></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">R1,999<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1211,7 +1217,9 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
       <div class="p-card reveal-card" style="border-color:var(--concrete-dark);" data-plan="Premium">
         <div class="p-name" data-i18n="pkg4_name">Premium</div><div class="p-amount" data-price="75000">R75,000<span style="font-size:18px;">+</span></div><div class="p-period" data-i18n="pkg4_period">fully custom · no limits</div>
         <p class="p-best-for" data-i18n="pkg4_best">Best for: Enterprises needing a bespoke digital solution</p>
-        <ul class="p-feats"></ul>
+        <ul class="p-feats"><!--BUILD:feats-Premium-->
+<li>Discovery &amp; strategy workshop<span class="p-feat-new">New</span></li><li>Unlimited pages</li><li>Custom functionality / API integrations</li><li>Full SEO dominance strategy</li><li>Direct line to the founder throughout</li><li>Priority support, replies within 24h on weekdays</li>
+<!--/BUILD:feats-Premium--></ul>
         <div class="p-retainer">
           <div class="p-retainer-lbl">Retainer Add-On</div>
           <div class="p-retainer-price">from R3,500<span style="font-size:11px;color:var(--grey);font-weight:500;"> /mo</span></div>
@@ -1252,19 +1260,27 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <div class="pay-section-h reveal-section">Website Packages</div>
         <div class="pay-plan-list">
           <div class="pay-plan-item active" data-plan="Starter" data-price="8500" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Starter</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Starter</div><!--BUILD:pay-Starter-->
+<div class="pay-plan-desc">3–5 pages · Custom branding · Contact form · Basic SEO · WhatsApp</div><div class="pay-plan-features"><span>3–5 pages</span><span>Custom brand colours &amp; typography</span><span>Mobile-responsive design</span><span>WhatsApp chat integration</span><span>Professional contact form</span><span>Google Business Profile setup</span><span>Basic on-page SEO</span><span>1 round of revisions</span></div>
+<!--/BUILD:pay-Starter--></div>
             <div class="pay-plan-price" data-price="8500">R8,500</div>
           </div>
           <div class="pay-plan-item" data-plan="Business" data-price="18500" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Business</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Business</div><!--BUILD:pay-Business-->
+<div class="pay-plan-desc">6–8 pages · Full on-page SEO · Copywriting for 3 pages · Maps &amp; Analytics</div><div class="pay-plan-features"><span>Everything in Starter</span><span>6–8 pages</span><span>Copywriting for 3 pages</span><span>Full on-page SEO</span><span>Google Maps + Analytics</span><span>Speed &amp; Core Web Vitals optimisation</span><span>Priority support: same-day reply on weekdays</span><span>2 rounds of revisions</span></div>
+<!--/BUILD:pay-Business--></div>
             <div class="pay-plan-price" data-price="18500">R18,500</div>
           </div>
           <div class="pay-plan-item" data-plan="Pro" data-price="34999" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Pro</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Pro</div><!--BUILD:pay-Pro-->
+<div class="pay-plan-desc">Up to 12 pages · E-commerce or booking · Payment gateway · Full copywriting</div><div class="pay-plan-features"><span>Everything in Business</span><span>Up to 12 pages</span><span>E-commerce or booking system</span><span>Payment gateway setup</span><span>Full copywriting</span><span>Blog setup + training</span><span>Direct access to the people doing the work</span><span>3 rounds of revisions</span></div>
+<!--/BUILD:pay-Pro--></div>
             <div class="pay-plan-price" data-price="34999">R34,999</div>
           </div>
           <div class="pay-plan-item" data-plan="Premium" data-price="75000" onclick="selectPayPlan(this)">
-            <div class="pay-plan-info"><div class="pay-plan-title">Premium</div><div class="pay-plan-desc"></div><div class="pay-plan-features"></div></div>
+            <div class="pay-plan-info"><div class="pay-plan-title">Premium</div><!--BUILD:pay-Premium-->
+<div class="pay-plan-desc">Discovery workshop · Unlimited pages · Custom functionality &amp; API integrations · Priority support</div><div class="pay-plan-features"><span>Discovery &amp; strategy workshop</span><span>Unlimited pages</span><span>Custom functionality / API integrations</span><span>Full SEO dominance strategy</span><span>Direct line to the founder throughout</span><span>Priority support, replies within 24h on weekdays</span></div>
+<!--/BUILD:pay-Premium--></div>
             <div class="pay-plan-price" data-price="75000">R75,000+</div>
           </div>
         </div>
@@ -1681,89 +1697,6 @@ function updateAllPrices() {
   });
   updatePaySummary();
 }
-
-/* ═══════════════════════
-   PACKAGE FEATURES
-═══════════════════════ */
-// Single source of truth. The package cards and the payment calculator each
-// kept their own hand-written copy of these lists and drifted: the calculator
-// was still promising Pro clients a "Dedicated Account Manager" for what is a
-// one-person studio. Both surfaces render from here, so they cannot disagree
-// again. check-packages.mjs fails if either surface stops rendering.
-//
-// A feature is a string, or [label, 'new'] to carry the "New" badge.
-// `summary` is the one-line description the calculator shows above the chips;
-// it is not duplicated anywhere else.
-const PACKAGES = {
-  Starter: {
-    summary: '3–5 pages · Custom branding · Contact form · Basic SEO · WhatsApp',
-    features: [
-      '3–5 pages',
-      'Custom brand colours & typography',
-      'Mobile-responsive design',
-      'WhatsApp chat integration',
-      'Professional contact form',
-      ['Google Business Profile setup', 'new'],
-      'Basic on-page SEO',
-      '1 round of revisions',
-    ],
-  },
-  Business: {
-    summary: '6–8 pages · Full on-page SEO · Copywriting for 3 pages · Maps & Analytics',
-    features: [
-      'Everything in Starter',
-      '6–8 pages',
-      ['Copywriting for 3 pages', 'new'],
-      'Full on-page SEO',
-      'Google Maps + Analytics',
-      ['Speed & Core Web Vitals optimisation', 'new'],
-      'Priority support: same-day reply on weekdays',
-      '2 rounds of revisions',
-    ],
-  },
-  Pro: {
-    summary: 'Up to 12 pages · E-commerce or booking · Payment gateway · Full copywriting',
-    features: [
-      'Everything in Business',
-      'Up to 12 pages',
-      'E-commerce or booking system',
-      ['Payment gateway setup', 'new'],
-      ['Full copywriting', 'new'],
-      'Blog setup + training',
-      'Direct access to the people doing the work',
-      '3 rounds of revisions',
-    ],
-  },
-  Premium: {
-    summary: 'Discovery workshop · Unlimited pages · Custom functionality & API integrations · Priority support',
-    features: [
-      ['Discovery & strategy workshop', 'new'],
-      'Unlimited pages',
-      'Custom functionality / API integrations',
-      'Full SEO dominance strategy',
-      'Direct line to the founder throughout',
-      'Priority support, replies within 24h on weekdays',
-    ],
-  },
-};
-
-function renderPackageFeatures() {
-  for (const [name, pkg] of Object.entries(PACKAGES)) {
-    const label = f => Array.isArray(f) ? f[0] : f;
-    const badge = f => Array.isArray(f) ? '<span class="p-feat-new">New</span>' : '';
-
-    const card = document.querySelector(`.p-card[data-plan="${name}"] .p-feats`);
-    if (card) card.innerHTML = pkg.features.map(f => `<li>${label(f)}${badge(f)}</li>`).join('');
-
-    const pay = document.querySelector(`.pay-plan-item[data-plan="${name}"]`);
-    if (pay) {
-      pay.querySelector('.pay-plan-desc').textContent = pkg.summary;
-      pay.querySelector('.pay-plan-features').innerHTML =
-        pkg.features.map(f => `<span>${label(f)}</span>`).join('');
-    }
-  }
-}
-renderPackageFeatures();
 
 /* ═══════════════════════
    PAYMENT CALCULATOR

@@ -14,6 +14,12 @@ service grid, the nav dropdown, the mobile menu group, the footer links and the
 sitemap entries. Everything outside those markers is hand-written and safe to
 edit.
 
+`lib/packages.js` does the same for the four website packages: `build.mjs` bakes
+each feature list into the package cards *and* the payment calculator, so both
+surfaces come from one source and a crawler reads them in the HTML rather than
+after a script runs. They were hand-written in two places once and drifted far
+enough to sell an account manager who did not exist.
+
 One thing is **not** generated: the four language dictionaries. A new service
 needs an `i18n` key (`svc9`, …) plus `svcN_name` / `svcN_desc` in all four
 dictionaries in `index.html`, or its homepage card stays English while the other

@@ -11,6 +11,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { SERVICES, HOURS } from './lib/services.js';
+import { PACKAGES } from './lib/packages.js';
 
 const SITE = 'https://www.elevatedigitals.co.za';
 const WA = '27650858437';
@@ -590,6 +591,20 @@ const homeCards = SERVICES.map(s => {
 const footerServices = SERVICES.map(s =>
   `      <li><a href="/services/${s.slug}">${esc(s.nav)}</a></li>`).join('\n');
 
+/* Package features, baked into both surfaces rather than rendered at runtime.
+   They used to be filled in by JavaScript on load, which meant the packages
+   page — the one that has to rank — shipped four empty <ul>s to the crawler
+   and only grew its selling points on a second, queued render pass. */
+const packageBlocks = Object.entries(PACKAGES).flatMap(([name, pkg]) => {
+  const label = f => Array.isArray(f) ? f[0] : f;
+  const badge = f => Array.isArray(f) ? '<span class="p-feat-new">New</span>' : '';
+  return [
+    [`feats-${name}`, pkg.features.map(f => `<li>${esc(label(f))}${badge(f)}</li>`).join('')],
+    [`pay-${name}`, `<div class="pay-plan-desc">${esc(pkg.summary)}</div>` +
+      `<div class="pay-plan-features">${pkg.features.map(f => `<span>${esc(label(f))}</span>`).join('')}</div>`],
+  ];
+});
+
 // Desktop nav dropdown. Opened on hover and on :focus-within, so it is reachable
 // by keyboard without any JS — the top-level Services link still switches to the
 // in-page services view for anyone who just clicks it.
@@ -600,9 +615,14 @@ const navServices = SERVICES.map(s =>
 const mobServices = SERVICES.map(s =>
   `    <a class="mob-sub" href="/services/${s.slug}">${esc(s.nav)}</a>`).join('\n');
 
+// Bumped by hand when the service copy actually changes. Deliberately not
+// new Date(): a lastmod that moves on every build tells crawlers the page
+// changed when it did not, and they stop believing the field.
+const SERVICES_LASTMOD = '2026-08-16';
+
 const sitemapEntries = SERVICES.map(s => `  <url>
     <loc>${SITE}/services/${s.slug}</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>${SERVICES_LASTMOD}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>`).join('\n');
@@ -620,6 +640,7 @@ export function build({ write = true } = {}) {
   index = inject(index, 'foot-services', footerServices, 'index.html');
   index = inject(index, 'nav-services', navServices, 'index.html');
   index = inject(index, 'mob-services', mobServices, 'index.html');
+  for (const [key, body] of packageBlocks) index = inject(index, key, body, 'index.html');
   out.set('index.html', index);
 
   let sitemap = readFileSync('sitemap.xml', 'utf8');

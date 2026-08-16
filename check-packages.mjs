@@ -1,64 +1,61 @@
 /* The package cards and the payment calculator used to keep separate
    hand-written copies of every feature list, and they drifted — the calculator
-   sold Pro clients a "Dedicated Account Manager" that a one-person studio
-   cannot staff. Both now render from PACKAGES. This runs the real renderer
-   from index.html against a stub DOM so a regression fails here, not in front
-   of a client reading two different promises on two pages.
+   sold Pro clients a "Dedicated Account Manager" that nobody was employed to
+   be. They then spent a while being rendered from one source by JavaScript on
+   load, which fixed the drift but shipped four empty <ul>s to the crawler on
+   the one page that has to rank.
+
+   Both surfaces are now baked into index.html by build.mjs from
+   lib/packages.js. This checks the baked HTML against that data, so neither
+   the drift nor the empty-lists regression can come back quietly.
    Run: node check-packages.mjs */
 import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
+import { PACKAGES } from './lib/packages.js';
 
 const html = readFileSync('index.html', 'utf8');
+// The New badge is a sibling span inside the <li>, so it has to come out
+// before tags are stripped or it concatenates onto the label it decorates.
+const strip = s => s
+  .replace(/<span class="p-feat-new">.*?<\/span>/gs, '')
+  .replace(/<[^>]+>/g, '')
+  .replace(/&amp;/g, '&').replace(/&#39;/g, "'").trim();
 
-/* ── pull the real source out of index.html so it cannot drift ── */
-const start = html.indexOf('const PACKAGES = {');
-const end = html.indexOf('   PAYMENT CALCULATOR');
-assert.ok(start > 0 && end > start, 'PACKAGES block not found in index.html');
-const src = html.slice(start, html.lastIndexOf('/*', end));
+const between = (key) => {
+  const open = `<!--BUILD:${key}-->`, close = `<!--/BUILD:${key}-->`;
+  const i = html.indexOf(open), j = html.indexOf(close);
+  assert.ok(i > 0 && j > i, `index.html has no ${open} … ${close} block — run: node build.mjs`);
+  return html.slice(i + open.length, j);
+};
 
-/* ── stub DOM: every selector hands back a node that remembers what was set ── */
-const nodes = {};
-const node = () => ({
-  innerHTML: '', textContent: '', kids: {},
-  querySelector(sel) { return this.kids[sel] ??= node(); },
-});
-const document = { querySelector: sel => nodes[sel] ??= node() };
-
-const { PACKAGES } = new Function('document', src + '\nreturn { PACKAGES };')(document);
-
-const card = name => nodes[`.p-card[data-plan="${name}"] .p-feats`];
-const pay = name => nodes[`.pay-plan-item[data-plan="${name}"]`];
-
-/* ── both surfaces render, and render the same features ── */
 for (const [name, pkg] of Object.entries(PACKAGES)) {
   const labels = pkg.features.map(f => Array.isArray(f) ? f[0] : f);
 
-  assert.equal(card(name).innerHTML.match(/<li>/g).length, labels.length,
-    `${name}: package card rendered the wrong number of features`);
-  assert.equal(pay(name).kids['.pay-plan-features'].innerHTML.match(/<span>/g).length, labels.length,
-    `${name}: calculator rendered the wrong number of features`);
+  /* ── the package card ── */
+  const card = between(`feats-${name}`);
+  const cardItems = [...card.matchAll(/<li>(.*?)<\/li>/gs)].map(m => strip(m[1]));
+  assert.deepEqual(cardItems, labels.map(l => strip(l)),
+    `${name}: the package card's features do not match lib/packages.js`);
 
-  for (const label of labels) {
-    assert.ok(card(name).innerHTML.includes(label), `${name}: card is missing "${label}"`);
-    assert.ok(pay(name).kids['.pay-plan-features'].innerHTML.includes(label),
-      `${name}: calculator is missing "${label}"`);
-  }
-  assert.equal(pay(name).kids['.pay-plan-desc'].textContent, pkg.summary,
-    `${name}: calculator summary did not render`);
+  /* ── the payment calculator ── */
+  const pay = between(`pay-${name}`);
+  const chips = [...pay.matchAll(/<span>(.*?)<\/span>/gs)].map(m => strip(m[1]));
+  assert.deepEqual(chips, labels.map(l => strip(l)),
+    `${name}: the calculator's features do not match the package card`);
+  assert.equal(strip(pay.match(/<div class="pay-plan-desc">(.*?)<\/div>/s)[1]), strip(pkg.summary),
+    `${name}: the calculator summary does not match lib/packages.js`);
+
+  /* ── in the source, not conjured by script ── */
+  assert.ok(cardItems.length > 0, `${name}: the package card is empty in the HTML source`);
 }
 
-/* ── the "New" badge survives the round trip ── */
-assert.ok(card('Starter').innerHTML.includes('<span class="p-feat-new">New</span>'),
+/* ── the New badge lands on the card and stays out of the chips ── */
+assert.match(between('feats-Starter'), /<span class="p-feat-new">New<\/span>/,
   'the New badge stopped rendering on package cards');
-assert.ok(!pay('Starter').kids['.pay-plan-features'].innerHTML.includes('p-feat-new'),
+assert.doesNotMatch(between('pay-Starter'), /p-feat-new/,
   'the New badge leaked into the calculator chips, which have no room for it');
 
-/* ── no account managers, whatever the team size ──
-   Elevate now works as a small team, so "one person" is no longer the claim.
-   What has not changed is the promise being sold: clients reach whoever is
-   doing the work, never a layer in between. This checks the places that make
-   that promise — the feature data and the structured data Google reads. Both
-   had their own copy; the JSON-LD one outlived the visible fix by a commit. */
+/* ── nothing may promise staff standing between a client and the work ── */
 const promises = Object.values(PACKAGES).flatMap(p => [p.summary, ...p.features.flat()]);
 for (const line of promises) {
   assert.doesNotMatch(line, /account manager/i,
@@ -71,15 +68,14 @@ assert.doesNotMatch(jsonLd, /account manager/i,
 assert.ok(PACKAGES.Pro.features.includes('Direct access to the people doing the work'),
   'Pro lost the direct-access wording');
 
-/* ── no hand-written copy has crept back into the markup ── */
-assert.equal((html.match(/<ul class="p-feats"><\/ul>/g) || []).length, 4,
-  'a package card has a hand-written feature list again instead of rendering from PACKAGES');
-assert.equal((html.match(/<div class="pay-plan-desc"><\/div><div class="pay-plan-features"><\/div>/g) || []).length, 4,
-  'a calculator plan has hand-written features again instead of rendering from PACKAGES');
+/* ── the renderer is gone; nothing should be filling these in at runtime ── */
+assert.doesNotMatch(html, /renderPackageFeatures|const PACKAGES\s*=/,
+  'index.html renders package features at runtime again — they belong in the HTML source');
 
 /* ── every plan the markup names has data behind it ── */
 for (const [, name] of html.matchAll(/class="(?:p-card|pay-plan-item)[^"]*"[^>]*data-plan="([^"]+)"/g)) {
-  assert.ok(PACKAGES[name], `markup names plan "${name}" but PACKAGES has no entry for it`);
+  assert.ok(PACKAGES[name], `markup names plan "${name}" but lib/packages.js has no entry for it`);
 }
 
-console.log(`ok packages: ${Object.keys(PACKAGES).length} plans render to both surfaces from one source`);
+const total = Object.values(PACKAGES).reduce((n, p) => n + p.features.length, 0);
+console.log(`ok packages: ${total} features baked into both surfaces from lib/packages.js`);
