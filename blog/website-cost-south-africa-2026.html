@@ -47,6 +47,7 @@
 body{font-family:'Archivo',sans-serif;background:var(--concrete);color:var(--ink);min-height:100vh;}
 nav{padding:18px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--concrete-dark);background:var(--surface);}
 .logo{display:inline-block;line-height:0;}
+.foot-legal{margin-top:6px;}
 .logo img{height:30px;width:auto;}
 .back-link{color:var(--ink);text-decoration:none;font-size:14px;transition:color 0.2s;}
 .back-link:hover{color:var(--ink);}
@@ -73,7 +74,7 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
 </head>
 <body>
 <nav>
-  <a href="https://www.elevatedigitals.co.za" class="logo">ELEVATE<span>DIGITALS</span></a>
+  <a href="/" class="logo" aria-label="Elevate Digitals - go to homepage"><img src="/brand/logo-horizontal-ink.svg" alt="Elevate Digitals" width="274" height="62"></a>
   <a href="https://www.elevatedigitals.co.za/#blog" class="back-link">← Back to Blog</a>
 </nav>
 <article>
@@ -130,7 +131,8 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
   </div>
 </article>
 <footer>
-  <p>© 2026 <a href="https://www.elevatedigitals.co.za">Elevate Digitals</a> · Web Design South Africa · <a href="https://www.elevatedigitals.co.za/#blog">Blog</a></p>
+  <p>© 2026 <a href="/">Elevate Digitals</a> · Web Design South Africa · <a href="/#blog">Blog</a> · <a href="/#services">Services</a></p>
+  <p class="foot-legal"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refund-policy">Refund Policy</a></p>
 </footer>
 </body>
 </html>
