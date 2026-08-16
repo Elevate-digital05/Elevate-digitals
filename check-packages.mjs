@@ -53,21 +53,22 @@ assert.ok(card('Starter').innerHTML.includes('<span class="p-feat-new">New</span
 assert.ok(!pay('Starter').kids['.pay-plan-features'].innerHTML.includes('p-feat-new'),
   'the New badge leaked into the calculator chips, which have no room for it');
 
-/* ── one-person studio: nothing may promise staff ──
-   The founder bio's "rather than an account manager" is the opposite claim and
-   is allowed, so this checks the places that make promises: the feature data
-   and the structured data Google reads. Both had their own copy; the JSON-LD
-   one outlived the visible fix by a commit. */
+/* ── no account managers, whatever the team size ──
+   Elevate now works as a small team, so "one person" is no longer the claim.
+   What has not changed is the promise being sold: clients reach whoever is
+   doing the work, never a layer in between. This checks the places that make
+   that promise — the feature data and the structured data Google reads. Both
+   had their own copy; the JSON-LD one outlived the visible fix by a commit. */
 const promises = Object.values(PACKAGES).flatMap(p => [p.summary, ...p.features.flat()]);
 for (const line of promises) {
   assert.doesNotMatch(line, /account manager/i,
-    `PACKAGES promises an account manager: "${line}" — this is a one-person studio`);
+    `PACKAGES promises an account manager: "${line}" — clients reach the people doing the work`);
 }
 const jsonLd = html.slice(html.indexOf('<script type="application/ld+json">'),
                           html.indexOf('</script>', html.indexOf('<script type="application/ld+json">')));
 assert.doesNotMatch(jsonLd, /account manager/i,
   'the JSON-LD offers still promise an account manager');
-assert.ok(PACKAGES.Pro.features.includes('Direct access to the person building it'),
+assert.ok(PACKAGES.Pro.features.includes('Direct access to the people doing the work'),
   'Pro lost the direct-access wording');
 
 /* ── no hand-written copy has crept back into the markup ── */

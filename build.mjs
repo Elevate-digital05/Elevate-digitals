@@ -539,7 +539,7 @@ a { color:inherit; }
     ${logo}
     <div class="m-cover-mid">
       <h1 class="m-title">Service Menu</h1>
-      <p class="m-sub">Websites, and the work that keeps them earning, for South African trades and service businesses. Built and looked after by one person in Cape Town.</p>
+      <p class="m-sub">Websites, and the work that keeps them earning, for South African trades and service businesses. Designed, built and looked after from Cape Town.</p>
       <div class="m-assure"><strong>See your homepage design before you pay anything.</strong> After a quick call, I'll build your homepage concept free. If you don't want to go ahead after seeing it, you owe nothing.</div>
       <p class="m-note">All prices in South African Rand. ${HOURS}.</p>
       <ul class="m-index">

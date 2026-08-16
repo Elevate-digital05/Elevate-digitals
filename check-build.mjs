@@ -101,6 +101,53 @@ assert.ok(index.includes('routeFromHash'),
    someone toggles language and back. af/zu/xh are hand-translated from this
    English, so it is the English that has to stay put. */
 const enDict = index.slice(index.indexOf('  en: {'), index.indexOf('  af: {'));
+
+/* Every data-i18n element, not just the service cards. Editing the dictionary
+   without editing the markup it mirrors leaves a page that shows one wording
+   until someone switches language, then silently shows another and never goes
+   back. That has now happened twice — the service card copy, then the founder
+   bio — so this checks all of them rather than the ones we remember. */
+const dictValue = key => {
+  const m = enDict.match(new RegExp(`\\b${key}\\s*:\\s*(['"])((?:[^\\\\]|\\\\.)*?)\\1\\s*,`, 's'));
+  return m && m[2].replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/\\n/g, '\n');
+};
+// Walks forward from an opening tag to its matching close, counting nesting.
+const innerOf = (html, tagStart, tag) => {
+  const open = new RegExp(`<${tag}\\b`, 'gi'), close = new RegExp(`</${tag}>`, 'gi');
+  let i = html.indexOf('>', tagStart) + 1, depth = 1, cursor = i;
+  while (depth > 0) {
+    open.lastIndex = close.lastIndex = cursor;
+    const o = open.exec(html), c = close.exec(html);
+    if (!c) return null;
+    if (o && o.index < c.index) { depth++; cursor = o.index + 1; }
+    else { depth--; cursor = c.index + 1; if (!depth) return html.slice(i, c.index); }
+  }
+  return null;
+};
+
+let mirrored = 0, skipped = 0;
+for (const m of index.matchAll(/<(\w+)[^>]*\sdata-i18n(-html)?="([a-z0-9_]+)"[^>]*>/gi)) {
+  const [tag, isHtml, key] = [m[1], Boolean(m[2]), m[3]];
+  const want = dictValue(key);
+  const inner = innerOf(index, m.index, tag);
+  if (want === null || inner === null) { skipped++; continue; }
+  // Compare the words, not the markup. The two sides legitimately differ on
+  // entity encoding (&amp; vs &) and attribute quoting (id='x' vs id="x"), and
+  // flagging those buries the drift that actually matters, which is wording.
+  const norm = t => t
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+  if (norm(inner) !== norm(want)) {
+    assert.fail(`index.html and the en dictionary disagree on "${key}", so the text changes the first time someone switches language\n` +
+      `  markup: ${norm(inner).slice(0, 110)}\n  en:     ${norm(want).slice(0, 110)}`);
+  }
+  mirrored++;
+}
+assert.ok(mirrored > 100, `only ${mirrored} data-i18n elements verified — the matcher is not finding them`);
+console.log(`ok i18n markup: ${mirrored} translated elements match the en dictionary (${skipped} too nested to compare)`);
+
 for (const svc of SERVICES) {
   // Without an i18n key the card renders English in all four languages, so the
   // grid half-translates. check-i18n.mjs then has nothing to complain about,

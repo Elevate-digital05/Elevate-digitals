@@ -284,7 +284,7 @@
           "name": "Pro Website",
           "price": "34999",
           "priceCurrency": "ZAR",
-          "description": "Up to 12 pages with e-commerce or booking system, payment gateway, full copywriting, blog setup and direct access to the person building it"
+          "description": "Up to 12 pages with e-commerce or booking system, payment gateway, full copywriting, blog setup and direct access to the people doing the work"
         },
         {
           "@type": "Offer",
@@ -507,6 +507,16 @@ html[lang="zu"] .hero h1, html[lang="xh"] .hero h1 { font-size:clamp(32px,4.4vw,
 .founder-photo { width:88px; height:88px; border-radius:50%; flex-shrink:0; object-fit:cover; background:var(--surface); border:1px solid var(--concrete-dark); }
 .founder-name { font-family:'Archivo',sans-serif; font-weight:600; font-size:16px; color:var(--ink); margin-bottom:8px; }
 .founder-bio { font-size:14px; line-height:1.7; color:var(--grey); }
+
+/* ── TEAM ── names and roles are English only, the same as the service-card
+   bullets and package features already are. Translating seven job titles would
+   cost 28 dictionary entries to say "web development" four ways. */
+.team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+.team-card { background:var(--surface); border:1px solid var(--concrete-dark); border-radius:18px; padding:22px; transition:transform 0.3s ease, border-color 0.3s ease; }
+.team-card:hover { transform:translateY(-4px); border-color:var(--ink); }
+.team-name { font-family:'Archivo',sans-serif; font-size:15px; font-weight:600; color:var(--ink); }
+.team-role { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); margin:6px 0 10px; }
+.team-desc { font-size:13.5px; line-height:1.65; color:var(--grey); }
 @media (max-width:560px) { .founder { flex-direction:column; text-align:center; gap:16px; padding-bottom:48px; } }
 
 /* ── TRUST STRIP ── */
@@ -1065,7 +1075,50 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
   <div class="founder reveal-section">
     <div>
       <div class="founder-name" data-i18n="founder_name">Kabelo, founder of Elevate Digitals</div>
-      <p class="founder-bio" data-i18n="founder_bio">I build the sites myself, which means you talk to the person doing the work rather than an account manager. Based in Cape Town.</p>
+      <p class="founder-bio" data-i18n="founder_bio">I run Elevate Digitals from Cape Town and I am on every project, alongside a team of specialists across design, build and content. You get my number, not an account manager's.</p>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0;">
+    <div class="sec-lbl reveal-section" data-i18n="team_label">The Team</div>
+    <h2 class="sec-h reveal-section" data-i18n-html="team_h2">The people who <span class="hl">build it</span></h2>
+    <p class="sec-sub reveal-section" data-i18n="team_sub">Based in Cape Town. You deal with me, and these are the people doing the work.</p>
+    <div class="team-grid">
+      <div class="team-card reveal-card">
+        <div class="team-name">Kabelo Tsotetsi</div>
+        <div class="team-role">Founder · Web development</div>
+        <p class="team-desc">Runs the studio and builds sites. First point of contact on every project, and still reachable after launch.</p>
+      </div>
+      <div class="team-card reveal-card">
+        <div class="team-name">Josh Kotzee</div>
+        <div class="team-role">Creative director · Strategy · Video</div>
+        <p class="team-desc">Sets the direction of a build before any code is written, runs projects day to day, and edits video.</p>
+      </div>
+      <div class="team-card reveal-card">
+        <div class="team-name">Josh Leaner</div>
+        <div class="team-role">Web development · Operations</div>
+        <p class="team-desc">Builds sites, and keeps projects moving: scheduling, handover, and the things that quietly stall a launch.</p>
+      </div>
+      <div class="team-card reveal-card">
+        <div class="team-name">Shaun Haye</div>
+        <div class="team-role">Web development</div>
+        <p class="team-desc">Front-end build and testing, including the responsive work that decides whether a site holds up on a mid-range phone.</p>
+      </div>
+      <div class="team-card reveal-card">
+        <div class="team-name">Liam Kotzee</div>
+        <div class="team-role">Web development · Client liaison</div>
+        <p class="team-desc">Development, and your point of contact while a project is running: updates, questions and revisions.</p>
+      </div>
+      <div class="team-card reveal-card">
+        <div class="team-name">Callum Camacho</div>
+        <div class="team-role">Web development · Video</div>
+        <p class="team-desc">Development, plus the video side: job footage cut down for social feeds and for the site itself.</p>
+      </div>
+      <div class="team-card reveal-card">
+        <div class="team-name">Luke Jacoby</div>
+        <div class="team-role">Social media coordination</div>
+        <p class="team-desc">Plans and schedules what goes out, and keeps posting consistent rather than in bursts between jobs.</p>
+      </div>
     </div>
   </div>
 
@@ -1341,7 +1394,7 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
         <form action="https://formspree.io/f/mqegrkbj" method="POST" id="contact-form">
           <div class="form-group"><label data-i18n="form_name">Your Name *</label><input type="text" name="name" placeholder="Your Name" data-i18n-ph="ph_name" required></div>
           <div class="form-group"><label data-i18n="form_whatsapp">WhatsApp Number *</label><input type="tel" name="whatsapp" placeholder="+27 ..." required></div>
-          <div class="form-group"><label data-i18n="form_email">Email <span class="opt" data-i18n="form_optional">(optional)</span></label><input type="email" name="email" placeholder="you@example.com"></div>
+          <div class="form-group"><label data-i18n-html="form_email">Email <span class="opt">(optional)</span></label><input type="email" name="email" placeholder="you@example.com"></div>
           <div class="form-group"><label data-i18n="form_message">Tell Us About Your Project *</label><textarea name="message" placeholder="Tell us about your business, what you need, and any questions you have…" data-i18n-ph="ph_message" required></textarea></div>
           <button type="submit" class="btn-submit" data-i18n="form_submit">Send Message →</button>
           <p id="contact-status" role="status" aria-live="polite" style="margin-top:14px;display:none;"></p>
@@ -1677,7 +1730,7 @@ const PACKAGES = {
       ['Payment gateway setup', 'new'],
       ['Full copywriting', 'new'],
       'Blog setup + training',
-      'Direct access to the person building it',
+      'Direct access to the people doing the work',
       '3 rounds of revisions',
     ],
   },
@@ -1975,7 +2028,7 @@ const TRANSLATIONS = {
     hero_badge:'Web Design Agency · South Africa',
     hero_h1:'Turn Your Website Into a <span class="hl">Lead-Generating Machine</span>',
     hero_sub:'We build websites for South African trades and service businesses, from plumbers and electricians to salons and consultants. Built to turn a phone screen into a booked job. Packages from <strong data-price="8500">R8,500</strong>.',
-    hero_cta1:'See Packages', hero_cta2:'Book Free Call', hero_chip:'Live in 2 weeks',
+    hero_cta1:'See Packages', hero_cta2:'or book a free call →', hero_chip:'Live in 2 weeks',
     stats_from:'Packages From', stats_turnaround:'Avg Turnaround', stats_support:'Support Response',
     why_label:'Why Elevate Digitals',
     why_h2:'Everything You Need to <span class="hl">Succeed Online</span>',
@@ -2020,13 +2073,15 @@ const TRANSLATIONS = {
     deposit_text:'<strong>50% deposit once you approve the concept</strong> • Balance due before launch',
     assure_text:'<strong>See your homepage design before you pay anything.</strong> After a quick call, I\'ll build your homepage concept free. If you don\'t want to go ahead after seeing it, you owe nothing.',
     founder_name:'Kabelo, founder of Elevate Digitals',
-    founder_bio:'I build the sites myself, which means you talk to the person doing the work rather than an account manager. Based in Cape Town.',
+    founder_bio:'I run Elevate Digitals from Cape Town and I am on every project, alongside a team of specialists across design, build and content. You get my number, not an account manager\'s.',
+    team_label:'The Team', team_h2:'The people who <span class="hl">build it</span>',
+    team_sub:'Based in Cape Town. You deal with me, and these are the people doing the work.',
     maint_label:'Add-Ons',
-    maint_h2:'Monthly <span class="hl">Maintenance Plans</span>',
-    maint_sub:'Keep your site secure and up to date after launch.',
+    maint_h2:'Monthly <span class="hl">Retainer Plans</span>',
+    maint_sub:'Each package has a matching monthly retainer to keep your site running, ranking and updated after launch.',
     contact_label:'Get In Touch',
     contact_h2:"Let's Start Your <span class=\"hl\">Project</span>",
-    contact_sub:'WhatsApp is the quickest way to reach me. Prefer to write it out? Use the form below and I will reply within 24 hours.', form_email:'Email Address *', form_message:'Tell Us About Your Project *', form_submit:'Send Message →', ph_message:'Tell us about your business, what you need, and any questions you have…',
+    contact_sub:'WhatsApp is the quickest way to reach me. Prefer to write it out? Use the form below and I will reply within 24 hours.', form_email:'Email <span class="opt">(optional)</span>', form_message:'Tell Us About Your Project *', form_submit:'Send Message →', ph_message:'Tell us about your business, what you need, and any questions you have…',
     blog_label:'Insights & Tips',
     blog_h2:'The <span class="hl">Elevate Blog</span>',
     blog_sub:'Practical advice to help South African businesses grow online: web design, SEO, and digital marketing tips you can actually use.',
@@ -2068,7 +2123,7 @@ const TRANSLATIONS = {
     hero_badge:'Webontwerp Agentskap · Suid-Afrika',
     hero_h1:"Verander Jou Webwerf in 'n <span class=\"hl\">Leidraad-Genererende Masjien</span>",
     hero_sub:"Ons bou webwerwe vir Suid-Afrikaanse ambagte en diensbesighede, van loodgieters en elektrisiëns tot salonne en konsultante. Gebou om 'n selfoonskerm in 'n bespreekte werk te omskep. Pakkette vanaf <strong data-price=\"8500\">R8,500</strong>.",
-    hero_cta1:'Sien Pakkette', hero_cta2:'Bespreek Gratis Oproep', hero_chip:'Aanlyn in 2 weke',
+    hero_cta1:'Sien Pakkette', hero_cta2:'of bespreek ’n gratis oproep →', hero_chip:'Aanlyn in 2 weke',
     stats_from:'Pakkette Vanaf', stats_turnaround:'Gem. Omlooptyd', stats_support:'Ondersteuning Reaksie',
     why_label:'Hoekom Elevate Digitals',
     why_h2:'Alles Wat Jy Nodig Het om <span class="hl">Aanlyn te Slaag</span>',
@@ -2113,13 +2168,15 @@ const TRANSLATIONS = {
     deposit_text:'<strong>50% deposito sodra jy die konsep goedkeur</strong> • Saldo betaalbaar voor bekendstelling',
     assure_text:'<strong>Sien jou tuisblad-ontwerp voordat jy enigiets betaal.</strong> Na \'n kort oproep bou ek jou tuisblad-konsep gratis. As jy nie wil voortgaan nadat jy dit gesien het nie, betaal jy niks.',
     founder_name:'Kabelo, stigter van Elevate Digitals',
-    founder_bio:'Ek bou die webwerwe self, wat beteken jy praat met die persoon wat die werk doen, nie met \'n rekeningbestuurder nie. Gebaseer in Kaapstad.',
+    founder_bio:'Ek bestuur Elevate Digitals vanuit Kaapstad en ek is op elke projek, saam met ’n span spesialiste in ontwerp, bou en inhoud. Jy kry my nommer, nie ’n rekeningbestuurder s’n nie.',
+    team_label:'Die Span', team_h2:'Die mense wat dit <span class="hl">bou</span>',
+    team_sub:'Gebaseer in Kaapstad. Jy werk met my, en dit is die mense wat die werk doen.',
     maint_label:'Byvoegings',
     maint_h2:'Maandelikse <span class="hl">Onderhoudplanne</span>',
-    maint_sub:'Hou jou werf veilig en op datum na bekendstelling.',
+    maint_sub:'Elke pakket het ’n passende maandelikse behouer om jou werf aan die gang, gerangskik en opgedateer te hou ná bekendstelling.',
     contact_label:'Kontak Ons',
     contact_h2:'Kom Ons Begin Jou <span class="hl">Projek</span>',
-    contact_sub:'WhatsApp is die vinnigste manier om my te bereik. Verkies jy om te skryf? Gebruik die vorm hieronder en ek antwoord binne 24 uur.', form_email:'E-posadres *', form_message:'Vertel Ons Oor Jou Projek *', form_submit:'Stuur Boodskap →', ph_message:'Vertel ons van jou besigheid, wat jy nodig het, en enige vrae wat jy het…',
+    contact_sub:'WhatsApp is die vinnigste manier om my te bereik. Verkies jy om te skryf? Gebruik die vorm hieronder en ek antwoord binne 24 uur.', form_email:'E-pos <span class="opt">(opsioneel)</span>', form_message:'Vertel Ons Oor Jou Projek *', form_submit:'Stuur Boodskap →', ph_message:'Vertel ons van jou besigheid, wat jy nodig het, en enige vrae wat jy het…',
     blog_label:'Insigte & Wenke',
     blog_h2:'Die <span class="hl">Elevate Blog</span>',
     blog_sub:'Praktiese raad om Suid-Afrikaanse besighede te help om aanlyn te groei: webontwerp, SEO en digitale bemarkingswenke wat jy werklik kan gebruik.',
@@ -2192,7 +2249,9 @@ const TRANSLATIONS = {
     deposit_text:'<strong>Idiphozithi engu-50% uma usuvumile umklamo</strong> • Insalela ikhokhwa ngaphambi kokwethulwa',
     assure_text:'<strong>Bona umklamo wekhasi lakho lasekhaya ngaphambi kokukhokha lutho.</strong> Ngemva kwengxoxo emfushane, ngizokwakhela umklamo wekhasi lakho lasekhaya mahhala. Uma ungafuni ukuqhubeka ngemva kokuwubona, awukhokhi lutho.',
     founder_name:'Kabelo, umsunguli we-Elevate Digitals',
-    founder_bio:'Ngiwakha ngokwami amawebhusayithi, okusho ukuthi ukhuluma nomuntu owenza umsebenzi, hhayi imenenja ye-akhawunti. NgiseKapa.',
+    founder_bio:'Ngiphatha i-Elevate Digitals ngiseKapa futhi ngikhona kuwo wonke amaphrojekthi, kanye neqembu lochwepheshe kwezokuklama, ukwakha nokuqukethwe. Uthola inombolo yami, hhayi eyemenenja ye-akhawunti.',
+    team_label:'Iqembu', team_h2:'Abantu <span class="hl">abakwakhayo</span>',
+    team_sub:'Sisekelwe eKapa. Usebenzisana nami, futhi laba yibona abantu abenza umsebenzi.',
     maint_label:'Okungezelelwayo',
     maint_h2:'Izinhlelo Zokunakekelwa <span class="hl">Zenyanga Zonke</span>',
     maint_sub:'Iphakheji ngayinye inohlelo lwenyanga oluhambisana nayo ukuze iwebhusayithi yakho ihlale isebenza, ibekwe phezulu futhi ibuyekezwe ngemva kokwethulwa.',
@@ -2203,7 +2262,7 @@ const TRANSLATIONS = {
     contact_wa_note:'Indlela esheshayo yokungifinyelela. Imibuzo eminingi iphendulwa ngalo lolo suku.',
     form_name:'Igama Lakho *', ph_name:'Igama Lakho',
     form_whatsapp:'Inombolo ye-WhatsApp *', form_optional:'(akuphoqelekile)',
-    form_email:'Ikheli le-imeyili', form_message:'Sitshele Ngephrojekthi Yakho *', form_submit:'Thumela Umyalezo →', ph_message:'Sitshele ngebhizinisi lakho, ukuthi udingani, nemibuzo onayo...',
+    form_email:'I-imeyili <span class="opt">(akudingekile)</span>', form_message:'Sitshele Ngephrojekthi Yakho *', form_submit:'Thumela Umyalezo →', ph_message:'Sitshele ngebhizinisi lakho, ukuthi udingani, nemibuzo onayo...',
     pay_h2:'Usukhulumile nathi? Khokha idiphozithi yakho lapha',
     pay_sub:"Khetha uhlelo esivumelene ngalo ukuze sibale idiphozithi yakho engu-50%. Wonke amanani akhonjiswa ku-<span id='payCurrencyNote'>ZAR</span>. Awukakhulumi nathi? <a href='#contact' onclick='event.preventDefault(); showPage(\"contact\");'>Qala lapha</a>. Umklamo wokuqala umahhala.",
     blog_label:'Ulwazi Namathiphu',
@@ -2284,7 +2343,9 @@ const TRANSLATIONS = {
     deposit_text:'<strong>Idipozithi engama-50% xa uvumile uyilo</strong> • Intsalela ihlawulwa phambi kokusungulwa',
     assure_text:'<strong>Bona uyilo lwephepha lakho lokuqala phambi kokuba uhlawule nto.</strong> Emva kwencoko emfutshane, ndiza kukwakhela uyilo lwephepha lakho lokuqala simahla. Ukuba awufuni ukuqhubeka emva kokulubona, akukho nto uyihlawulayo.',
     founder_name:'Kabelo, umsunguli we-Elevate Digitals',
-    founder_bio:'Ndizakha ngokwam iiwebhusayithi, oko kuthetha ukuba uthetha nomntu owenza umsebenzi, hayi umphathi we-akhawunti. NdiseKapa.',
+    founder_bio:'Ndiqhuba i-Elevate Digitals ndiseKapa kwaye ndikho kuzo zonke iiprojekthi, kunye neqela leengcali kuyilo, ulwakhiwo nomxholo. Ufumana inombolo yam, hayi eyomphathi weakhawunti.',
+    team_label:'Iqela', team_h2:'Abantu <span class="hl">abayakhayo</span>',
+    team_sub:'Sisekwe eKapa. Usebenza nam, kwaye aba ngabantu abenza umsebenzi.',
     maint_label:'Okongezelelweyo',
     maint_h2:'Izicwangciso Zokugcinwa <span class="hl">Zenyanga Nenyanga</span>',
     maint_sub:'Ipakeji nganye inesicwangciso senyanga esihambelanayo ukuze iwebhusayithi yakho ihlale isebenza, ibekwe phezulu kwaye ihlaziywe emva kokusungulwa.',
@@ -2295,7 +2356,7 @@ const TRANSLATIONS = {
     contact_wa_note:'Eyona ndlela ikhawulezayo yokundifikelela. Imibuzo emininzi iphendulwa kwangaloo mini.',
     form_name:'Igama Lakho *', ph_name:'Igama Lakho',
     form_whatsapp:'Inombolo ye-WhatsApp *', form_optional:'(ayinyanzelekanga)',
-    form_email:'Idilesi ye-imeyile', form_message:'Sixelele Ngeprojekthi Yakho *', form_submit:'Thumela Umyalezo →', ph_message:'Sixelele ngeshishini lakho, into oyifunayo, nayo nayiphi na imibuzo onayo...',
+    form_email:'I-imeyile <span class="opt">(ayifuneki)</span>', form_message:'Sixelele Ngeprojekthi Yakho *', form_submit:'Thumela Umyalezo →', ph_message:'Sixelele ngeshishini lakho, into oyifunayo, nayo nayiphi na imibuzo onayo...',
     pay_h2:'Sele uthethile nathi? Hlawula idipozithi yakho apha',
     pay_sub:"Khetha isicwangciso esivumelene ngaso ukuze sibale idipozithi yakho engama-50%. Onke amaxabiso aboniswa ku-<span id='payCurrencyNote'>ZAR</span>. Awukathethi nathi? <a href='#contact' onclick='event.preventDefault(); showPage(\"contact\");'>Qala apha</a>. Uyilo lokuqala lusimahla.",
     blog_label:'Ulwazi Namacebiso',
