@@ -42,6 +42,8 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/motion.css">
+<script>document.documentElement.classList.add('js-ready');</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Archivo',sans-serif;background:var(--concrete);color:var(--ink);min-height:100vh;}
@@ -71,8 +73,8 @@ li{font-size:16px;line-height:1.8;color:var(--grey);margin-bottom:6px;}
 .cta-box{background:var(--surface);border:1px solid var(--concrete-dark);border-radius:20px;padding:32px;text-align:center;margin-top:48px;}
 .cta-box h3{font-family:'Archivo',sans-serif;font-size:22px;font-weight:600;margin-bottom:10px;}
 .cta-box p{font-size:14px;color:var(--grey);margin-bottom:20px;}
-.btn{display:inline-block;background:var(--hivis);color:var(--ink);padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600;font-size:15px;transition:transform 0.2s,box-shadow 0.2s;}
-.btn:hover{background:var(--hivis-dark);transform:translateY(-2px);}
+.btn{display:inline-block;background:var(--hivis);color:var(--ink);padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600;font-size:15px;transition:transform 0.2s,color 0.5s var(--ease);}
+.btn:hover{transform:translateY(-2px);}
 footer{border-top:1px solid var(--concrete-dark);padding:24px 32px;text-align:center;font-size:13px;color:var(--grey);}
 footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--hivis);text-decoration-thickness:2px;text-underline-offset:3px;}
 </style>
@@ -90,13 +92,13 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
   <p>South Africa has one of the highest rates of mobile-only internet users in the world. While businesses in Europe and North America often have a split between desktop and mobile browsing, in South Africa the picture is dramatically different, and it has huge implications for how websites should be built.</p>
 
   <div class="stat-grid">
-    <div class="stat-box"><div class="stat-num">80%+</div><div class="stat-label">of SA internet users browse primarily on mobile</div></div>
-    <div class="stat-box"><div class="stat-num">53%</div><div class="stat-label">of mobile visitors abandon sites that take 3+ seconds to load</div></div>
-    <div class="stat-box"><div class="stat-num">#1</div><div class="stat-label">Google now uses mobile-first indexing for all websites</div></div>
-    <div class="stat-box"><div class="stat-num">2x</div><div class="stat-label">Mobile-optimised sites get twice the conversion rate on phones</div></div>
+    <div class="stat-box" data-reveal><div class="stat-num">80%+</div><div class="stat-label">of SA internet users browse primarily on mobile</div></div>
+    <div class="stat-box" data-reveal><div class="stat-num">53%</div><div class="stat-label">of mobile visitors abandon sites that take 3+ seconds to load</div></div>
+    <div class="stat-box" data-reveal><div class="stat-num">#1</div><div class="stat-label">Google now uses mobile-first indexing for all websites</div></div>
+    <div class="stat-box" data-reveal><div class="stat-num">2x</div><div class="stat-label">Mobile-optimised sites get twice the conversion rate on phones</div></div>
   </div>
 
-  <h2>The South African Context</h2>
+  <h2 data-reveal>The South African Context</h2>
   <p>Unlike many developed markets where people have both a smartphone and a laptop or desktop, millions of South Africans are smartphone-only internet users. For these users, their phone is their computer. It's how they search for services, read reviews, compare prices, and make contact with businesses.</p>
   <p>This isn't just a demographic trend. It's driven by practical factors: data costs, load-shedding (making desktop charging unreliable), and the affordability of smartphones relative to computers in the South African market.</p>
 
@@ -104,7 +106,7 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
     If your website isn't optimised for mobile, you're not just providing a worse experience. You're invisible to the majority of your potential customers. Google ranks mobile-friendly sites higher in search results.
   </div>
 
-  <h2>What "Mobile-First" Actually Means</h2>
+  <h2 data-reveal>What "Mobile-First" Actually Means</h2>
   <p>Mobile-first isn't just about making a desktop site look okay on a phone. It's a fundamentally different approach to design:</p>
   <ul>
     <li><strong>Design for the smallest screen first:</strong> Start with the mobile layout and scale up, not down.</li>
@@ -115,11 +117,11 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
     <li><strong>Simple navigation:</strong> Complex multi-level menus are unusable on phones. Hamburger menus and clear CTAs work.</li>
   </ul>
 
-  <h2>The Google Connection</h2>
+  <h2 data-reveal>The Google Connection</h2>
   <p>Since 2019, Google has used mobile-first indexing for all websites. This means Google primarily uses the mobile version of your site to determine how it ranks in search results, for everyone, including desktop users.</p>
   <p>If your site has content that's hidden or truncated on mobile, Google effectively can't see it. If your mobile site loads slowly, your rankings suffer across the board. Mobile performance and SEO are now inseparable.</p>
 
-  <h2>What Makes a Good Mobile Website in 2026?</h2>
+  <h2 data-reveal>What Makes a Good Mobile Website in 2026?</h2>
   <ul class="checklist">
     <li>Loads in under 2 seconds on a 4G connection</li>
     <li>Text is at least 16px and readable without zooming</li>
@@ -131,19 +133,20 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
     <li>Navigation is clear and accessible with one thumb</li>
   </ul>
 
-  <h2>How Elevate Digitals Approaches Mobile</h2>
+  <h2 data-reveal>How Elevate Digitals Approaches Mobile</h2>
   <p>Every website we build is designed mobile-first. We start with the smallest screen and work up, not the other way around. We test every build on real devices across the screen sizes most common in South Africa, including mid-range Android phones that represent the majority of the market.</p>
   <p>We also optimise load times specifically for South African mobile networks: compressing images, minimising scripts, and ensuring fast performance even on 3G connections.</p>
 
-  <div class="cta-box">
+  <div class="cta-box" data-reveal>
     <h3>Is Your Website Mobile-Ready?</h3>
     <p>Get a free website review and find out how your current site performs on mobile, and what we'd do differently.</p>
-    <a href="https://www.elevatedigitals.co.za/#contact" class="btn">Get a Free Review →</a>
+    <a href="https://www.elevatedigitals.co.za/#contact" class="btn btn-primary">Get a Free Review →</a>
   </div>
 </article>
 <footer>
   <p>© 2026 <a href="/">Elevate Digitals</a> · Web Design South Africa · <a href="/#blog">Blog</a> · <a href="/#services">Services</a></p>
   <p class="foot-legal"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refund-policy">Refund Policy</a></p>
 </footer>
+<script src="/motion.js" defer></script>
 </body>
 </html>

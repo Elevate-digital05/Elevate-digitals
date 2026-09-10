@@ -1,0 +1,123 @@
+/* Elevate Digitals — motion layer, ported from the Prismatic Syntax build.
+
+   Prismatic is a dark, blue, single-page site; this file takes its MOVEMENT
+   only. Every colour still comes from theme.css, and nothing below carries a
+   literal colour value — same rule as site.css.
+
+   Everything that hides content is gated behind .js-ready on <html>, which
+   index.html and each standalone page set synchronously in <head>. Without
+   JS nothing here applies and the page renders plain, fully readable.
+
+   Reduced motion follows the policy already set in index.html: no MOVEMENT,
+   not a dead page. Entrances still fade in place; anything that slides,
+   sweeps or wipes stops. Windows sets that flag whenever "Animation effects"
+   is off, which is a large share of visitors, so a hard kill would leave
+   those people staring at content that never arrives. */
+
+:root {
+  --ease:    cubic-bezier(.16, 1, .3, 1);   /* Prismatic's entrance ease */
+  --ease-io: cubic-bezier(.65, 0, .35, 1);  /* symmetrical, for state swaps */
+}
+
+/* ── REVEAL ──
+   Opt in with data-reveal. Stagger a row by setting --d per element, the way
+   Prismatic does: style="--d:200ms". Opacity and transform run on different
+   durations so the fade lands before the movement settles. */
+.js-ready [data-reveal] {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity 0.9s var(--ease) var(--d, 0ms),
+              transform 1.2s var(--ease) var(--d, 0ms);
+}
+.js-ready [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ── SPLIT HEADLINE ──
+   The signature Prismatic reveal: each line sits in its own clipped box and
+   rises from below, one after the next. Markup is one .line wrapper per line
+   with the text in a nested span:
+     <h2 data-split><span class="line"><span>First line</span></span>…</h2>
+   The padding/margin pair stops descenders (g, y, p) being clipped by the
+   overflow that makes the effect work. motion.js numbers the lines (--i). */
+.line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.line > span { display: block; }
+.js-ready [data-split] .line > span {
+  transform: translateY(106%);
+  transition: transform 1.15s var(--ease) calc(var(--d, 0ms) + var(--i, 0) * 95ms);
+}
+.js-ready [data-split].is-in .line > span { transform: none; }
+
+/* ── BUTTON FILL SWEEP ──
+   Prismatic wipes a fill across the button from the right, then anchors it
+   left on the way out, so the sweep reverses rather than snapping back.
+   The fill is ink in both cases: hi-vis may only ever carry ink text, so
+   sweeping hi-vis over hi-vis would be invisible and sweeping it over the
+   ghost button would break the one-or-two-per-screen budget. */
+.btn-primary, .btn-ghost { position: relative; isolation: isolate; overflow: hidden; }
+.btn-primary::before, .btn-ghost::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: var(--ink);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.6s var(--ease);
+}
+.btn-primary:is(:hover, :focus-visible)::before,
+.btn-ghost:is(:hover, :focus-visible)::before { transform: scaleX(1); transform-origin: left; }
+.btn-primary, .btn-ghost { transition: color 0.5s var(--ease), transform 0.2s, border-color 0.2s; }
+.btn-primary:is(:hover, :focus-visible),
+.btn-ghost:is(:hover, :focus-visible) { color: var(--concrete); }
+
+/* ── ARROW NUDGE ──
+   Opt in per icon with .arr, so a WhatsApp mark in the same button stays put. */
+.arr { transition: transform 0.5s var(--ease); }
+:is(.btn, .link, a, button):is(:hover, :focus-visible) .arr { transform: translateX(5px); }
+
+/* ── LINK UNDERLINE SWIPE ──
+   The rule wipes out to the right and back in from the left, rather than
+   growing from one end. Needs a positioned parent with an ::after rule. */
+@keyframes swipe {
+  0%   { transform: scaleX(1); transform-origin: right; }
+  45%  { transform: scaleX(0); transform-origin: right; }
+  46%  { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+
+/* ── UNDERLINE GROW ──
+   A gradient sized from 0 to full width, so the rule draws itself in. Cheaper
+   and smoother than animating text-decoration, which cannot be transitioned. */
+.u-grow {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.6s var(--ease), color 0.3s, opacity 0.3s;
+  text-decoration: none;
+}
+.u-grow:is(:hover, :focus-visible) { background-size: 100% 1px; }
+
+/* ── STICKY HEADER ──
+   Two states, both driven by motion.js: is-scrolled frosts the bar once the
+   page has moved, is-hidden lifts it away while scrolling down and brings it
+   back on the way up. color-mix keeps the translucency here without putting a
+   second copy of the concrete value anywhere but theme.css. */
+.site-head, [data-sticky-head] {
+  transition: transform 0.6s var(--ease), background-color 0.4s, box-shadow 0.4s;
+  will-change: transform;
+}
+.site-head.is-scrolled, [data-sticky-head].is-scrolled {
+  background: color-mix(in srgb, var(--concrete) 84%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+.site-head.is-hidden, [data-sticky-head].is-hidden { transform: translateY(-101%); }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  /* entrances keep their fade, in place */
+  .js-ready [data-reveal] { transform: none; transition: opacity 0.5s ease var(--d, 0ms); }
+  /* a split headline has nowhere to fade to per line, so it fades whole */
+  .js-ready [data-split] { opacity: 0; transition: opacity 0.5s ease var(--d, 0ms); }
+  .js-ready [data-split].is-in { opacity: 1; }
+  .js-ready [data-split] .line > span { transform: none; transition: none; }
+  /* sweeps, wipes and nudges are movement with no content behind them */
+  .btn-primary::before, .btn-ghost::before { display: none; }
+  .arr { transition: none; }
+  .u-grow { transition: color 0.3s, opacity 0.3s; }
+  .u-grow:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 3px; }
+  .site-head.is-hidden, [data-sticky-head].is-hidden { transform: none; }
+  .link:hover::after { animation: none; }
+}

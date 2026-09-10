@@ -95,18 +95,21 @@ function renderPage(svc, all) {
   const h1Text = `${before}${hl}${after}`;
   const others = all.filter(s => s.slug !== svc.slug);
 
-  const included = svc.included.map(i => `
-        <div class="incl">
+  /* Cards reveal in sequence rather than all at once. The step is small enough
+     that a row still reads as one movement — Prismatic runs 80ms between
+     siblings and nothing here has more items in a row than it does. */
+  const included = svc.included.map((i, n) => `
+        <div class="incl" data-reveal style="--d:${n * 80}ms">
           <div class="incl-ico">${i.icon === 'whatsapp' ? waIcon(19) : icon(i.icon, 19)}</div>
           <h3>${esc(i.name)}</h3>
           <p>${esc(i.desc)}</p>
         </div>`).join('');
 
-  const who = svc.who.map(([lead, rest]) =>
-    `        <li><span><strong>${esc(lead)}</strong> ${esc(rest)}</span></li>`).join('\n');
+  const who = svc.who.map(([lead, rest], n) =>
+    `        <li data-reveal style="--d:${n * 60}ms"><span><strong>${esc(lead)}</strong> ${esc(rest)}</span></li>`).join('\n');
 
-  const tiers = svc.pricing.tiers.map(t => `
-        <div class="tier${t.rec ? ' rec' : ''}">
+  const tiers = svc.pricing.tiers.map((t, n) => `
+        <div class="tier${t.rec ? ' rec' : ''}" data-reveal style="--d:${n * 100}ms">
           ${t.rec ? '<span class="tier-tag">Recommended</span>' : ''}
           <div class="tier-name">${esc(t.name)}</div>
           <div class="tier-price">${price(t.price, { service: svc.name, tier: t.name })}${t.plus ? '+' : ''}${t.per ? `<span class="tier-period"> /${t.per}</span>` : ''}</div>
@@ -116,14 +119,14 @@ function renderPage(svc, all) {
           <a class="btn ${t.rec ? 'btn-primary' : 'btn-ghost'}" href="${attr(waLink(`Hi Kabelo, I'm interested in ${svc.name} (${t.name}).`))}" target="_blank" rel="noopener noreferrer">Enquire</a>
         </div>`).join('');
 
-  const faqs = svc.faqs.map(f => `
-        <details class="faq">
+  const faqs = svc.faqs.map((f, n) => `
+        <details class="faq" data-reveal style="--d:${n * 60}ms">
           <summary>${esc(f.q)}</summary>
           <p>${f.a}</p>
         </details>`).join('');
 
-  const otherLinks = others.map(s =>
-    `        <a href="/services/${s.slug}">${esc(s.name)} <span aria-hidden="true">→</span></a>`).join('\n');
+  const otherLinks = others.map((s, n) =>
+    `        <a href="/services/${s.slug}" data-reveal style="--d:${n * 60}ms">${esc(s.name)} <span aria-hidden="true">→</span></a>`).join('\n');
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -207,6 +210,8 @@ ${JSON.stringify(jsonLd, null, 2)}
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/motion.css">
+<script>document.documentElement.classList.add('js-ready');</script>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -224,32 +229,32 @@ ${JSON.stringify(jsonLd, null, 2)}
   <div class="wrap">
 
     <section class="hero">
-      <span class="kicker">${esc(svc.hero.kicker)}</span>
-      <h1>${esc(before)}<span class="hl">${esc(hl)}</span>${esc(after)}</h1>
-      <p class="lede">${esc(svc.hero.lede)}</p>
-      <div class="cta-row">
+      <span class="kicker" data-reveal style="--d:200ms">${esc(svc.hero.kicker)}</span>
+      <h1 data-reveal style="--d:280ms">${esc(before)}<span class="hl">${esc(hl)}</span>${esc(after)}</h1>
+      <p class="lede" data-reveal style="--d:640ms">${esc(svc.hero.lede)}</p>
+      <div class="cta-row" data-reveal style="--d:760ms">
         <a class="btn btn-primary" href="${attr(waLink(`Hi Kabelo, I'd like to talk about ${svc.name.toLowerCase()} for my business.`))}" target="_blank" rel="noopener noreferrer">${waIcon()} Chat on WhatsApp</a>
         <a class="btn btn-ghost" href="#pricing">See pricing</a>
       </div>
     </section>
 
     <section class="sec">
-      <h2>What's included</h2>
-      <p class="sec-sub">Everything below is part of the work, not an upsell once you have started.</p>
+      <h2 data-split><span class="line"><span>What's included</span></span></h2>
+      <p class="sec-sub" data-reveal style="--d:80ms">Everything below is part of the work, not an upsell once you have started.</p>
       <div class="incl-grid">${included}
       </div>
     </section>
 
     <section class="sec">
-      <h2>Who it's for</h2>
+      <h2 data-split><span class="line"><span>Who it's for</span></span></h2>
       <ul class="who">
 ${who}
       </ul>
     </section>
 
     <section class="sec" id="pricing">
-      <h2>Pricing</h2>
-      <p class="sec-sub">${esc(svc.pricing.lead)}</p>
+      <h2 data-split><span class="line"><span>Pricing</span></span></h2>
+      <p class="sec-sub" data-reveal style="--d:80ms">${esc(svc.pricing.lead)}</p>
       <div class="tiers t${svc.pricing.cols}">${tiers}
       </div>
       ${svc.pricing.note ? `<p class="price-note">${svc.pricing.note}</p>` : ''}
@@ -261,20 +266,20 @@ ${who}
     </section>
 
     <section class="sec">
-      <h2>Questions about ${esc(svc.name.toLowerCase())}</h2>
+      <h2 data-split><span class="line"><span>Questions about ${esc(svc.name.toLowerCase())}</span></span></h2>
       <div class="faqs">${faqs}
       </div>
     </section>
 
     <section class="sec">
-      <h2>Other things I do</h2>
+      <h2 data-split><span class="line"><span>Other things I do</span></span></h2>
       <div class="svc-links">
 ${otherLinks}
       </div>
     </section>
 
     <section class="close-cta">
-      <h2>Tell me what you need</h2>
+      <h2 data-split><span class="line"><span>Tell me what you need</span></span></h2>
       <p>Send a message with what your business does and what you are trying to fix. I'll come back with a straight answer on whether I can help and what it would cost.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="${attr(waLink(`Hi Kabelo, I'd like to talk about ${svc.name.toLowerCase()} for my business.`))}" target="_blank" rel="noopener noreferrer">${waIcon()} Chat on WhatsApp</a>
@@ -329,6 +334,7 @@ ${all.map(s => `        <li><a href="/services/${s.slug}">${esc(s.nav)}</a></li>
 </footer>
 
 <a href="${attr(waLink(`Hi Kabelo, I'd like to talk about ${svc.name.toLowerCase()} for my business.`))}" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">${waIcon(27)}</a>
+<script src="/motion.js" defer></script>
 </body>
 </html>
 `;

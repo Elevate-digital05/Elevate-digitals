@@ -137,6 +137,37 @@ not started and to message on WhatsApp.
 should carry a literal colour value. `/brand` holds the logo files, favicons and
 og-image; `brand/README.md` is the source of truth for usage.
 
+## Motion
+
+`motion.css` and `motion.js` are the shared animation layer, ported from the
+Prismatic Syntax build. Between them they cover the scroll reveals, the split
+headline rise, the button fill sweep, the drawn-in link underlines and the
+sticky header's scrolled/hidden states. Like `site.css`, `motion.css` carries no
+literal colour value — everything comes from `theme.css`.
+
+Two hooks do the work:
+
+- `data-reveal` fades and lifts an element in when it scrolls into view. Stagger
+  a row by setting `--d` per element: `<div data-reveal style="--d:80ms">`.
+- `data-split` rises a heading out of a clipped box. Each line needs wrapping:
+  `<h2 data-split><span class="line"><span>Pricing</span></span></h2>`. Only use
+  it where the markup is static — anything driven by `data-i18n-html` has its
+  innerHTML replaced on a language switch, which would strip the wrappers, so
+  those headings take `data-reveal` instead.
+
+Both hide content until JS runs, so both are gated behind `.js-ready` on
+`<html>`. Every page that uses them sets that class synchronously in `<head>`;
+without JS the rules never match and the page renders plain and fully readable.
+
+Reduced motion follows the policy already set in `index.html`: no *movement*,
+not a dead page. Entrances still fade in place, and the sweeps, wipes and
+nudges stop. Windows sets that flag whenever "Animation effects" is off, so a
+hard kill would leave a large share of visitors waiting on content that never
+arrives.
+
+The legal pages and the printable menu deliberately skip this layer: those are
+documents to read, print and search, not pages to scroll through.
+
 ## Tools
 
 `tools/invoice.html` — fillable, printable invoice. Not linked from the site.

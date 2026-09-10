@@ -143,6 +143,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/motion.css">
+<script>document.documentElement.classList.add('js-ready');</script>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
@@ -160,45 +162,45 @@
   <div class="wrap">
 
     <section class="hero">
-      <span class="kicker">Monthly Maintenance</span>
-      <h1>Your site stays up and current, <span class="hl">without you thinking about it</span></h1>
-      <p class="lede">Websites do not fail loudly. A certificate expires, a form stops sending, prices go stale, and you find out weeks later from a customer. A retainer is the arrangement where that stops being your problem.</p>
-      <div class="cta-row">
+      <span class="kicker" data-reveal style="--d:200ms">Monthly Maintenance</span>
+      <h1 data-reveal style="--d:280ms">Your site stays up and current, <span class="hl">without you thinking about it</span></h1>
+      <p class="lede" data-reveal style="--d:640ms">Websites do not fail loudly. A certificate expires, a form stops sending, prices go stale, and you find out weeks later from a customer. A retainer is the arrangement where that stops being your problem.</p>
+      <div class="cta-row" data-reveal style="--d:760ms">
         <a class="btn btn-primary" href="https://wa.me/27650858437?text=Hi%20Kabelo%2C%20I'd%20like%20to%20talk%20about%20monthly%20maintenance%20for%20my%20business." target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Chat on WhatsApp</a>
         <a class="btn btn-ghost" href="#pricing">See pricing</a>
       </div>
     </section>
 
     <section class="sec">
-      <h2>What's included</h2>
-      <p class="sec-sub">Everything below is part of the work, not an upsell once you have started.</p>
+      <h2 data-split><span class="line"><span>What's included</span></span></h2>
+      <p class="sec-sub" data-reveal style="--d:80ms">Everything below is part of the work, not an upsell once you have started.</p>
       <div class="incl-grid">
-        <div class="incl">
+        <div class="incl" data-reveal style="--d:0ms">
           <div class="incl-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
           <h3>Hosting included</h3>
           <p>No separate hosting bill, no control panel to log into, no renewal you forget until the site is offline.</p>
         </div>
-        <div class="incl">
+        <div class="incl" data-reveal style="--d:80ms">
           <div class="incl-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div>
           <h3>Weekly backups</h3>
           <p>A full copy taken every week and kept off the server, so a bad change or a bad day is a restore rather than a rebuild.</p>
         </div>
-        <div class="incl">
+        <div class="incl" data-reveal style="--d:160ms">
           <div class="incl-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <h3>Security &amp; SSL monitoring</h3>
           <p>The padlock stays valid and dependencies stay patched. An expired certificate makes browsers warn people away from you.</p>
         </div>
-        <div class="incl">
+        <div class="incl" data-reveal style="--d:240ms">
           <div class="incl-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8"/><path d="m15 5 4 4"/><path d="M18.4 2.6a2.17 2.17 0 0 1 3 3L6 21l-4 1 1-4Z"/></svg></div>
           <h3>Content updates</h3>
           <p>New prices, new photos, changed hours, a new service. You send it, I change it, within your monthly hours.</p>
         </div>
-        <div class="incl">
+        <div class="incl" data-reveal style="--d:320ms">
           <div class="incl-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
           <h3>Uptime monitoring</h3>
           <p>The site is checked automatically. If it goes down, I find out from the monitor rather than from you.</p>
         </div>
-        <div class="incl">
+        <div class="incl" data-reveal style="--d:400ms">
           <div class="incl-ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></div>
           <h3>Monthly report</h3>
           <p>What changed, what was updated and, on the higher plans, where you rank. One page, plain language.</p>
@@ -207,20 +209,20 @@
     </section>
 
     <section class="sec">
-      <h2>Who it's for</h2>
+      <h2 data-split><span class="line"><span>Who it's for</span></span></h2>
       <ul class="who">
-        <li><span><strong>Your site is live and nobody is looking after it</strong> which is the normal state of most small business websites.</span></li>
-        <li><span><strong>It broke once already</strong> and you would rather not repeat the week that followed.</span></li>
-        <li><span><strong>You do not want to touch it</strong> and would rather send a WhatsApp than log into anything.</span></li>
-        <li><span><strong>Your prices or team change often</strong> and the site is always three months behind.</span></li>
+        <li data-reveal style="--d:0ms"><span><strong>Your site is live and nobody is looking after it</strong> which is the normal state of most small business websites.</span></li>
+        <li data-reveal style="--d:60ms"><span><strong>It broke once already</strong> and you would rather not repeat the week that followed.</span></li>
+        <li data-reveal style="--d:120ms"><span><strong>You do not want to touch it</strong> and would rather send a WhatsApp than log into anything.</span></li>
+        <li data-reveal style="--d:180ms"><span><strong>Your prices or team change often</strong> and the site is always three months behind.</span></li>
       </ul>
     </section>
 
     <section class="sec" id="pricing">
-      <h2>Pricing</h2>
-      <p class="sec-sub">Monthly, in ZAR. Each plan pairs with a website package, but you do not have to have bought the site from me. Cancel any time with 30 days' notice.</p>
+      <h2 data-split><span class="line"><span>Pricing</span></span></h2>
+      <p class="sec-sub" data-reveal style="--d:80ms">Monthly, in ZAR. Each plan pairs with a website package, but you do not have to have bought the site from me. Cancel any time with 30 days' notice.</p>
       <div class="tiers t4">
-        <div class="tier">
+        <div class="tier" data-reveal style="--d:0ms">
           
           <div class="tier-name">Starter Care</div>
           <div class="tier-price">R799<span class="tier-period"> /mo</span></div>
@@ -229,7 +231,7 @@
           <ul class="tier-feats"><li><span>Hosting included</span></li><li><span>Weekly backups</span></li><li><span>Security &amp; SSL monitoring</span></li><li><span>Content updates (1hr/mo)</span></li></ul>
           <a class="btn btn-ghost" href="https://wa.me/27650858437?text=Hi%20Kabelo%2C%20I'm%20interested%20in%20Monthly%20Maintenance%20(Starter%20Care)." target="_blank" rel="noopener noreferrer">Enquire</a>
         </div>
-        <div class="tier rec">
+        <div class="tier rec" data-reveal style="--d:100ms">
           <span class="tier-tag">Recommended</span>
           <div class="tier-name">Business Care</div>
           <div class="tier-price">R1,299<span class="tier-period"> /mo</span></div>
@@ -238,7 +240,7 @@
           <ul class="tier-feats"><li><span>Everything in Starter Care</span></li><li><span>Content updates (2hr/mo)</span></li><li><span>Monthly SEO report</span></li><li><span>Same-day reply on weekdays</span></li></ul>
           <a class="btn btn-primary" href="https://wa.me/27650858437?text=Hi%20Kabelo%2C%20I'm%20interested%20in%20Monthly%20Maintenance%20(Business%20Care)." target="_blank" rel="noopener noreferrer">Enquire</a>
         </div>
-        <div class="tier">
+        <div class="tier" data-reveal style="--d:200ms">
           
           <div class="tier-name">Pro Care</div>
           <div class="tier-price">R1,999<span class="tier-period"> /mo</span></div>
@@ -247,7 +249,7 @@
           <ul class="tier-feats"><li><span>Everything in Business Care</span></li><li><span>Store / booking support</span></li><li><span>SEO monitoring &amp; reporting</span></li><li><span>Content updates (4hr/mo)</span></li></ul>
           <a class="btn btn-ghost" href="https://wa.me/27650858437?text=Hi%20Kabelo%2C%20I'm%20interested%20in%20Monthly%20Maintenance%20(Pro%20Care)." target="_blank" rel="noopener noreferrer">Enquire</a>
         </div>
-        <div class="tier">
+        <div class="tier" data-reveal style="--d:300ms">
           
           <div class="tier-name">Premium Care</div>
           <div class="tier-price">R3,500+<span class="tier-period"> /mo</span></div>
@@ -266,25 +268,25 @@
     </section>
 
     <section class="sec">
-      <h2>Questions about monthly maintenance</h2>
+      <h2 data-split><span class="line"><span>Questions about monthly maintenance</span></span></h2>
       <div class="faqs">
-        <details class="faq">
+        <details class="faq" data-reveal style="--d:0ms">
           <summary>What counts as a content update?</summary>
           <p>Text, images, prices, opening hours, staff, adding or removing a service, swapping a PDF. The monthly hours are for changes to what is already there. A new page layout, a new feature or a redesign is project work and gets quoted separately, and I tell you which one it is before doing it, not after.</p>
         </details>
-        <details class="faq">
+        <details class="faq" data-reveal style="--d:60ms">
           <summary>What are your support hours?</summary>
           <p>Mon–Fri 7am–7pm · Sat 12pm–5pm SAST. On Business Care and above you get a same-day reply on weekdays. We do not offer 24/7 or overnight cover. The hours above are the hours we actually work, and I would rather set a promise we can keep than one that sounds better in a brochure. Uptime monitoring runs continuously regardless, so an outage is caught even outside those hours.</p>
         </details>
-        <details class="faq">
+        <details class="faq" data-reveal style="--d:120ms">
           <summary>Do I have to take a retainer?</summary>
           <p>No. It is optional on every package. Without one you arrange your own hosting, which typically runs R50–R150 a month plus a domain renewal of R100–R200 a year, and you handle updates yourself or pay hourly when something needs doing. Plenty of clients do exactly that.</p>
         </details>
-        <details class="faq">
+        <details class="faq" data-reveal style="--d:180ms">
           <summary>Can I cancel?</summary>
           <p>Any time, with 30 days' notice. You own the site, so cancelling means you take your files and your domain and either self-host or move to someone else. There is no lock-in and nothing is built in a proprietary system designed to make leaving hard.</p>
         </details>
-        <details class="faq">
+        <details class="faq" data-reveal style="--d:240ms">
           <summary>Do you maintain sites you did not build?</summary>
           <p>Often, yes, but not always. It depends on how it was built and what it was built with. Send me the address and I will tell you honestly whether I can look after it properly. If I cannot, I will say so rather than take the money and hope.</p>
         </details>
@@ -292,20 +294,20 @@
     </section>
 
     <section class="sec">
-      <h2>Other things I do</h2>
+      <h2 data-split><span class="line"><span>Other things I do</span></span></h2>
       <div class="svc-links">
-        <a href="/services/web-design">Website Design &amp; Build <span aria-hidden="true">→</span></a>
-        <a href="/services/seo">Search Engine Optimisation <span aria-hidden="true">→</span></a>
-        <a href="/services/ecommerce">E-Commerce Stores <span aria-hidden="true">→</span></a>
-        <a href="/services/booking-systems">Booking Systems <span aria-hidden="true">→</span></a>
-        <a href="/services/copywriting">Content &amp; Copywriting <span aria-hidden="true">→</span></a>
-        <a href="/services/video-editing">Video Editing <span aria-hidden="true">→</span></a>
-        <a href="/services/brand-identity">Brand Identity <span aria-hidden="true">→</span></a>
+        <a href="/services/web-design" data-reveal style="--d:0ms">Website Design &amp; Build <span aria-hidden="true">→</span></a>
+        <a href="/services/seo" data-reveal style="--d:60ms">Search Engine Optimisation <span aria-hidden="true">→</span></a>
+        <a href="/services/ecommerce" data-reveal style="--d:120ms">E-Commerce Stores <span aria-hidden="true">→</span></a>
+        <a href="/services/booking-systems" data-reveal style="--d:180ms">Booking Systems <span aria-hidden="true">→</span></a>
+        <a href="/services/copywriting" data-reveal style="--d:240ms">Content &amp; Copywriting <span aria-hidden="true">→</span></a>
+        <a href="/services/video-editing" data-reveal style="--d:300ms">Video Editing <span aria-hidden="true">→</span></a>
+        <a href="/services/brand-identity" data-reveal style="--d:360ms">Brand Identity <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
     <section class="close-cta">
-      <h2>Tell me what you need</h2>
+      <h2 data-split><span class="line"><span>Tell me what you need</span></span></h2>
       <p>Send a message with what your business does and what you are trying to fix. I'll come back with a straight answer on whether I can help and what it would cost.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://wa.me/27650858437?text=Hi%20Kabelo%2C%20I'd%20like%20to%20talk%20about%20monthly%20maintenance%20for%20my%20business." target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Chat on WhatsApp</a>
@@ -367,5 +369,6 @@
 </footer>
 
 <a href="https://wa.me/27650858437?text=Hi%20Kabelo%2C%20I'd%20like%20to%20talk%20about%20monthly%20maintenance%20for%20my%20business." class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><svg width="27" height="27" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<script src="/motion.js" defer></script>
 </body>
 </html>

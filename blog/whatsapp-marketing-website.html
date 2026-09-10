@@ -42,6 +42,8 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/motion.css">
+<script>document.documentElement.classList.add('js-ready');</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Archivo',sans-serif;background:var(--concrete);color:var(--ink);min-height:100vh;}
@@ -66,8 +68,8 @@ li{font-size:16px;line-height:1.8;color:var(--grey);margin-bottom:6px;}
 .cta-box{background:var(--surface);border:1px solid var(--concrete-dark);border-radius:20px;padding:32px;text-align:center;margin-top:48px;}
 .cta-box h3{font-family:'Archivo',sans-serif;font-size:22px;font-weight:600;margin-bottom:10px;}
 .cta-box p{font-size:14px;color:var(--grey);margin-bottom:20px;}
-.btn{display:inline-block;background:var(--hivis);color:var(--ink);padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600;font-size:15px;transition:transform 0.2s,box-shadow 0.2s;}
-.btn:hover{background:var(--hivis-dark);transform:translateY(-2px);}
+.btn{display:inline-block;background:var(--hivis);color:var(--ink);padding:14px 28px;border-radius:50px;text-decoration:none;font-weight:600;font-size:15px;transition:transform 0.2s,color 0.5s var(--ease);}
+.btn:hover{transform:translateY(-2px);}
 footer{border-top:1px solid var(--concrete-dark);padding:24px 32px;text-align:center;font-size:13px;color:var(--grey);}
 footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--hivis);text-decoration-thickness:2px;text-underline-offset:3px;}
 </style>
@@ -84,12 +86,12 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
 
   <p>WhatsApp is used by over 90% of South African smartphone users. It's the communication channel your customers are most comfortable with, and adding it to your website is one of the simplest, highest-impact things you can do to increase enquiries and sales.</p>
 
-  <div class="stat-box">
+  <div class="stat-box" data-reveal>
     <strong>3–5x</strong>
     Businesses that add a WhatsApp chat button to their website typically see 3–5x more customer enquiries compared to contact forms alone.
   </div>
 
-  <h2>Why WhatsApp Works So Well in South Africa</h2>
+  <h2 data-reveal>Why WhatsApp Works So Well in South Africa</h2>
   <ul>
     <li><strong>It's familiar:</strong> Most South Africans check WhatsApp dozens of times a day. A WhatsApp message feels natural, not formal.</li>
     <li><strong>Lower barrier to entry:</strong> Filling out a contact form feels like commitment. Sending a WhatsApp message feels like a quick chat.</li>
@@ -98,7 +100,7 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
     <li><strong>Pre-filled messages:</strong> You can link to WhatsApp with a pre-written message like "Hi, I'm interested in your services", removing all effort from the customer.</li>
   </ul>
 
-  <h2>Where to Add WhatsApp on Your Website</h2>
+  <h2 data-reveal>Where to Add WhatsApp on Your Website</h2>
   <p>Placement is everything. Here's where WhatsApp buttons perform best:</p>
   <ul>
     <li><strong>Floating sticky button:</strong> A WhatsApp icon that floats in the bottom right corner of every page. This is the highest-converting placement.</li>
@@ -108,15 +110,15 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
     <li><strong>Blog posts:</strong> At the end of articles, offering to answer any questions directly.</li>
   </ul>
 
-  <h2>How to Set Up WhatsApp Links</h2>
+  <h2 data-reveal>How to Set Up WhatsApp Links</h2>
   <p>WhatsApp click-to-chat links use this format:</p>
-  <div class="tip-box">
+  <div class="tip-box" data-reveal>
     <strong>https://wa.me/[your-number]?text=[pre-filled message]</strong><br><br>
     Example: <code>https://wa.me/27650858437?text=Hi%2C%20I%27m%20interested%20in%20a%20website</code><br><br>
     Replace the number with your full international format (27 + number without the leading 0).
   </div>
 
-  <h2>Best Practices</h2>
+  <h2 data-reveal>Best Practices</h2>
   <ul>
     <li><strong>Use a business WhatsApp account:</strong> WhatsApp Business gives you a profile, opening hours, and quick replies.</li>
     <li><strong>Set up auto-replies:</strong> An away message like "Thanks for reaching out! We'll reply within 2 hours during business hours" manages expectations.</li>
@@ -125,18 +127,19 @@ footer a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--
     <li><strong>Respond fast:</strong> The biggest mistake is having WhatsApp on your site but taking 24 hours to reply. It kills trust instantly.</li>
   </ul>
 
-  <h2>What We Do at Elevate Digitals</h2>
+  <h2 data-reveal>What We Do at Elevate Digitals</h2>
   <p>Every website we build includes a properly configured WhatsApp chat button, with your number, a pre-filled message, and smart positioning that gets clicks without being annoying. It's included in every package, not an add-on.</p>
 
-  <div class="cta-box">
+  <div class="cta-box" data-reveal>
     <h3>Want WhatsApp Built Into Your Site?</h3>
     <p>We include WhatsApp integration in every website we build, plus all the other tools to turn visitors into customers.</p>
-    <a href="https://www.elevatedigitals.co.za/#contact" class="btn">Chat With Us →</a>
+    <a href="https://www.elevatedigitals.co.za/#contact" class="btn btn-primary">Chat With Us →</a>
   </div>
 </article>
 <footer>
   <p>© 2026 <a href="/">Elevate Digitals</a> · Web Design South Africa · <a href="/#blog">Blog</a> · <a href="/#services">Services</a></p>
   <p class="foot-legal"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refund-policy">Refund Policy</a></p>
 </footer>
+<script src="/motion.js" defer></script>
 </body>
 </html>
