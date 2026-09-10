@@ -686,11 +686,6 @@ a.svc-card:hover .svc-more { letter-spacing:0.05em; }
 @media (max-width: 900px) { .pay-section-grid { grid-template-columns: 1fr; } .pay-form-row { grid-template-columns: 1fr; } }
 
 /* ── FAQ ── */
-.faq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; }
-.faq-item { background:var(--surface); border:1px solid var(--concrete-dark); border-radius:20px; padding:24px; transform 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.4s cubic-bezier(0.34,1.56,0.64,1); position:relative; overflow:hidden; }
-.faq-item:hover { transform:translateY(-6px); border-color:var(--concrete-dark); }
-.faq-q { font-family:'Archivo',sans-serif; font-size:16px; font-weight:600; margin-bottom:10px; }
-.faq-a { font-size:14px; color:var(--grey); line-height:1.7; }
 
 /* ── BLOG ── */
 .blog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
@@ -808,14 +803,26 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
 .faq-main-header { font-family:'Archivo',sans-serif; font-size:clamp(28px,5vw,44px); font-weight:600; line-height:1.1; margin-bottom:12px; text-align:center; color:var(--ink); }
 .faq-sub-header { font-size:16px; color:var(--grey); line-height:1.6; text-align:center; margin-bottom:36px; max-width:600px; margin-left:auto; margin-right:auto; }
 .faq-accordion { display:flex; flex-direction:column; gap:12px; }
-.faq-item-accordion { background:var(--surface); border:1px solid var(--concrete-dark); border-radius:16px; padding:20px 24px; cursor:pointer; transition:all 0.3s ease; }
+.faq-item-accordion { background:var(--surface); border:1px solid var(--concrete-dark); border-radius:16px; padding:20px 24px; cursor:pointer; transition:border-color 0.3s var(--ease); }
 .faq-item-accordion:hover { border-color:var(--concrete-dark); }
-.faq-item-accordion.open { border-color:var(--ink); background:var(--surface); }
-.faq-q-accordion { font-family:'Archivo',sans-serif; font-size:15px; font-weight:600; display:flex; justify-content:space-between; align-items:center; color:var(--ink); }
-.faq-q-accordion::after { content:'+'; font-size:20px; color:var(--ink); transition:transform 0.3s; flex-shrink:0; margin-left:12px; }
-.faq-item-accordion.open .faq-q-accordion::after { transform:rotate(45deg); }
-.faq-a-accordion { font-size:14px; color:var(--grey); line-height:1.7; max-height:0; overflow:hidden; transition:max-height 0.4s ease, margin-top 0.3s ease; margin-top:0; }
-.faq-item-accordion.open .faq-a-accordion { max-height:200px; margin-top:14px; }
+.faq-item-accordion.open { border-color:var(--ink); }
+.faq-q-accordion { font-family:'Archivo',sans-serif; font-size:15px; font-weight:600; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--ink); }
+/* two bars morphing + into −: a plus turning into an × reads as "dismiss",
+   a minus reads as "collapse", which is what this control actually does */
+.faq-q-accordion::after { content:''; position:relative; width:14px; height:14px; flex-shrink:0;
+  background:
+    linear-gradient(var(--ink),var(--ink)) center/100% 2px no-repeat,
+    linear-gradient(var(--ink),var(--ink)) center/2px 100% no-repeat;
+  transition:background-size 0.42s var(--ease); }
+.faq-item-accordion.open .faq-q-accordion::after { background-size:100% 2px, 2px 0; }
+/* A grid track, not a max-height guess. max-height needs a number bigger than
+   any answer and then eases through the empty remainder, which is why it opens
+   fast and stalls; worse, it clips anything taller — a long answer at phone
+   width, or a Zulu/Xhosa translation. 0fr to 1fr is measured, so neither. */
+.faq-a-wrap { display:grid; grid-template-rows:0fr; margin-top:0;
+  transition:grid-template-rows 0.42s var(--ease), margin-top 0.42s var(--ease); }
+.faq-item-accordion.open .faq-a-wrap { grid-template-rows:1fr; margin-top:14px; }
+.faq-a-accordion { font-size:14px; color:var(--grey); line-height:1.7; overflow:hidden; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
@@ -1442,47 +1449,47 @@ footer { position:relative; z-index:1; background:var(--ink); color:var(--concre
   <div class="faq-accordion" role="list">
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq1_q">How much does a website cost in South Africa?</div>
-      <div class="faq-a-accordion" data-i18n="faq1_a">Website costs in South Africa vary based on complexity. Basic small business websites start from R8,500, e-commerce sites from R34,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and the balance due before launch.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq1_a">Website costs in South Africa vary based on complexity. Basic small business websites start from R8,500, e-commerce sites from R34,999, and custom solutions vary. We offer flexible payment plans with a 50% deposit to start and the balance due before launch.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq2_q">How long does it take to build a website?</div>
-      <div class="faq-a-accordion" data-i18n="faq2_a">Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq2_a">Most websites launch within 2 weeks. Basic websites take 1-2 weeks, e-commerce sites 3-5 weeks, and custom enterprise projects 6-10 weeks.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq3_q">Do your websites work on mobile devices?</div>
-      <div class="faq-a-accordion" data-i18n="faq3_a">Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq3_a">Absolutely! All our websites are fully mobile-responsive and optimized for South Africa's diverse device market. Mobile-first design is our standard approach.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq4_q">What payment methods do you accept?</div>
-      <div class="faq-a-accordion" data-i18n="faq4_a">We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start, with the balance due before we launch the site to your domain.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq4_a">We accept secure online card payments (Visa, Mastercard) via Paystack. We require a 50% deposit to start, with the balance due before we launch the site to your domain.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq5_q">Do you offer SEO services?</div>
-      <div class="faq-a-accordion" data-i18n="faq5_a">Yes! We specialize in SEO services for South African businesses. Our local SEO optimization helps you rank on Google.co.za for keywords like 'web design Cape Town', 'web design Johannesburg', and other South African search terms.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq5_a">Yes! We specialize in SEO services for South African businesses. Our local SEO optimization helps you rank on Google.co.za for keywords like 'web design Cape Town', 'web design Johannesburg', and other South African search terms.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq6_q">Do I own the website when it is finished?</div>
-      <div class="faq-a-accordion" data-i18n="faq6_a">Yes. Once the final payment is made, the domain, the files, and the content are yours. We hand everything over and you are free to take it to another developer at any time.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq6_a">Yes. Once the final payment is made, the domain, the files, and the content are yours. We hand everything over and you are free to take it to another developer at any time.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq7_q">What if I don't like the design?</div>
-      <div class="faq-a-accordion" data-i18n="faq7_a">You see the first homepage concept before you pay anything, so you can walk away at no cost. After that, each package includes revision rounds to refine the design until it is right. If we still cannot get there, our refund policy sets out exactly where you stand.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq7_a">You see the first homepage concept before you pay anything, so you can walk away at no cost. After that, each package includes revision rounds to refine the design until it is right. If we still cannot get there, our refund policy sets out exactly where you stand.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq8_q">Who hosts it, and what does it cost after launch?</div>
-      <div class="faq-a-accordion" data-i18n="faq8_a">Hosting is included in any monthly retainer. Without a retainer you arrange your own hosting, which for a site this size typically runs R50–R150 a month, plus your domain renewal of around R100–R200 a year. We tell you the exact figures before launch. No surprises.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq8_a">Hosting is included in any monthly retainer. Without a retainer you arrange your own hosting, which for a site this size typically runs R50–R150 a month, plus your domain renewal of around R100–R200 a year. We tell you the exact figures before launch. No surprises.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq9_q">Can I update the content myself?</div>
-      <div class="faq-a-accordion" data-i18n="faq9_a">Yes. We walk you through editing text, images, and prices before handover, and you get written notes to refer back to. For bigger structural changes, or if you would rather not touch it, that is what the monthly retainer covers.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq9_a">Yes. We walk you through editing text, images, and prices before handover, and you get written notes to refer back to. For bigger structural changes, or if you would rather not touch it, that is what the monthly retainer covers.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq10_q">What happens if you are not available later?</div>
-      <div class="faq-a-accordion" data-i18n="faq10_a">You own the files and the domain, so your site keeps running and any developer can pick it up. Everything is built with standard HTML, CSS, and JavaScript rather than a proprietary system, specifically so you are never locked in.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq10_a">You own the files and the domain, so your site keeps running and any developer can pick it up. Everything is built with standard HTML, CSS, and JavaScript rather than a proprietary system, specifically so you are never locked in.</div></div>
     </div>
     <div class="faq-item-accordion" onclick="toggleFaq(this)" role="listitem" tabindex="0" aria-expanded="false">
       <div class="faq-q-accordion" data-i18n="faq11_q">What do you need from me to start, and how long does it take?</div>
-      <div class="faq-a-accordion" data-i18n="faq11_a">To start: your logo if you have one, a rough idea of the pages you want, and any text or photos you already use. Most sites go live within two weeks of the deposit and content landing. The main thing that slows a project down is waiting on content, so the sooner that arrives, the sooner you launch.</div>
+      <div class="faq-a-wrap"><div class="faq-a-accordion" data-i18n="faq11_a">To start: your logo if you have one, a rough idea of the pages you want, and any text or photos you already use. Most sites go live within two weeks of the deposit and content landing. The main thing that slows a project down is waiting on content, so the sooner that arrives, the sooner you launch.</div></div>
     </div>
   </div>
   <div style="text-align:center;margin-top:32px;">
@@ -1613,6 +1620,15 @@ function closeMenu(restoreScroll) {
 }
 function navTo(id) { closeMenu(false); showPage(id); }
 function toggleFaq(el) { el.classList.toggle('open'); el.setAttribute('aria-expanded', el.classList.contains('open')); }
+/* These are focusable divs, so Enter and Space have to be wired by hand —
+   a div with only onclick is reachable by keyboard but not operable. */
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  var item = e.target.closest && e.target.closest('.faq-item-accordion');
+  if (!item) return;
+  e.preventDefault();
+  toggleFaq(item);
+});
 
 /* ═══════════════════════
    INTERSECTION OBSERVER

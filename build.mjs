@@ -119,10 +119,14 @@ function renderPage(svc, all) {
           <a class="btn ${t.rec ? 'btn-primary' : 'btn-ghost'}" href="${attr(waLink(`Hi Kabelo, I'm interested in ${svc.name} (${t.name}).`))}" target="_blank" rel="noopener noreferrer">Enquire</a>
         </div>`).join('');
 
+  /* .faq__body/.faq__inner are the grid track the panel animates on, and
+     .faq__mark is the + that morphs to −. Both are styled in motion.css.
+     A tighter stagger than the cards: five questions in a column should read
+     as one list arriving, not as a queue. */
   const faqs = svc.faqs.map((f, n) => `
-        <details class="faq" data-reveal style="--d:${n * 60}ms">
-          <summary>${esc(f.q)}</summary>
-          <p>${f.a}</p>
+        <details class="faq" data-reveal style="--d:${n * 45}ms">
+          <summary>${esc(f.q)}<i class="faq__mark" aria-hidden="true"></i></summary>
+          <div class="faq__body"><div class="faq__inner"><p>${f.a}</p></div></div>
         </details>`).join('');
 
   const otherLinks = others.map((s, n) =>

@@ -44,6 +44,51 @@
     }
   }, { rootMargin: '0px 0px -10% 0px' });
 
+  /* ── FAQ accordion ──
+     A <details> hides its own content the moment `open` is removed, so a
+     collapse never gets to animate. Opening needs no help: `open` goes on, the
+     content becomes visible, and the grid track in motion.css eases it down.
+     Closing is the case that needs holding — keep the element open, mark it
+     .is-closing so the track runs back to 0fr, and only then let it shut. */
+  function initFaq(root = document) {
+    for (const sum of $$('.faq > summary', root)) {
+      if (sum.dataset.faqBound) continue;
+      sum.dataset.faqBound = '1';
+      sum.addEventListener('click', e => {
+        const d = sum.parentElement;
+        const body = d.querySelector('.faq__body');
+        if (reduced || !body) return;           // native toggle, no animation
+
+        // mid-collapse and clicked again: abandon the close, stay open
+        if (d.classList.contains('is-closing')) {
+          e.preventDefault();
+          d.classList.remove('is-closing');
+          return;
+        }
+        if (!d.open) return;                    // opening needs no intervention
+
+        e.preventDefault();
+        d.classList.add('is-closing');
+        let shut = false;
+        const finish = () => {
+          if (shut) return;
+          shut = true;
+          body.removeEventListener('transitionend', onEnd);
+          // a second click may already have cancelled the collapse
+          if (d.classList.contains('is-closing')) {
+            d.classList.remove('is-closing');
+            d.open = false;
+          }
+        };
+        const onEnd = ev => { if (ev.propertyName === 'grid-template-rows') finish(); };
+        body.addEventListener('transitionend', onEnd);
+        // transitionend never fires on a hidden or display:none element, and a
+        // question stuck half-shut is worse than one that closes unanimated
+        setTimeout(finish, 600);
+      });
+    }
+  }
+
   function initMotion(root = document) {
     for (const h of $$('[data-split]', root)) {
       $$('.line', h).forEach((l, i) => l.style.setProperty('--i', i));
@@ -51,6 +96,7 @@
     for (const el of $$('[data-reveal],[data-split]', root)) {
       if (!el.classList.contains('is-in')) io.observe(el);
     }
+    initFaq(root);
   }
   window.initMotion = initMotion;
 
